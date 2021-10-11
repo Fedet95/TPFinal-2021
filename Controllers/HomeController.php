@@ -7,7 +7,7 @@
         public function Index($message = "")
         {
             //require_once(VIEWS_PATH."controlPanel.php");
-            require_once(VIEWS_PATH."home.php");
+            require_once(VIEWS_PATH . "home.php");
         }
 
         public function login($email)
@@ -26,23 +26,26 @@
             }
 
 
-           //VALIDAR QUE EL EMAIL SEA VALIDO, Y QUE EL AULUMNO ESTE ACTIVE
-            $students=$this->getApiStudents();
+            //VALIDAR QUE EL EMAIL SEA VALIDO, Y QUE EL AULUMNO ESTE ACTIVE
+            $students = $this->getApiStudents();
 
         }
 
         public function getApiStudents()
         {
 
-            $api= new APIStudentDAO();
-            $students= $api->start($api);
+            $api = new APIStudentDAO();
+            $students = $api->start($api);
             return $students;
         }
 
+
+        public function hola()
+        {
+           echo "pablo probando git";
+        }
+
     }
-
-
-
 
 
 
