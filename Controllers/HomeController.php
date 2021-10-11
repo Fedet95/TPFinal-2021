@@ -10,26 +10,64 @@
             require_once(VIEWS_PATH . "home.php");
         }
 
+        public function showControlPanelView()
+        {
+            require_once (VIEWS_PATH.'controlPanel.php');
+        }
+
+
         public function login($email)
         {
-
-            $emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                // invalid emailaddress
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) // invalid emailaddress
+            {
+                $message='Error, enter a valid email';
+               $this->Index($message);
             }
-
-            if (filter_var($emailB, FILTER_VALIDATE_EMAIL) === false ||
-                $emailB != $email
-            ) {
-                echo "This email adress isn't valid!";
-                exit(0);
+            else
+            {
+                $searchedStudent=$this->searchEmail($email);
+                if($searchedStudent)
+                {
+                    if($searchedStudent->getActive()) //si es true
+                    {
+                        $this->showControlPanelView();
+                    }
+                    else
+                    {
+                        $message='Your account is not active, please get in contact with the university';
+                        $this->Index($message);
+                    }
+                }
+                else
+                {
+                    $message='Error, enter a valid email';
+                    $this->Index($message);
+                }
             }
 
 
             //VALIDAR QUE EL EMAIL SEA VALIDO, Y QUE EL AULUMNO ESTE ACTIVE
+            //GUARDAR EN SESSION EL USUARIO
             $students = $this->getApiStudents();
 
         }
+
+        public function searchEmail($email)
+        {
+            $students = $this->getApiStudents();
+            $searchedStudent=null;
+
+            foreach ($students as $value)
+            {
+                if($value->getEmail()==$email)
+                {
+                    $searchedStudent=$value;
+                }
+            }
+            return $searchedStudent;
+        }
+
+
 
         public function getApiStudents()
         {
@@ -37,23 +75,6 @@
             $api = new APIStudentDAO();
             $students = $api->start($api);
             return $students;
-        }
-
-
-        public function hola11()
-        {
-           echo "pablo probando git";
-        }
-
-        public function hola22()
-        {
-            echo "pablo probando git version 2 ";
-        }
-
-        public function hola33()
-        {
-            echo "pablo probando git version  holaaaaaa juann";
-
         }
 
 
