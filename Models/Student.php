@@ -19,8 +19,8 @@ class Student
     public function getStudentId()
     {
         return $this->studentId;
-    }
 
+    }
 
     public function setStudentId($studentId)
     {
