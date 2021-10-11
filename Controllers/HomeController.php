@@ -12,7 +12,7 @@
 
         public function showControlPanelView()
         {
-            require_once (VIEWS_PATH.'controlPanel.php');
+            require_once (VIEWS_PATH.'controlPanel.php'); //panel de control
         }
 
 
