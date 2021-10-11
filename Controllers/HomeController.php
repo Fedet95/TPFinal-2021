@@ -40,10 +40,16 @@
         }
 
 
-        public function hola()
+        public function hola11()
         {
            echo "pablo probando git";
         }
+
+        public function hola22()
+        {
+            echo "pablo probando git version 2 ";
+        }
+
 
     }
 
