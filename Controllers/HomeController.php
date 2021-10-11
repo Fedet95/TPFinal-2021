@@ -50,6 +50,11 @@
             echo "pablo probando git version 2 ";
         }
 
+        public function hola33()
+        {
+            echo "pablo probando git version 3 ";
+        }
+
 
     }
 
