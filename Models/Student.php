@@ -1,19 +1,17 @@
 <?php
 namespace Models;
 
-class Student
+class Student extends User
 {
     private $studentId;
     private $careerId;
     private $firstName;
     private $lastName;
     private $dni;
-    private $fileNumber;
+    private $fileNumber; //legajo
     private $gender;
     private $birthDate;
-    private $email;
     private $phoneNumber;
-    private $active;
 
 
     public function getStudentId()
@@ -110,19 +108,6 @@ class Student
         $this->birthDate = $birthDate;
     }
 
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-
     public function getPhoneNumber()
     {
         return $this->phoneNumber;
@@ -134,17 +119,6 @@ class Student
         $this->phoneNumber = $phoneNumber;
     }
 
-
-    public function getActive()
-    {
-        return $this->active;
-    }
-
-
-    public function setActive($active)
-    {
-        $this->active = $active;
-    }
 
 
 

@@ -1,0 +1,18 @@
+[
+    {
+        "email": "pablopayetta@utn.edu.com.ar",
+        "active": true,
+        "administratorId": "1",
+        "firstName": "Pablo",
+        "lastName": "Payetta",
+        "employeeNumber": "A1933"
+    },
+    {
+        "email": "juanpayetta@utn.edu.com.ar",
+        "active": false,
+        "administratorId": "2",
+        "firstName": "Juan",
+        "lastName": "Payetta",
+        "employeeNumber": "F4419"
+    }
+]

@@ -10,6 +10,7 @@ class APIStudentDAO
     private $response;
     private $finalArray = array();
 
+
     public function __construct($url = null, $option= null)
     {
         $this->url= is_null($url) ? $this->url : $url;
@@ -67,7 +68,7 @@ class APIStudentDAO
         return $this->finalArray;
     }
 
-    public function  start($api)
+    public function  start(APIStudentDAO $api)
     {
         $api->init();
         $api->setOption()->setOption( CURLOPT_RETURNTRANSFER, true)->setOption(CURLOPT_SSL_VERIFYPEER, false)->setOption(CURLOPT_HTTPHEADER, array(API_KEY))->decode();
@@ -82,5 +83,8 @@ class APIStudentDAO
         curl_close($this->handler);
         return $this;
     }
+
+
+
 
 }

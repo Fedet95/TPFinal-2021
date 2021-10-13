@@ -10,79 +10,132 @@
             require_once(VIEWS_PATH . "home.php");
         }
 
-        public function showControlPanelView()
-        {
-            require_once (VIEWS_PATH.'controlPanel.php'); //panel de control
-        }
+
+    /**
+     * * Send to student control panel view
+     * @param string $message
+     */
+    public function showStudentControlPanelView($message = "")
+    {
+        require_once(VIEWS_PATH."checkLoggedStudent.php");
+        require_once(VIEWS_PATH . "studentControlPanel.php"); //panel de control
+    }
+
+    /**
+     * * Send to administrator control panel view
+     * @param string $message
+     */
+    public function showAdministratorControlPanelView($message = "")
+    {
+        require_once(VIEWS_PATH."checkLoggedAdmin.php");
+        require_once(VIEWS_PATH . "administratorControlPanel.php"); //panel de control
+    }
 
 
-        public function login($email)
+    /**
+     * Validate login, sending to the correspondent view
+     * @param $email
+     */
+    public function login($email)
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) // invalid emailaddress
         {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) // invalid emailaddress
+            $message = 'Error, enter a valid email';
+            $this->Index($message);
+        } else
+        {
+            $searchedStudent = $this->searchStudentEmail($email); //busca email del student, retorna student o null
+            $administrator= $this->searchAdministratorEmail($email); //busca email del administrador, retorna administrador o null
+
+            if ($searchedStudent) //If is not NULL
             {
-                $message='Error, enter a valid email';
-               $this->Index($message);
-            }
-            else
-            {
-                $searchedStudent=$this->searchEmail($email);
-                if($searchedStudent)
+                if ($searchedStudent->getActive()) //if is TRUE
                 {
-                    if($searchedStudent->getActive()) //si es true
-                    {
-                        $this->showControlPanelView();
-                    }
-                    else
-                    {
-                        $message='Your account is not active, please get in contact with the university';
-                        $this->Index($message);
-                    }
+                    $this->updateJsonStudent($searchedStudent);
+                    $_SESSION['loggedstudent']=$searchedStudent;
+                    $this->showStudentControlPanelView();
                 }
                 else
                 {
-                    $message='Error, enter a valid email';
+                    $message = 'Your account is not active, please get in contact with the university';
                     $this->Index($message);
                 }
             }
+            else if($administrator)//if is not null
+            {
+                 if($administrator->getActive())
+                 {
+                     $this->updateAllJsonStudents($this->apiStudents);
+                     $_SESSION['loggedadmin']=$administrator;
+                     $this->showAdministratorControlPanelView();
+                 }
+                 else
+                 {
+                     $message = 'Your account is not active, please get in contact with the university';
+                     $this->Index($message);
+                 }
+            }
+            else //if is null
+            {
+                $message = 'Error, enter a valid email';
+                $this->Index($message);
 
-
-            //VALIDAR QUE EL EMAIL SEA VALIDO, Y QUE EL AULUMNO ESTE ACTIVE
-            //GUARDAR EN SESSION EL USUARIO
-            $students = $this->getApiStudents();
-
+            }
         }
+    }
 
         public function searchEmail($email)
         {
             $students = $this->getApiStudents();
             $searchedStudent=null;
 
-            foreach ($students as $value)
-            {
-                if($value->getEmail()==$email)
-                {
-                    $searchedStudent=$value;
-                }
+        foreach ($students as $value) {
+            if ($value->getEmail() == $email) {
+                $searchedStudent = $value;
             }
-            return $searchedStudent;
         }
+        return $searchedStudent;
+    }
 
+    /**
+     * Get all the students from Api
+     * @return mixed
+     */
+    public function getApiStudents()
+    {
+        $students = $this->api->start($this->api);
+        return $students;
+    }
 
+    public function updateAllJsonStudents($studentsArray)
+    {
+        $this->studentRepository->updateAllStudentFiles($studentsArray);
+    }
 
-        public function getApiStudents()
-        {
-
-            $api = new APIStudentDAO();
-            $students = $api->start($api);
-            return $students;
-        }
-
-
+    public function updateJsonStudent( $student)
+    {
+        $this->studentRepository->updateStudentFile($student);
     }
 
 
+    /**
+     * Search an administrator by email, returning the administrator or null
+     * @param $email
+     * @return mixed|null
+     */
+    public function searchAdministratorEmail($email)
+   {
+      $administrator= $this->administratorRepository->searchByEmail($email); //retorna el administrador o null
+      return $administrator;
+   }
 
+    public function Logout()
+    {
+        session_destroy();
 
+        $this->Index();
+    }
 
+}
 
 ?>

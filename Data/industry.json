@@ -1,0 +1,21 @@
+[
+  {"type": "Front End Developer", "id": 1},
+  {"type": "Mobile Engineer", "id": 2},
+  {"type": "Game Developer", "id": 3},
+  {"type": "Back End Developer", "id": 4},
+  {"type": "Application Developer", "id": 5},
+  {"type": "Data Scientist", "id": 6},
+  {"type": "QA/Test/Automation", "id": 7},
+  {"type": "Embedded System Developer", "id": 8},
+  {"type": "Linux Kernel and OS Developer", "id": 9},
+  {"type": "DevOps Engineer", "id": 10},
+  {"type": "Full Stack Developer", "id": 11},
+  {"type": "Language/Compiler Developer", "id": 12},
+  {"type": "Cloud Developer", "id": 13},
+  {"type": "Tools and Enterprise Software Developer", "id": 14},
+  {"type": "Algorithms/Science Software", "id": 15},
+  {"type": "Graphic Designer", "id": 16},
+  {"type": "Database Administrator", "id": 17},
+  {"type": "Web Developer", "id": 18},
+  {"type": "Desktop Applications Developer", "id": 19}
+]

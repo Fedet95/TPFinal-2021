@@ -7,12 +7,14 @@ include('header.php');
         <header class="text-center">
             <h2>Welcome</h2>
         </header>
+
         <form action="<?php echo FRONT_ROOT."Home/login"?>" method="POST" class="login-form bg-dark-alpha p-5 text-white">
+            <?php if(isset($message)){ echo $message;}?>
             <div class="form-group">
                 <label for="">Username</label>
                 <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter your email" required>
             </div>
-            <button class="btn btn-dark btn-block btn-lg" type="submit">LOGUIN</button>
+            <button class="btn btn-dark btn-block btn-lg" type="submit">LOGIN</button>
         </form>
     </div>
 </main>
