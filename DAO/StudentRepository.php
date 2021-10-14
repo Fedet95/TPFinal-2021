@@ -89,7 +89,6 @@ class StudentRepository implements lStudentRepository
         if($this->studentList!=$allStudentsAPI)
         {
             $this->studentList=$allStudentsAPI;
-            echo "Holaa entre a updatear";
         }
 
         $this->SaveData();

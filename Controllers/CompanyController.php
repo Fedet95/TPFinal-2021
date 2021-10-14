@@ -206,8 +206,9 @@ class CompanyController
     public function image()
     {
         $image = null;
-        if (getimagesize($_FILES['image']['tmp_name']) == false) {
-            echo "Please select an image"; //llamar a una vista aca mejor
+        if (getimagesize($_FILES['image']['tmp_name']) == false)
+        {
+           $image=null;
         } else {
             $image = addslashes($_FILES['image']['tmp_name']);
             $image = file_get_contents($image);

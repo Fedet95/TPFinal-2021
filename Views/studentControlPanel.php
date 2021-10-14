@@ -4,7 +4,7 @@ include_once('nav-student.php');
 require_once(VIEWS_PATH."checkLoggedStudent.php");
 ?>
 
-<!--ESTO ES DE EJEMPLO PARA MIRAR NOMAS-->
+<!--ESTO ES DE EJEMPLO PARA MIRAR NOMAS, para borrar-->
 <main class="py-5">
     <section id="listado" class="mb-5">
         <div class="container">

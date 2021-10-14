@@ -57,6 +57,7 @@
                 }
                 else
                 {
+                    $this->updateJsonStudent($searchedStudent);
                     $message = 'Your account is not active, please get in contact with the university';
                     $this->Index($message);
                 }
