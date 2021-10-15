@@ -1,5 +1,4 @@
 <?php
-
 namespace Controllers;
 require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
@@ -31,6 +30,7 @@ class CompanyController
 
 
     /**
+     * Call the "createCompany" view
      * @param string $message
      */
     public function showCreateCompanyView($message = "")
@@ -42,6 +42,7 @@ class CompanyController
     }
 
     /**
+     * Call the "companyManagement" view
      * @param string $message
      */
     public function showCompanyManagement($message = "")
@@ -52,11 +53,25 @@ class CompanyController
         require_once(VIEWS_PATH . "companyManagement.php");
     }
 
-    public function showEditCompany($message= "", $company)
+    /**
+     * Call the "companyManagement" view
+     * @param string $message
+     */
+    public function showEditCompany($message = "", $company)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
         require_once(VIEWS_PATH . "editCompany.php");
     }
+
+    /**
+     * Call the "editCompany" view
+     * @param string $message
+     * @param mixed $company
+     */
+    /**
+     * Call the "companyManagement" view
+     * @param string $message
+     */
 
     /**
      * @param $name
@@ -199,6 +214,11 @@ class CompanyController
 
     }
 
+
+    /**
+     * Validate if the admin has logged in the system correctly
+     * @return mixed|null
+     */
     public function loggedaminValidation()
     {
         $loggedadmin = null;
@@ -353,7 +373,11 @@ class CompanyController
 
 
 
-   //FILTRADO DE BUSQUEDAS
+    /**
+     * Returns a searched company or all companies otherwise
+     * @param $allCompanys
+     * @return array|mixed
+     */
     public function searchFiltre($allCompanys)
     {
         $searchedCompany= array();

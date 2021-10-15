@@ -1,10 +1,10 @@
 <?php
 include_once('header.php');
-include_once('nav-admin.php');
-require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+include_once('nav-student.php');
+require_once(VIEWS_PATH."checkLoggedStudent.php");
 ?>
 
-          <div class="ml-auto col-auto">
+<div class="ml-auto col-auto">
             <h3 class=" text-center text-muted">Companies List</h3>
             <div class="scrollable container-fluid" >
                 <div class="form-group">
@@ -12,13 +12,13 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                         <thead>
                         <tr>
                             <th>
-                                <form action="<?php echo FRONT_ROOT . "Company/showCompanyManagement" ?>" method="post"  enctype="multipart/form-data">
+                                <form action="<?php echo FRONT_ROOT . "Student/showCompanyListView" ?>" method="post"  enctype="multipart/form-data">
                                 <input type="text" name="valueToSearch" placeholder="Company To Search">
                                     <input type="submit" class="btn" name="search" value="Filter">
                                 </form>
                             </th>
                             <th>
-                                <form action="<?php echo FRONT_ROOT . "Company/showCompanyManagement" ?>" method="post"  enctype="multipart/form-data">
+                                <form action="<?php echo FRONT_ROOT . "Student/showCompanyListView" ?>" method="post"  enctype="multipart/form-data">
                                 <input type="submit" class="btn" name="all" value="Show all companies" >
                                 </form>
                             </th>
@@ -32,7 +32,6 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                             <th style="width: 30%;">ID</th>
                             <th style="width: 30%;">Name</th>
                             <th style="width: 30%;">Nacionality</th>
-                            <th style="width: 30%;">Industry</th>
                             <th style="width: 30%;">Foundation Date</th>
                             <th style="width: 30%;">Cuit</th>
                             <th style="width: 50%;">About Us</th>
@@ -42,8 +41,6 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                             <th style="width: 30%;">City</th>
                             <th style="width: 30%;">Active</th>
                             <th style="width: 30%;">Logo</th>
-                            <th style="width: 30%;">Remove</th>
-                            <th style="width: 30%;">Edit</th>
 
                         </tr>
                         </thead>
@@ -55,7 +52,6 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                                 <td><?php echo $valueCompany->getCompanyId() ?></td>
                                 <td><?php echo $valueCompany->getName() ?></td>
                                 <td><?php echo $valueCompany->getNacionality() ?></td>
-                                <td><?php echo $valueCompany->getIndustry() ?></td>
                                 <td><?php echo $valueCompany->getFoundationDate() ?></td>
                                 <td><?php echo $valueCompany->getCuit() ?></td>
                                 <td><?php echo $valueCompany->getAboutUs() ?></td>
@@ -65,22 +61,6 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                                 <td><?php echo $valueCompany->getCity() ?></td>
                                 <td><?php echo $valueCompany->getActive() ?></td>
                                 <td><?php echo '<img src="data:image;base64,' . $valueCompany->getLogo() . '" height="50" width="50"/>'; ?></td>
-
-                                <td>
-                                    <form action="<?php echo FRONT_ROOT . "Company/Remove" ?>" method="POST">
-                                        <button type="submit" name="id" class="btn"
-                                                value="<?php echo $valueCompany->getCompanyId() ?>"> Remove
-                                        </button>
-                                    </form>
-                                </td>
-
-                                <td>
-                                    <form action="<?php echo FRONT_ROOT . "Company/Edit" ?>" method="POST">
-                                        <button type="submit" name="id" class="btn"
-                                                value="<?php echo $valueCompany->getCompanyId() ?>"> Edit
-                                        </button>
-                                    </form>
-                                </td>
                             </tr>
                         <?php
                             }
@@ -93,6 +73,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
              <!-- / main body -->
          <div class="clear"></div>
 
+
 <?php
-include('footer.php');
+include_once('footer.php');
 ?>

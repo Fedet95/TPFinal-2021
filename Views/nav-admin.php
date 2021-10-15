@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
      <span class="navbar-text">
-          Welcome <strong>  </strong>
+          Welcome
      </span>
      <ul class="navbar-nav ml-auto">
          <li class="nav-item">
