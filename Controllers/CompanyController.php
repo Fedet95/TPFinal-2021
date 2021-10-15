@@ -48,9 +48,15 @@ class CompanyController
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
         $allCompanys = $this->companyRepository->getAll();
+        $searchedCompany=$this->searchFiltre($allCompanys);
         require_once(VIEWS_PATH . "companyManagement.php");
     }
 
+    public function showEditCompany($message= "", $company)
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        require_once(VIEWS_PATH . "editCompany.php");
+    }
 
     /**
      * @param $name
@@ -120,11 +126,20 @@ class CompanyController
         $company->setCountry($country); //name para json, (luego se guarda el id para base de datos)
         $company->setCreationAdminId($this->loggedadmin->getAdministratorId());
 
-        $this->companyRepository->add($company);
-        $this->newCity($city);
-        $this->newIndustry($industry);
 
-        $this->showCompanyManagement();
+        $companyCuitSearch=$this->companyRepository->searchCuit($cuit);
+        if($companyCuitSearch==null)
+        {
+            $this->companyRepository->add($company);
+            $this->newCity($city);
+            $this->newIndustry($industry);
+            $this->showCompanyManagement();
+        }
+        else
+        {
+            $message="Error, the company with Cuit ".$cuit." is alredy in the system";
+            $this->showCreateCompanyView($message);
+        }
 
     }
 
@@ -307,10 +322,65 @@ class CompanyController
     public function Remove($id)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
-
         $this->companyRepository->remove($id);
+        $this->showCompanyManagement();
+    }
+
+
+    //MODIFICACION DE EMPRESA
+    public function Edit($id)
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        $allIndustrys = $this->industryRepository->getAll();
+        $allCountrys = $this->countryRepository->getAll();
+
+        $company = $this->companyRepository->getCompany($id);
+
+        $this->showEditCompany("", $company);
+
+    }
+
+    public function UpdateCompany($company)
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        $this->companyRepository->update($company);
 
         $this->showCompanyManagement();
+    }
+
+
+
+
+   //FILTRADO DE BUSQUEDAS
+    public function searchFiltre($allCompanys)
+    {
+        $searchedCompany= array();
+        if(isset($_POST['search'])) //click boton de filtrado
+        {
+              if(isset($_POST['valueToSearch']))
+              {
+                  $valueToSearch = $_POST['valueToSearch']; //nombre de la empresa a buscar
+
+                  foreach ($allCompanys as $value)
+                  {
+                      if(strcasecmp($value->getName(), $valueToSearch)==0) //no es case sensitive
+                      {
+                          array_push($searchedCompany, $value);
+                      }
+                  }
+              }
+              else
+              {
+                  $searchedCompany=$allCompanys;
+              }
+            }
+        else
+        {
+          $searchedCompany=$allCompanys;
+        }
+        return $searchedCompany;
     }
 
 

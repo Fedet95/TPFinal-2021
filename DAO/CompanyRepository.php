@@ -58,6 +58,41 @@ class CompanyRepository implements lCompanyRepository
     }
 
     /**
+     * Get company from Json file
+     * @param $companyId
+     */
+
+    function getCompany($companyId)
+    {
+        $this->RetrieveData();
+
+        $company = null;
+        foreach($this->companytList as $key => $value)
+        {
+            if($value->getCompanyId()==$companyId)
+            {
+                $company = $this->companytList[$key];
+            }
+        }
+        return $company;
+    }
+
+    function searchCuit($cuit)
+    {
+        $this->RetrieveData();
+
+        $company = null;
+        foreach($this->companytList as $key => $value)
+        {
+            if($value->getCuit()==$cuit)
+            {
+                $company = $this->companytList[$key];
+            }
+        }
+        return $company;
+    }
+
+    /**
      * Update company values
      * @param Company $company
      */

@@ -1,10 +1,7 @@
-<?php
-//include ('Process/check-LoggedUser.php'); //lo coloco aca porque es donde se necesitara siempre (para no tener que cargarlo en cada nueva pagina php)
-?>
 
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
      <span class="navbar-text">
-          Welcome <strong> hola  </strong>
+          Welcome <strong>  </strong>
      </span>
      <ul class="navbar-nav ml-auto">
          <li class="nav-item">
