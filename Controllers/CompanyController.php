@@ -1,14 +1,18 @@
 <?php
 namespace Controllers;
-require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+require_once(VIEWS_PATH . "checkLoggedUser.php");
 
 use DAO\CityRepository;
 use DAO\CompanyRepository;
 use DAO\CountryRepository;
 use DAO\IndustryRepository;
+use DAO\AdministratorRepository;
+use DAO\StudentRepository;
 use Models\City;
 use Models\Company;
 use Models\Industry;
+use Models\Administrator;
+use Models\Student;
 
 
 class CompanyController
@@ -17,7 +21,10 @@ class CompanyController
     private $countryRepository;
     private $cityRepository;
     private $industryRepository;
-    private $loggedadmin;
+    private $adminRepository;
+    private $studentRepository;
+    private $loggedUser;
+    private $loggedAdmin;
 
     public function __construct()
     {
@@ -25,7 +32,10 @@ class CompanyController
         $this->countryRepository = new CountryRepository();
         $this->cityRepository = new CityRepository();
         $this->industryRepository = new IndustryRepository();
-        $this->loggedadmin = $this->loggedaminValidation();
+        $this->adminRepository = new AdministratorRepository();
+        $this->studentRepository= new StudentRepository();
+        $this->loggedUser = $this->loggedUserValidation();
+        $this->loggedAdmin=$this->loggedAdminValidation();
     }
 
 
@@ -36,6 +46,7 @@ class CompanyController
     public function showCreateCompanyView($message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
         $allIndustrys = $this->industryRepository->getAll();
         $allCountrys = $this->countryRepository->getAll();
         require_once(VIEWS_PATH . "createCompany.php");
@@ -47,35 +58,55 @@ class CompanyController
      */
     public function showCompanyManagement($message = "")
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        require_once(VIEWS_PATH . "checkLoggedUser.php");
         $allCompanys = $this->companyRepository->getAll();
-        $searchedCompany=$this->searchFiltre($allCompanys);
-        require_once(VIEWS_PATH . "companyManagement.php");
+        $searchedCompany = $this->searchCompanyFiltre($allCompanys);
+
+        if($this->loggedUser instanceof Administrator)
+        {
+            require_once(VIEWS_PATH . "companyManagement.php");
+        }
+        else if($this->loggedUser instanceof Student)
+        {
+            require_once(VIEWS_PATH . "companyList.php");
+        }
     }
 
+
     /**
-     * Call the "companyManagement" view
+     * Call the extend view of a company
      * @param string $message
      */
-    public function showEditCompany($message = "", $company)
+    public function showCompanyViewMore($id)
+    {
+        require_once(VIEWS_PATH . "checkLoggedUser.php");
+
+        $company = $this->companyRepository->getCompany($id);
+        if($this->loggedUser instanceof Administrator)
+        {
+            require_once(VIEWS_PATH . "companyViewMore.php");
+        }
+        else if($this->loggedUser instanceof Student)
+        {
+            require_once(VIEWS_PATH."companyViewMoreStudent.php");
+        }
+    }
+
+
+    /**
+     * Call the "editCompany" view
+     * @param string $message
+     */
+    public function showEditCompany($company, $allIndustrys, $allCountrys, $message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
         require_once(VIEWS_PATH . "editCompany.php");
     }
 
-    /**
-     * Call the "editCompany" view
-     * @param string $message
-     * @param mixed $company
-     */
-    /**
-     * Call the "companyManagement" view
-     * @param string $message
-     */
 
     /**
+     * Add a new company to the system
      * @param $name
-     * @param $nacionality
      * @param $foundationDate
      * @param $cuit
      * @param $aboutUs
@@ -87,75 +118,98 @@ class CompanyController
      * @param $city
      * @param $country
      */
-    public function addCompany($name, $cuit, $companyLink, $nacionality, $email, $country, $city, $industry, $active, $foundationDate, $aboutUs, $image)
+    public function addCompany($name, $cuit, $companyLink, $email, $country, $city, $industry, $active, $foundationDate, $aboutUs, $image)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $allCompanys = $this->companyRepository->getAll();
-        $newMaxId = $this->newId($allCompanys);
+            $company = new Company();
 
-        $imagen = $this->image($image);
-        if ($imagen == null) {
-            $message = "Error, enter a valid image file";
-            $this->showCreateCompanyView($message);
-        }
+            //Paso los ID/Nombres al Objeto de cada uno y los agrego a Company
 
-        $validCuit = $this->validateCuit($cuit);
-        if ($validCuit == false) {
-            $message = "Error, enter a valid Cuit";
-            $this->showCreateCompanyView($message);
-        }
+            $searchedCountry = $this->countryRepository->searchById($country);
+            if ($searchedCountry != null) {
+                $company->setCountry($searchedCountry);
+            }
 
-        $validLink = $this->validateLink($companyLink);
-        if ($validLink == false) {
-            $message = "Error, enter a valid URL link";
-            $this->showCreateCompanyView($message);
-        }
+            $searchedCity = $this->cityRepository->searchByName($city);
+            if ($searchedCity != null) {
+                $company->setCity($searchedCity);
+            } else {
+                $company->setCity($this->newCity($city));
+            }
 
-        $validEmail = $this->validateEmail($email);
-        if ($validEmail == false) {
-            $message = "Error, enter a valid email";
-            $this->showCreateCompanyView($message);
-        }
+            $searchedIndustry = $this->industryRepository->searchById($industry);
+            if ($searchedIndustry != null) {
+                $company->setIndustry($searchedIndustry);
+            }
 
-        $founDate = $this->validateFoundationDate($foundationDate);
-        if ($founDate == false) {
-            $message = "Error, enter a valid foundation date";
-            $this->showCreateCompanyView($message);
-        }
+            $searchedAdmin = $this->adminRepository->searchById($this->loggedAdmin->getAdministratorId());
+            if ($searchedAdmin != null) {
+                $company->setCreationAdmin($searchedAdmin);
+            }
 
 
-        $company = new Company();
-        $company->setName($name);
-        $company->setCompanyId($newMaxId); //generado con el metodo de nuevoID (solo para el json, con base auto_increment)
-        $company->setNacionality($nacionality); //select con paises
-        $company->setFoundationDate($foundationDate); //date
-        $company->setCuit($cuit);
-        $company->setAboutUs($aboutUs);
-        $company->setCompanyLink($companyLink);
-        $company->setEmail($email);
-        $company->setLogo($imagen); //la que viene del metodo validado
-        $company->setActive($active);
-        $company->setIndustry($industry);
-        $company->setCity($city);
-        $company->setCountry($country); //name para json, (luego se guarda el id para base de datos)
-        $company->setCreationAdminId($this->loggedadmin->getAdministratorId());
+            $allCompanys = $this->companyRepository->getAll();
+            $newMaxId = $this->newId($allCompanys);
+
+            $flag = 0;
+            $imagen = $this->image($image);
+            if ($imagen == null) {
+                $message = "Error, enter a valid image file (jpg, jpeg, png)";
+                $flag = 1;
+                $this->showCreateCompanyView($message);
+            }
+
+            $validCuit = $this->validateCuit($cuit);
+            if ($validCuit == false) {
+                $message = "Error, enter a valid Cuit";
+                $flag = 1;
+                $this->showCreateCompanyView($message);
+            }
+
+            $validLink = $this->validateLink($companyLink);
+            if ($validLink == false) {
+                $message = "Error, enter a valid URL link";
+                $flag = 1;
+                $this->showCreateCompanyView($message);
+            }
+
+            $validEmail = $this->validateEmail($email);
+            if ($validEmail == false) {
+                $message = "Error, enter a valid email";
+                $flag = 1;
+                $this->showCreateCompanyView($message);
+            }
+
+            $founDate = $this->validateFoundationDate($foundationDate);
+            if ($founDate == false) {
+                $message = "Error, enter a valid foundation date";
+                $flag = 1;
+                $this->showCreateCompanyView($message);
+            }
+
+            if ($flag == 0) {
+                //Seteo los atributos simples de Company
+                $company->setName($name);
+                $company->setCompanyId($newMaxId);//generado con el metodo de nuevoID (solo para el json, con base auto_increment)
+                $company->setFoundationDate($foundationDate); //date
+                $company->setCuit($cuit);
+                $company->setAboutUs($aboutUs);
+                $company->setCompanyLink($companyLink);
+                $company->setEmail($email);
+                $company->setLogo($imagen); //la que viene del metodo validado
+                $company->setActive($active);
 
 
-        $companyCuitSearch=$this->companyRepository->searchCuit($cuit);
-        if($companyCuitSearch==null)
-        {
-            $this->companyRepository->add($company);
-            $this->newCity($city);
-            $this->newIndustry($industry);
-            $this->showCompanyManagement();
-        }
-        else
-        {
-            $message="Error, the company with Cuit ".$cuit." is alredy in the system";
-            $this->showCreateCompanyView($message);
-        }
-
+                $companyCuitSearch = $this->companyRepository->searchCuit($cuit);
+                if ($companyCuitSearch == null) {
+                    $this->companyRepository->add($company);
+                    $this->showCompanyManagement();
+                } else {
+                    $message = "Error, the company with Cuit " . $cuit . " is alredy in the system"; //unique cuit!
+                    $this->showCreateCompanyView($message);
+                }
+            }
     }
 
     /**
@@ -184,6 +238,10 @@ class CompanyController
     }
 
 
+    /**
+     * Validate if the entered cuit is valid
+     * @return mixed|null
+     */
     public function validateCuit($cuit)
     {
         $valid = false;
@@ -202,6 +260,10 @@ class CompanyController
         return $valid;
     }
 
+    /**
+     * Validate if the entered company url is valid
+     * @return mixed|null
+     */
     public function validateLink($companyLink)
     {
         $validate = false;
@@ -216,19 +278,44 @@ class CompanyController
 
 
     /**
+     * Validate if the admin/stundent has logged in the system correctly
+     * @return mixed|null
+     */
+    public function loggedUserValidation()
+    {
+        $loggedUser = null;
+
+        if (isset($_SESSION['loggedadmin'])) {
+            $loggedUser = $_SESSION['loggedadmin'];
+        }
+        else if(isset($_SESSION['loggedstudent'])) {
+            $loggedUser = $_SESSION['loggedstudent'];
+        }
+
+        return  $loggedUser;
+    }
+
+    /**
      * Validate if the admin has logged in the system correctly
      * @return mixed|null
      */
-    public function loggedaminValidation()
+    public function loggedAdminValidation()
     {
-        $loggedadmin = null;
+        $loggedAdmin = null;
+
         if (isset($_SESSION['loggedadmin'])) {
-            $loggedadmin = $_SESSION['loggedadmin'];
+            $loggedAdmin = $_SESSION['loggedadmin'];
         }
 
-        return $loggedadmin;
+        return  $loggedAdmin;
     }
 
+
+
+    /**
+     * Validate if the entered email is valid
+     * @return mixed|null
+     */
     public function validateEmail($email)
     {
         $validate = false;
@@ -238,20 +325,42 @@ class CompanyController
         return $validate;
     }
 
+    /**
+     * Validate if the entered email is valid
+     * @return mixed|null
+     */
     public function image()
     {
         $image = null;
-        if (getimagesize($_FILES['image']['tmp_name']) == false)
+
+        if(isset($_FILES['image']) && isset($_POST['button']))
         {
-           $image=null;
-        } else {
-            $image = addslashes($_FILES['image']['tmp_name']);
-            $image = file_get_contents($image);
-            $image = base64_encode($image);
+            if (file_exists($_FILES['image']['tmp_name']))
+            {
+                if (getimagesize($_FILES['image']['tmp_name']) == false) {
+                    $image = null;
+                } else {
+
+                    $filename = $_FILES['image']['name'];
+                    $fileExt = explode('.', $filename);
+                    $fileActualExt = strtolower(end($fileExt));
+
+                    $allowedExt = array('jpg', 'jpeg', 'png');
+                    if (in_array($fileActualExt, $allowedExt)) {
+                        $image = addslashes($_FILES['image']['tmp_name']);
+                        $image = file_get_contents($image);
+                        $image = base64_encode($image);
+                    }
+                }
+            }
         }
         return $image;
     }
 
+    /**
+     * Validate if the entered foundation date is valid
+     * @return mixed|null
+     */
     public function validateFoundationDate($date)
     {
         $validate = false;
@@ -261,6 +370,9 @@ class CompanyController
         return $validate;
     }
 
+    /**
+     * Generate a new city id
+     */
     public function newCityId($value)//cuando se utilze base de datos se elimina este metodo ya que sera ID auto_increment
     {
         $maxId = 1;
@@ -279,27 +391,26 @@ class CompanyController
     }
 
 
+    /**
+     * Generate a new city instance
+     */
     public function newCity($city)
     {
         $allCitys = $this->cityRepository->getAll();
-        $newId = 0;
-        $flag = 0;
-        foreach ($allCitys as $citys) {
-            if (strcasecmp($citys->getName(), $city) == 0) {
-                $flag = 1;
-            }
-        }
 
-        if ($flag == 0) {
-            $newId = $this->newCityId($allCitys);
-            $anotherCity = new City();
-            $anotherCity->setName($city);
-            $anotherCity->setId($newId);
-            $this->cityRepository->add($anotherCity);
-        }
+        $newId = $this->newCityId($allCitys);
+        $anotherCity = new City();
+        $anotherCity->setName($city);
+        $anotherCity->setId($newId);
+        $this->cityRepository->add($anotherCity);
 
+
+        return $anotherCity;
     }
 
+    /**
+     * Generate a new industry id
+     */
     public function newIndustryId($value)//cuando se utilze base de datos se elimina este metodo ya que sera ID auto_increment
     {
         $maxId = 1;
@@ -317,59 +428,139 @@ class CompanyController
         return $maxId;
     }
 
-
+    /**
+     * Generate a new industry instance
+     */
     public function newIndustry($industry)
     {
         $allIndustrys = $this->industryRepository->getAll();
-        $newId = 0;
-        $flag = 0;
-        foreach ($allIndustrys as $industrys) {
-            if (strcasecmp($industrys->getType(), $industry) == 0) {
-                $flag = 1;
-            }
-        }
 
-        if ($flag == 0) {
-            $newId = $this->newIndustryId($allIndustrys);
-            $anotherIndustry = new Industry();
-            $anotherIndustry->setType($industry);
-            $anotherIndustry->setId($newId);
-            $this->cityRepository->add($anotherIndustry);
-        }
+        $newId = $this->newIndustryId($allIndustrys);
+        $anotherIndustry = new Industry();
+        $anotherIndustry->setType($industry);
+        $anotherIndustry->setId($newId);
+        $this->industryRepository->add($anotherIndustry);
 
+        return $anotherIndustry;
     }
 
+    /**
+     * Remove a company from the system
+     * @return mixed|null
+     */
     public function Remove($id)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
-        $this->companyRepository->remove($id);
-        $this->showCompanyManagement();
+
+            $this->companyRepository->remove($id);
+            $this->showCompanyManagement();
     }
 
 
-    //MODIFICACION DE EMPRESA
+    /**
+     * Edit information of a company from the system
+     * @return mixed|null
+     */
     public function Edit($id)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $allIndustrys = $this->industryRepository->getAll();
-        $allCountrys = $this->countryRepository->getAll();
+         $allIndustrys = $this->industryRepository->getAll();
+         $allCountrys = $this->countryRepository->getAll();
 
-        $company = $this->companyRepository->getCompany($id);
+         $company = $this->companyRepository->getCompany($id);
 
-        $this->showEditCompany("", $company);
-
+         $this->showEditCompany($company, $allIndustrys, $allCountrys);
     }
 
-    public function UpdateCompany($company)
+    /**
+     * Update the information of a company from the system
+     * @return mixed|null
+     */
+    public function UpdateCompany($name, $cuit, $companyLink, $email, $country, $city, $industry, $active, $foundationDate, $aboutUs, $image, $id)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $this->companyRepository->update($company);
+            $allCountrys = $this->countryRepository->getAll();
+            $allIndustrys = $this->industryRepository->getAll();
 
-        $this->showCompanyManagement();
+            $company = $this->companyRepository->getCompany($id);
+
+            $searchedCountry = $this->countryRepository->searchById($country);
+            if ($searchedCountry != null) {
+                $company->setCountry($searchedCountry);
+            }
+
+            $searchedCity = $this->cityRepository->searchByName($city);
+            if ($searchedCity != null) {
+                $company->setCity($searchedCity);
+            } else {
+                $company->setCity($this->newCity($city));
+            }
+
+            $searchedIndustry = $this->industryRepository->searchById($industry);
+            if ($searchedIndustry != null) {
+                $company->setIndustry($searchedIndustry);
+            }
+
+            $searchedAdmin = $this->adminRepository->searchById($this->loggedUser->getAdministratorId());
+            if ($searchedAdmin != null) {
+                $company->setCreationAdmin($searchedAdmin);
+            }
+
+
+            $allCompanys = $this->companyRepository->getAll();
+            $newMaxId = $this->newId($allCompanys);
+
+            $imagen = $this->image($image);
+            if ($imagen == null) {
+                $message = "Error, enter a valid image file";
+                $this->showCreateCompanyView($message);
+            }
+
+            $validCuit = $this->validateCuit($cuit);
+            if ($validCuit == false) {
+                $message = "Error, enter a valid Cuit";
+                $this->showCreateCompanyView($message);
+            }
+
+            $validLink = $this->validateLink($companyLink);
+            if ($validLink == false) {
+                $message = "Error, enter a valid URL link";
+                $this->showCreateCompanyView($message);
+            }
+
+            $validEmail = $this->validateEmail($email);
+            if ($validEmail == false) {
+                $message = "Error, enter a valid email";
+                $this->showCreateCompanyView($message);
+            }
+
+            $founDate = $this->validateFoundationDate($foundationDate);
+            if ($founDate == false) {
+                $message = "Error, enter a valid foundation date";
+                $this->showCreateCompanyView($message);
+            }
+
+
+            //Seteo los atributos simples de Company
+            $company->setName($name);
+            $company->setFoundationDate($foundationDate); //date
+            $company->setCuit($cuit);
+            $company->setAboutUs($aboutUs);
+            $company->setCompanyLink($companyLink);
+            $company->setEmail($email);
+            $company->setLogo($imagen); //la que viene del metodo validado
+            $company->setActive($active);
+
+
+            $this->companyRepository->update($company);
+
+            /*$this->newCity($city); CORROBORAR CITYS PARA CREAR NUEVAS
+            $this->newIndustry($industry); CORROBORAR INDUSTRYS PARA CREAR NUEVAS*/
+
+            $this->showCompanyManagement();
     }
-
 
 
 
@@ -378,31 +569,25 @@ class CompanyController
      * @param $allCompanys
      * @return array|mixed
      */
-    public function searchFiltre($allCompanys)
+    public function searchCompanyFiltre($allCompanys)
     {
-        $searchedCompany= array();
-        if(isset($_POST['search'])) //click boton de filtrado
+        $searchedCompany = array();
+        if (isset($_POST['search'])) //click boton de filtrado
         {
-              if(isset($_POST['valueToSearch']))
-              {
-                  $valueToSearch = $_POST['valueToSearch']; //nombre de la empresa a buscar
+            if (isset($_POST['valueToSearch'])) {
+                $valueToSearch = $_POST['valueToSearch']; //nombre de la empresa a buscar
 
-                  foreach ($allCompanys as $value)
-                  {
-                      if(strcasecmp($value->getName(), $valueToSearch)==0) //no es case sensitive
-                      {
-                          array_push($searchedCompany, $value);
-                      }
-                  }
-              }
-              else
-              {
-                  $searchedCompany=$allCompanys;
-              }
+                foreach ($allCompanys as $value) {
+                    if (strcasecmp($value->getName(), $valueToSearch) == 0) //no es case sensitive
+                    {
+                        array_push($searchedCompany, $value);
+                    }
+                }
+            } else {
+                $searchedCompany = $allCompanys;
             }
-        else
-        {
-          $searchedCompany=$allCompanys;
+        } else {
+            $searchedCompany = $allCompanys;
         }
         return $searchedCompany;
     }

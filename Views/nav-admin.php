@@ -1,20 +1,32 @@
 
-<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-     <span class="navbar-text">
-          Welcome
-     </span>
-     <ul class="navbar-nav ml-auto">
-         <li class="nav-item">
-             <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/showAdministratorControlPanelView"?>">Control Panel</a>
-         </li>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo  FRONT_ROOT."Company/showCreateCompanyView"?>">Add Company</a>
-          </li>
-         <li class="nav-item">
-             <a class="nav-link" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Company Management</a>
-         </li>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/Logout"?>">Logout</a>
-          </li>
-     </ul>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <img style="max-width:30px; margin-top: -7px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXmuQnI6IpPLYNsDQK5TOfvDOK2sTEfFZ1wRdxVQzlhUwkXikpEKfvvdGZ-2gr0RtewYg&usqp=CAU">
+    <a class="navbar-brand" href="#"> Welcome</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/showAdministratorControlPanelView"?>">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                    Services
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCreateCompanyView"?>">Add Company</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Company Management</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Student/showStudentListView"?>">Student List</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/Logout"?>">Logout</a>
+            </li>
+
+        </ul>
+    </div>
 </nav>

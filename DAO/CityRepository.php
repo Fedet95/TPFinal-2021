@@ -1,5 +1,6 @@
 <?php
 namespace DAO;
+
 use Models\City;
 
 
@@ -42,22 +43,34 @@ class CityRepository implements lCityRepository
     function remove($id)
     {
         $this->retrieveData();
-        $i=0;
 
-        foreach ($this->cityList as $value)
-        {
-            if($value->getId()==$id)
-            {
-                unset($this->cityList[$i]);
-            }
-            $i++;
-        }
+        $this->cityList=array_filter($this->cityList, function ($city) use($id){
+            return $city->getId()!=$id; //si se cumple guarda el dato en this->cityList
+
+        });
         $this->saveData();
     }
 
     /**
      *Saves all citys in a Json file
      */
+
+    public function searchByName($name)
+    {
+        $this->retrieveData();
+        $city=null;
+
+        foreach ($this->cityList as $value)
+        {
+            if(strcasecmp($value->getName(),$name) == 0)
+            {
+                $city=$value;
+            }
+        }
+
+        return $city;
+    }
+
     private function SaveData()
     {
         $arrayToEncode = array();
@@ -97,4 +110,5 @@ class CityRepository implements lCityRepository
             }
         }
     }
+
 }

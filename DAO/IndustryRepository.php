@@ -42,17 +42,29 @@ class IndustryRepository implements lIndustryRepository
     function remove($id)
     {
         $this->retrieveData();
-        $i=0;
+
+        $this->industryList=array_filter($this->industryList, function ($industry) use($id){
+            return $industry->getId()!=$id; //si se cumple guarda el dato en this->industry
+
+        });
+
+        $this->saveData();
+    }
+
+    public function searchById($id)
+    {
+        $this->retrieveData();
+        $industry=null;
 
         foreach ($this->industryList as $value)
         {
             if($value->getId()==$id)
             {
-                unset($this->industryList[$i]);
+                $industry=$value;
             }
-            $i++;
         }
-        $this->saveData();
+
+        return $industry;
     }
 
     /**
@@ -88,6 +100,7 @@ class IndustryRepository implements lIndustryRepository
             $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
             foreach ($arrayToDecode as $valuesArray) {
+
                 $industry = new Industry();
                 $industry->setType($valuesArray["type"]);
                 $industry->setId($valuesArray["id"]);

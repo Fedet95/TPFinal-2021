@@ -41,19 +41,31 @@ class CountryRepository implements lCountryRepository
      * Remove a country by ID from Json file
      * @param $id
      */
-    function remove($id)
+    public function searchById($id)
     {
         $this->retrieveData();
-        $i=0;
+        $country=null;
 
         foreach ($this->countryList as $value)
         {
             if($value->getId()==$id)
             {
-                unset($this->countryList[$i]);
+                $country=$value;
             }
-            $i++;
         }
+
+        return $country;
+    }
+    function remove($id)
+    {
+        $this->retrieveData();
+
+
+        $this->countryList=array_filter($this->countryList, function ($country) use($id){
+            return $country->getId()!=$id; //si se cumple guarda el dato en this->countrylist
+
+        });
+
         $this->saveData();
     }
 

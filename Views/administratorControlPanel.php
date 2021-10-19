@@ -1,8 +1,7 @@
 <?php
 include_once('header.php');
 include_once('nav-admin.php');
-require_once(VIEWS_PATH."checkLoggedAdmin.php");
-
+require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 ?>
 
 <main class="py-5">
@@ -14,17 +13,17 @@ require_once(VIEWS_PATH."checkLoggedAdmin.php");
                 <div class="row">
                     <div class="col-lg-4 text-center">
                         <label for="">Nombre</label>
-                        <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $loggedadmin->getFirstName()?>">
+                        <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $loggedUser->getFirstName()?>">
                     </div>
 
                     <div class="col-lg-4 text-center">
                         <label for="">Apellido</label>
-                        <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $loggedadmin->getLastName()?>">
+                        <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $loggedUser->getLastName()?>">
                     </div>
 
                     <div class="col-lg-4 text-center">
                         <label  for="">Employee Number</label>
-                        <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $loggedadmin->getEmployeeNumber()?>">
+                        <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $loggedUser->getEmployeeNumber()?>">
                     </div>
                 </div>
             </div><br>

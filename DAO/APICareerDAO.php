@@ -1,11 +1,10 @@
 <?php
 namespace DAO;
 use Models\Career;
-use Models\Student;
 
-class APIStudentDAO
+class APICareerDAO
 {
-    private $url='https://utn-students-api.herokuapp.com/api/Student';
+    private $url='https://utn-students-api.herokuapp.com/api/Career';
     private $option;
     private $handler; //mi $ch
     private $response;
@@ -46,24 +45,12 @@ class APIStudentDAO
     {
         foreach ($this->response as $key =>$value)
         {
-                $student= new Student();
-                $student->setStudentId($value['studentId']);
-                $student->setEmail($value['email']);
-                $student->setLastName($value['lastName']);
-                $student->setFirstName($value['firstName']);
-                $student->setActive($value['active']);
+            $career= new Career();
+            $career->setCareerId($value['careerId']);
+            $career->setDescription($value['description']);
+            $career->setActive($value['active']);
 
-                $career= new Career();
-                $career->setCareerId($value['careerId']);
-                $student->setCareer($career);
-
-                $student->setDni($value['dni']);
-                $student->setFileNumber($value['fileNumber']);
-                $student->setBirthDate($value['birthDate']);
-                $student->setGender($value['gender']);
-                $student->setPhoneNumber($value['phoneNumber']);
-
-                array_push($this->finalArray, $student);
+            array_push($this->finalArray, $career);
         }
     }
 
@@ -73,14 +60,14 @@ class APIStudentDAO
         return $this->finalArray;
     }
 
-    public function  start(APIStudentDAO $api)
+    public function  start(APICareerDAO $api)
     {
         $api->init();
         $api->setOption()->setOption( CURLOPT_RETURNTRANSFER, true)->setOption(CURLOPT_SSL_VERIFYPEER, false)->setOption(CURLOPT_HTTPHEADER, array(API_KEY))->decode();
-        $students= $api->getAll();
+        $careers= $api->getAll();
         $api->close();
 
-        return $students;
+        return $careers;
     }
 
     public function close()
@@ -88,8 +75,6 @@ class APIStudentDAO
         curl_close($this->handler);
         return $this;
     }
-
-
 
 
 }

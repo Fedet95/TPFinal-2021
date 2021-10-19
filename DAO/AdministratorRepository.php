@@ -45,7 +45,21 @@ class AdministratorRepository implements lAdministratorRepository
         return $administrator;
     }
 
+    public function searchById($id)
+    {
+        $this->retrieveData();
+        $admin=null;
 
+        foreach ($this->administratorList as $value)
+        {
+            if($value->getAdministratorId()==$id)
+            {
+                $admin=$value;
+            }
+        }
+
+        return $admin;
+    }
 
     /**
      *Saves all administrators in a Json file

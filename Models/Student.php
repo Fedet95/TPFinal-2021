@@ -4,7 +4,7 @@ namespace Models;
 class Student extends User
 {
     private $studentId;
-    private $careerId;
+    private $career;
     private $firstName;
     private $lastName;
     private $dni;
@@ -25,17 +25,22 @@ class Student extends User
         $this->studentId = $studentId;
     }
 
-
-    public function getCareerId()
+    /**
+     * @return mixed
+     */
+    public function getCareer()
     {
-        return $this->careerId;
+        return $this->career;
     }
 
-
-    public function setCareerId($careerId)
+    /**
+     * @param mixed $career
+     */
+    public function setCareer(Career $career)
     {
-        $this->careerId = $careerId;
+        $this->career = $career;
     }
+
 
     public function getFirstName()
     {

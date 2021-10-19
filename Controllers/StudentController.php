@@ -1,20 +1,23 @@
 <?php
 namespace Controllers;
 use DAO\CompanyRepository;
-require_once(VIEWS_PATH . "checkLoggedStudent.php");
+use DAO\StudentRepository;
+use Models\Administrator;
 
-
+require_once(VIEWS_PATH . "checkLoggedUser.php");
 
 
 class StudentController
 {
     private $companyRepository;
-    private $loggedStudent;
+    private $studentRepository;
+    private $loggedUser;
 
     public function __construct()
     {
         $this->companyRepository = new CompanyRepository();
-        $this->loggedStudent = $this->loggedStudentValidation();
+        $this->studentRepository= new StudentRepository();
+        $this->loggedUser = $this->loggedUserValidation();
     }
 
     /**
@@ -23,74 +26,79 @@ class StudentController
      */
     public function showStudentControlPanelView($message = "")
     {
-        require_once(VIEWS_PATH."checkLoggedStudent.php");
+        require_once(VIEWS_PATH . "checkLoggedStudent.php");
         require_once(VIEWS_PATH . "studentControlPanel.php");
     }
 
-    /**
-     * * Send to student company list panel view
-     * @param string $message
-     */
-    public function showCompanyListView($message = "")
+
+    public function showStudentListView()
     {
-        require_once(VIEWS_PATH."checkLoggedStudent.php");
-        $allCompanys = $this->companyRepository->getAll();
-        $searchedCompany=$this->searchFiltre($allCompanys);
-        require_once(VIEWS_PATH . "companyList.php");
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        $allStudents= $this->studentRepository->getAll();
+        $searchedStudent=$this->searchStudentFiltre($allStudents);
+        require_once(VIEWS_PATH . "studentList.php");
+
+    }
+
+    public function showMoreStudentView($studentId)
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        $searchedStudent=$this->studentRepository->getStudent($studentId);
+        require_once(VIEWS_PATH . "studentListViewMore.php");
     }
 
 
     /**
-     * Returns a searched company or all companies otherwise
-     * @param $allCompanys
+     * Returns a searched student or all students otherwise
+     * @param $allStudents
      * @return array|mixed
      */
-    public function searchFiltre($allCompanys)
+    public function searchStudentFiltre($allStudents)
     {
-        $searchedCompany= array();
-        if(isset($_POST['search'])) //click boton de filtrado
+        $searchedStudents = array();
+        if (isset($_POST['search'])) //click boton de filtrado
         {
-            if(isset($_POST['valueToSearch']))
-            {
+            if (isset($_POST['valueToSearch'])) {
                 $valueToSearch = $_POST['valueToSearch']; //nombre de la empresa a buscar
 
-                foreach ($allCompanys as $value)
-                {
-                    if(strcasecmp($value->getName(), $valueToSearch)==0) //no es case sensitive
+                $dniReplace= str_replace("-", "", $valueToSearch);
+
+                foreach ($allStudents as $value) {
+                    $dniValueReplace= str_replace("-", "", $value->getDni());
+                    if($dniValueReplace==$dniReplace)
                     {
-                        array_push($searchedCompany, $value);
+                        array_push($searchedStudents, $value);
                     }
                 }
+            } else {
+                $searchedStudents = $allStudents;
             }
-            else
-            {
-                $searchedCompany=$allCompanys;
-            }
+        } else {
+            $searchedStudents = $allStudents;
         }
-        else
-        {
-            $searchedCompany=$allCompanys;
-        }
-        return $searchedCompany;
+        return $searchedStudents;
     }
-
 
 
     /**
-     * Validate if the student has logged in the system correctly
+     * Validate if the admin/stundent has logged in the system correctly
      * @return mixed|null
      */
-    public function loggedStudentValidation()
+    public function loggedUserValidation()
     {
-        $loggedstudent = null;
-        if (isset($_SESSION['loggedstudent'])) {
-            $loggedstudent = $_SESSION['loggedstudent'];
+        $loggedUser = null;
+
+        if (isset($_SESSION['loggedadmin'])) {
+            $loggedUser = $_SESSION['loggedadmin'];
+        }
+        else if(isset($_SESSION['loggedstudent'])) {
+            $loggedUser = $_SESSION['loggedstudent'];
         }
 
-        return $loggedstudent;
+        return  $loggedUser;
     }
-
-
 
 
 

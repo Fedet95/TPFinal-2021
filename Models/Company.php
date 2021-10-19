@@ -5,7 +5,6 @@ class Company
 {
     private $companyId;
     private $name;
-    private $nacionality;
     private $foundationDate;
     private $cuit;
     private $aboutUs;
@@ -37,18 +36,6 @@ class Company
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-
-    public function getNacionality()
-    {
-        return $this->nacionality;
-    }
-
-
-    public function setNacionality($nacionality)
-    {
-        $this->nacionality = $nacionality;
     }
 
 

@@ -1,7 +1,6 @@
 [
     {
         "studentId": 1,
-        "careerId": 2,
         "firstName": "Devlen",
         "lastName": "Douthwaite",
         "dni": "15-992-8607",
@@ -10,11 +9,15 @@
         "birthDate": "2021-06-28T00:00:00",
         "phoneNumber": "849-713-4523",
         "email": "ddouthwaite0@goo.gl",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 2,
-        "careerId": 5,
         "firstName": "Wyatan",
         "lastName": "Lorant",
         "dni": "63-025-8112",
@@ -23,11 +26,15 @@
         "birthDate": "2021-02-23T00:00:00",
         "phoneNumber": "171-448-9062",
         "email": "wlorant1@sbwire.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 3,
-        "careerId": 2,
         "firstName": "Alanson",
         "lastName": "Seemmonds",
         "dni": "06-684-0100",
@@ -36,11 +43,15 @@
         "birthDate": "2021-07-03T00:00:00",
         "phoneNumber": "961-404-8720",
         "email": "aseemmonds2@upenn.edu",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 4,
-        "careerId": 5,
         "firstName": "Elvin",
         "lastName": "Diben",
         "dni": "25-552-7065",
@@ -49,11 +60,15 @@
         "birthDate": "2020-09-29T00:00:00",
         "phoneNumber": "337-480-1652",
         "email": "ediben3@multiply.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 5,
-        "careerId": 2,
         "firstName": "Darsey",
         "lastName": "Hasely",
         "dni": "38-798-8629",
@@ -62,11 +77,15 @@
         "birthDate": "2021-03-14T00:00:00",
         "phoneNumber": "936-600-0486",
         "email": "dhasely4@blinklist.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 6,
-        "careerId": 4,
         "firstName": "Whitby",
         "lastName": "Alelsandrowicz",
         "dni": "85-506-8427",
@@ -75,11 +94,15 @@
         "birthDate": "2020-09-25T00:00:00",
         "phoneNumber": "328-137-1386",
         "email": "walelsandrowicz5@nasa.gov",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 7,
-        "careerId": 3,
         "firstName": "Kienan",
         "lastName": "Witheford",
         "dni": "03-800-8262",
@@ -88,11 +111,15 @@
         "birthDate": "2021-09-15T00:00:00",
         "phoneNumber": "525-769-1695",
         "email": "kwitheford6@salon.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 8,
-        "careerId": 5,
         "firstName": "Isidor",
         "lastName": "Aberdalgy",
         "dni": "26-149-2035",
@@ -101,11 +128,15 @@
         "birthDate": "2021-09-06T00:00:00",
         "phoneNumber": "977-660-8938",
         "email": "iaberdalgy7@mlb.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 9,
-        "careerId": 5,
         "firstName": "Grier",
         "lastName": "Castle",
         "dni": "53-191-5001",
@@ -114,11 +145,15 @@
         "birthDate": "2021-08-30T00:00:00",
         "phoneNumber": "904-335-2660",
         "email": "gcastle8@hexun.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 10,
-        "careerId": 4,
         "firstName": "Son",
         "lastName": "Forrington",
         "dni": "62-447-4424",
@@ -127,11 +162,15 @@
         "birthDate": "2021-03-13T00:00:00",
         "phoneNumber": "720-205-4748",
         "email": "sforrington9@webnode.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 11,
-        "careerId": 2,
         "firstName": "Sapphire",
         "lastName": "Jantet",
         "dni": "86-635-3442",
@@ -140,11 +179,15 @@
         "birthDate": "2021-03-14T00:00:00",
         "phoneNumber": "860-103-9915",
         "email": "sjanteta@businessinsider.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 12,
-        "careerId": 3,
         "firstName": "Jori",
         "lastName": "Doring",
         "dni": "81-077-9856",
@@ -153,11 +196,15 @@
         "birthDate": "2021-04-12T00:00:00",
         "phoneNumber": "414-609-3692",
         "email": "jdoringb@un.org",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 13,
-        "careerId": 2,
         "firstName": "Jamey",
         "lastName": "Yaxley",
         "dni": "50-772-8315",
@@ -166,11 +213,15 @@
         "birthDate": "2021-03-09T00:00:00",
         "phoneNumber": "595-862-1690",
         "email": "jyaxleyc@ifeng.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 14,
-        "careerId": 2,
         "firstName": "Sasha",
         "lastName": "Laxson",
         "dni": "05-910-7081",
@@ -179,11 +230,15 @@
         "birthDate": "2020-10-02T00:00:00",
         "phoneNumber": "174-737-9358",
         "email": "slaxsond@squarespace.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 15,
-        "careerId": 5,
         "firstName": "Bartholomew",
         "lastName": "Van Daalen",
         "dni": "25-669-1408",
@@ -192,11 +247,15 @@
         "birthDate": "2021-06-24T00:00:00",
         "phoneNumber": "267-278-5971",
         "email": "bvandaalene@sphinn.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 16,
-        "careerId": 2,
         "firstName": "Annamaria",
         "lastName": "Crannage",
         "dni": "56-601-9741",
@@ -205,11 +264,15 @@
         "birthDate": "2021-08-09T00:00:00",
         "phoneNumber": "126-254-6195",
         "email": "acrannagef@baidu.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 17,
-        "careerId": 1,
         "firstName": "Frayda",
         "lastName": "Gorvette",
         "dni": "52-405-2882",
@@ -218,11 +281,15 @@
         "birthDate": "2021-07-05T00:00:00",
         "phoneNumber": "152-846-1928",
         "email": "fgorvetteg@list-manage.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 18,
-        "careerId": 2,
         "firstName": "Ondrea",
         "lastName": "Webburn",
         "dni": "92-770-5792",
@@ -231,11 +298,15 @@
         "birthDate": "2021-08-19T00:00:00",
         "phoneNumber": "598-324-4986",
         "email": "owebburnh@google.co.uk",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 19,
-        "careerId": 2,
         "firstName": "Talia",
         "lastName": "Petersen",
         "dni": "66-290-7595",
@@ -244,11 +315,15 @@
         "birthDate": "2021-05-11T00:00:00",
         "phoneNumber": "138-603-2531",
         "email": "tpeterseni@nydailynews.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 20,
-        "careerId": 5,
         "firstName": "Judie",
         "lastName": "Brunton",
         "dni": "39-063-5733",
@@ -257,11 +332,15 @@
         "birthDate": "2020-09-27T00:00:00",
         "phoneNumber": "241-206-2755",
         "email": "jbruntonj@imageshack.us",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 21,
-        "careerId": 4,
         "firstName": "Lara",
         "lastName": "Syne",
         "dni": "58-550-2198",
@@ -270,11 +349,15 @@
         "birthDate": "2020-10-19T00:00:00",
         "phoneNumber": "812-829-3352",
         "email": "lsynek@msn.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 22,
-        "careerId": 4,
         "firstName": "Theda",
         "lastName": "Thompstone",
         "dni": "19-852-1865",
@@ -283,11 +366,15 @@
         "birthDate": "2021-02-06T00:00:00",
         "phoneNumber": "581-862-8307",
         "email": "tthompstonel@unblog.fr",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 23,
-        "careerId": 4,
         "firstName": "Marline",
         "lastName": "Vasilischev",
         "dni": "55-935-5268",
@@ -296,11 +383,15 @@
         "birthDate": "2021-09-15T00:00:00",
         "phoneNumber": "758-919-0671",
         "email": "mvasilischevm@123-reg.co.uk",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 24,
-        "careerId": 1,
         "firstName": "Kyrstin",
         "lastName": "Heisman",
         "dni": "56-875-3900",
@@ -309,11 +400,15 @@
         "birthDate": "2021-05-07T00:00:00",
         "phoneNumber": "687-607-3859",
         "email": "kheismann@purevolume.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 25,
-        "careerId": 1,
         "firstName": "Brande",
         "lastName": "Strivens",
         "dni": "10-415-4568",
@@ -322,11 +417,15 @@
         "birthDate": "2021-02-17T00:00:00",
         "phoneNumber": "411-285-2703",
         "email": "bstrivenso@surveymonkey.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 26,
-        "careerId": 2,
         "firstName": "Rhodia",
         "lastName": "Haller",
         "dni": "54-718-3009",
@@ -335,11 +434,15 @@
         "birthDate": "2021-09-07T00:00:00",
         "phoneNumber": "964-943-9988",
         "email": "rhallerp@free.fr",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 27,
-        "careerId": 1,
         "firstName": "Russell",
         "lastName": "Geipel",
         "dni": "18-120-5229",
@@ -348,11 +451,15 @@
         "birthDate": "2020-10-27T00:00:00",
         "phoneNumber": "533-522-7527",
         "email": "rgeipelq@jugem.jp",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 28,
-        "careerId": 1,
         "firstName": "Hersch",
         "lastName": "Sellen",
         "dni": "85-567-9313",
@@ -361,11 +468,15 @@
         "birthDate": "2021-04-16T00:00:00",
         "phoneNumber": "425-253-5570",
         "email": "hsellenr@nba.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 29,
-        "careerId": 4,
         "firstName": "Mace",
         "lastName": "Bromidge",
         "dni": "47-216-4336",
@@ -374,11 +485,15 @@
         "birthDate": "2021-02-05T00:00:00",
         "phoneNumber": "306-431-3867",
         "email": "mbromidges@smugmug.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 30,
-        "careerId": 5,
         "firstName": "Harrison",
         "lastName": "Bettington",
         "dni": "75-405-0292",
@@ -387,11 +502,15 @@
         "birthDate": "2021-08-07T00:00:00",
         "phoneNumber": "543-608-6067",
         "email": "hbettingtont@marketwatch.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 31,
-        "careerId": 3,
         "firstName": "Kasey",
         "lastName": "Littrik",
         "dni": "00-985-8419",
@@ -400,11 +519,15 @@
         "birthDate": "2021-08-09T00:00:00",
         "phoneNumber": "776-195-5544",
         "email": "klittriku@army.mil",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 32,
-        "careerId": 5,
         "firstName": "Irina",
         "lastName": "Simukov",
         "dni": "32-573-1282",
@@ -413,11 +536,15 @@
         "birthDate": "2020-10-12T00:00:00",
         "phoneNumber": "415-385-0195",
         "email": "isimukovv@bbc.co.uk",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 33,
-        "careerId": 1,
         "firstName": "Cassie",
         "lastName": "Fysh",
         "dni": "35-351-0827",
@@ -426,11 +553,15 @@
         "birthDate": "2021-06-21T00:00:00",
         "phoneNumber": "682-889-8851",
         "email": "cfyshw@mysql.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 34,
-        "careerId": 2,
         "firstName": "Marris",
         "lastName": "Danzelman",
         "dni": "09-071-3281",
@@ -439,11 +570,15 @@
         "birthDate": "2021-05-22T00:00:00",
         "phoneNumber": "847-391-5838",
         "email": "mdanzelmanx@hhs.gov",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 35,
-        "careerId": 1,
         "firstName": "Wakefield",
         "lastName": "Dalla",
         "dni": "73-109-6355",
@@ -452,11 +587,15 @@
         "birthDate": "2021-03-04T00:00:00",
         "phoneNumber": "767-735-0534",
         "email": "wdallay@printfriendly.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 36,
-        "careerId": 5,
         "firstName": "Peg",
         "lastName": "Johnes",
         "dni": "66-498-0795",
@@ -465,11 +604,15 @@
         "birthDate": "2021-06-03T00:00:00",
         "phoneNumber": "945-808-3754",
         "email": "pjohnesz@columbia.edu",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 37,
-        "careerId": 4,
         "firstName": "Kizzee",
         "lastName": "Offiler",
         "dni": "00-350-8372",
@@ -478,11 +621,15 @@
         "birthDate": "2020-11-20T00:00:00",
         "phoneNumber": "703-628-6849",
         "email": "koffiler10@youku.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 38,
-        "careerId": 2,
         "firstName": "Beret",
         "lastName": "Poyner",
         "dni": "50-644-3386",
@@ -491,11 +638,15 @@
         "birthDate": "2021-08-14T00:00:00",
         "phoneNumber": "688-583-4742",
         "email": "bpoyner11@php.net",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 39,
-        "careerId": 4,
         "firstName": "Obadias",
         "lastName": "Louys",
         "dni": "42-393-7383",
@@ -504,11 +655,15 @@
         "birthDate": "2021-04-26T00:00:00",
         "phoneNumber": "365-275-7347",
         "email": "olouys12@army.mil",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 40,
-        "careerId": 2,
         "firstName": "Sharia",
         "lastName": "Leary",
         "dni": "64-212-3162",
@@ -517,11 +672,15 @@
         "birthDate": "2020-11-01T00:00:00",
         "phoneNumber": "343-120-7321",
         "email": "sleary13@eventbrite.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 41,
-        "careerId": 1,
         "firstName": "Bunny",
         "lastName": "Benham",
         "dni": "27-441-6898",
@@ -530,11 +689,15 @@
         "birthDate": "2020-10-17T00:00:00",
         "phoneNumber": "971-848-4265",
         "email": "bbenham14@vimeo.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 42,
-        "careerId": 2,
         "firstName": "Gifford",
         "lastName": "McGarel",
         "dni": "24-962-3779",
@@ -543,11 +706,15 @@
         "birthDate": "2021-03-11T00:00:00",
         "phoneNumber": "371-171-1943",
         "email": "gmcgarel15@disqus.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 43,
-        "careerId": 5,
         "firstName": "Katharyn",
         "lastName": "O'Donoghue",
         "dni": "34-717-4988",
@@ -556,11 +723,15 @@
         "birthDate": "2020-09-29T00:00:00",
         "phoneNumber": "675-855-8792",
         "email": "kodonoghue16@vinaora.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 44,
-        "careerId": 1,
         "firstName": "Alexi",
         "lastName": "Knowlys",
         "dni": "95-474-3336",
@@ -569,11 +740,15 @@
         "birthDate": "2021-03-30T00:00:00",
         "phoneNumber": "647-835-8682",
         "email": "aknowlys17@unicef.org",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 45,
-        "careerId": 5,
         "firstName": "Marven",
         "lastName": "Spilsbury",
         "dni": "76-803-4887",
@@ -582,11 +757,15 @@
         "birthDate": "2021-01-29T00:00:00",
         "phoneNumber": "161-726-5357",
         "email": "mspilsbury18@gravatar.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 46,
-        "careerId": 3,
         "firstName": "Esme",
         "lastName": "Atyeo",
         "dni": "96-988-1544",
@@ -595,11 +774,15 @@
         "birthDate": "2021-01-19T00:00:00",
         "phoneNumber": "604-138-2728",
         "email": "eatyeo19@nba.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 47,
-        "careerId": 2,
         "firstName": "Gunner",
         "lastName": "Hilland",
         "dni": "10-527-6911",
@@ -608,11 +791,15 @@
         "birthDate": "2021-04-28T00:00:00",
         "phoneNumber": "708-702-4402",
         "email": "ghilland1a@mit.edu",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 48,
-        "careerId": 1,
         "firstName": "Dorie",
         "lastName": "Philot",
         "dni": "65-663-7022",
@@ -621,11 +808,15 @@
         "birthDate": "2021-08-11T00:00:00",
         "phoneNumber": "168-403-8062",
         "email": "dphilot1b@kickstarter.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 49,
-        "careerId": 4,
         "firstName": "Yance",
         "lastName": "Raynham",
         "dni": "79-563-1656",
@@ -634,11 +825,15 @@
         "birthDate": "2020-11-05T00:00:00",
         "phoneNumber": "369-540-5290",
         "email": "yraynham1c@studiopress.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 50,
-        "careerId": 2,
         "firstName": "Gerick",
         "lastName": "Hruska",
         "dni": "57-616-0361",
@@ -647,11 +842,15 @@
         "birthDate": "2021-07-31T00:00:00",
         "phoneNumber": "375-200-9564",
         "email": "ghruska1d@zimbio.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 51,
-        "careerId": 5,
         "firstName": "Morgen",
         "lastName": "Labroue",
         "dni": "44-168-7059",
@@ -660,11 +859,15 @@
         "birthDate": "2020-12-05T00:00:00",
         "phoneNumber": "254-542-2439",
         "email": "mlabroue1e@webeden.co.uk",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 52,
-        "careerId": 4,
         "firstName": "Calypso",
         "lastName": "Snelgar",
         "dni": "36-361-0619",
@@ -673,11 +876,15 @@
         "birthDate": "2021-05-29T00:00:00",
         "phoneNumber": "511-192-9263",
         "email": "csnelgar1f@etsy.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 53,
-        "careerId": 4,
         "firstName": "Zach",
         "lastName": "Jurek",
         "dni": "99-564-0350",
@@ -686,11 +893,15 @@
         "birthDate": "2021-07-23T00:00:00",
         "phoneNumber": "772-700-7304",
         "email": "zjurek1g@indiegogo.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 54,
-        "careerId": 5,
         "firstName": "Darwin",
         "lastName": "Michurin",
         "dni": "53-383-1667",
@@ -699,11 +910,15 @@
         "birthDate": "2021-08-25T00:00:00",
         "phoneNumber": "571-480-7716",
         "email": "dmichurin1h@msn.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 55,
-        "careerId": 1,
         "firstName": "Eba",
         "lastName": "Jeskins",
         "dni": "59-545-5484",
@@ -712,11 +927,15 @@
         "birthDate": "2021-06-15T00:00:00",
         "phoneNumber": "628-593-0925",
         "email": "ejeskins1i@forbes.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 56,
-        "careerId": 1,
         "firstName": "Weidar",
         "lastName": "Yaxley",
         "dni": "58-116-6555",
@@ -725,11 +944,15 @@
         "birthDate": "2021-01-22T00:00:00",
         "phoneNumber": "319-587-6296",
         "email": "wyaxley1j@cargocollective.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 57,
-        "careerId": 5,
         "firstName": "Thornie",
         "lastName": "Bassam",
         "dni": "62-194-8628",
@@ -738,11 +961,15 @@
         "birthDate": "2021-04-15T00:00:00",
         "phoneNumber": "847-461-4910",
         "email": "tbassam1k@rediff.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 58,
-        "careerId": 2,
         "firstName": "Fran",
         "lastName": "Beardsley",
         "dni": "10-540-6091",
@@ -751,11 +978,15 @@
         "birthDate": "2021-07-18T00:00:00",
         "phoneNumber": "128-308-3463",
         "email": "fbeardsley1l@berkeley.edu",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 59,
-        "careerId": 2,
         "firstName": "Balduin",
         "lastName": "Sooper",
         "dni": "29-897-9350",
@@ -764,11 +995,15 @@
         "birthDate": "2021-03-31T00:00:00",
         "phoneNumber": "649-524-7466",
         "email": "bsooper1m@nba.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 60,
-        "careerId": 4,
         "firstName": "Binky",
         "lastName": "Snoden",
         "dni": "78-390-7971",
@@ -777,11 +1012,15 @@
         "birthDate": "2021-09-22T00:00:00",
         "phoneNumber": "901-495-3237",
         "email": "bsnoden1n@nydailynews.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 61,
-        "careerId": 5,
         "firstName": "Melody",
         "lastName": "Avrahamy",
         "dni": "60-142-1673",
@@ -790,11 +1029,15 @@
         "birthDate": "2021-03-28T00:00:00",
         "phoneNumber": "186-463-5122",
         "email": "mavrahamy1o@mapy.cz",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 62,
-        "careerId": 2,
         "firstName": "Maryjane",
         "lastName": "Haestier",
         "dni": "76-067-9131",
@@ -803,11 +1046,15 @@
         "birthDate": "2020-11-29T00:00:00",
         "phoneNumber": "118-132-5905",
         "email": "mhaestier1p@constantcontact.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 63,
-        "careerId": 1,
         "firstName": "Annissa",
         "lastName": "Dobing",
         "dni": "10-164-5517",
@@ -816,11 +1063,15 @@
         "birthDate": "2020-12-30T00:00:00",
         "phoneNumber": "649-157-3136",
         "email": "adobing1q@hostgator.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 64,
-        "careerId": 4,
         "firstName": "Gerry",
         "lastName": "Hullett",
         "dni": "86-004-0723",
@@ -829,11 +1080,15 @@
         "birthDate": "2020-12-16T00:00:00",
         "phoneNumber": "966-302-3954",
         "email": "ghullett1r@smugmug.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 65,
-        "careerId": 5,
         "firstName": "Karlis",
         "lastName": "Izkovitz",
         "dni": "67-119-9198",
@@ -842,11 +1097,15 @@
         "birthDate": "2021-05-11T00:00:00",
         "phoneNumber": "262-601-0659",
         "email": "kizkovitz1s@mac.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 66,
-        "careerId": 4,
         "firstName": "Tadeo",
         "lastName": "Shears",
         "dni": "74-609-6611",
@@ -855,11 +1114,15 @@
         "birthDate": "2020-11-12T00:00:00",
         "phoneNumber": "303-218-7999",
         "email": "tshears1t@icq.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 67,
-        "careerId": 3,
         "firstName": "Aymer",
         "lastName": "Bruineman",
         "dni": "98-226-6801",
@@ -868,11 +1131,15 @@
         "birthDate": "2020-12-18T00:00:00",
         "phoneNumber": "469-982-7985",
         "email": "abruineman1u@typepad.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 68,
-        "careerId": 4,
         "firstName": "Neel",
         "lastName": "Yven",
         "dni": "55-697-8917",
@@ -881,11 +1148,15 @@
         "birthDate": "2020-12-04T00:00:00",
         "phoneNumber": "106-171-8503",
         "email": "nyven1v@unicef.org",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 69,
-        "careerId": 4,
         "firstName": "Star",
         "lastName": "Annis",
         "dni": "09-226-3608",
@@ -894,11 +1165,15 @@
         "birthDate": "2021-04-30T00:00:00",
         "phoneNumber": "145-198-0335",
         "email": "sannis1w@cnn.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 70,
-        "careerId": 1,
         "firstName": "Giorgi",
         "lastName": "Brabyn",
         "dni": "34-540-7376",
@@ -907,11 +1182,15 @@
         "birthDate": "2021-08-28T00:00:00",
         "phoneNumber": "969-271-8721",
         "email": "gbrabyn1x@moonfruit.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 71,
-        "careerId": 1,
         "firstName": "Betsey",
         "lastName": "Glanfield",
         "dni": "88-525-8376",
@@ -920,11 +1199,15 @@
         "birthDate": "2021-03-12T00:00:00",
         "phoneNumber": "903-991-3132",
         "email": "bglanfield1y@globo.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 72,
-        "careerId": 4,
         "firstName": "Travus",
         "lastName": "Stuehmeier",
         "dni": "35-742-8601",
@@ -933,11 +1216,15 @@
         "birthDate": "2021-06-19T00:00:00",
         "phoneNumber": "901-727-3778",
         "email": "tstuehmeier1z@privacy.gov.au",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 73,
-        "careerId": 1,
         "firstName": "Tadio",
         "lastName": "Millmoe",
         "dni": "88-893-2722",
@@ -946,11 +1233,15 @@
         "birthDate": "2021-09-16T00:00:00",
         "phoneNumber": "992-568-7663",
         "email": "tmillmoe20@blogspot.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 74,
-        "careerId": 1,
         "firstName": "Antonie",
         "lastName": "Gannicleff",
         "dni": "27-309-8937",
@@ -959,11 +1250,15 @@
         "birthDate": "2020-10-03T00:00:00",
         "phoneNumber": "858-907-0753",
         "email": "agannicleff21@livejournal.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 75,
-        "careerId": 1,
         "firstName": "Gonzalo",
         "lastName": "De Pietri",
         "dni": "68-043-2945",
@@ -972,11 +1267,15 @@
         "birthDate": "2020-10-06T00:00:00",
         "phoneNumber": "607-464-2013",
         "email": "gdepietri22@github.io",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 76,
-        "careerId": 5,
         "firstName": "Pammie",
         "lastName": "Friman",
         "dni": "37-754-2476",
@@ -985,11 +1284,15 @@
         "birthDate": "2020-11-12T00:00:00",
         "phoneNumber": "492-691-2537",
         "email": "pfriman23@columbia.edu",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 77,
-        "careerId": 2,
         "firstName": "Tracie",
         "lastName": "Vreiberg",
         "dni": "42-052-8183",
@@ -998,11 +1301,15 @@
         "birthDate": "2021-07-14T00:00:00",
         "phoneNumber": "569-585-2167",
         "email": "tvreiberg24@state.tx.us",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 78,
-        "careerId": 1,
         "firstName": "Trixy",
         "lastName": "Beagles",
         "dni": "25-872-3664",
@@ -1011,11 +1318,15 @@
         "birthDate": "2021-05-31T00:00:00",
         "phoneNumber": "994-971-1461",
         "email": "tbeagles25@gov.uk",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 79,
-        "careerId": 4,
         "firstName": "Aidan",
         "lastName": "McGlashan",
         "dni": "18-411-2776",
@@ -1024,11 +1335,15 @@
         "birthDate": "2020-10-11T00:00:00",
         "phoneNumber": "488-672-3631",
         "email": "amcglashan26@washingtonpost.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 80,
-        "careerId": 4,
         "firstName": "Rudiger",
         "lastName": "Bainbridge",
         "dni": "62-199-1596",
@@ -1037,11 +1352,15 @@
         "birthDate": "2021-02-10T00:00:00",
         "phoneNumber": "614-601-7046",
         "email": "rbainbridge27@delicious.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 81,
-        "careerId": 5,
         "firstName": "Zaria",
         "lastName": "Shepley",
         "dni": "58-348-3702",
@@ -1050,11 +1369,15 @@
         "birthDate": "2021-07-22T00:00:00",
         "phoneNumber": "902-436-1480",
         "email": "zshepley28@typepad.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 82,
-        "careerId": 1,
         "firstName": "Linnie",
         "lastName": "Jocic",
         "dni": "62-388-7682",
@@ -1063,11 +1386,15 @@
         "birthDate": "2021-01-15T00:00:00",
         "phoneNumber": "356-793-8759",
         "email": "ljocic29@economist.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 83,
-        "careerId": 1,
         "firstName": "Charleen",
         "lastName": "Waylen",
         "dni": "29-994-0636",
@@ -1076,11 +1403,15 @@
         "birthDate": "2021-06-22T00:00:00",
         "phoneNumber": "526-290-6310",
         "email": "cwaylen2a@princeton.edu",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 84,
-        "careerId": 3,
         "firstName": "Kelbee",
         "lastName": "de Vaen",
         "dni": "38-139-8480",
@@ -1089,11 +1420,15 @@
         "birthDate": "2021-04-27T00:00:00",
         "phoneNumber": "640-502-4617",
         "email": "kdevaen2b@usgs.gov",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 85,
-        "careerId": 4,
         "firstName": "Rafe",
         "lastName": "Reckhouse",
         "dni": "45-903-5831",
@@ -1102,11 +1437,15 @@
         "birthDate": "2021-08-07T00:00:00",
         "phoneNumber": "101-527-3576",
         "email": "rreckhouse2c@cnn.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 86,
-        "careerId": 5,
         "firstName": "Beverie",
         "lastName": "Gilby",
         "dni": "21-203-5420",
@@ -1115,11 +1454,15 @@
         "birthDate": "2021-05-23T00:00:00",
         "phoneNumber": "696-388-0069",
         "email": "bgilby2d@usda.gov",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 87,
-        "careerId": 1,
         "firstName": "Calli",
         "lastName": "Sutliff",
         "dni": "81-223-5987",
@@ -1128,11 +1471,15 @@
         "birthDate": "2021-06-22T00:00:00",
         "phoneNumber": "925-140-1998",
         "email": "csutliff2e@ihg.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 88,
-        "careerId": 2,
         "firstName": "Milissent",
         "lastName": "Devil",
         "dni": "81-313-1293",
@@ -1141,11 +1488,15 @@
         "birthDate": "2021-01-17T00:00:00",
         "phoneNumber": "248-921-6676",
         "email": "mdevil2f@ox.ac.uk",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 89,
-        "careerId": 5,
         "firstName": "Ursuline",
         "lastName": "Eighteen",
         "dni": "46-217-6852",
@@ -1154,11 +1505,15 @@
         "birthDate": "2021-02-28T00:00:00",
         "phoneNumber": "820-769-0779",
         "email": "ueighteen2g@twitpic.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 90,
-        "careerId": 5,
         "firstName": "Tildy",
         "lastName": "Turmall",
         "dni": "41-971-2001",
@@ -1167,11 +1522,15 @@
         "birthDate": "2020-09-25T00:00:00",
         "phoneNumber": "488-931-4301",
         "email": "tturmall2h@newsvine.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 91,
-        "careerId": 1,
         "firstName": "Bert",
         "lastName": "Blew",
         "dni": "39-342-8776",
@@ -1180,11 +1539,15 @@
         "birthDate": "2020-09-26T00:00:00",
         "phoneNumber": "828-834-1196",
         "email": "bblew2i@biglobe.ne.jp",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 92,
-        "careerId": 4,
         "firstName": "Jennilee",
         "lastName": "Sabathe",
         "dni": "18-651-6841",
@@ -1193,11 +1556,15 @@
         "birthDate": "2021-05-22T00:00:00",
         "phoneNumber": "721-457-9122",
         "email": "jsabathe2j@studiopress.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 93,
-        "careerId": 3,
         "firstName": "Ethelyn",
         "lastName": "Zipsell",
         "dni": "20-882-4129",
@@ -1206,11 +1573,15 @@
         "birthDate": "2020-11-27T00:00:00",
         "phoneNumber": "188-708-3056",
         "email": "ezipsell2k@nymag.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 94,
-        "careerId": 5,
         "firstName": "Skyler",
         "lastName": "Whiteside",
         "dni": "59-003-2764",
@@ -1219,11 +1590,15 @@
         "birthDate": "2020-11-27T00:00:00",
         "phoneNumber": "967-927-0327",
         "email": "swhiteside2l@pbs.org",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 95,
-        "careerId": 4,
         "firstName": "Franchot",
         "lastName": "Stave",
         "dni": "62-422-4180",
@@ -1232,11 +1607,15 @@
         "birthDate": "2021-03-26T00:00:00",
         "phoneNumber": "399-493-0794",
         "email": "fstave2m@ezinearticles.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 96,
-        "careerId": 1,
         "firstName": "Bettine",
         "lastName": "Tonner",
         "dni": "20-726-8355",
@@ -1245,11 +1624,15 @@
         "birthDate": "2020-12-29T00:00:00",
         "phoneNumber": "120-371-4961",
         "email": "btonner2n@diigo.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 97,
-        "careerId": 4,
         "firstName": "Antons",
         "lastName": "Colaco",
         "dni": "09-249-2880",
@@ -1258,11 +1641,15 @@
         "birthDate": "2021-07-31T00:00:00",
         "phoneNumber": "425-810-4447",
         "email": "acolaco2o@shop-pro.jp",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 98,
-        "careerId": 5,
         "firstName": "Esdras",
         "lastName": "Dalgety",
         "dni": "89-007-8770",
@@ -1271,11 +1658,15 @@
         "birthDate": "2021-07-03T00:00:00",
         "phoneNumber": "829-518-6610",
         "email": "edalgety2p@cornell.edu",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 99,
-        "careerId": 4,
         "firstName": "Kathlin",
         "lastName": "Bonnett",
         "dni": "78-552-3269",
@@ -1284,11 +1675,15 @@
         "birthDate": "2021-09-16T00:00:00",
         "phoneNumber": "627-902-1623",
         "email": "kbonnett2q@tmall.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 100,
-        "careerId": 4,
         "firstName": "Fredia",
         "lastName": "Deave",
         "dni": "11-441-4898",
@@ -1297,11 +1692,15 @@
         "birthDate": "2021-05-28T00:00:00",
         "phoneNumber": "826-543-3453",
         "email": "fdeave2r@wix.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 101,
-        "careerId": 5,
         "firstName": "Read",
         "lastName": "Crimp",
         "dni": "87-834-8894",
@@ -1310,11 +1709,15 @@
         "birthDate": "2021-07-20T00:00:00",
         "phoneNumber": "300-596-9167",
         "email": "rcrimp2s@posterous.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 102,
-        "careerId": 1,
         "firstName": "Ermin",
         "lastName": "Goves",
         "dni": "42-485-4826",
@@ -1323,11 +1726,15 @@
         "birthDate": "2021-07-19T00:00:00",
         "phoneNumber": "988-703-4660",
         "email": "egoves2t@squarespace.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 103,
-        "careerId": 2,
         "firstName": "Boyd",
         "lastName": "Scemp",
         "dni": "15-881-6261",
@@ -1336,11 +1743,15 @@
         "birthDate": "2021-07-20T00:00:00",
         "phoneNumber": "687-360-6606",
         "email": "bscemp2u@tumblr.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 104,
-        "careerId": 1,
         "firstName": "Kareem",
         "lastName": "Burn",
         "dni": "28-005-8149",
@@ -1349,11 +1760,15 @@
         "birthDate": "2021-09-02T00:00:00",
         "phoneNumber": "530-613-3865",
         "email": "kburn2v@arstechnica.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 105,
-        "careerId": 5,
         "firstName": "Leo",
         "lastName": "Spight",
         "dni": "17-631-6882",
@@ -1362,11 +1777,15 @@
         "birthDate": "2021-08-15T00:00:00",
         "phoneNumber": "242-192-0925",
         "email": "lspight2w@examiner.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 106,
-        "careerId": 5,
         "firstName": "Herve",
         "lastName": "Bradder",
         "dni": "18-818-7495",
@@ -1375,11 +1794,15 @@
         "birthDate": "2021-03-27T00:00:00",
         "phoneNumber": "344-574-1632",
         "email": "hbradder2x@ibm.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 107,
-        "careerId": 4,
         "firstName": "Lynea",
         "lastName": "Hunn",
         "dni": "88-822-0968",
@@ -1388,11 +1811,15 @@
         "birthDate": "2021-06-07T00:00:00",
         "phoneNumber": "313-213-0165",
         "email": "lhunn2y@cbslocal.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 108,
-        "careerId": 3,
         "firstName": "Bibbie",
         "lastName": "Hamilton",
         "dni": "84-349-3365",
@@ -1401,11 +1828,15 @@
         "birthDate": "2020-11-24T00:00:00",
         "phoneNumber": "550-811-8535",
         "email": "bhamilton2z@ezinearticles.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 109,
-        "careerId": 1,
         "firstName": "Liana",
         "lastName": "Cockill",
         "dni": "26-554-7121",
@@ -1414,11 +1845,15 @@
         "birthDate": "2021-08-16T00:00:00",
         "phoneNumber": "296-278-1935",
         "email": "lcockill30@time.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 110,
-        "careerId": 4,
         "firstName": "Natty",
         "lastName": "Southwick",
         "dni": "50-122-3261",
@@ -1427,11 +1862,15 @@
         "birthDate": "2021-07-12T00:00:00",
         "phoneNumber": "881-814-3989",
         "email": "nsouthwick31@cargocollective.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 111,
-        "careerId": 3,
         "firstName": "Aluin",
         "lastName": "Petran",
         "dni": "69-860-0534",
@@ -1440,11 +1879,15 @@
         "birthDate": "2020-11-05T00:00:00",
         "phoneNumber": "917-438-0078",
         "email": "apetran32@yahoo.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 112,
-        "careerId": 2,
         "firstName": "Dudley",
         "lastName": "Shilburne",
         "dni": "96-041-8460",
@@ -1453,11 +1896,15 @@
         "birthDate": "2021-05-03T00:00:00",
         "phoneNumber": "975-792-2824",
         "email": "dshilburne33@zimbio.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 113,
-        "careerId": 2,
         "firstName": "Malvin",
         "lastName": "Delhay",
         "dni": "74-274-5418",
@@ -1466,11 +1913,15 @@
         "birthDate": "2021-01-04T00:00:00",
         "phoneNumber": "815-902-4143",
         "email": "mdelhay34@irs.gov",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 114,
-        "careerId": 1,
         "firstName": "Melisent",
         "lastName": "Sket",
         "dni": "10-248-4079",
@@ -1479,11 +1930,15 @@
         "birthDate": "2021-06-02T00:00:00",
         "phoneNumber": "131-365-3935",
         "email": "msket35@dmoz.org",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 115,
-        "careerId": 4,
         "firstName": "Mair",
         "lastName": "Kowalski",
         "dni": "65-226-9222",
@@ -1492,11 +1947,15 @@
         "birthDate": "2021-08-12T00:00:00",
         "phoneNumber": "875-401-6852",
         "email": "mkowalski36@hc360.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 116,
-        "careerId": 2,
         "firstName": "Claudetta",
         "lastName": "Flewan",
         "dni": "07-965-3438",
@@ -1505,11 +1964,15 @@
         "birthDate": "2021-08-21T00:00:00",
         "phoneNumber": "116-810-7043",
         "email": "cflewan37@rediff.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 117,
-        "careerId": 1,
         "firstName": "Tirrell",
         "lastName": "Ethelston",
         "dni": "43-174-9121",
@@ -1518,11 +1981,15 @@
         "birthDate": "2021-07-20T00:00:00",
         "phoneNumber": "271-502-2244",
         "email": "tethelston38@samsung.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 118,
-        "careerId": 5,
         "firstName": "Darby",
         "lastName": "De Simoni",
         "dni": "93-158-6861",
@@ -1531,11 +1998,15 @@
         "birthDate": "2020-12-06T00:00:00",
         "phoneNumber": "246-502-4545",
         "email": "ddesimoni39@surveymonkey.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 119,
-        "careerId": 2,
         "firstName": "Hannis",
         "lastName": "Antic",
         "dni": "73-517-4123",
@@ -1544,11 +2015,15 @@
         "birthDate": "2021-06-14T00:00:00",
         "phoneNumber": "635-152-6564",
         "email": "hantic3a@fotki.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 120,
-        "careerId": 2,
         "firstName": "Tadeo",
         "lastName": "Turbayne",
         "dni": "14-771-9346",
@@ -1557,11 +2032,15 @@
         "birthDate": "2021-05-28T00:00:00",
         "phoneNumber": "323-395-0040",
         "email": "tturbayne3b@apache.org",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 121,
-        "careerId": 1,
         "firstName": "Filip",
         "lastName": "Bilam",
         "dni": "18-228-9435",
@@ -1570,11 +2049,15 @@
         "birthDate": "2021-08-20T00:00:00",
         "phoneNumber": "396-536-7478",
         "email": "fbilam3c@auda.org.au",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 122,
-        "careerId": 3,
         "firstName": "Betteanne",
         "lastName": "Honnicott",
         "dni": "98-149-3242",
@@ -1583,11 +2066,15 @@
         "birthDate": "2021-05-10T00:00:00",
         "phoneNumber": "996-124-9094",
         "email": "bhonnicott3d@amazon.de",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 123,
-        "careerId": 5,
         "firstName": "Winny",
         "lastName": "Rawne",
         "dni": "11-079-3587",
@@ -1596,11 +2083,15 @@
         "birthDate": "2021-08-04T00:00:00",
         "phoneNumber": "784-509-5500",
         "email": "wrawne3e@phpbb.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 124,
-        "careerId": 5,
         "firstName": "Tomlin",
         "lastName": "Chessum",
         "dni": "34-259-8750",
@@ -1609,11 +2100,15 @@
         "birthDate": "2021-09-19T00:00:00",
         "phoneNumber": "981-831-1449",
         "email": "tchessum3f@chicagotribune.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 125,
-        "careerId": 2,
         "firstName": "Koralle",
         "lastName": "Iddison",
         "dni": "40-064-3739",
@@ -1622,11 +2117,15 @@
         "birthDate": "2020-11-12T00:00:00",
         "phoneNumber": "418-438-4982",
         "email": "kiddison3g@usnews.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 126,
-        "careerId": 5,
         "firstName": "Cookie",
         "lastName": "Le Grice",
         "dni": "52-779-7702",
@@ -1635,11 +2134,15 @@
         "birthDate": "2021-09-07T00:00:00",
         "phoneNumber": "642-929-9923",
         "email": "clegrice3h@parallels.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 127,
-        "careerId": 4,
         "firstName": "Dorthea",
         "lastName": "Kinkead",
         "dni": "69-441-2879",
@@ -1648,11 +2151,15 @@
         "birthDate": "2020-09-29T00:00:00",
         "phoneNumber": "478-475-7057",
         "email": "dkinkead3i@tinypic.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 128,
-        "careerId": 5,
         "firstName": "Howey",
         "lastName": "Bruckstein",
         "dni": "36-375-1786",
@@ -1661,11 +2168,15 @@
         "birthDate": "2020-12-30T00:00:00",
         "phoneNumber": "610-756-6491",
         "email": "hbruckstein3j@ow.ly",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 129,
-        "careerId": 4,
         "firstName": "Ignace",
         "lastName": "Mansfield",
         "dni": "43-252-7384",
@@ -1674,11 +2185,15 @@
         "birthDate": "2021-08-22T00:00:00",
         "phoneNumber": "485-876-5605",
         "email": "imansfield3k@amazonaws.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 130,
-        "careerId": 5,
         "firstName": "Nehemiah",
         "lastName": "Metzke",
         "dni": "98-360-6184",
@@ -1687,11 +2202,15 @@
         "birthDate": "2021-06-11T00:00:00",
         "phoneNumber": "876-319-3747",
         "email": "nmetzke3l@cargocollective.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 131,
-        "careerId": 1,
         "firstName": "Lynea",
         "lastName": "Littlechild",
         "dni": "89-529-1236",
@@ -1700,11 +2219,15 @@
         "birthDate": "2021-06-25T00:00:00",
         "phoneNumber": "460-395-6975",
         "email": "llittlechild3m@europa.eu",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 132,
-        "careerId": 3,
         "firstName": "Velma",
         "lastName": "Iacofo",
         "dni": "84-140-0452",
@@ -1713,11 +2236,15 @@
         "birthDate": "2021-02-17T00:00:00",
         "phoneNumber": "153-170-3448",
         "email": "viacofo3n@github.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 133,
-        "careerId": 5,
         "firstName": "Leland",
         "lastName": "Choulerton",
         "dni": "74-357-2371",
@@ -1726,11 +2253,15 @@
         "birthDate": "2021-03-07T00:00:00",
         "phoneNumber": "387-858-5444",
         "email": "lchoulerton3o@cyberchimps.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 134,
-        "careerId": 5,
         "firstName": "Rodrick",
         "lastName": "D'Alessio",
         "dni": "27-650-9424",
@@ -1739,11 +2270,15 @@
         "birthDate": "2021-04-27T00:00:00",
         "phoneNumber": "371-769-6875",
         "email": "rdalessio3p@prnewswire.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 135,
-        "careerId": 1,
         "firstName": "Rosalynd",
         "lastName": "Gouny",
         "dni": "76-645-7890",
@@ -1752,11 +2287,15 @@
         "birthDate": "2021-04-01T00:00:00",
         "phoneNumber": "146-632-7102",
         "email": "rgouny3q@yellowbook.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 136,
-        "careerId": 3,
         "firstName": "Hermon",
         "lastName": "Crudgington",
         "dni": "02-484-6356",
@@ -1765,11 +2304,15 @@
         "birthDate": "2020-11-02T00:00:00",
         "phoneNumber": "214-172-6385",
         "email": "hcrudgington3r@aboutads.info",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 137,
-        "careerId": 5,
         "firstName": "Ranique",
         "lastName": "Bonus",
         "dni": "37-114-5910",
@@ -1778,11 +2321,15 @@
         "birthDate": "2020-10-03T00:00:00",
         "phoneNumber": "530-875-5915",
         "email": "rbonus3s@cnn.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 138,
-        "careerId": 1,
         "firstName": "Genni",
         "lastName": "Fish",
         "dni": "73-715-2378",
@@ -1791,11 +2338,15 @@
         "birthDate": "2021-04-06T00:00:00",
         "phoneNumber": "250-677-4442",
         "email": "gfish3t@shutterfly.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 139,
-        "careerId": 2,
         "firstName": "Fredericka",
         "lastName": "Goodey",
         "dni": "92-340-3593",
@@ -1804,11 +2355,15 @@
         "birthDate": "2021-01-16T00:00:00",
         "phoneNumber": "260-141-9667",
         "email": "fgoodey3u@bandcamp.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 140,
-        "careerId": 1,
         "firstName": "Gabey",
         "lastName": "Scoggan",
         "dni": "37-206-0317",
@@ -1817,11 +2372,15 @@
         "birthDate": "2020-11-26T00:00:00",
         "phoneNumber": "924-769-3310",
         "email": "gscoggan3v@t.co",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 141,
-        "careerId": 2,
         "firstName": "Luciana",
         "lastName": "Penburton",
         "dni": "46-638-6239",
@@ -1830,11 +2389,15 @@
         "birthDate": "2021-09-15T00:00:00",
         "phoneNumber": "344-134-4871",
         "email": "lpenburton3w@joomla.org",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 142,
-        "careerId": 4,
         "firstName": "Eugen",
         "lastName": "Dunphy",
         "dni": "65-917-4177",
@@ -1843,11 +2406,15 @@
         "birthDate": "2021-03-11T00:00:00",
         "phoneNumber": "165-945-4956",
         "email": "edunphy3x@census.gov",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 143,
-        "careerId": 3,
         "firstName": "Gertrudis",
         "lastName": "McGillivray",
         "dni": "12-086-3270",
@@ -1856,11 +2423,15 @@
         "birthDate": "2021-06-12T00:00:00",
         "phoneNumber": "833-449-3661",
         "email": "gmcgillivray3y@mediafire.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 144,
-        "careerId": 4,
         "firstName": "Yvor",
         "lastName": "Tucknott",
         "dni": "70-198-7705",
@@ -1869,11 +2440,15 @@
         "birthDate": "2021-01-21T00:00:00",
         "phoneNumber": "370-149-7338",
         "email": "ytucknott3z@sogou.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 145,
-        "careerId": 3,
         "firstName": "Adelle",
         "lastName": "Rilton",
         "dni": "67-791-3398",
@@ -1882,11 +2457,15 @@
         "birthDate": "2021-09-24T00:00:00",
         "phoneNumber": "483-562-7792",
         "email": "arilton40@merriam-webster.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 146,
-        "careerId": 3,
         "firstName": "Saudra",
         "lastName": "Strongman",
         "dni": "29-136-1427",
@@ -1895,11 +2474,15 @@
         "birthDate": "2020-11-25T00:00:00",
         "phoneNumber": "961-561-9646",
         "email": "sstrongman41@skype.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 147,
-        "careerId": 1,
         "firstName": "Gracie",
         "lastName": "Webb-Bowen",
         "dni": "83-459-8976",
@@ -1908,11 +2491,15 @@
         "birthDate": "2021-03-14T00:00:00",
         "phoneNumber": "836-256-7957",
         "email": "gwebbbowen42@t.co",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 148,
-        "careerId": 3,
         "firstName": "Becki",
         "lastName": "Mullen",
         "dni": "68-837-1664",
@@ -1921,11 +2508,15 @@
         "birthDate": "2021-01-26T00:00:00",
         "phoneNumber": "641-224-2494",
         "email": "bmullen43@last.fm",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 149,
-        "careerId": 2,
         "firstName": "Swen",
         "lastName": "Thirst",
         "dni": "43-665-3998",
@@ -1934,11 +2525,15 @@
         "birthDate": "2020-10-30T00:00:00",
         "phoneNumber": "797-402-2816",
         "email": "sthirst44@comsenz.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 150,
-        "careerId": 3,
         "firstName": "Issie",
         "lastName": "Gainforth",
         "dni": "98-422-8559",
@@ -1947,11 +2542,15 @@
         "birthDate": "2021-09-15T00:00:00",
         "phoneNumber": "670-349-1455",
         "email": "igainforth45@hubpages.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 151,
-        "careerId": 4,
         "firstName": "Kaycee",
         "lastName": "Morfell",
         "dni": "91-629-3136",
@@ -1960,11 +2559,15 @@
         "birthDate": "2021-08-23T00:00:00",
         "phoneNumber": "915-593-9589",
         "email": "kmorfell46@slate.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 152,
-        "careerId": 5,
         "firstName": "Jessie",
         "lastName": "Fakeley",
         "dni": "55-654-9243",
@@ -1973,11 +2576,15 @@
         "birthDate": "2021-02-01T00:00:00",
         "phoneNumber": "807-724-1840",
         "email": "jfakeley47@ning.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 153,
-        "careerId": 4,
         "firstName": "Dania",
         "lastName": "Lebbon",
         "dni": "09-468-6894",
@@ -1986,11 +2593,15 @@
         "birthDate": "2021-02-23T00:00:00",
         "phoneNumber": "970-161-7429",
         "email": "dlebbon48@virginia.edu",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 154,
-        "careerId": 2,
         "firstName": "Robinson",
         "lastName": "Delamere",
         "dni": "97-037-8971",
@@ -1999,11 +2610,15 @@
         "birthDate": "2021-01-08T00:00:00",
         "phoneNumber": "459-182-2906",
         "email": "rdelamere49@mtv.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 155,
-        "careerId": 2,
         "firstName": "Letta",
         "lastName": "Costall",
         "dni": "80-792-0881",
@@ -2012,11 +2627,15 @@
         "birthDate": "2021-05-04T00:00:00",
         "phoneNumber": "107-342-4871",
         "email": "lcostall4a@alibaba.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 156,
-        "careerId": 2,
         "firstName": "Billie",
         "lastName": "Cherrett",
         "dni": "92-009-1789",
@@ -2025,11 +2644,15 @@
         "birthDate": "2021-05-24T00:00:00",
         "phoneNumber": "663-263-2110",
         "email": "bcherrett4b@aboutads.info",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 157,
-        "careerId": 5,
         "firstName": "Mannie",
         "lastName": "Stone",
         "dni": "14-352-2736",
@@ -2038,11 +2661,15 @@
         "birthDate": "2020-10-13T00:00:00",
         "phoneNumber": "821-347-9937",
         "email": "mstone4c@infoseek.co.jp",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 158,
-        "careerId": 2,
         "firstName": "Yance",
         "lastName": "Henrique",
         "dni": "32-938-0805",
@@ -2051,11 +2678,15 @@
         "birthDate": "2021-03-03T00:00:00",
         "phoneNumber": "238-174-5782",
         "email": "yhenrique4d@wired.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 159,
-        "careerId": 1,
         "firstName": "Willabella",
         "lastName": "Mc Harg",
         "dni": "40-113-7018",
@@ -2064,11 +2695,15 @@
         "birthDate": "2021-04-18T00:00:00",
         "phoneNumber": "848-998-3882",
         "email": "wmcharg4e@reddit.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 160,
-        "careerId": 1,
         "firstName": "Stoddard",
         "lastName": "Brittlebank",
         "dni": "94-833-3478",
@@ -2077,11 +2712,15 @@
         "birthDate": "2021-03-09T00:00:00",
         "phoneNumber": "616-391-9245",
         "email": "sbrittlebank4f@cornell.edu",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 161,
-        "careerId": 3,
         "firstName": "Grayce",
         "lastName": "Autin",
         "dni": "60-273-7013",
@@ -2090,11 +2729,15 @@
         "birthDate": "2021-07-01T00:00:00",
         "phoneNumber": "615-247-7087",
         "email": "gautin4g@ucoz.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 162,
-        "careerId": 2,
         "firstName": "Caritta",
         "lastName": "Vaudin",
         "dni": "39-815-8919",
@@ -2103,11 +2746,15 @@
         "birthDate": "2021-06-25T00:00:00",
         "phoneNumber": "549-755-1391",
         "email": "cvaudin4h@businesswire.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 163,
-        "careerId": 3,
         "firstName": "Riki",
         "lastName": "Wasselin",
         "dni": "94-012-0879",
@@ -2116,11 +2763,15 @@
         "birthDate": "2021-04-05T00:00:00",
         "phoneNumber": "369-853-4412",
         "email": "rwasselin4i@theguardian.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 164,
-        "careerId": 2,
         "firstName": "Betsy",
         "lastName": "Skrzynski",
         "dni": "09-812-0539",
@@ -2129,11 +2780,15 @@
         "birthDate": "2021-07-29T00:00:00",
         "phoneNumber": "612-173-5472",
         "email": "bskrzynski4j@feedburner.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 165,
-        "careerId": 5,
         "firstName": "Zachariah",
         "lastName": "Farrans",
         "dni": "51-857-0902",
@@ -2142,11 +2797,15 @@
         "birthDate": "2020-11-13T00:00:00",
         "phoneNumber": "814-918-8343",
         "email": "zfarrans4k@forbes.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 166,
-        "careerId": 2,
         "firstName": "Brewster",
         "lastName": "Pouton",
         "dni": "95-706-1796",
@@ -2155,11 +2814,15 @@
         "birthDate": "2020-12-09T00:00:00",
         "phoneNumber": "616-120-6191",
         "email": "bpouton4l@yellowpages.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 167,
-        "careerId": 3,
         "firstName": "Sal",
         "lastName": "Goncaves",
         "dni": "87-220-5041",
@@ -2168,11 +2831,15 @@
         "birthDate": "2021-08-18T00:00:00",
         "phoneNumber": "599-511-2518",
         "email": "sgoncaves4m@symantec.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 168,
-        "careerId": 4,
         "firstName": "Kareem",
         "lastName": "McIlmorow",
         "dni": "47-548-5627",
@@ -2181,11 +2848,15 @@
         "birthDate": "2021-08-12T00:00:00",
         "phoneNumber": "650-134-2767",
         "email": "kmcilmorow4n@yandex.ru",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 169,
-        "careerId": 3,
         "firstName": "Jenda",
         "lastName": "Carlens",
         "dni": "63-318-6489",
@@ -2194,11 +2865,15 @@
         "birthDate": "2021-03-23T00:00:00",
         "phoneNumber": "146-586-2597",
         "email": "jcarlens4o@google.ca",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 170,
-        "careerId": 2,
         "firstName": "Ruthy",
         "lastName": "Airdrie",
         "dni": "94-620-4481",
@@ -2207,11 +2882,15 @@
         "birthDate": "2020-09-27T00:00:00",
         "phoneNumber": "770-417-6639",
         "email": "rairdrie4p@topsy.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 171,
-        "careerId": 4,
         "firstName": "Araldo",
         "lastName": "Nannoni",
         "dni": "05-894-8126",
@@ -2220,11 +2899,15 @@
         "birthDate": "2021-05-02T00:00:00",
         "phoneNumber": "811-955-4367",
         "email": "anannoni4q@vimeo.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 172,
-        "careerId": 2,
         "firstName": "Angie",
         "lastName": "Dyas",
         "dni": "71-260-6905",
@@ -2233,11 +2916,15 @@
         "birthDate": "2021-04-13T00:00:00",
         "phoneNumber": "831-473-4363",
         "email": "adyas4r@earthlink.net",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 173,
-        "careerId": 5,
         "firstName": "Sheelagh",
         "lastName": "Flindall",
         "dni": "49-368-8757",
@@ -2246,11 +2933,15 @@
         "birthDate": "2021-05-20T00:00:00",
         "phoneNumber": "283-860-7535",
         "email": "sflindall4s@mediafire.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 174,
-        "careerId": 5,
         "firstName": "Jarid",
         "lastName": "Tidridge",
         "dni": "13-917-7108",
@@ -2259,11 +2950,15 @@
         "birthDate": "2021-06-15T00:00:00",
         "phoneNumber": "176-889-1935",
         "email": "jtidridge4t@posterous.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 175,
-        "careerId": 2,
         "firstName": "Syman",
         "lastName": "Dowglass",
         "dni": "90-232-2089",
@@ -2272,11 +2967,15 @@
         "birthDate": "2021-07-30T00:00:00",
         "phoneNumber": "529-675-9277",
         "email": "sdowglass4u@foxnews.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 176,
-        "careerId": 2,
         "firstName": "Norine",
         "lastName": "Brimelow",
         "dni": "31-723-5197",
@@ -2285,11 +2984,15 @@
         "birthDate": "2021-06-10T00:00:00",
         "phoneNumber": "265-863-6907",
         "email": "nbrimelow4v@pagesperso-orange.fr",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 177,
-        "careerId": 3,
         "firstName": "Rudolf",
         "lastName": "Szymonwicz",
         "dni": "60-389-1389",
@@ -2298,11 +3001,15 @@
         "birthDate": "2021-09-03T00:00:00",
         "phoneNumber": "545-893-1140",
         "email": "rszymonwicz4w@who.int",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 178,
-        "careerId": 5,
         "firstName": "Ricky",
         "lastName": "Runnacles",
         "dni": "67-524-8267",
@@ -2311,11 +3018,15 @@
         "birthDate": "2021-09-13T00:00:00",
         "phoneNumber": "676-627-8556",
         "email": "rrunnacles4x@tripadvisor.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 179,
-        "careerId": 4,
         "firstName": "Kimberly",
         "lastName": "Piris",
         "dni": "74-384-3757",
@@ -2324,11 +3035,15 @@
         "birthDate": "2021-01-03T00:00:00",
         "phoneNumber": "121-697-3551",
         "email": "kpiris4y@chicagotribune.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 180,
-        "careerId": 1,
         "firstName": "Harman",
         "lastName": "Eckery",
         "dni": "73-212-2596",
@@ -2337,11 +3052,15 @@
         "birthDate": "2021-05-25T00:00:00",
         "phoneNumber": "731-857-3248",
         "email": "heckery4z@businessweek.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 181,
-        "careerId": 1,
         "firstName": "Antoni",
         "lastName": "Braiden",
         "dni": "50-498-1142",
@@ -2350,11 +3069,15 @@
         "birthDate": "2021-03-10T00:00:00",
         "phoneNumber": "177-622-7559",
         "email": "abraiden50@hibu.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 182,
-        "careerId": 4,
         "firstName": "Sebastien",
         "lastName": "Blaisdell",
         "dni": "98-669-8860",
@@ -2363,11 +3086,15 @@
         "birthDate": "2020-12-14T00:00:00",
         "phoneNumber": "536-262-5430",
         "email": "sblaisdell51@jiathis.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 183,
-        "careerId": 2,
         "firstName": "Aubrey",
         "lastName": "Evanson",
         "dni": "76-629-6090",
@@ -2376,11 +3103,15 @@
         "birthDate": "2021-07-09T00:00:00",
         "phoneNumber": "427-902-6345",
         "email": "aevanson52@icq.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 184,
-        "careerId": 5,
         "firstName": "Rorke",
         "lastName": "Ramos",
         "dni": "85-144-7566",
@@ -2389,11 +3120,15 @@
         "birthDate": "2021-01-10T00:00:00",
         "phoneNumber": "178-560-0180",
         "email": "rramos53@ucla.edu",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 185,
-        "careerId": 1,
         "firstName": "Belle",
         "lastName": "Antoszczyk",
         "dni": "71-344-9034",
@@ -2402,11 +3137,15 @@
         "birthDate": "2020-11-19T00:00:00",
         "phoneNumber": "931-894-0632",
         "email": "bantoszczyk54@addthis.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 186,
-        "careerId": 4,
         "firstName": "Rea",
         "lastName": "Langelaan",
         "dni": "75-497-0280",
@@ -2415,11 +3154,15 @@
         "birthDate": "2020-10-08T00:00:00",
         "phoneNumber": "917-763-3318",
         "email": "rlangelaan55@printfriendly.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 187,
-        "careerId": 5,
         "firstName": "Renato",
         "lastName": "Mitie",
         "dni": "42-179-9911",
@@ -2428,11 +3171,15 @@
         "birthDate": "2021-09-23T00:00:00",
         "phoneNumber": "700-745-1419",
         "email": "rmitie56@hugedomains.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 188,
-        "careerId": 3,
         "firstName": "Tod",
         "lastName": "Storry",
         "dni": "45-451-5867",
@@ -2441,11 +3188,15 @@
         "birthDate": "2021-09-09T00:00:00",
         "phoneNumber": "595-495-7291",
         "email": "tstorry57@google.cn",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 189,
-        "careerId": 1,
         "firstName": "Frederich",
         "lastName": "Adelsberg",
         "dni": "45-650-3730",
@@ -2454,11 +3205,15 @@
         "birthDate": "2021-04-15T00:00:00",
         "phoneNumber": "793-798-5222",
         "email": "fadelsberg58@about.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 190,
-        "careerId": 3,
         "firstName": "Franciska",
         "lastName": "Degan",
         "dni": "77-753-5103",
@@ -2467,11 +3222,15 @@
         "birthDate": "2021-05-04T00:00:00",
         "phoneNumber": "831-536-2866",
         "email": "fdegan59@europa.eu",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 191,
-        "careerId": 5,
         "firstName": "Meridith",
         "lastName": "Langham",
         "dni": "48-779-5094",
@@ -2480,11 +3239,15 @@
         "birthDate": "2021-07-08T00:00:00",
         "phoneNumber": "654-825-5795",
         "email": "mlangham5a@moonfruit.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 5,
+            "description": "Photobean",
+            "active": true
+        }
     },
     {
         "studentId": 192,
-        "careerId": 1,
         "firstName": "Essa",
         "lastName": "Goldsworthy",
         "dni": "62-206-2472",
@@ -2493,11 +3256,15 @@
         "birthDate": "2021-03-25T00:00:00",
         "phoneNumber": "518-971-3092",
         "email": "egoldsworthy5b@narod.ru",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 193,
-        "careerId": 1,
         "firstName": "Paola",
         "lastName": "Maleby",
         "dni": "89-275-9899",
@@ -2506,11 +3273,15 @@
         "birthDate": "2021-04-13T00:00:00",
         "phoneNumber": "253-509-2968",
         "email": "pmaleby5c@ucoz.ru",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 194,
-        "careerId": 1,
         "firstName": "Sydelle",
         "lastName": "Avon",
         "dni": "20-444-0920",
@@ -2519,11 +3290,15 @@
         "birthDate": "2021-02-20T00:00:00",
         "phoneNumber": "694-533-7844",
         "email": "savon5d@chicagotribune.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 195,
-        "careerId": 1,
         "firstName": "Beaufort",
         "lastName": "Shorthill",
         "dni": "18-735-9079",
@@ -2532,11 +3307,15 @@
         "birthDate": "2021-02-07T00:00:00",
         "phoneNumber": "412-472-8296",
         "email": "bshorthill5e@blogs.com",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 196,
-        "careerId": 3,
         "firstName": "Ronnie",
         "lastName": "Gummie",
         "dni": "53-420-6421",
@@ -2545,11 +3324,15 @@
         "birthDate": "2021-03-29T00:00:00",
         "phoneNumber": "581-207-7981",
         "email": "rgummie5f@xinhuanet.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     },
     {
         "studentId": 197,
-        "careerId": 4,
         "firstName": "Tymon",
         "lastName": "Nazer",
         "dni": "40-384-7934",
@@ -2558,11 +3341,15 @@
         "birthDate": "2020-12-11T00:00:00",
         "phoneNumber": "535-177-9395",
         "email": "tnazer5g@google.de",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 4,
+            "description": "Twiyo",
+            "active": true
+        }
     },
     {
         "studentId": 198,
-        "careerId": 1,
         "firstName": "Basilio",
         "lastName": "Merle",
         "dni": "85-589-1156",
@@ -2571,11 +3358,15 @@
         "birthDate": "2020-09-26T00:00:00",
         "phoneNumber": "101-915-3491",
         "email": "bmerle5h@jiathis.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 1,
+            "description": "Yabox",
+            "active": true
+        }
     },
     {
         "studentId": 199,
-        "careerId": 2,
         "firstName": "Terra",
         "lastName": "Kitson",
         "dni": "03-745-8474",
@@ -2584,11 +3375,15 @@
         "birthDate": "2021-06-14T00:00:00",
         "phoneNumber": "633-303-0830",
         "email": "tkitson5i@mashable.com",
-        "active": false
+        "active": false,
+        "career": {
+            "id": 2,
+            "description": "Latz",
+            "active": false
+        }
     },
     {
         "studentId": 200,
-        "careerId": 3,
         "firstName": "Ellary",
         "lastName": "Cordelette",
         "dni": "16-890-1380",
@@ -2597,6 +3392,11 @@
         "birthDate": "2021-04-08T00:00:00",
         "phoneNumber": "411-950-1338",
         "email": "ecordelette5j@umich.edu",
-        "active": true
+        "active": true,
+        "career": {
+            "id": 3,
+            "description": "Twiyo",
+            "active": false
+        }
     }
 ]

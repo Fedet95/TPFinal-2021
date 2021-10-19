@@ -49,23 +49,40 @@
 
             if ($searchedStudent) //If is not NULL
             {
-                if ($searchedStudent->getActive()) //if is TRUE
+                $this->getApiCareers();
+                $searchCareer= $this->searchCareer($searchedStudent->getCareer()->getCareerId());
+
+                if($searchCareer)
                 {
-                    $this->updateJsonStudent($searchedStudent);
-                    $_SESSION['loggedstudent']=$searchedStudent;
-                    $this->showStudentControlPanelView();
+                    $searchedStudent->getCareer()->setDescription($searchCareer->getDescription());
+                    $searchedStudent->getCareer()->setActive($searchCareer->getActive());
+
+                    if ($searchedStudent->getActive()) //if is TRUE
+                    {
+                        $this->updateJsonStudent($searchedStudent);
+                        $_SESSION['loggedstudent']=$searchedStudent;
+                        $this->showStudentControlPanelView();
+                    }
+                    else
+                    {
+                        $this->updateJsonStudent($searchedStudent);
+                        $message = 'Your account is not active, please get in contact with the university';
+                        $this->Index($message);
+                    }
                 }
                 else
                 {
-                    $this->updateJsonStudent($searchedStudent);
-                    $message = 'Your account is not active, please get in contact with the university';
+                    $message = 'Your career is not active, please get in contact with the university';
                     $this->Index($message);
                 }
+
             }
             else if($administrator)//if is not null
             {
+
                  if($administrator->getActive())
                  {
+                     $this->getApiCareers();
                      $this->updateAllJsonStudents($this->apiStudents);
                      $_SESSION['loggedadmin']=$administrator;
                      $this->showAdministratorControlPanelView();
@@ -108,11 +125,32 @@
         return $students;
     }
 
+
+    /**
+     *Update all students from Api to Json
+     * @return mixed
+     */
     public function updateAllJsonStudents($studentsArray)
     {
-        $this->studentRepository->updateAllStudentFiles($studentsArray);
+
+        foreach($studentsArray as $key => $value)
+        {
+                $searchCareer= $this->searchCareer($value->getCareer()->getCareerId());
+                $career= $value->getCareer();
+                $career->setDescription($searchCareer->getDescription());
+                $career->setActive($searchCareer->getActive());
+                $value->setCareer($career);
+                $studentsArray[$key]=$value;
+        }
+
+            $this->studentRepository->updateAllStudentFiles($studentsArray);
     }
 
+
+    /**
+     * Update a student from Api to Json
+     * @return mixed
+     */
     public function updateJsonStudent( $student)
     {
         $this->studentRepository->updateStudentFile($student);
@@ -130,6 +168,37 @@
       return $administrator;
    }
 
+
+    /**
+     * Get all careers from Api
+     */
+    public function getApiCareers()
+    {
+        $careers = $this->apiC->start($this->apiC);
+        $this->apiCareers=$careers; //save apiCareers
+    }
+
+    /**
+     * Search the student career ID in api, returning the searched career or null
+     * @param $careerId
+     * @return mixed|null
+     */
+    public function searchCareer($careerId)
+    {
+        $searchedCareer = null;
+        foreach ($this->apiCareers as $value) {
+            if ($value->getCareerId() == $careerId) {
+                $searchedCareer = $value;
+            }
+        }
+        return $searchedCareer;
+    }
+
+
+
+    /**
+     * Logout from system
+     */
     public function Logout()
     {
         session_destroy();
