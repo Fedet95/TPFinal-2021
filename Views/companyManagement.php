@@ -47,32 +47,24 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                     <td><?php echo $valueCompany->getIndustry()->getType() ?></td>
                     <td><?php echo '<img src="data:image;base64,' . $valueCompany->getLogo() . '" height="50" width="50"/>'; ?></td>
 
-                                <td>
-                                    <form action="<?php echo FRONT_ROOT . "Company/Remove" ?>" method="POST">
-                                        <button type="submit" name="id" class="btn"
-                                                value="<?php echo $valueCompany->getCompanyId() ?>"> Remove
-                                        </button>
-                                    </form>
-                                </td>
+                    <td>
+                        <form action="<?php echo FRONT_ROOT ."Company/showCompanyViewMore" ?>" method="POST">
+                            <button type="submit" name="id" class="btn btn-dark ml-auto d-block"
+                                    value="<?php echo $valueCompany->getCompanyId() ?>"> View More
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <?php
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-                                <td>
-                                    <form action="<?php echo FRONT_ROOT . "Company/Edit" ?>" method="POST">
-                                        <button type="submit" name="id" class="btn"
-                                                value="<?php echo $valueCompany->getCompanyId() ?>"> Edit
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php
-                            }
-                        ?>
-                        </tbody>
-                    </table>
-            </div>
-          </div>
-
-             <!-- / main body -->
-         <div class="clear"></div>
+<!-- / main body -->
+<div class="clear"></div>
 
 <?php
 include('footer.php');

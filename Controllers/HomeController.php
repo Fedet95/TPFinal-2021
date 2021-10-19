@@ -1,14 +1,39 @@
 <?php
-    namespace Controllers;
-    use DAO\APIStudentDAO;
 
-    class HomeController
+namespace Controllers;
+
+use DAO\AdministratorRepository;
+use DAO\APICareerDAO;
+use DAO\APIStudentDAO;
+use DAO\StudentRepository;
+use Models\Student;
+
+class HomeController
+{
+    private $administratorRepository;
+    private $studentRepository;
+    private $api;
+    private $apiStudents;
+    private $apiC;
+    private $apiCareers;
+
+
+    public function __construct()
     {
-        public function Index($message = "")
-        {
-            //require_once(VIEWS_PATH."controlPanel.php");
-            require_once(VIEWS_PATH . "home.php");
-        }
+        $this->administratorRepository = new AdministratorRepository();
+        $this->studentRepository = new StudentRepository();
+        $this->api=new APIStudentDAO();
+        $this->apiC= new APICareerDAO();
+    }
+
+    /**
+     * Send to home view
+     * @param string $message
+     */
+    public function Index($message = "")
+    {
+        require_once(VIEWS_PATH . "home.php");
+    }
 
 
     /**
@@ -102,10 +127,16 @@
         }
     }
 
-        public function searchEmail($email)
-        {
-            $students = $this->getApiStudents();
-            $searchedStudent=null;
+    /**
+     * Search the entered student email in api, returning the searched user or null
+     * @param $email
+     * @return mixed|null
+     */
+    public function searchStudentEmail($email)
+    {
+        $students = $this->getApiStudents();
+        $this->apiStudents=$students; //save apiStudens
+        $searchedStudent = null;
 
         foreach ($students as $value) {
             if ($value->getEmail() == $email) {

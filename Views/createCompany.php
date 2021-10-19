@@ -48,14 +48,14 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                         <div class="col-lg-15">
                             <div class="form-group">
                                 <label for="">Current Location Country</label>
-                                <select name="country" class="form-control"  required>
-                                   <option disabled selected>Select country</option>
+                                <select name="country" class="form-control" required>
+                                    <option disabled selected>Select country</option>
                                     <?php
                                     foreach ($allCountrys as $value) {
                                         ?>
                                         <option value="<?php echo $value->getId() ?>"><?php echo $value->getName() ?></option>
 
-                                            <?php
+                                        <?php
 
                                     }
                                     ?>
@@ -75,11 +75,10 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                         <div class="col-lg-15">
                             <div class="form-group">
                                 <label for="">Industry Area</label>
-                                <select name="industry" class="form-control"  required>
+                                <select name="industry" class="form-control" required>
                                     <option disabled selected>Select industry area</option>
                                     <?php
-                                    foreach ($allIndustrys as $value)
-                                    {
+                                    foreach ($allIndustrys as $value) {
                                         ?>
                                         <option value="<?php echo $value->getId() ?>"><?php echo $value->getType() ?></option>
                                         <?php
@@ -95,7 +94,8 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                                 <label for="active">Active</label>
                                 <input type="radio" name="active" value="true" class="radioSize" required id="active">
                                 <label for="inactive">Inactive</label>
-                                <input type="radio" name="active" value="false" class="radioSize" required id="inactive">
+                                <input type="radio" name="active" value="false" class="radioSize" required
+                                       id="inactive">
                             </div>
                         </div>
 
@@ -109,13 +109,15 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                         <div class="col-lg-15">
                             <div class="form-group">
                                 <label for="">About Us</label>
-                                <p><textarea name="aboutUs" placeholder="Tell us something about your company..." class="form-control"></textarea></p>
+                                <p><textarea name="aboutUs" placeholder="Tell us something about your company..."
+                                             class="form-control"></textarea></p>
                             </div>
                         </div>
                         <div class="col-lg-15">
                             <div class="form-group">
                                 <label for="">Company Logo</label>
-                                <input type="file" name="image" class="form-control" required placeholder="Enter a valid image">
+                                <input type="file" name="image" class="form-control" required
+                                       placeholder="Enter a valid image">
                             </div>
                         </div>
 

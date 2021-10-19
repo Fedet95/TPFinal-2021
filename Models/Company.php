@@ -1,5 +1,11 @@
 <?php
+
 namespace Models;
+
+use Models\City as City;
+use Models\Industry as Industry;
+use Models\Country as Country;
+use Models\Administrator as Administrator;
 
 class Company
 {
@@ -15,7 +21,7 @@ class Company
     private $industry;
     private $city;
     private $country;
-    private $creationAdminId;
+    private $creationAdmin;
 
 
     public function getCompanyId()
@@ -105,7 +111,7 @@ class Company
     }
 
 
-    public function setLogo($logo)
+    public function setLogo($logo) ///Object tipo logo?
     {
         $this->logo = $logo;
     }
@@ -129,7 +135,7 @@ class Company
     }
 
 
-    public function setIndustry($industry)
+    public function setIndustry(Industry $industry)
     {
         $this->industry = $industry;
     }
@@ -141,7 +147,7 @@ class Company
     }
 
 
-    public function setCity($city)
+    public function setCity(City $city)
     {
         $this->city = $city;
     }
@@ -153,21 +159,21 @@ class Company
     }
 
 
-    public function setCountry($country)
+    public function setCountry(Country $country)
     {
         $this->country = $country;
     }
 
 
-    public function getCreationAdminId()
+    public function getCreationAdmin()
     {
-        return $this->creationAdminId;
+        return $this->creationAdmin;
     }
 
 
-    public function setCreationAdminId($creationAdminId)
+    public function setCreationAdmin(Administrator $creationAdmin)
     {
-        $this->creationAdminId = $creationAdminId;
+        $this->creationAdmin = $creationAdmin;
     }
 
 
