@@ -56,6 +56,52 @@ class CountryRepository implements lCountryRepository
 
         return $country;
     }
+
+    public function searchByName($name)
+    {
+        $this->retrieveData();
+        $country=null;
+
+        foreach ($this->countryList as $value)
+        {
+            if(strcasecmp($value->getName(), $name)==0)
+            {
+                $country=$value;
+            }
+        }
+
+        return $country;
+    }
+
+    public function searchMaxId()
+    {
+        $this->retrieveData();
+        $country=null;
+
+        $maxid=1;
+        if(count($this->countryList)>1)
+        {
+            $maxid=$this->countryList[0]->getId();
+
+            foreach ($this->countryList as $value)
+            {
+                if($value->getId()>$maxid)
+                {
+                    $maxid=$value->getId();
+                }
+            }
+            $maxid++;
+        }
+        else
+        {
+            $maxid++;
+        }
+
+        return $maxid;
+    }
+
+
+
     function remove($id)
     {
         $this->retrieveData();

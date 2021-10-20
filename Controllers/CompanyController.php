@@ -10,6 +10,7 @@ use DAO\AdministratorRepository;
 use DAO\StudentRepository;
 use Models\City;
 use Models\Company;
+use Models\Country;
 use Models\Industry;
 use Models\Administrator;
 use Models\Student;
@@ -126,10 +127,34 @@ class CompanyController
 
             //Paso los ID/Nombres al Objeto de cada uno y los agrego a Company
 
-            $searchedCountry = $this->countryRepository->searchById($country);
-            if ($searchedCountry != null) {
-                $company->setCountry($searchedCountry);
-            }
+
+             $searchedCountryName=null;
+             if(!is_numeric($country))
+             {
+                 $searchedCountry=$this->countryRepository->searchByName($country);
+                 if($searchedCountry==null)
+                 {
+                     $maxIdCountry=$this->countryRepository->searchMaxId();
+                     $countryObj= new Country();
+                     $countryObj->setId($maxIdCountry);
+                     $countryObj->setName($country);
+                     $company->setCountry($countryObj);
+                     $this->countryRepository->add($countryObj);
+                 }
+                 else
+                 {
+                     $company->setCountry($searchedCountry);
+                 }
+             }
+             else
+             {
+                 $searchedCountry = $this->countryRepository->searchById($country);
+                 if ($searchedCountry != null) {
+                     $company->setCountry($searchedCountry);
+                 }
+             }
+
+
 
             $searchedCity = $this->cityRepository->searchByName($city);
             if ($searchedCity != null) {
@@ -512,37 +537,44 @@ class CompanyController
             $allCompanys = $this->companyRepository->getAll();
             $newMaxId = $this->newId($allCompanys);
 
+            $flag = 0;
             $imagen = $this->image($image);
             if ($imagen == null) {
+                $flag = 1;
                 $message = "Error, enter a valid image file";
                 $this->showCreateCompanyView($message);
             }
 
             $validCuit = $this->validateCuit($cuit);
             if ($validCuit == false) {
+                $flag = 1;
                 $message = "Error, enter a valid Cuit";
                 $this->showCreateCompanyView($message);
             }
 
             $validLink = $this->validateLink($companyLink);
             if ($validLink == false) {
+                $flag = 1;
                 $message = "Error, enter a valid URL link";
                 $this->showCreateCompanyView($message);
             }
 
             $validEmail = $this->validateEmail($email);
             if ($validEmail == false) {
+                $flag = 1;
                 $message = "Error, enter a valid email";
                 $this->showCreateCompanyView($message);
             }
 
             $founDate = $this->validateFoundationDate($foundationDate);
             if ($founDate == false) {
+                $flag = 1;
                 $message = "Error, enter a valid foundation date";
                 $this->showCreateCompanyView($message);
             }
 
 
+        if ($flag == 0) {
             //Seteo los atributos simples de Company
             $company->setName($name);
             $company->setFoundationDate($foundationDate); //date
@@ -560,6 +592,8 @@ class CompanyController
             $this->newIndustry($industry); CORROBORAR INDUSTRYS PARA CREAR NUEVAS*/
 
             $this->showCompanyManagement();
+        }
+
     }
 
 

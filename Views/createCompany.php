@@ -45,8 +45,9 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
                            <div class="col-lg-15">
                                <div class="form-group">
-                                   <label for="">Current Location Country</label>
-                                   <select name="country" class="form-control" required>
+                                   <label for="countrylist">Current Location Country</label>
+                                   <input list="listcountrys" name="country" id="countrylist">
+                                   <datalist id="listcountrys" required>
                                        <option disabled selected>Select country</option>
                                        <?php
                                        foreach ($allCountrys as $value) {
@@ -57,7 +58,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
                                        }
                                        ?>
-                                   </select>
+                                   </datalist>
 
                                </div>
                            </div>

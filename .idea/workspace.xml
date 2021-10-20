@@ -7,17 +7,12 @@
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/CountryRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CountryRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/company.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/company.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/administratorControlPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/administratorControlPanel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/companyManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyManagement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/companyViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyViewMore.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/countrys.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/countrys.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/createCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/createCompany.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/estilos.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/editCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/editCompany.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/img/bg.png" beforeDir="false" afterPath="$PROJECT_DIR$/Views/img/bg.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/studentList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/studentListViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentListViewMore.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/home.php" afterDir="false" />
     </list>
     <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="" />
     <list id="af60e691-328f-4020-b1af-4fc76ece5be8" name="Changes by paye_" comment="Update" />
@@ -93,7 +88,7 @@
       <workItem from="1634574378150" duration="78000" />
       <workItem from="1634584871227" duration="5652000" />
       <workItem from="1634591010569" duration="2570000" />
-      <workItem from="1634677084852" duration="15246000" />
+      <workItem from="1634677084852" duration="22456000" />
     </task>
     <task id="LOCAL-00001" summary="mi subida">
       <created>1633917102951</created>
@@ -193,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634684496494</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Update">
+      <created>1634693983930</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1634693983930</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

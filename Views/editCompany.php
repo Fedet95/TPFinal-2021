@@ -43,22 +43,25 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label for="">Current Location Country</label>
-                                    <select name="country" class="form-control" value="<?php echo $company->getCountry()->getName() ?>" required>
-                                        <option selected><?php echo $company->getCountry()->getName() ?></option>
+                                    <label for="countrylist">Current Location Country</label>
+                                    <input list="listcountrys" name="country" id="countrylist" value="<?php echo $company->getCountry()->getName() ?>">
+                                    <datalist id="listcountrys" required>
+                                        <option selected value="<?php echo $company->getCountry()->getName() ?>"><?php echo $company->getCountry()->getName() ?></option>
                                         <?php
-                                        foreach ($allCountrys as $value)
-                                        {
+                                        foreach ($allCountrys as $value) {
                                             ?>
-                                            <option value="<?php echo $value->getName()?>"><?php echo $value->getName()?></option>
+                                            <option value="<?php echo $value->getId() ?>"><?php echo $value->getName() ?></option>
 
                                             <?php
+
                                         }
                                         ?>
-                                    </select>
+                                    </datalist>
 
                                 </div>
                             </div>
+
+
 
                             <div class="col-lg-15">
                                 <div class="form-group">
