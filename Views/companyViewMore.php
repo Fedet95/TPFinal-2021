@@ -6,7 +6,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 <div class="ml-auto col-auto">
     <h3 class=" text-center text-muted py-3">Companies List</h3>
     <div class="scrollable container-fluid">
-        <table class="table bg bg-light-alpha" style="text-align:center;">
+        <table class="table bg bg-light-alpha border" style="text-align:center;">
             <thead>
             <tr>
                 <th style="width: 30%;">ID</th>

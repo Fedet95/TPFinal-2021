@@ -63,15 +63,15 @@
     },
     {
         "active": "true",
-        "email": "juanpayetta@gmail.com",
-        "name": "holaaa",
-        "aboutUs": "holaa",
+        "email": "thenewland@gmail.com",
+        "name": "NewLand",
+        "aboutUs": "Advanced systems",
         "city": {
-            "id": 1,
-            "name": "Mar del Plata"
+            "id": 7,
+            "name": "Buenos Aires"
         },
         "companyId": 3,
-        "companyLink": "https:\/\/www.google.com",
+        "companyLink": "https:\/\/www.newlandco.com",
         "country": {
             "id": 72,
             "name": "Georgia"
@@ -85,7 +85,7 @@
             "employeeNumber": "A1933"
         },
         "cuit": "30536345632",
-        "foundationDate": "2021-10-03",
+        "foundationDate": "2021-10-01",
         "industry": {
             "id": 19,
             "type": "Health care services"

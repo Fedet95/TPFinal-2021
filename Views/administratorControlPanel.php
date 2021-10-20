@@ -9,7 +9,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
         <div class="container">
             <h3 class="mb-3 text-center text-muted">Administrator</h3>
 
-            <div class="bg-light-alpha p-2">
+            <div class="bg-light-alpha p-3 border">
                 <div class="row">
                     <div class="col-lg-4 text-center">
                         <label for="">Nombre</label>

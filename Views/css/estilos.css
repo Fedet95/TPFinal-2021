@@ -20,8 +20,11 @@ body {
      background-color: rgba(0,0,0,0.2);
 }
 .bg-light-alpha {
-     background-color: rgba(255,255,255,0.2);
+    background-color: rgba(156, 252, 210, 0.2);
+
+
 }
+
 
 .login-form {
      width: 500px;

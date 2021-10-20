@@ -27,7 +27,7 @@ require_once(VIEWS_PATH."checkLoggedAdmin.php");
             </table>
 
         </div>
-        <table class="table bg-light-alpha" style="text-align:center; ">
+        <table class="table bg-light-alpha border" style="text-align:center; ">
             <thead>
             <tr>
                 <th style="width: 25%;">First Name</th>

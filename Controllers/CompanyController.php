@@ -477,7 +477,7 @@ class CompanyController
      * Update the information of a company from the system
      * @return mixed|null
      */
-    public function UpdateCompany($name, $cuit, $companyLink, $email, $country, $city, $industry, $active, $foundationDate, $aboutUs, $image, $id)
+    public function UpdateCompany($name, $cuit, $companyLink, $email, $country, $city, $industry, $active, $foundationDate, $aboutUs, $id, $image)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 

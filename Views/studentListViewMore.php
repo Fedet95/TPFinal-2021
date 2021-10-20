@@ -6,7 +6,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 <div class="ml-auto col-auto">
     <h3 class=" text-center text-muted py-3"> <td><?php echo $searchedStudent->getFirstName()." ".$searchedStudent->getLastName()  ?></td></h3>
     <div class="scrollable container-fluid">
-        <table class="table bg bg-light-alpha" style="text-align:center;">
+        <table class="table bg bg-light-alpha border" style="text-align:center;">
             <thead>
             <tr>
 
