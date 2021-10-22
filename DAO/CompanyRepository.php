@@ -80,7 +80,7 @@ class CompanyRepository implements lCompanyRepository
         return $company;
     }
 
-    function searchCuit($cuit)
+    function searchCuit($cuit, $id = null)
     {
         $this->RetrieveData();
 
@@ -89,7 +89,18 @@ class CompanyRepository implements lCompanyRepository
         {
             if($value->getCuit()==$cuit)
             {
-                $company = $this->companytList[$key];
+               if($id!=null) //edit company
+               {
+                   if($value->getCompanyId()!=$id)
+                   {
+                       $company = $this->companytList[$key];
+                   }
+               }
+               else //caso add new company
+               {
+                   $company = $this->companytList[$key];
+               }
+
             }
         }
         return $company;

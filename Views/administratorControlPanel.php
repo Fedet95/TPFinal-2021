@@ -12,17 +12,17 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
             <div class="bg-light-alpha p-3 border">
                 <div class="row">
                     <div class="col-lg-4 text-center">
-                        <label for="">Nombre</label>
+                        <label class="text-muted text-strong" for="">First Name</label>
                         <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $loggedUser->getFirstName()?>">
                     </div>
 
                     <div class="col-lg-4 text-center">
-                        <label for="">Apellido</label>
+                        <label class="text-muted text-strong" for="">Last Name</label>
                         <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $loggedUser->getLastName()?>">
                     </div>
 
                     <div class="col-lg-4 text-center">
-                        <label  for="">Employee Number</label>
+                        <label class="text-muted text-strong"  for="">Employee Number</label>
                         <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $loggedUser->getEmployeeNumber()?>">
                     </div>
                 </div>
@@ -32,7 +32,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 </main>
 
 
-
+<br><br>
 
 <?php
 include_once('footer.php');

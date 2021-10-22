@@ -26,15 +26,16 @@ class HomeController
         $this->apiC= new APICareerDAO();
     }
 
-    /**
-     * Send to home view
-     * @param string $message
-     */
     public function Index($message = "")
+    {
+        require_once(VIEWS_PATH."welcome.php");
+    }
+
+
+    public function welcome($message = "")
     {
         require_once(VIEWS_PATH . "home.php");
     }
-
 
     /**
      * * Send to student control panel view
@@ -66,7 +67,7 @@ class HomeController
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) // invalid emailaddress
         {
             $message = 'Error, enter a valid email';
-            $this->Index($message);
+            $this->welcome($message);
         } else
         {
             $searchedStudent = $this->searchStudentEmail($email); //busca email del student, retorna student o null
@@ -92,13 +93,13 @@ class HomeController
                     {
                         $this->updateJsonStudent($searchedStudent);
                         $message = 'Your account is not active, please get in contact with the university';
-                        $this->Index($message);
+                        $this->welcome($message);
                     }
                 }
                 else
                 {
                     $message = 'Your career is not active, please get in contact with the university';
-                    $this->Index($message);
+                    $this->wlcome($message);
                 }
 
             }
@@ -115,13 +116,13 @@ class HomeController
                  else
                  {
                      $message = 'Your account is not active, please get in contact with the university';
-                     $this->Index($message);
+                     $this->welcome($message);
                  }
             }
             else //if is null
             {
                 $message = 'Error, enter a valid email';
-                $this->Index($message);
+                $this->welcome($message);
 
             }
         }

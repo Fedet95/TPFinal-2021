@@ -13,13 +13,13 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                         <div class="col-sm-10 offset-sm-1 text-center">
                             <strong><?php if(isset($message)){ echo $message;}?></strong>
                             <div class="form-group">
-                                <label for="">Company Name</label>
+                                <label for="" class="text-muted text-strong text">Company Name</label>
                                 <input type="text" name="name" class="form-control" value = "<?php echo $company->getName() ?>" required
                                        placeholder="Enter company name">
                             </div>
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label>Cuit</label>
+                                    <label class="text-muted text-strong text">Cuit</label>
                                     <input type="number" name="cuit" id="contactNo" required class="form-control"
                                            placeholder="Enter cuit" value="<?php echo $company->getCuit() ?>" aria-label="contactNo" aria-describedby="basic-addon2"
                                            maxlength="11" data-rule-minlength="11" data-rule-maxlength="11"
@@ -28,14 +28,14 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                             </div>
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label for="">Company Web URL</label>
+                                    <label class="text-muted text-strong text" for="">Company Web URL</label>
                                     <input type="url" name="companyLink" class="form-control" value="<?php echo $company->getCompanyLink() ?>" required
                                            placeholder="Enter company web">
                                 </div>
                             </div>
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label for="">Email</label>
+                                    <label class="text-muted text-strong text" for="">Email</label>
                                     <input type="email" name="email" class="form-control" value= "<?php echo $company->getEmail() ?>" required
                                            placeholder="Enter company email">
                                 </div>
@@ -43,7 +43,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label for="countrylist">Current Location Country</label>
+                                    <label class="text-muted text-strong text" for="countrylist">Current Location Country</label>
                                     <input list="listcountrys" name="country" id="countrylist" value="<?php echo $company->getCountry()->getName() ?>">
                                     <datalist id="listcountrys" required>
                                         <option selected value="<?php echo $company->getCountry()->getName() ?>"><?php echo $company->getCountry()->getName() ?></option>
@@ -62,37 +62,43 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                             </div>
 
 
-
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label for="">City</label>
+                                    <label class="text-muted text-strong text" for="">City</label>
                                     <input type="text" name="city" class="form-control" minlength="3" value="<?php echo $company->getCity()->getName()?>" required
                                            placeholder="Enter company City">
                                 </div>
                             </div>
 
+
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label for="">Industry Area</label>
-                                    <select name="industry" class="form-control" value="<?php echo $company->getIndustry()->getType() ?>"  required>
-                                        <option selected><?php echo $company->getIndustry()->getType() ?></option>
+                                    <label class="text-muted text-strong text" for="industrylist">Industry Area</label>
+                                    <br>
+                                    <input list="listindustrys" name="industry" id="industrylist" value="<?php echo $company->getIndustry()->getType() ?>">
+                                    <datalist id="listindustrys" required>
+                                        <option selected value="<?php echo $company->getIndustry()->getType() ?>"><?php echo $company->getIndustry()->getType() ?></option>
                                         <?php
-                                        foreach ($allIndustrys as $value)
-                                        {
+                                        foreach ($allIndustrys as $value) {
                                             ?>
-                                            <option value="<?php echo $value->getType()?>"><?php echo $value->getType()?></option>
+                                            <option value="<?php echo $value->getId() ?>"><?php echo $value->getType() ?></option>
+
                                             <?php
+
                                         }
                                         ?>
-                                    </select>
+                                    </datalist>
 
                                 </div>
                             </div>
+
+
+
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <p>Condition</p>
+                                    <p class="text-muted text-strong text">Condition</p>
                                     <?php if($company->getActive() == "true"){?>
-                                        <label for="active">Active</label>
+                                        <label  for="active">Active</label>
                                         <input type="radio" name="active" value="true" class="radioSize" required id="active" checked="checked">
                                         <label for="inactive">Inactive</label>
                                         <input type="radio" name="active" value="false" class="radioSize" required id="inactive">
@@ -109,20 +115,20 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label for="">Foundation Date</label>
+                                    <label class="text-muted text-strong text" for="">Foundation Date</label>
                                     <input type="date" name="foundationDate" class="form-control" value="<?php echo $company->getFoundationDate() ?>"required
                                            placeholder="Enter company foundation date">
                                 </div>
                             </div>
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label for="">About Us</label>
+                                    <label class="text-muted text-strong text" for="">About Us</label>
                                     <p><textarea name="aboutUs" placeholder="Tell us something about your company..." class="form-control"><?php echo $company->getAboutUs() ?></textarea></p>
                                 </div>
                             </div>
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label for="">Company Logo</label>
+                                    <label class="text-muted text-strong text" for="">Company Logo</label>
                                     <input type="file" name="image" class="form-control" value="<?php $company->getLogo() ?>" required placeholder="Enter a valid image">
                                 </div>
                             </div>

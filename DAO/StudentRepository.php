@@ -179,7 +179,6 @@ class StudentRepository implements lStudentRepository
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
 
         file_put_contents($this->fileName, $jsonContent);
-
     }
 
     /**

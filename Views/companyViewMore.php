@@ -4,35 +4,34 @@ include_once('nav-admin.php');
 require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 ?>
 <div class="ml-auto col-auto">
-    <h3 class=" text-center text-muted py-3">Companies List</h3>
+    <h3 class=" text-center text-muted py-3"> <td><?php echo $company->getName()?></td></h3>
     <div class="scrollable container-fluid">
         <table class="table bg bg-light-alpha border" style="text-align:center;">
             <thead>
             <tr>
-                <th style="width: 30%;">ID</th>
-                <th style="width: 30%;">Name</th>
-                <th style="width: 30%;">Industry</th>
-                <th style="width: 30%;">Foundation Date</th>
-                <th style="width: 30%;">Cuit</th>
-                <th style="width: 50%;">About Us</th>
-                <th style="width: 30%;">Company Link</th>
-                <th style="width: 30%;">Email</th>
-                <th style="width: 30%;">Country</th>
-                <th style="width: 30%;">City</th>
-                <th style="width: 
-                30%;">Active</th>
-                <th style="width: 30%;">Logo</th>
-                <th style="width: 30%;">Remove</th>
-                <th style="width: 30%;">Edit</th>
-                <th style="width: 30%;">Back</th>
+                <!--<th class="text-muted text-strong" style="width: 30%;">ID</th>-->
+                <!-- <th class="text-muted text-strong" style="width: 30%;">Name</th>-->
+                <!--<th class="text-muted text-strong" style="width: 30%;">Industry</th>-->
+                <th  class="text-muted text-strong" style="width: 15%;">Foundation Date</th>
+                <th class="text-muted text-strong" style="width: 15%;">Cuit</th>
+                <th class="text-muted text-strong" style="width: 15%;">About Us</th>
+                <th class="text-muted text-strong" style="width: 15%;">Company Link</th>
+                <th class="text-muted text-strong" style="width: 15%;">Email</th>
+                <th class="text-muted text-strong" style="width: 15%;">Country</th>
+                <th class="text-muted text-strong" style="width: 15%;">City</th>
+                <th class="text-muted text-strong" style="width: 15%;">Active</th>
+              <!--  <th class="text-muted text-strong" style="width: 30%;">Logo</th>-->
+                <th class="text-muted text-strong" style="width: 15%;">Remove</th>
+                <th class="text-muted text-strong" style="width: 15%;">Edit</th>
+                <th class="text-muted text-strong" style="width: 15%;">Back</th>
 
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td><?php echo $company->getCompanyId() ?></td>
-                <td><?php echo $company->getName() ?></td>
-                <td><?php echo $company->getIndustry()->getType() ?></td>
+                <!-- <td><?php echo $company->getCompanyId() ?></td>-->
+               <!-- <td><?php echo $company->getName() ?></td>-->
+                <!--<td><?php echo $company->getIndustry()->getType() ?></td>-->
                 <td><?php echo $company->getFoundationDate() ?></td>
                 <td><?php echo $company->getCuit() ?></td>
                 <td><?php echo $company->getAboutUs() ?></td>
@@ -41,7 +40,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                 <td><?php echo $company->getCountry()->getName() ?></td>
                 <td><?php echo $company->getCity()->getName() ?></td>
                 <td><?php echo $company->getActive() ?></td>
-                <td><?php echo '<img src="data:image;base64,' . $company->getLogo() . '" height="50" width="50"/>'; ?></td>
+                <!--<td><?php echo '<img src="data:image;base64,' . $company->getLogo() . '" height="50" width="50"/>'; ?></td>-->
 
                 <td>
                     <form action="<?php echo FRONT_ROOT . "Company/Remove" ?>" method="POST">
@@ -73,6 +72,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 <!-- / main body -->
 <div class="clear"></div>
 
+<br><br><br><br><br><br><br><br><br><br><br>
 <?php
 include('footer.php');
 ?>

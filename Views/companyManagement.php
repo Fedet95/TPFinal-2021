@@ -5,7 +5,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 ?>
 
 <div class="ml-auto col-auto">
-    <h3 class=" text-center text-muted">Companies List</h3>
+    <h3 class=" text-center text-muted py-3">Companies List</h3>
     <div class="scrollable container-fluid">
         <div class="form-group">
             <table>
@@ -31,11 +31,11 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
         <table class="table bg bg-light-alpha border" style="text-align:center;">
             <thead>
             <tr>
-                <th style="width: 25%;">ID</th>
-                <th style="width: 25%;">Name</th>
-                <th style="width: 25%;">Industry</th>
-                <th style="width: 30%;">Logo</th>
-                <th style="width: 30%;">View More</th>
+                <th class="text-muted text-strong" style="width: 25%;">ID</th>
+                <th class="text-muted text-strong" style="width: 25%;">Name</th>
+                <th class="text-muted text-strong" style="width: 25%;">Industry</th>
+                <th class="text-muted text-strong" style="width: 30%;">Logo</th>
+                <th class="text-muted text-strong" style="width: 30%;">View More</th>
             </tr>
             </thead>
             <tbody>
@@ -45,7 +45,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                     <td><?php echo $valueCompany->getCompanyId() ?></td>
                     <td><?php echo $valueCompany->getName() ?></td>
                     <td><?php echo $valueCompany->getIndustry()->getType() ?></td>
-                    <td><?php echo '<img src="data:image;base64,' . $valueCompany->getLogo() . '" height="50" width="50"/>'; ?></td>
+                    <td><?php echo '<img src="data:image;base64,' . $valueCompany->getLogo() . '" height="70" width="70"/>'; ?></td>
 
                     <td>
                         <form action="<?php echo FRONT_ROOT ."Company/showCompanyViewMore" ?>" method="POST">
@@ -66,6 +66,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 <!-- / main body -->
 <div class="clear"></div>
 
+<br><br><br><br><br><br><br><br><br><br><br>
 <?php
 include('footer.php');
 ?>

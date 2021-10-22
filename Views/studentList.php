@@ -5,7 +5,7 @@ require_once(VIEWS_PATH."checkLoggedAdmin.php");
 ?>
 
 <div class="ml-auto col-auto">
-    <h3 class="text-center text-muted py-3">Student List</h3>
+    <h3 class="text-center text-muted py-4">Student List</h3>
     <div class="scrollable container-fluid">
         <div class="form-group">
             <table>
@@ -30,11 +30,11 @@ require_once(VIEWS_PATH."checkLoggedAdmin.php");
         <table class="table bg-light-alpha border" style="text-align:center; ">
             <thead>
             <tr>
-                <th style="width: 25%;">First Name</th>
-                <th style="width: 25%;">Last Name</th>
-                <th style="width: 30%;">DNI</th>
-                <th style="width: 30%;">Career</th>
-                <th style="width: 30%;">View More</th>
+                <th class="text-muted text-strong" style="width: 25%;">First Name</th>
+                <th class="text-muted text-strong" style="width: 25%;">Last Name</th>
+                <th class="text-muted text-strong" style="width: 30%;">DNI</th>
+                <th class="text-muted text-strong" style="width: 30%;">Career</th>
+                <th class="text-muted text-strong" style="width: 30%;">View More</th>
             </tr>
             </thead>
             <tbody>
@@ -61,7 +61,7 @@ require_once(VIEWS_PATH."checkLoggedAdmin.php");
         </table>
     </div>
 </div>
-
+<br><br><br><br><br><br><br><br><br><br>
 <?php
 include_once('footer.php');
 ?>

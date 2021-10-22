@@ -4,18 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="Update">
+    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="Update views and other fixes, datalist">
+      <change afterPath="$PROJECT_DIR$/Views/img/why-us.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/welcome.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/CountryRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CountryRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/CompanyRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CompanyRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/IndustryRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/IndustryRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/StudentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/StudentRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/citys.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/citys.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/company.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/company.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/countrys.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/countrys.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/industry.json" beforeDir="false" afterPath="$PROJECT_DIR$/Data/industry.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/administratorControlPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/administratorControlPanel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/companyList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/companyManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyManagement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/companyViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyViewMore.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/companyViewMoreStudent.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyViewMoreStudent.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/createCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/createCompany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/estilos.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/editCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/editCompany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/studentControlPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentControlPanel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/studentList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/studentListViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentListViewMore.php" afterDir="false" />
     </list>
     <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="" />
-    <list id="af60e691-328f-4020-b1af-4fc76ece5be8" name="Changes by paye_" comment="Update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +67,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Guia7-oficial/Ejercicio3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -58,6 +77,12 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\TPFinal2021Fede\Views\img" />
+      <recent name="C:\wamp64\www\TPFinal2021Fede\Views\js" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -88,7 +113,22 @@
       <workItem from="1634574378150" duration="78000" />
       <workItem from="1634584871227" duration="5652000" />
       <workItem from="1634591010569" duration="2570000" />
-      <workItem from="1634677084852" duration="22456000" />
+      <workItem from="1634677084852" duration="27460000" />
+      <workItem from="1634757591815" duration="631000" />
+      <workItem from="1634761698913" duration="5704000" />
+      <workItem from="1634776641021" duration="1793000" />
+      <workItem from="1634824058847" duration="426000" />
+      <workItem from="1634825399513" duration="2387000" />
+      <workItem from="1634828819020" duration="3021000" />
+      <workItem from="1634833812904" duration="9275000" />
+      <workItem from="1634850112188" duration="130000" />
+      <workItem from="1634850328796" duration="1775000" />
+      <workItem from="1634857151601" duration="1086000" />
+      <workItem from="1634859014362" duration="179000" />
+      <workItem from="1634873059100" duration="83000" />
+      <workItem from="1634909497849" duration="78000" />
+      <workItem from="1634923239294" duration="5356000" />
+      <workItem from="1634933082144" duration="320000" />
     </task>
     <task id="LOCAL-00001" summary="mi subida">
       <created>1633917102951</created>
@@ -195,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634693983930</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Update views and other fixes, datalist">
+      <created>1634751275391</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1634751275391</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +270,7 @@
     <MESSAGE value="Cambios de lista, filtrado, modificacion, unique company cuit" />
     <MESSAGE value="show companies to student" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Update views and other fixes, datalist" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update views and other fixes, datalist" />
   </component>
 </project>

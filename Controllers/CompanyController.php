@@ -57,11 +57,11 @@ class CompanyController
      * Call the "companyManagement" view
      * @param string $message
      */
-    public function showCompanyManagement($message = "")
+    public function showCompanyManagement($valueToSearch = null, $message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
         $allCompanys = $this->companyRepository->getAll();
-        $searchedCompany = $this->searchCompanyFiltre($allCompanys);
+        $searchedCompany = $this->searchCompanyFiltre($allCompanys, $valueToSearch);
 
         if($this->loggedUser instanceof Administrator)
         {
@@ -155,18 +155,40 @@ class CompanyController
              }
 
 
-
-            $searchedCity = $this->cityRepository->searchByName($city);
-            if ($searchedCity != null) {
-                $company->setCity($searchedCity);
-            } else {
-                $company->setCity($this->newCity($city));
+        $searchedIndustryName=null;
+        if(!is_numeric($industry))
+        {
+            $searchedIndustryName=$this->industryRepository->searchByName($industry);
+            if($searchedIndustryName==null)
+            {
+                $maxIdIndustry=$this->industryRepository->searchMaxId();
+                $industryObj= new Industry();
+                $industryObj->setId($maxIdIndustry);
+                $industryObj->setType($industry);
+                $company->setIndustry($industryObj);
+                $this->industryRepository->add($industryObj);
             }
-
+            else
+            {
+                $company->setIndustry($searchedIndustryName);
+            }
+        }
+        else
+        {
             $searchedIndustry = $this->industryRepository->searchById($industry);
             if ($searchedIndustry != null) {
                 $company->setIndustry($searchedIndustry);
             }
+
+        }
+
+
+        $searchedCity = $this->cityRepository->searchByName($city);
+        if ($searchedCity != null) {
+            $company->setCity($searchedCity);
+        } else {
+            $company->setCity($this->newCity($city));
+        }
 
             $searchedAdmin = $this->adminRepository->searchById($this->loggedAdmin->getAdministratorId());
             if ($searchedAdmin != null) {
@@ -486,7 +508,7 @@ class CompanyController
      * Edit information of a company from the system
      * @return mixed|null
      */
-    public function Edit($id)
+    public function Edit($id, $message ="")
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
@@ -495,7 +517,7 @@ class CompanyController
 
          $company = $this->companyRepository->getCompany($id);
 
-         $this->showEditCompany($company, $allIndustrys, $allCountrys);
+         $this->showEditCompany($company, $allIndustrys, $allCountrys, $message);
     }
 
     /**
@@ -511,9 +533,34 @@ class CompanyController
 
             $company = $this->companyRepository->getCompany($id);
 
-            $searchedCountry = $this->countryRepository->searchById($country);
-            if ($searchedCountry != null) {
-                $company->setCountry($searchedCountry);
+        $companyCuitSearch = $this->companyRepository->searchCuit($cuit, $id);
+        if ($companyCuitSearch == null)
+        {
+            $searchedCountryName=null;
+
+            if(!is_numeric($country))
+            {
+                $searchedCountry=$this->countryRepository->searchByName($country);
+                if($searchedCountry==null)
+                {
+                    $maxIdCountry=$this->countryRepository->searchMaxId();
+                    $countryObj= new Country();
+                    $countryObj->setId($maxIdCountry);
+                    $countryObj->setName($country);
+                    $company->setCountry($countryObj);
+                    $this->countryRepository->add($countryObj);
+                }
+                else
+                {
+                    $company->setCountry($searchedCountry);
+                }
+            }
+            else
+            {
+                $searchedCountry = $this->countryRepository->searchById($country);
+                if ($searchedCountry != null) {
+                    $company->setCountry($searchedCountry);
+                }
             }
 
             $searchedCity = $this->cityRepository->searchByName($city);
@@ -523,9 +570,31 @@ class CompanyController
                 $company->setCity($this->newCity($city));
             }
 
-            $searchedIndustry = $this->industryRepository->searchById($industry);
-            if ($searchedIndustry != null) {
-                $company->setIndustry($searchedIndustry);
+            $searchedIndustryName=null;
+            if(!is_numeric($industry))
+            {
+                $searchedIndustryName=$this->industryRepository->searchByName($industry);
+                if($searchedIndustryName==null)
+                {
+                    $maxIdIndustry=$this->industryRepository->searchMaxId();
+                    $industryObj= new Industry();
+                    $industryObj->setId($maxIdIndustry);
+                    $industryObj->setType($industry);
+                    $company->setIndustry($industryObj);
+                    $this->industryRepository->add($industryObj);
+                }
+                else
+                {
+                    $company->setIndustry($searchedIndustryName);
+                }
+            }
+            else
+            {
+                $searchedIndustry = $this->industryRepository->searchById($industry);
+                if ($searchedIndustry != null) {
+                    $company->setIndustry($searchedIndustry);
+                }
+
             }
 
             $searchedAdmin = $this->adminRepository->searchById($this->loggedUser->getAdministratorId());
@@ -574,26 +643,31 @@ class CompanyController
             }
 
 
-        if ($flag == 0) {
-            //Seteo los atributos simples de Company
-            $company->setName($name);
-            $company->setFoundationDate($foundationDate); //date
-            $company->setCuit($cuit);
-            $company->setAboutUs($aboutUs);
-            $company->setCompanyLink($companyLink);
-            $company->setEmail($email);
-            $company->setLogo($imagen); //la que viene del metodo validado
-            $company->setActive($active);
+            if ($flag == 0) {
+                //Seteo los atributos simples de Company
+                $company->setName($name);
+                $company->setFoundationDate($foundationDate); //date
+                $company->setCuit($cuit);
+                $company->setAboutUs($aboutUs);
+                $company->setCompanyLink($companyLink);
+                $company->setEmail($email);
+                $company->setLogo($imagen); //la que viene del metodo validado
+                $company->setActive($active);
 
 
-            $this->companyRepository->update($company);
+                $this->companyRepository->update($company);
 
-            /*$this->newCity($city); CORROBORAR CITYS PARA CREAR NUEVAS
-            $this->newIndustry($industry); CORROBORAR INDUSTRYS PARA CREAR NUEVAS*/
+                /*$this->newCity($city); CORROBORAR CITYS PARA CREAR NUEVAS
+                $this->newIndustry($industry); CORROBORAR INDUSTRYS PARA CREAR NUEVAS*/
 
-            $this->showCompanyManagement();
+                $this->showCompanyManagement();
+            }
+
+        } else
+        {
+            $message = "Error, the company with Cuit " . $cuit . " is alredy in the system"; //unique cuit!
+            $this->Edit($id, $message);
         }
-
     }
 
 
@@ -603,26 +677,38 @@ class CompanyController
      * @param $allCompanys
      * @return array|mixed
      */
-    public function searchCompanyFiltre($allCompanys)
+    public function searchCompanyFiltre($allCompanys, $valueToSearch)
     {
         $searchedCompany = array();
-        if (isset($_POST['search'])) //click boton de filtrado
-        {
-            if (isset($_POST['valueToSearch'])) {
-                $valueToSearch = $_POST['valueToSearch']; //nombre de la empresa a buscar
 
-                foreach ($allCompanys as $value) {
+        if($valueToSearch!=null)
+        {
+                foreach ($allCompanys as $value)
+                {
                     if (strcasecmp($value->getName(), $valueToSearch) == 0) //no es case sensitive
                     {
                         array_push($searchedCompany, $value);
                     }
                 }
-            } else {
-                $searchedCompany = $allCompanys;
-            }
-        } else {
+
+                /*
+                foreach ($allCompanys as $value)
+                {
+                    str_contains($value, $valueToSearch);
+                }
+                */
+
+        }
+        else
+        {
             $searchedCompany = $allCompanys;
         }
+
+        if($valueToSearch=='Show all companies' || $valueToSearch=='Back')
+        {
+            $searchedCompany = $allCompanys;
+        }
+
         return $searchedCompany;
     }
 

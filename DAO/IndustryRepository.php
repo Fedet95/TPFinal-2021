@@ -35,6 +35,53 @@ class IndustryRepository implements lIndustryRepository
         return $this->industryList;
     }
 
+
+    public function searchMaxId()
+    {
+        $this->retrieveData();
+
+        $maxid=1;
+        if(count($this->industryList)>1)
+        {
+            $maxid=$this->industryList[0]->getId();
+
+            foreach ($this->industryList as $value)
+            {
+                if($value->getId()>$maxid)
+                {
+                    $maxid=$value->getId();
+                }
+            }
+            $maxid++;
+        }
+        else
+        {
+            $maxid++;
+        }
+
+        return $maxid;
+    }
+
+
+    public function searchByName($type)
+    {
+        $this->retrieveData();
+        $industry=null;
+
+        foreach ($this->industryList as $value)
+        {
+            if(strcasecmp($value->getType(), $type)==0)
+            {
+                $industry=$value;
+            }
+        }
+
+        return $industry;
+    }
+
+
+
+
     /**
      * Remove a industry by ID from Json file
      * @param $id
