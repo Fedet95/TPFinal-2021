@@ -15,6 +15,7 @@ class APICareerDAO
     {
         $this->url= is_null($url) ? $this->url : $url;
         $this->option= is_null($option) ? CURLOPT_URL : $option;
+
     }
 
     public function init()
@@ -75,6 +76,10 @@ class APICareerDAO
         curl_close($this->handler);
         return $this;
     }
+
+
+
+
 
 
 }

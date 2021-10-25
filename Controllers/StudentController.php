@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
-use DAO\CompanyRepository;
+use DAO\CompanyDAO;
+use DAO\StudentDAO;
 use DAO\StudentRepository;
 use Models\Administrator;
 
@@ -9,14 +10,12 @@ require_once(VIEWS_PATH . "checkLoggedUser.php");
 
 class StudentController
 {
-    private $companyRepository;
-    private $studentRepository;
+    private $studentDAO;
     private $loggedUser;
 
     public function __construct()
     {
-        $this->companyRepository = new CompanyRepository();
-        $this->studentRepository= new StudentRepository();
+        $this->studentDAO= new StudentDAO();
         $this->loggedUser = $this->loggedUserValidation();
     }
 
@@ -35,7 +34,7 @@ class StudentController
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $allStudents= $this->studentRepository->getAll();
+        $allStudents= $this->studentDAO->getAll();
         $searchedStudent=$this->searchStudentFiltre($allStudents);
         require_once(VIEWS_PATH . "studentList.php");
 
@@ -45,7 +44,7 @@ class StudentController
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $searchedStudent=$this->studentRepository->getStudent($studentId);
+        $searchedStudent=$this->studentDAO->getStudent($studentId);
         require_once(VIEWS_PATH . "studentListViewMore.php");
     }
 
@@ -61,7 +60,7 @@ class StudentController
         if (isset($_POST['search'])) //click boton de filtrado
         {
             if (isset($_POST['valueToSearch'])) {
-                $valueToSearch = $_POST['valueToSearch']; //nombre de la empresa a buscar
+                $valueToSearch = $_POST['valueToSearch']; //dni buscado
 
                 $dniReplace= str_replace("-", "", $valueToSearch);
 

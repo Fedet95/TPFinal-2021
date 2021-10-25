@@ -1,7 +1,7 @@
 <?php
-include_once('header.php');
-include_once('nav-admin.php');
 require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+include_once('header.php');
+include_once('nav.php');
 ?>
 
 <div class="ml-auto col-auto">
@@ -45,7 +45,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                     <td><?php echo $valueCompany->getCompanyId() ?></td>
                     <td><?php echo $valueCompany->getName() ?></td>
                     <td><?php echo $valueCompany->getIndustry()->getType() ?></td>
-                    <td><?php echo '<img src="data:image;base64,' . $valueCompany->getLogo() . '" height="70" width="70"/>'; ?></td>
+                    <td><?php echo '<img src="../uploads/' .$valueCompany->getLogo()->getFile() . '" height="50" width="50"/>'; ?></td>
 
                     <td>
                         <form action="<?php echo FRONT_ROOT ."Company/showCompanyViewMore" ?>" method="POST">

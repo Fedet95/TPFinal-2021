@@ -5,6 +5,7 @@ abstract class User
 {
     private $email;
     private $active;
+    private $password;
     //no se agrego firstName y lastName por si algun dia empresa tambiem sea user y no poseen estas caracteristicas
 
 
@@ -31,6 +32,16 @@ abstract class User
         $this->active = $active;
     }
 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
 
 
 

@@ -1,7 +1,7 @@
 <?php
+require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 include_once('header.php');
 include_once('nav-admin.php');
-require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 ?>
 <div class="ml-auto col-auto">
     <h3 class=" text-center text-muted py-4"> <td><?php echo $searchedStudent->getFirstName()." ".$searchedStudent->getLastName()  ?></td></h3>
@@ -11,9 +11,9 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
             <tr>
 
                 <th class="text-muted text-strong" style="width: 15%;">ID</th>
-               <!-- <th class="text-muted text-strong" style="width: 20%;">First Name</th>-->
+                <!-- <th class="text-muted text-strong" style="width: 20%;">First Name</th>-->
                 <!--<th  class="text-muted text-strong" style="width: 20%;">Last Name</th>-->
-               <!-- <th class="text-muted text-strong"  style="width: 20%;">DNI</th>-->
+                <!-- <th class="text-muted text-strong"  style="width: 20%;">DNI</th>-->
                 <th class="text-muted text-strong" style="width: 15%;">File Number</th>
                 <th class="text-muted text-strong"  style="width: 15%;">Birthdate</th>
                 <th class="text-muted text-strong" style="width: 15%;">Gender</th>
@@ -29,7 +29,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
             <tr>
                 <td><?php echo $searchedStudent->getStudentId() ?></td>
                 <!--<td><?php echo $searchedStudent->getFirstName() ?></td>-->
-              <!--  <td><?php echo $searchedStudent->getLastName()?></td>-->
+                <!--  <td><?php echo $searchedStudent->getLastName()?></td>-->
                 <!--<td><?php echo $searchedStudent->getDni()?></td>-->
                 <td><?php echo $searchedStudent->getFileNumber()?></td>
                 <td><?php echo $searchedStudent->getBirthDate() ?></td>
@@ -37,7 +37,7 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                 <td><?php echo $searchedStudent->getPhoneNumber() ?></td>
                 <td><?php echo $searchedStudent->getEmail()?></td>
                 <td><?php if($searchedStudent->getActive()){echo "Active";}else{echo "Inactive";};?></td>
-              <!--  <td><?php echo $searchedStudent->getCareer()->getDescription() ?></td>-->
+                <!--  <td><?php echo $searchedStudent->getCareer()->getDescription() ?></td>-->
                 <td>
                     <form action="<?php echo FRONT_ROOT . "Student/showStudentListView" ?>" method="post"
                           enctype="multipart/form-data">

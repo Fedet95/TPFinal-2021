@@ -111,7 +111,7 @@ class Company
     }
 
 
-    public function setLogo($logo) ///Object tipo logo?
+    public function setLogo(Logo $logo)
     {
         $this->logo = $logo;
     }

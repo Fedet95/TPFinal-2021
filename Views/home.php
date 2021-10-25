@@ -8,7 +8,7 @@ include('header.php');
             <h1 class="text-muted">Welcome</h1>
         </header>
 
-        <div class="container bg-light-alpha border py-lg-4">
+        <div class="container bg-light-alpha border py-4">
       <table>
           <tbody class="flex">
           <tr>
@@ -19,18 +19,29 @@ include('header.php');
                           <label for="" >Username</label>
                           <br>
                           <input type="email" name="email" class="form-control-lg " placeholder="Enter your email" required>
+                          <br><br>
+                          <label for="" >Password</label>
+                          <br>
+                          <input type="password" name="password" class="form-control-lg " placeholder="Enter your password" required>
                       </div>
                       <button class="btn btn-dark btn-block btn-lg" type="submit">LOGIN</button>
                   </form>
+              <form action="<?php echo FRONT_ROOT."Home/showSignUpView"?>" method="POST" class="py-3 text-center">
+                  <button class="btn btn-dark btn-block btn-lg" type="submit">SIGN UP</button>
+              </form>
+                  <br>
+                  <form action="<?php echo FRONT_ROOT."Home/Index" ?>" method="POST"
+                        class="py-3 text-center">
+                      <input type="submit" value="BACK" class="btn btn-dark ">
+                  </form>
+                  <!--
                   <form class=" text-center">
                       <input type="button" value="BACK" class="btn btn-dark " onclick="history.back()">
                   </form>
-                  <!--
-                  <form action="<?php echo FRONT_ROOT."Home/Index" ?>" method="post" class=" text-center">
-                      <button type="submit" class="btn btn-dark ">BACK</button>
-                  </form>
                   -->
+
               </th>
+          </tr>
           </tbody>
       </table>
     </div>

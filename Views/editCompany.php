@@ -1,7 +1,7 @@
 <?php
-include_once('header.php');
-include_once('nav-admin.php');
 require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+include_once('header.php');
+include_once('nav.php');
 ?>
 
 <main class="py-5">
@@ -128,8 +128,10 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
                             </div>
                             <div class="col-lg-15">
                                 <div class="form-group">
-                                    <label class="text-muted text-strong text" for="">Company Logo</label>
-                                    <input type="file" name="image" class="form-control" value="<?php $company->getLogo() ?>" required placeholder="Enter a valid image">
+                                    <label class="text-muted text-strong text">Actual Company Logo</label>
+                                    <?php echo '<img src="../uploads/' .$company->getLogo()->getFile() . '" height="50" width="50"/>'; ?>
+                                    <label class="text-muted text-strong text" for="">New Company Logo</label>
+                                    <input type="file" name="image" class="form-control" value="<?php $company->getLogo()->getFile()?>" placeholder="Enter a valid image">
                                 </div>
                             </div>
                             <div>

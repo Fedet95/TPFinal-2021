@@ -1,11 +1,12 @@
 <?php
-include_once('header.php');
-include_once('nav-admin.php');
 require_once(VIEWS_PATH."checkLoggedAdmin.php");
+include_once('header.php');
+include_once('nav.php');
+
 ?>
 
 <div class="ml-auto col-auto">
-    <h3 class="text-center text-muted py-4">Student List</h3>
+    <h3 class="text-center text-muted py-3">Student List</h3>
     <div class="scrollable container-fluid">
         <div class="form-group">
             <table>
@@ -61,7 +62,8 @@ require_once(VIEWS_PATH."checkLoggedAdmin.php");
         </table>
     </div>
 </div>
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br>
 <?php
 include_once('footer.php');
 ?>

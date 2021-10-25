@@ -4,87 +4,91 @@
         "id": 1
     },
     {
-        "type": "Mobile Engineer",
+        "type": "Aeronautical Engineering",
         "id": 2
     },
     {
-        "type": "Game Developer",
+        "type": "Civil Engineering",
         "id": 3
     },
     {
-        "type": "Back End Developer",
+        "type": "Electrical Engineering",
         "id": 4
     },
     {
-        "type": "Application Developer",
+        "type": "Electromechanical Engineering",
         "id": 5
     },
     {
-        "type": "Data Scientist",
+        "type": "Electronic Engineering",
         "id": 6
     },
     {
-        "type": "QA\/Test\/Automation",
+        "type": "Automotive company",
         "id": 7
     },
     {
-        "type": "Embedded System Developer",
+        "type": "Railway company",
         "id": 8
     },
     {
-        "type": "Linux Kernel and OS Developer",
+        "type": "Metallurgic",
         "id": 9
     },
     {
-        "type": "DevOps Engineer",
+        "type": "Naval company",
         "id": 10
     },
     {
-        "type": "Full Stack Developer",
+        "type": "Fishing company",
         "id": 11
     },
     {
-        "type": "Language\/Compiler Developer",
+        "type": "Chemical plant",
         "id": 12
     },
     {
-        "type": "Cloud Developer",
+        "type": "Textil company",
         "id": 13
     },
     {
-        "type": "Tools and Enterprise Software Developer",
+        "type": "Marketing services",
         "id": 14
     },
     {
-        "type": "Algorithms\/Science Software",
+        "type": "Accountant services",
         "id": 15
     },
     {
-        "type": "Graphic Designer",
+        "type": "Industrial desing",
         "id": 16
     },
     {
-        "type": "Database Administrator",
+        "type": "Aeronautical company",
         "id": 17
     },
     {
-        "type": "Web Developer",
+        "type": "Turism services",
         "id": 18
     },
     {
-        "type": "Desktop Applications Developer",
+        "type": "Health care services",
         "id": 19
     },
     {
-        "type": "Online Shopping",
+        "type": "Hygiene and Safety",
         "id": 20
     },
     {
-        "type": "Electrical services",
+        "type": "Oil company",
         "id": 21
     },
     {
-        "type": "Galletiteria",
+        "type": "galletitas",
         "id": 22
+    },
+    {
+        "type": "Ice creams factory",
+        "id": 23
     }
 ]

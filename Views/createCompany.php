@@ -1,7 +1,7 @@
 <?php
-include_once('header.php');
-include_once('nav-admin.php');
 require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+include_once('header.php');
+include_once('nav.php');
 ?>
 
 <main class="py-3">
