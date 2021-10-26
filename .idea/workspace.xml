@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="Update views and other fixes, datalist" />
+    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="delete old repositories" />
     <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="" />
     <list id="af60e691-328f-4020-b1af-4fc76ece5be8" name="Changes by paye_" comment="Update" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +40,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TPFinal2021Fede" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -204,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634751275391</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="delete old repositories">
+      <created>1635208271147</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1635208271147</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +240,7 @@
     <MESSAGE value="show companies to student" />
     <MESSAGE value="Update" />
     <MESSAGE value="Update views and other fixes, datalist" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update views and other fixes, datalist" />
+    <MESSAGE value="delete old repositories" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete old repositories" />
   </component>
 </project>
