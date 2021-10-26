@@ -44,7 +44,7 @@ if (isset($_SESSION['loggedstudent']))
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-                    Services
+                    Company Services
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <?php
@@ -86,6 +86,40 @@ if (isset($_SESSION['loggedstudent']))
                     }
                         ?>
                 </div>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                    Job Offers
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php
+                    if($loggedUser instanceof Administrator)
+                    {
+                        ?>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCreateCompanyView"?>">Add Company</a>
+                        <?php
+                    }
+                    else if($loggedUser instanceof Student)
+                    {
+                        ?>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Companies</a>
+                        <?php
+                    }
+                    ?>
+                    <div class="dropdown-divider"></div>
+                    <?php
+                    if($loggedUser instanceof Administrator)
+                    {
+                        ?>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Company Management</a>
+                        <?php
+                    }
+                    else if($loggedUser instanceof Student)
+                    {
+                        ?>
+                        <a class="dropdown-item" href="#">View Our Portfolio</a>
+                        <?php
+                    }
+                    ?>
             </li class="nav-item active">
             <?php
             if($loggedUser instanceof Administrator)
