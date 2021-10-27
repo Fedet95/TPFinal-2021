@@ -125,9 +125,6 @@ class IndustryDAO implements lIndustryDAO
 
     }
 
-
-
-
     public function mapear($array)
     {
         $array = is_array($array) ? $array : []; //si lo que viene como parametro es un array lo deja como viene, sino lo guarda como array vacio
