@@ -124,10 +124,44 @@ class JobOfferDAO implements IJobOfferDAO
     }
 
 
+    /**
+     * Validate if a job offer title is available for a company
+     * @param $title
+     * @param $id
+     */
+    public function searchTitleValidation($title, $id)
+    {
+        try
+        {
+            $query= "SELECT * FROM ".$this->tableName." WHERE (title= :title) and (companyId= :companyId)";
+
+            $parameters['title']=$title;
+            $parameters['companyId']=$id;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, $parameters);
+
+            $flag=0;
+            if(!empty($result))
+            {
+                $flag=1;
+            }
+
+            return $flag;
+        }
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
+    }
+
+
+
+
     public function mapear ($array)
     {
         $array = is_array($array) ? $array : [];
-        var_dump($array);
 
         $resultado = array_map(function ($value){
 

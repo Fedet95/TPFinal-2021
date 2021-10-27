@@ -1,7 +1,7 @@
 <?php
 require_once(VIEWS_PATH . "checkLoggedStudent.php");
 include_once('header.php');
-include_once('nav-student.php');
+include_once('nav.php');
 
 ?>
 

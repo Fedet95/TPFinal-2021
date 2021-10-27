@@ -1,7 +1,7 @@
 <?php
 require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 include_once('header.php');
-include_once('nav-admin.php');
+include_once('nav.php');
 ?>
 <div class="ml-auto col-auto">
     <h3 class=" text-center text-muted py-4"> <td><?php echo $searchedStudent->getFirstName()." ".$searchedStudent->getLastName()  ?></td></h3>

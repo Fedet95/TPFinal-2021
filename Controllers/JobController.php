@@ -14,8 +14,12 @@ use Models\Company;
 use Models\JobOffer;
 use Models\JobOfferPosition;
 use Models\JobPosition;
+use Models\Student;
 
 
+/**
+ *
+ */
 class JobController
 {
     private $companyDAO;
@@ -65,6 +69,25 @@ class JobController
     }
 
 
+    /**
+     * Call the "createJobOffer" view
+     * @param string $message
+     */
+    public function showJobOfferManagementView($message = "", $offer)
+    {
+        require_once(VIEWS_PATH . "checkLoggedUser.php");
+
+        //$allCompanies = $this->companyDAO->getAll();
+        //$allCountrys = $this->countryDAO->getAll();
+
+        require_once(VIEWS_PATH . "jobOffersManagement.php");
+    }
+
+
+
+    /**
+     * Start the new job offer creation, sending to the second part of the form
+     */
     public function addJobOfferFirstPart($company, $career, $publishDate, $endDate)
     {
         $endDateValidation = $this->validateEndDate($endDate);
@@ -81,56 +104,90 @@ class JobController
     }
 
 
+    /**
+     * End the new job offer, adding to data base
+     */
     public function addJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $active, $values)
     {
-
-
         $postvalue = unserialize(base64_decode($values));
 
-        $newJobOffer = new JobOffer();
-        $newJobOffer->setDescription($description);
-        $newJobOffer->setActive($active);
-        $newJobOffer->setDedication($dedication);
-        $newJobOffer->setEndDate($postvalue['endDate']);
-        $newJobOffer->setPublishDate($postvalue['publishDate']);
-        $newJobOffer->setRemote($remote);
-        $newJobOffer->setSalary($salary);
-        $newJobOffer->setTitle($title);
+        $titleValidation = $this->validateUniqueTitle($title, $postvalue['company'] );
+        if ($titleValidation == 1) {
+            $message = "Error, the entered Job Offer Title is already in use by the offering company";
+            //var_dump($postvalue['career']);
+            $this->showCreateJobOfferView($message,$postvalue['career'], $postvalue );
+        }
+        else
+        {
+            $newJobOffer = new JobOffer();
+            $newJobOffer->setDescription($description);
+            $newJobOffer->setActive($active);
+            $newJobOffer->setDedication($dedication);
+            $newJobOffer->setEndDate($postvalue['endDate']);
+            $newJobOffer->setPublishDate($postvalue['publishDate']);
+            $newJobOffer->setRemote($remote);
+            $newJobOffer->setSalary($salary);
+            $newJobOffer->setTitle($title);
 
-        $career = new Career();
-        $career->setCareerId($postvalue['career']);
-        $newJobOffer->setCareer($career);
+            $career = new Career();
+            $career->setCareerId($postvalue['career']);
+            $newJobOffer->setCareer($career);
 
-        $company = new Company();
-        $company->setCompanyId($postvalue['company']);
-        $newJobOffer->setCompany($company);
+            $company = new Company();
+            $company->setCompanyId($postvalue['company']);
+            $newJobOffer->setCompany($company);
 
-        $admin = new Administrator();
-        $admin->setAdministratorId($this->loggedUser->getAdministratorId());
-        $newJobOffer->setCreationAdmin($admin);
+            $admin = new Administrator();
+            $admin->setAdministratorId($this->loggedUser->getAdministratorId());
+            $newJobOffer->setCreationAdmin($admin);
 
-        $positionsArray = array();
-        foreach ($position as $value) {
-            $newJobPosition = new JobPosition();
-            $newJobPosition->setJobPositionId($value);
-            array_push($positionsArray, $newJobPosition);
+            $positionsArray = array();
+            foreach ($position as $value) {
+                $newJobPosition = new JobPosition();
+                $newJobPosition->setJobPositionId($value);
+                array_push($positionsArray, $newJobPosition);
+            }
+
+            $newJobOffer->setJobPosition($positionsArray);
+
+            try {
+
+                $idOffer = $this->jobOfferDAO->add($newJobOffer);
+
+                foreach ($newJobOffer->getJobPosition() as $value) {
+                    $op = new JobOfferPosition();
+                    $op->setJobPositionId($value->getJobPositionId());
+                    $op->setJoOfferId($idOffer);
+                    $this->jobOfferPositionDAO->add($op);
+                }
+
+                try {
+                    $allOffers = $this->jobOfferDAO->getJobOffer($idOffer);
+                    $offer=$this->unifyOffer($allOffers);
+                    $this->showJobOfferManagementView("", $offer);
+                    //var_dump($offer);
+                }
+                catch (\PDOException $ex)
+                {
+                    echo $ex->getMessage();
+                }
+            }
+            catch (\PDOException $ex)
+            {
+                if ($ex->getCode() == 23000) //unique constraint
+                {
+                  $message = "Error, the entered Job Offer Title is already in use by the offering company";
+                  $this->showCreateJobOfferView($message,$postvalue['career'], $values );
+
+                }
+                else
+                {
+                    $message = "Error, try again";
+                    $this->showCreateJobOfferView($message,$postvalue['career'], $values );
+                }
+            }
         }
 
-        $newJobOffer->setJobPosition($positionsArray);
-
-        $idOffer = $this->jobOfferDAO->add($newJobOffer);
-
-
-        foreach ($newJobOffer->getJobPosition() as $value) {
-            $op = new JobOfferPosition();
-            $op->setJobPositionId($value->getJobPositionId());
-            $op->setJoOfferId($idOffer);
-            $this->jobOfferPositionDAO->add($op);
-        }
-
-        $allOffers = $this->jobOfferDAO->getJobOffer($idOffer);
-        $offer=$this->unifyOffer($allOffers);
-        var_dump($offer);
 
 
         //$this->showCreateJobOfferView("", $career);
@@ -149,7 +206,36 @@ class JobController
         return $validate;
     }
 
+    /**
+     * Validate if a job offer title is available for a company
+     * @param $title
+     * @param null $id
+     * @return int
+     */
+    public function validateUniqueTitle($title, $id)
+    {
+        $validate =null;
+        try {
+            $JobOfferTitleSearch = $this->jobOfferDAO->searchTitleValidation($title, $id);
+            if ($JobOfferTitleSearch ==1) //wrong
+            {
+                $validate=1;
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            $validate=1;
+            echo $ex->getMessage();
+        }
+        return $validate;
+    }
 
+
+    /**
+     * Makes a jobOffer object with all their positions
+     * @param $offer
+     * @return mixed|null
+     */
     public function unifyOffer($offer)
     {
         $positionArray=array();
