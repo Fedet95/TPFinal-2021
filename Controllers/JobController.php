@@ -339,9 +339,7 @@ class JobController
                     }
                 }
 
-
                $flag=0;
-
                foreach ($finalArray as $value)
                {
                    if($value->getJobOfferId()==$pos)
@@ -349,7 +347,6 @@ class JobController
                        $flag=1;
                    }
                }
-
 
                if($flag==0)
                {
@@ -374,9 +371,6 @@ class JobController
                {
                    $i++;
                }
-
-
-
 
             }
 
