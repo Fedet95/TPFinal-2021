@@ -6,10 +6,7 @@ use DAO\CityDAO;
 use DAO\CompanyDAO;
 use DAO\CountryDAO;
 use DAO\IndustryDAO;
-use DAO\AdministratorDAO;
 use DAO\LogoDAO;
-use DAO\StudentDAO;
-use DAO\StudentRepository;
 use Models\City;
 use Models\Company;
 use Models\Country;
@@ -25,10 +22,8 @@ class CompanyController
     private $countryDAO;
     private $cityDAO;
     private $industryDAO;
-    private $adminDAO;
     private $logoDAO;
     private $loggedUser;
-    private $loggedAdmin;
 
 
     public function __construct()
@@ -37,10 +32,8 @@ class CompanyController
         $this->countryDAO = new CountryDAO();
         $this->cityDAO = new CityDAO();
         $this->industryDAO = new IndustryDAO();
-        $this->adminDAO = new AdministratorDAO();
         $this->logoDAO= new LogoDAO();
         $this->loggedUser = $this->loggedUserValidation();
-        $this->loggedAdmin=$this->loggedAdminValidation();
     }
 
 
@@ -66,7 +59,6 @@ class CompanyController
         require_once(VIEWS_PATH . "checkLoggedUser.php");
         $allCompanys = $this->companyDAO->getAll();
         $searchedCompany = $this->searchCompanyFiltre($allCompanys, $valueToSearch, $back);
-
         if($this->loggedUser instanceof Administrator)
         {
             require_once(VIEWS_PATH . "companyManagement.php");
@@ -502,6 +494,7 @@ class CompanyController
         }
     }
 
+    /*
     public function validateAdmin($company)
     {
         try {
@@ -521,7 +514,7 @@ class CompanyController
         }
         return $company;
     }
-
+*/
 
     /**
      * Validate if the entered cuit is valid
@@ -561,7 +554,7 @@ class CompanyController
 
 
     /**
-     * Validate if the admin/stundent has logged in the system correctly
+     * Validate if the admin/student has logged in the system correctly
      * @return mixed|null
      */
     public function loggedUserValidation()

@@ -95,7 +95,7 @@ if (isset($_SESSION['loggedstudent']))
                     if($loggedUser instanceof Administrator)
                     {
                         ?>
-                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCreateCompanyView"?>">Add Company</a>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showCreateJobOfferView"?>">Add Job Offer</a>
                         <?php
                     }
                     else if($loggedUser instanceof Student)

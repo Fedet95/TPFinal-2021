@@ -3,7 +3,7 @@ namespace DAO;
 use Models\Career;
 use Models\Student;
 
-class APIStudentDAO
+class OriginStudentDAO
 {
     private $url='https://utn-students-api.herokuapp.com/api/Student';
     private $option;
@@ -18,31 +18,31 @@ class APIStudentDAO
         $this->option= is_null($option) ? CURLOPT_URL : $option;
     }
 
-    public function init()
+    private function init()
     {
         $this->handler= curl_init();
         return $this;
     }
 
-    public function setOption($option = null, $value = null)
+    private function setOption($option = null, $value = null)
     {
         curl_setopt($this->handler, is_null($option) ? $this->option : $option, is_null($value) ? $this->url : $value );
         return $this;
     }
 
 
-    public function execute()
+    private function execute()
     {
         return curl_exec($this->handler);
     }
 
-    public function decode()
+    private function decode()
     {
         $this->response= json_decode($this->execute(), true);
         $this->convertion();
     }
 
-    public function convertion()
+    private function convertion()
     {
         foreach ($this->response as $key =>$value)
         {
@@ -68,12 +68,12 @@ class APIStudentDAO
     }
 
 
-    public function getAll()
+    private function getAll()
     {
         return $this->finalArray;
     }
 
-    public function  start(APIStudentDAO $api)
+    public function  start(OriginStudentDAO $api)
     {
         $api->init();
         $api->setOption()->setOption( CURLOPT_RETURNTRANSFER, true)->setOption(CURLOPT_SSL_VERIFYPEER, false)->setOption(CURLOPT_HTTPHEADER, array(API_KEY))->decode();
@@ -83,7 +83,7 @@ class APIStudentDAO
         return $students;
     }
 
-    public function close()
+    private function close()
     {
         curl_close($this->handler);
         return $this;

@@ -15,7 +15,7 @@ class JobOffer
  private $salary;
  private $creationAdmin;
  private $company;
- private $jobPosition;
+ private $jobPosition = array();
  private $career;
 
 
@@ -134,7 +134,7 @@ class JobOffer
     }
 
 
-    public function setCreationAdmin($creationAdmin)
+    public function setCreationAdmin(Administrator $creationAdmin)
     {
         $this->creationAdmin = $creationAdmin;
     }
@@ -146,7 +146,7 @@ class JobOffer
     }
 
 
-    public function setCompany($company)
+    public function setCompany(Company $company)
     {
         $this->company = $company;
     }
@@ -170,7 +170,7 @@ class JobOffer
     }
 
 
-    public function setCareer($career)
+    public function setCareer(Career $career)
     {
         $this->career = $career;
     }

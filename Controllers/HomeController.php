@@ -3,11 +3,10 @@
 namespace Controllers;
 
 use DAO\AdministratorDAO;
-use DAO\APICareerDAO;
-use DAO\APIStudentDAO;
+use DAO\OriginCareerDAO;
+use DAO\OriginStudentDAO;
 use DAO\CareerDAO;
 use DAO\StudentDAO;
-use Models\Student;
 
 class HomeController
 {
@@ -24,9 +23,9 @@ class HomeController
     {
         $this->administratorDAO = new AdministratorDAO();
         $this->studentDAO = new StudentDAO();
-        $this->Sorigin=new APIStudentDAO();
+        $this->Sorigin=new OriginStudentDAO();
         $this->careerDAO=new CareerDAO();
-        $this->careersOrigin= new APICareerDAO();
+        $this->careersOrigin= new OriginCareerDAO();
 
     }
 
