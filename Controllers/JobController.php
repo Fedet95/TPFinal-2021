@@ -93,6 +93,11 @@ class JobController
 
         //$allCompanies = $this->companyDAO->getAll();
         //$allCountrys = $this->countryDAO->getAll();
+        $offers= $this->jobOfferDAO->getAll();
+        $allOffers= $this->unifyAllOffer($offers);
+        var_dump($allOffers);
+        //$o= $allOffers[0];
+        //var_dump($o->getJobPosition());
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
     }
@@ -190,18 +195,18 @@ class JobController
 
             try {
 
-                $idOffer = $this->jobOfferDAO->add($newJobOffer);
+                $idOffer = $this->jobOfferDAO->add($newJobOffer); //add job offer to JobPosition DAO
 
                 foreach ($newJobOffer->getJobPosition() as $value) {
                     $op = new JobOfferPosition();
                     $op->setJobPositionId($value->getJobPositionId());
                     $op->setJoOfferId($idOffer);
-                    $this->jobOfferPositionDAO->add($op);
+                    $this->jobOfferPositionDAO->add($op); //add job OfferxPosition to JobOfferPosition DAO (N:M table)
                 }
 
                 try {
-                    $allOffers = $this->jobOfferDAO->getJobOffer($idOffer);
-                    $offer=$this->unifyOffer($allOffers);
+                    //$allOffers = $this->jobOfferDAO->getJobOffer($idOffer);
+                    //$offer=$this->unifyOffer($allOffers);
                     $this->showJobOfferManagementView("", $offer);
                     //var_dump($offer);
                 }
@@ -270,7 +275,7 @@ class JobController
 
 
     /**
-     * Makes a jobOffer object with all their positions
+     * Makes one jobOffer object with all their positions
      * @param $offer
      * @return mixed|null
      */
@@ -298,6 +303,90 @@ class JobController
         }
 
         return $finalOffer;
+
+    }
+
+
+    /**
+     * Makes a jobOffer object with all their positions
+     * @param $offer
+     * @return mixed|null
+     */
+    public function unifyAllOffer($offer)
+    {
+        $finalArray=array();
+        $subArray= array();
+        $positionArray=array();
+        $finalOffer=null;
+        if(is_array($offer))
+        {
+            $cant=count($offer);
+
+            $i=0;
+            for ($x=0; $x<$cant; $x++)
+           {
+               $subArray=array();
+                $positionArray= array();
+                $pos=null;
+                foreach ($offer as $value)
+                {
+                    $id = $offer[$i]->getJobOfferId();
+
+                    if ($value->getJobOfferId() == $id)
+                    {
+                        $pos=$value->getJobOfferId();
+                        array_push($subArray, $value);//job offers with same id
+                    }
+                }
+
+
+               $flag=0;
+
+               foreach ($finalArray as $value)
+               {
+                   if($value->getJobOfferId()==$pos)
+                   {
+                       $flag=1;
+                   }
+               }
+
+
+               if($flag==0)
+               {
+                   foreach ($subArray as $values) //unify job position
+                   {
+                       //var_dump($values->getJobPosition()); //es un objeto
+                       array_push($positionArray, $values->getJobPosition()); //array con 3 objetos
+                   }
+
+                   //var_dump($positionArray); //array con objetos
+
+                   $finalOffer= $subArray[0];
+                   $finalOffer->setJobPosition($positionArray);
+
+                   array_push($finalArray, $finalOffer);
+                   $positionArray=null;
+                   $finalOffer=null;
+                   $subArray=null;
+                   $i++;
+               }
+               else
+               {
+                   $i++;
+               }
+
+
+
+
+            }
+
+        }
+        else if(is_object($offer))
+        {
+           array_push($finalArray, $offer);
+        }
+
+        return $finalArray;
 
     }
 

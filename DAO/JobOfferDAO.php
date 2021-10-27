@@ -54,6 +54,7 @@ class JobOfferDAO implements IJobOfferDAO
         try {
 
             $query= "SELECT * FROM ".$this->tableName." o INNER JOIN ".$this->tableName2." op ON o.jobOfferId= op.jobOfferIdOp
+            INNER JOIN ".$this->tableName6." jp ON op.jobPositionIdOp = jp.jobPositionId 
             INNER JOIN ".$this->tableName3." co ON o.companyId= co.companyId 
             INNER JOIN ".$this->tableName4." ad ON o.creationAdminId= ad.administratorId
             INNER JOIN ".$this->tableName5." ca ON o.careerIdOffer= ca.careerId";
@@ -186,22 +187,21 @@ class JobOfferDAO implements IJobOfferDAO
             $jobOffer->setCareer($career);
 
             $company = new Company();
-            $company->setCompanyId($value["companyId"]);
-            $company->setName($value["name"]);
-            $company->setFoundationDate($value["foundationDate"]);
-            $company->setCuit($value["cuit"]);
-            $company->setAboutUs($value["aboutUs"]);
-            $company->setEmail($value["email"]);
-            $company->setActive($value["activeCompany"]);
-            $company->setCompanyLink($value['companyLink']);
+            $company->setCompanyId($value["companyId"]); //SI SE ELIMINAN LOS ATRIBUTOS COMENTADOS, ELIMINAR EL JOIN CON "COMPANY" DEL GET ALL!!!!
+            //$company->setName($value["name"]);
+            //$company->setFoundationDate($value["foundationDate"]);
+            //$company->setCuit($value["cuit"]);
+            //$company->setAboutUs($value["aboutUs"]);
+            //$company->setEmail($value["email"]);
+            //$company->setActive($value["activeCompany"]);
+            //$company->setCompanyLink($value['companyLink']);
             $jobOffer->setCompany($company);
 
 
             $admin= new Administrator();
             $admin->setAdministratorId($value['administratorId']);
-            $admin->setActive($value['activeAdmin']);
-            $admin->setEmail($value['emailAdmin']);
-            $admin->setPassword($value['passwordAdmin']);
+            //$admin->setActive($value['activeAdmin']);
+            //$admin->setEmail($value['emailAdmin']);
             $admin->setEmployeeNumber($value['employeeNumber']);
             $admin->setFirstName($value['firstNameAdmin']);
             $admin->setLastName($value['lastNameAdmin']);
