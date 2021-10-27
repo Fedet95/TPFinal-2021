@@ -3,21 +3,6 @@ require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 include_once('header.php');
 include_once('nav.php');
 ?>
-
-//private $jobOfferId; <--- base de datos
-      private $active;
-     private $remote;
-    private $publishDate;
-     private $endDate;
-     private $title;
-      private $dedication;
-     private $description;
-          private $salary;
-private $creationAdmin;
-     private $company;
-     private $jobPosition;
-      private $career;
-
 <?php if ($careerId==null){?>
 <main class="py-3">
     <section id="listado">

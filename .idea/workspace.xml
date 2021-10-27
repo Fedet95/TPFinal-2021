@@ -4,25 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAO/IJobOfferPosition.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAO/JobOfferPositionDAO.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAO/OriginJobPositionDAO.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/JobOfferPosition.php" afterDir="false" />
+    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update offers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/StudentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/APICareerDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/OriginCareerDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/APIStudentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/OriginStudentDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/IJobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/IJobOfferDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/JobPositionDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobPositionDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/JobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/JobOffer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/JobPosition.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/JobPosition.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/createJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/createJobOffer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
     </list>
     <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="" />
     <list id="af60e691-328f-4020-b1af-4fc76ece5be8" name="Changes by paye_" comment="Update">
@@ -113,7 +97,7 @@
       <workItem from="1634945153143" duration="41205000" />
       <workItem from="1635083664865" duration="43043000" />
       <workItem from="1635207657888" duration="468000" />
-      <workItem from="1635254847304" duration="40170000" />
+      <workItem from="1635254847304" duration="41737000" />
     </task>
     <task id="LOCAL-00001" summary="mi subida">
       <created>1633917102951</created>
@@ -248,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635254874355</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="update offers">
+      <created>1635300606197</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1635300606197</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,6 +270,7 @@
     <MESSAGE value="Update views and other fixes, datalist" />
     <MESSAGE value="delete old repositories" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="update offers" />
+    <option name="LAST_COMMIT_MESSAGE" value="update offers" />
   </component>
 </project>
