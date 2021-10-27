@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update offers">
-      <change afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
+    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="fix errors and validations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/companyViewMoreStudent.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyViewMoreStudent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/studentListViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentListViewMore.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
     </list>
     <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="" />
     <list id="af60e691-328f-4020-b1af-4fc76ece5be8" name="Changes by paye_" comment="Update" />
@@ -99,7 +98,7 @@
       <workItem from="1635083664865" duration="43043000" />
       <workItem from="1635207657888" duration="468000" />
       <workItem from="1635254847304" duration="41876000" />
-      <workItem from="1635341477964" duration="6962000" />
+      <workItem from="1635341477964" duration="14576000" />
     </task>
     <task id="LOCAL-00001" summary="mi subida">
       <created>1633917102951</created>
@@ -255,7 +254,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635302696402</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="fix errors and validations">
+      <created>1635349760365</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1635349760365</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,6 +293,7 @@
     <MESSAGE value="update" />
     <MESSAGE value="update offers" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="fix errors and validations" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix errors and validations" />
   </component>
 </project>

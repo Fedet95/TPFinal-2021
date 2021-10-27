@@ -61,8 +61,22 @@ class JobController
         if($careerId!=null)
         {
             $allPositions= $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
-            $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
+            try {
 
+                $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
+
+                try {
+                    $allPositions= $this->jobPositionDAO->getAll();
+                }
+                catch (\PDOException $ex)
+                {
+                    echo $ex->getMessage();
+                }
+            }
+            catch (\PDOException $ex)
+            {
+                echo $ex->getMessage();
+            }
         }
 
         require_once(VIEWS_PATH . "createJobOffer.php");
@@ -73,7 +87,7 @@ class JobController
      * Call the "createJobOffer" view
      * @param string $message
      */
-    public function showJobOfferManagementView($message = "", $offer)
+    public function showJobOfferManagementView($message = "", $offer=null)
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
@@ -82,6 +96,30 @@ class JobController
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
     }
+
+
+    public function showJobPositionManagment($message = "")
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        $allPositions= $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
+        $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
+        $allPositions = $this->jobPositionDAO->getAll();
+
+        require_once(VIEWS_PATH . "jobPositionManagment.php");
+    }
+
+    public function showCreateJobPositionView($message = "")
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        $allCareers = $this->careersOrigin->start($this->careersOrigin);
+
+
+        require_once(VIEWS_PATH . "createJobPosition.php");
+
+    }
+
 
 
 
@@ -261,6 +299,15 @@ class JobController
 
         return $finalOffer;
 
+    }
+
+
+    public function addJobPosition($careerId, $descriptionJob)
+    {
+        require_once(VIEWS_PATH . "checkLoggedUser.php");
+
+        var_dump($careerId);
+        var_dump($descriptionJob);
     }
 
 

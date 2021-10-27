@@ -96,12 +96,13 @@ if (isset($_SESSION['loggedstudent']))
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showCreateJobOfferView"?>">Add Job Offer</a>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showCreateJobPositionView"?>">Add Job Position</a>
                         <?php
                     }
                     else if($loggedUser instanceof Student)
                     {
                         ?>
-                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Companies</a>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Job Offers Management</a>
                         <?php
                     }
                     ?>
@@ -110,7 +111,8 @@ if (isset($_SESSION['loggedstudent']))
                     if($loggedUser instanceof Administrator)
                     {
                         ?>
-                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Company Management</a>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Job Offers Management</a>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobPositionManagement"?>">Job Position Managment</a>
                         <?php
                     }
                     else if($loggedUser instanceof Student)
