@@ -135,42 +135,56 @@ include_once('nav.php');
                         <li><a href="#">part Time</a></li>
                     </ul>
 
-                    <?php foreach ($allOffers as $value ){ ?>
-                    <div class="single-post d-flex flex-row">
-                        <div class="thumb">
-                            <img src="../Views/img/post.png" alt=""> <!--LOGO-->
-                            <ul class="tags">
-                                <li>
-                                    <a href="#">Art</a>
-                                </li>
-                                <li>
-                                    <a href="#">Media</a>
-                                </li>
-                                <li>
-                                    <a href="#">Design</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="details">
-                            <div class="title d-flex flex-row justify-content-between">
-                                <div class="titles">
-                                    <a href="single.html"><h4>Creative Art Designer</h4></a> <!--TITLE-->
-                                    <h6>Premium Labels Limited</h6> <!--COMPANY NAME-->
+                    <?php foreach ($allOffers as $value ){
+
+                        foreach ($allCompanies as $company){
+                            if($value->getCompany()->getCompanyId()==$company->getCompanyId()){?>
+
+                                <div class="single-post d-flex flex-row">
+                                    <div class="thumb">
+                                        <img><?php echo '<img src="../uploads/' .$company->getLogo()->getFile() . '" height="100" width="100"/>'; ?>
+                                      <!--  <img src="../Views/img/post.png" alt=""> --LOGO-->
+                                        <ul class="tags">
+                                            <?php if($value->getCareer()->getCareerID()==3 || $value->getCareer()->getCareerID()==4 ){?>
+                                            <li>
+                                                <?php if($value->getCareer()->getCareerID()==3){?>
+                                                <a href="#">Naval</a>
+                                                <?php } else { ?>   <a href="#">Fishing</a>  <?php }?>
+                                            </li>
+                                            <li>
+                                                <a href="#">Engineering</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Harbor</a>
+                                            </li>
+                                            <?php }?>
+                                        </ul>
+                                    </div>
+                                    <div class="details">
+                                        <div class="title d-flex flex-row justify-content-between">
+                                            <div class="titles">
+                                                <a href="single.html"><h4><?php echo $value->getTitle()?></h4></a> <!--TITLE-->
+                                                <h6><?php echo $company->getName()?></h6> <!--COMPANY NAME-->
+                                            </div>
+                                        </div>
+                                        <p> <!--DESCRIPTION-->
+                                            <?php echo $value->getDescription()?>
+                                        </p>
+                                        <h5>Job Nature: <?php echo $value->getDedication();?></h5> <!--DEDICATION-->
+                                        <p class="address"><span class="lnr lnr-map"></span> Country: <?php echo $company->getCountry()->getName()?> </p> <!--COUNTRY-->
+                                        <p class="address"><span class="lnr lnr-map"></span> City: <?php echo $company->getCity()->getName()?> </p> <!--COUNTRY-->
+                                        <p class="address"><span class="lnr lnr-database"></span> Publish Date: <?php echo $value->getPublishDate()?>  </p> <!--PUBLISHDATE-->
+                                    </div>
+                                    <div class="row offset-3">
+                                        <form action="<?php echo FRONT_ROOT . "Company/addCompany" ?>" method="POST" class="">
+                                            <ul class="btns">
+                                                <li><a href="#"><span class="lnr lnr-heart"></span></a></li>
+                                                <li><a href="#">Apply</a></li>
+                                            </ul>
+                                        </form>
+                                    </div>
                                 </div>
-                                <ul class="btns">
-                                    <li><a href="#"><span class="lnr lnr-heart"></span></a></li>
-                                    <li><a href="#">Apply</a></li>
-                                </ul>
-                            </div>
-                            <p> <!--DESCRIPTION-->
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporinc ididunt ut dolore magna aliqua.
-                            </p>
-                            <h5>Job Nature: Full time</h5> <!--DEDICATION-->
-                            <p class="address"><span class="lnr lnr-map"></span> 56/8, Panthapath Dhanmondi Dhaka</p> <!--COUNTRY-->
-                            <p class="address"><span class="lnr lnr-database"></span> 15k - 25k</p> <!--PUBLISHDATE-->
-                        </div>
-                    </div>
-              <?php } ?>
+              <?php }}} ?>
 
 <!--
                     <div class="single-post d-flex flex-row">
@@ -384,34 +398,6 @@ include_once('nav.php');
         </div>
     </section>
     <!-- End post Area -->
-
-
-<?php var_dump($offer);?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
 include_once('footer.php');

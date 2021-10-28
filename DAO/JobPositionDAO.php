@@ -199,6 +199,26 @@ class JobPositionDAO implements IJobPositionDAO
         }
     }
 
+    /**
+     * Returns max id from a Job Position
+     * @return int
+     */
+    function getMaxId (){
+        try
+        {
+            $query = "SELECT * FROM " . $this->tableName . " ORDER BY (jobPositionId) DESC LIMIT 0, 1";
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query,array());
+            return (int)($result[0][0])+1;
+
+        }catch (\PDOException $ex){
+            throw $ex;
+        }
+
+    }
+
 
     /**
      * Returns all values from Data base

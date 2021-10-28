@@ -31,9 +31,10 @@ include_once('nav.php');
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-group offset-3 col-7">
                             <label class="text-muted text-strong text" for="">Job Description</label>
-                            <p><textarea name="descriptionJob" placeholder="Describe the Job Position..." class="form-control"></textarea></p>
+                            <p><textarea name="descriptionJob" placeholder="Describe the Job Position..." class="form-control" required></textarea></p>
                         </div>
                         <button type="submit" name="button" class="btn btn-dark offset-5 d-block my-3 col-3 justify-content-center">Confirm & Save</button>
                     </div>

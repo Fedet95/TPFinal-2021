@@ -91,28 +91,37 @@ class JobController
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
-        //$allCompanies = $this->companyDAO->getAll();
+        $allCompanies = $this->companyDAO->getAll();
         //$allCountrys = $this->countryDAO->getAll();
         $offers= $this->jobOfferDAO->getAll();
         $allOffers= $this->unifyAllOffer($offers);
-        var_dump($allOffers);
-        //$o= $allOffers[0];
-        //var_dump($o->getJobPosition());
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
     }
 
 
-    public function showJobPositionManagment($message = "")
+
+//--------------------------------------------------------------------------------------------
+
+    public function showJobPositionManagment($message = "",$jobPosition = null)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $allPositions= $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
-        $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
+        if($jobPosition == null)
+        {
+            $allPositions= $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
+            $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
+        }
+        else
+        {
+            $this->jobPositionDAO->updateJobPositionFile($jobPosition);
+        }
+
         $allPositions = $this->jobPositionDAO->getAll();
 
         require_once(VIEWS_PATH . "jobPositionManagment.php");
     }
+
 
     public function showCreateJobPositionView($message = "")
     {
@@ -124,6 +133,72 @@ class JobController
         require_once(VIEWS_PATH . "createJobPosition.php");
 
     }
+
+
+    public function addJobPosition($careerId, $descriptionJob)
+    {
+        require_once(VIEWS_PATH . "checkLoggedUser.php");
+
+        $allJobPositions = $this->jobPositionDAO->getAll();
+        $allCareers = $this->careersOrigin->start($this->careersOrigin);
+        $flag = 0;
+
+        if($careerId == null)
+        {
+            $this->showCreateJobPositionView("Please select a Career Reference");
+
+        }else
+        {
+            if($descriptionJob == null)
+            {
+                $this->showCreateJobPositionView("Please write a Description Job");
+            }
+            else
+            {
+                foreach ($allCareers as $value)
+                {
+                    if($value->getCareerId() == $careerId)
+                    {
+                        if(strcasecmp($value->getDescription(),$descriptionJob) == 0)
+                        {
+                            $flag = 1;
+                        }
+
+                    }
+                    if($flag == 1)
+                    {
+                        break;
+                    }
+                }
+            }
+
+        }
+        if($flag == 1)
+        {
+            $this->showCreateJobPositionView("This Job Position already exist");
+
+        } else
+        {
+            $newJobPosition = new JobPosition();
+            $newJobPosition->setJobPositionId(($this->jobPositionDAO->getMaxId()));
+            $newJobPosition->setDescription($descriptionJob);
+
+            $careerAux = new Career(); ///Pasar objeto tipo carrera o solo id?
+            $careerAux->setCareerId($careerId);
+            $newJobPosition->setCareer($careerAux);
+
+            $this->jobPositionDAO->add($newJobPosition);
+            $this->showJobPositionManagment("Job Position succesfully created", $newJobPosition);
+        }
+
+    }
+
+
+    //--------------------------------------------------------------------
+
+
+
+
 
 
 
@@ -385,13 +460,10 @@ class JobController
     }
 
 
-    public function addJobPosition($careerId, $descriptionJob)
-    {
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
 
-        var_dump($careerId);
-        var_dump($descriptionJob);
-    }
+
+
+
 
 
 

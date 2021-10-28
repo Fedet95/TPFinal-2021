@@ -16,7 +16,7 @@ include_once('nav.php');
                         <div class=" offset-3 col-7">
                         <div class="form-group">
                             <label class="text-muted text-strong text" for="">Offering Company</label>
-                            <select name="company" class="form-control"  required>
+                            <select name="company" class="form-control" required >
                                 <option disabled selected class="text-center">Select offering company</option>
                                 <?php
                                 foreach ($allCompanies as $value)
@@ -35,7 +35,7 @@ include_once('nav.php');
 
                         <div class="form-group offset-3 col-7">
                             <label class="text-muted text-strong text" for="">Referring Career</label>
-                            <select name="career"  class="form-control"  required>
+                            <select name="career"  class="form-control" required >
                                 <option disabled selected class="text-center">Select referring career</option>
                                 <?php
                                 foreach ($allCareers as $value)
@@ -131,7 +131,7 @@ else {
                             <div class="col-lg-15">
                                 <div class="form-group">
                                     <label class="text-muted text-strong" for="">Description</label>
-                                    <p><textarea name="description" placeholder="" class="form-control"></textarea></p>
+                                    <p><textarea name="description" placeholder="" class="form-control" required></textarea></p>
                                 </div>
                             </div>
 
