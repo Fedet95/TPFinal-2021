@@ -17,7 +17,7 @@ include_once('nav.php');
                         <div class="form-group">
                             <label class="text-muted text-strong text" for="">Offering Company</label>
                             <select name="company" class="form-control" required >
-                                <option disabled selected class="text-center">Select offering company</option>
+                                <option value="" disabled selected class="text-center">Select offering company</option>
                                 <?php
                                 foreach ($allCompanies as $value)
                                 {
@@ -35,8 +35,8 @@ include_once('nav.php');
 
                         <div class="form-group offset-3 col-7">
                             <label class="text-muted text-strong text" for="">Referring Career</label>
-                            <select name="career"  class="form-control" required >
-                                <option disabled selected class="text-center">Select referring career</option>
+                            <select name="career"  class="form-control" required>
+                                <option value="" disabled selected class="text-center">Select referring career</option>
                                 <?php
                                 foreach ($allCareers as $value)
                                 {
@@ -90,7 +90,7 @@ else {
                                 <div class="form-group">
                                     <label class="text-muted text-strong text" for="">Job Position</label>
                                     <select name="position[]" multiple class="form-control"  required>
-                                        <option disabled selected class="text-center">Select Job Position</option>
+                                        <option value="" disabled selected class="text-center">Select Job Position</option>
                                         <?php
                                         foreach ($allPositions as $value)
                                         {
@@ -109,7 +109,7 @@ else {
                             <div class="form-group col-lg-15">
                                 <label class="text-muted text-strong text" for="">Work Type</label>
                                 <select name="remote"  class="form-control"  required>
-                                    <option disabled selected class="text-center">Select Work Type</option>
+                                    <option value="" disabled selected class="text-center">Select Work Type</option>
                                     <option value="Remote Working">Remote Working</option>
                                     <option value="Office Working">Office Working</option>
                                     <option value="Office and Remote Working">Office and Remote Working</option>
@@ -120,7 +120,7 @@ else {
                             <div class="form-group col-lg-15">
                                 <label class="text-muted text-strong text" for="">Dedication</label>
                                 <select name="dedication"  class="form-control"  required>
-                                    <option disabled selected class="text-center">Select Dedication</option>
+                                    <option value="" disabled selected class="text-center">Select Dedication</option>
                                     <option value="Full Time">Full Time</option>
                                     <option value="Part Time">Part Time</option>
                                     <option value="Temporary">Temporary</option>
@@ -138,7 +138,7 @@ else {
                             <div class="col-lg-15">
                                 <div class="form-group">
                                     <label class="text-muted text-strong" for="">Salary</label>
-                                    <input type="number" name="salary" min="0.00" step="0.01"
+                                    <input required type="number" name="salary" min="0.00" step="0.01"
                                 </div>
                             </div>
 

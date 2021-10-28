@@ -87,7 +87,7 @@ class JobController
      * Call the "createJobOffer" view
      * @param string $message
      */
-    public function showJobOfferManagementView($message = "", $offer=null)
+    public function showJobOfferManagementView($message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
@@ -228,11 +228,30 @@ class JobController
     public function addJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $active, $values)
     {
         $postvalue = unserialize(base64_decode($values));
+        var_dump($postvalue['career']);
+        var_dump($position);
+        var_dump($title);
+        var_dump($remote);
+        var_dump($dedication);
+        var_dump($description);
+        var_dump($salary);
+        var_dump($active);
+        var_dump($values);
+
+
+        $flag=0;
+        if($position=='' || $title==''  || $remote=='' || $dedication=='' || $description=='' || $salary=='' || $active=='' || $values=='')
+        {
+            $message = "Error, complete all fields";
+            $flag=1;
+            var_dump($postvalue['career']);
+            $this->showCreateJobOfferView($message,$postvalue['career'], $postvalue );
+        }
+
 
         $titleValidation = $this->validateUniqueTitle($title, $postvalue['company'] );
         if ($titleValidation == 1) {
             $message = "Error, the entered Job Offer Title is already in use by the offering company";
-            //var_dump($postvalue['career']);
             $this->showCreateJobOfferView($message,$postvalue['career'], $postvalue );
         }
         else
@@ -279,16 +298,8 @@ class JobController
                     $this->jobOfferPositionDAO->add($op); //add job OfferxPosition to JobOfferPosition DAO (N:M table)
                 }
 
-                try {
-                    //$allOffers = $this->jobOfferDAO->getJobOffer($idOffer);
-                    //$offer=$this->unifyOffer($allOffers);
-                    $this->showJobOfferManagementView("", $offer);
-                    //var_dump($offer);
-                }
-                catch (\PDOException $ex)
-                {
-                    echo $ex->getMessage();
-                }
+                    $this->showJobOfferManagementView("");
+
             }
             catch (\PDOException $ex)
             {

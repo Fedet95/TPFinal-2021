@@ -2599,8 +2599,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .post-list .single-post {
   padding: 30px;
-  background-color: #f9f9ff;
+  background-color: #fdfdfe;
   margin-bottom: 30px;
+  border-radius: 25px;
 }
 
 .post-list .single-post h6 {
