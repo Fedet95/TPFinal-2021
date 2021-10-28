@@ -101,7 +101,7 @@ class JobOfferDAO implements IJobOfferDAO
             $mapedArray=null;
             if(!empty($result))
             {
-                $mapedArray= $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+                $mapedArray= $this->mapear($result);
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL

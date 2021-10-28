@@ -5,8 +5,8 @@ namespace Models;
 class Appointment
 {
   private $appointmentId;
-  private $jobOffer;
-  private $student;
+  private $jobOffer; // (objeto)
+  private $student; // (objeto)
   private $date;
 
 
@@ -27,7 +27,7 @@ class Appointment
     }
 
 
-    public function setJobOffer($jobOffer)
+    public function setJobOffer(jobOffer $jobOffer)
     {
         $this->jobOffer = $jobOffer;
     }
@@ -39,7 +39,7 @@ class Appointment
     }
 
 
-    public function setStudent($student)
+    public function setStudent(student $student)
     {
         $this->student = $student;
     }
@@ -55,9 +55,6 @@ class Appointment
     {
         $this->date = $date;
     }
-
-
-
 
 
 }
