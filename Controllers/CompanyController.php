@@ -2,6 +2,7 @@
 namespace Controllers;
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 
+use DAO\AdministratorDAO;
 use DAO\CityDAO;
 use DAO\CompanyDAO;
 use DAO\CountryDAO;
@@ -23,6 +24,7 @@ class CompanyController
     private $cityDAO;
     private $industryDAO;
     private $logoDAO;
+    private $adminDAO;
     private $loggedUser;
 
 
@@ -33,6 +35,7 @@ class CompanyController
         $this->cityDAO = new CityDAO();
         $this->industryDAO = new IndustryDAO();
         $this->logoDAO= new LogoDAO();
+        $this->adminDAO = new AdministratorDAO();
         $this->loggedUser = $this->loggedUserValidation();
     }
 
@@ -45,8 +48,22 @@ class CompanyController
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $allIndustrys = $this->industryDAO->getAll();
-        $allCountrys = $this->countryDAO->getAll();
+        try {
+            $allIndustrys = $this->industryDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+        try {
+            $allCountrys = $this->countryDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
         require_once(VIEWS_PATH . "createCompany.php");
     }
 
@@ -57,7 +74,15 @@ class CompanyController
     public function showCompanyManagement($valueToSearch = null, $back =null, $message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
-        $allCompanys = $this->companyDAO->getAll();
+
+        try {
+            $allCompanys = $this->companyDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
         $searchedCompany = $this->searchCompanyFiltre($allCompanys, $valueToSearch, $back);
         if($this->loggedUser instanceof Administrator)
         {
@@ -78,7 +103,14 @@ class CompanyController
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
-        $company = $this->companyDAO->getCompany($id);
+        try {
+            $company = $this->companyDAO->getCompany($id);
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
         if($this->loggedUser instanceof Administrator)
         {
             require_once(VIEWS_PATH . "companyViewMore.php");
@@ -494,11 +526,11 @@ class CompanyController
         }
     }
 
-    /*
+
     public function validateAdmin($company)
     {
         try {
-            $searchedAdmin = $this->adminDAO->searchById($this->loggedAdmin->getAdministratorId());
+            $searchedAdmin = $this->adminDAO->searchById($this->loggedUser->getAdministratorId());
             if ($searchedAdmin!=null) {
                 $company->setCreationAdmin($searchedAdmin);
             }
@@ -514,7 +546,7 @@ class CompanyController
         }
         return $company;
     }
-*/
+
 
     /**
      * Validate if the entered cuit is valid
@@ -696,22 +728,48 @@ class CompanyController
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
+        try {
             $this->companyDAO->remove($id);
             $this->showCompanyManagement();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
     }
 
 
     /**
      * Edit information of a company from the system
      */
-    public function Edit($id, $message=null) //DEBERIA PASARLE UN MENSAJE AL EDIT, QUE LE PASE AL SHOW EDIT COMPANY PARA MOSTRAR ERRORES
+    public function Edit($id, $message=null)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-         $allIndustrys = $this->industryDAO->getAll();
-         $allCountrys = $this->countryDAO->getAll();
+        try {
 
-         $company = $this->companyDAO->getCompany($id);
+            $allIndustrys = $this->industryDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+        try {
+            $allCountrys = $this->countryDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+        try {
+            $company = $this->companyDAO->getCompany($id);
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
 
          $this->showEditCompany($company, $allIndustrys, $allCountrys, $message);
     }

@@ -88,6 +88,11 @@ class JobPositionDAO implements IJobPositionDAO
         }
     }
 
+
+    /**
+     * @param $array
+     * @return JobPosition|JobPosition[]
+     */
     public function mapear($array)
     {
         $array = is_array($array) ? $array : []; //si lo que viene como parametro es un array lo deja como viene, sino lo guarda como array vacio
@@ -112,7 +117,7 @@ class JobPositionDAO implements IJobPositionDAO
 
         }, $array);
 
-        return count($resultado) > 1 ? $resultado : $resultado['0']; //devuelve un array si es mas de 1 dato, O un objeto si es 1 solo dato y sino NULL
+        return count($resultado) > 1 ? $resultado : $resultado['0'];
 
     }
 

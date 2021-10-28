@@ -89,8 +89,8 @@ else {
                             <div class="col-lg-15">
                                 <div class="form-group">
                                     <label class="text-muted text-strong text" for="">Job Position</label>
-                                    <select name="position[]" multiple class="form-control"  required>
-                                        <option value="" disabled selected class="text-center">Select Job Position</option>
+                                    <select name="position[]" multiple class="form-control"  required="required">
+                                        <option value="" disabled class="text-center">Select Job Position</option>
                                         <?php
                                         foreach ($allPositions as $value)
                                         {

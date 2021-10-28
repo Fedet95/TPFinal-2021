@@ -5,17 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="fix errors and validations">
-      <change afterPath="$PROJECT_DIR$/Views/jobOfferViewMore.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DAO/AppointmentHistoryDAODAO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DAO/IAppointmentHistoryDAO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Models/AppointmentHistory.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/JobPositionDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobPositionDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/createJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/createJobOffer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
     </list>
     <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="" />
     <list id="af60e691-328f-4020-b1af-4fc76ece5be8" name="Changes by paye_" comment="Update">
-      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/IAppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/IAppointmentDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Appointment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Appointment.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,30 +47,11 @@
     </file-type-list>
   </component>
   <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/Views/jobOffersManagement.php">
+    <file path="$PROJECT_DIR$/DAO/JobOfferDAO.php">
       <ranges>
-        <range start1="1" end1="2" start2="1" end2="6" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="27" end1="28" start2="31" end2="34" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
-        <range start1="59" end1="60" start2="65" end2="65" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
-        <range start1="124" end1="126" start2="129" end2="129" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
-        <range start1="128" end1="130" start2="131" end2="133" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="137" end1="138" start2="140" end2="141" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
-        <range start1="139" end1="141" start2="142" end2="147" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="142" end1="179" start2="148" end2="236" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="180" end1="182" start2="237" end2="283" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="183" end1="187" start2="284" end2="292" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
-        <range start1="188" end1="394" start2="293" end2="499" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
-        <range start1="397" end1="398" start2="502" end2="503" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/Controllers/JobController.php">
-      <ranges>
-        <range start1="44" end1="45" start2="44" end2="44" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
-        <range start1="46" end1="46" start2="45" end2="66" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
-        <range start1="89" end1="90" start2="109" end2="110" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="230" end1="230" start2="250" end2="270" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="234" end1="235" start2="274" end2="274" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="281" end1="291" start2="320" end2="322" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="103" end1="104" start2="103" end2="104" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
+        <range start1="231" end1="232" start2="231" end2="235" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="235" end1="235" start2="238" end2="323" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
       </ranges>
     </file>
   </component>
@@ -78,7 +66,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../job" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../job-listing-master" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -130,7 +118,8 @@
       <workItem from="1635083664865" duration="43043000" />
       <workItem from="1635207657888" duration="468000" />
       <workItem from="1635254847304" duration="41876000" />
-      <workItem from="1635341477964" duration="39135000" />
+      <workItem from="1635341477964" duration="39162000" />
+      <workItem from="1635426280447" duration="13564000" />
     </task>
     <task id="LOCAL-00001" summary="mi subida">
       <created>1633917102951</created>
@@ -321,7 +310,21 @@
       <option name="project" value="LOCAL" />
       <updated>1635380030638</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="fix errors and validations">
+      <created>1635387925272</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1635387925272</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Update">
+      <created>1635387933661</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1635387933661</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,8 +355,8 @@
     <MESSAGE value="delete old repositories" />
     <MESSAGE value="update" />
     <MESSAGE value="update offers" />
-    <MESSAGE value="Update" />
     <MESSAGE value="fix errors and validations" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix errors and validations" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
 </project>

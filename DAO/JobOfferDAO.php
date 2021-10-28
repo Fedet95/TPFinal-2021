@@ -229,7 +229,95 @@ class JobOfferDAO implements IJobOfferDAO
 
         }, $array);
 
-        return count($resultado) > 1 ? $resultado : $resultado['0']; //devuelve un array si es mas de 1 dato, O un objeto si es 1 solo dato y sino NULL
+
+        $finalOffers=$this->unifyAllOffer($resultado);
+
+        return $finalOffers;
+
+    }
+
+
+
+    /**
+     * Makes a jobOffer object with all their positions
+     * @param $offer
+     */
+    public function unifyAllOffer($offer)
+    {
+        $finalArray=array();
+        $subArray= array();
+        $positionArray=array();
+        $finalOffer=null;
+        if(is_array($offer))
+        {
+            $cant=count($offer);
+
+            $i=0;
+            for ($x=0; $x<$cant; $x++)
+            {
+                $subArray=array();
+                $positionArray= array();
+                $pos=null;
+                foreach ($offer as $value)
+                {
+                    $id = $offer[$i]->getJobOfferId();
+
+                    if ($value->getJobOfferId() == $id)
+                    {
+                        $pos=$value->getJobOfferId();
+                        array_push($subArray, $value);//job offers with same id
+                    }
+                }
+
+                $flag=0;
+                foreach ($finalArray as $value)
+                {
+                    if($value->getJobOfferId()==$pos)
+                    {
+                        $flag=1;
+                    }
+                }
+
+                if($flag==0)
+                {
+                    foreach ($subArray as $values) //unify job position
+                    {
+                        //var_dump($values->getJobPosition()); //es un objeto
+                        array_push($positionArray, $values->getJobPosition()); //array con 3 objetos
+                    }
+
+                    //var_dump($positionArray); //array con objetos
+
+                    $finalOffer= $subArray[0];
+                    $finalOffer->setJobPosition($positionArray);
+
+                    array_push($finalArray, $finalOffer);
+                    $positionArray=null;
+                    $finalOffer=null;
+                    $subArray=null;
+                    $i++;
+                }
+                else
+                {
+                    $i++;
+                }
+
+            }
+
+            if(count($finalArray)==1)
+            {
+                $offer= $finalArray[0];
+                $finalArray=$offer;
+            }
+
+        }
+        else if(is_object($offer))
+        {
+            $finalArray=$offer;
+            //array_push($finalArray, $offer);
+        }
+
+        return $finalArray;
 
     }
 

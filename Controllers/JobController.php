@@ -60,10 +60,15 @@ class JobController
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
-        $jobOffer = $this->jobOfferDAO->getJobOffer($id);
+        try {
+            $jobOffer = $this->jobOfferDAO->getJobOffer($id);
+        }catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
         require_once(VIEWS_PATH."jobOfferViewMore.php");
     }
-
 
 
     /**
@@ -104,7 +109,7 @@ class JobController
 
 
     /**
-     * Call the "createJobOffer" view
+     * Call the "job offer management" view
      * @param string $message
      */
     public function showJobOfferManagementView($message = "")
@@ -113,8 +118,21 @@ class JobController
 
         $allCompanies = $this->companyDAO->getAll();
         //$allCountrys = $this->countryDAO->getAll();
-        $offers= $this->jobOfferDAO->getAll();
-        $allOffers= $this->unifyAllOffer($offers);
+        $allOffers= $this->jobOfferDAO->getAll();
+        //$allOffers= $this->unifyAllOffer($offers);
+
+        require_once(VIEWS_PATH . "jobOffersManagement.php");
+    }
+
+
+    /**
+     * Call the "edi job offer" view
+     * @param string $message
+     */
+    public function showEditJobOfferView($allCompanies, $allCareers, $jobOfferEdit, $allPositions=null, $message = "")
+    {
+        $edit=1;
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
     }
@@ -248,22 +266,10 @@ class JobController
     public function addJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $active, $values)
     {
         $postvalue = unserialize(base64_decode($values));
-        var_dump($postvalue['career']);
-        var_dump($position);
-        var_dump($title);
-        var_dump($remote);
-        var_dump($dedication);
-        var_dump($description);
-        var_dump($salary);
-        var_dump($active);
-        var_dump($values);
 
-
-        $flag=0;
-        if($position=='' || $title==''  || $remote=='' || $dedication=='' || $description=='' || $salary=='' || $active=='' || $values=='')
+        if($values=='')
         {
             $message = "Error, complete all fields";
-            $flag=1;
             var_dump($postvalue['career']);
             $this->showCreateJobOfferView($message,$postvalue['career'], $postvalue );
         }
@@ -309,7 +315,7 @@ class JobController
 
             try {
 
-                $idOffer = $this->jobOfferDAO->add($newJobOffer); //add job offer to JobPosition DAO
+                $idOffer = $this->jobOfferDAO->add($newJobOffer); //add job offer to JobOffer DAO
 
                 foreach ($newJobOffer->getJobPosition() as $value) {
                     $op = new JobOfferPosition();
@@ -318,7 +324,8 @@ class JobController
                     $this->jobOfferPositionDAO->add($op); //add job OfferxPosition to JobOfferPosition DAO (N:M table)
                 }
 
-                    $this->showJobOfferManagementView("");
+                   $message= "Job Offer successfully added";
+                    $this->showJobOfferManagementView("$message");
 
             }
             catch (\PDOException $ex)
@@ -380,11 +387,10 @@ class JobController
     }
 
 
-    /**
+/*
      * Makes one jobOffer object with all their positions
      * @param $offer
      * @return mixed|null
-     */
     public function unifyOffer($offer)
     {
         $positionArray=array();
@@ -409,88 +415,84 @@ class JobController
         }
 
         return $finalOffer;
-
     }
 
+*/
 
-    /**
-     * Makes a jobOffer object with all their positions
-     * @param $offer
-     * @return mixed|null
-     */
-    public function unifyAllOffer($offer)
+
+   public function editJobOffer($jobOfferId, $careerId=null)
+   {
+       require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+       $jobOffer= $this->jobOfferDAO->getJobOffer($jobOfferId);
+       $allCompanies = $this->companyDAO->getAll();
+       $allCareers= $this->careersOrigin->start($this->careersOrigin);
+       $this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, null, null);
+   }
+
+
+    public function editJobOfferFirstPart($company, $career, $publishDate, $endDate, $jobOfferId)
     {
-        $finalArray=array();
-        $subArray= array();
-        $positionArray=array();
-        $finalOffer=null;
-        if(is_array($offer))
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        //var_dump($company);
+        //var_dump($career);
+        //var_dump($publishDate);
+        //var_dump($endDate);
+        //var_dump($jobOfferId);
+
+        //HACER DESDE ACA!!!
+        $endDateValidation = $this->validateEndDate($endDate);
+        if ($endDateValidation == null) {
+            $message = "Error, enter a valid Job Offer End Date";
+            $flag = 1;
+            $this->showCreateJobOfferView($message);
+        }
+        else
         {
-            $cant=count($offer);
+            $values= array("company"=>$company, "career"=>$career, "publishDate"=>$publishDate, "endDate"=>$endDate );
+            $this->showCreateJobOfferView("", $career, $values);
+        }
 
-            $i=0;
-            for ($x=0; $x<$cant; $x++)
-           {
-               $subArray=array();
-                $positionArray= array();
-                $pos=null;
-                foreach ($offer as $value)
-                {
-                    $id = $offer[$i]->getJobOfferId();
 
-                    if ($value->getJobOfferId() == $id)
-                    {
-                        $pos=$value->getJobOfferId();
-                        array_push($subArray, $value);//job offers with same id
-                    }
+
+
+
+
+        //$jobOffer= $this->jobOfferDAO->getJobOffer($jobOfferId);
+        //$allCompanies = $this->companyDAO->getAll();
+        //$allCareers= $this->careersOrigin->start($this->careersOrigin);
+        //$message=null;
+
+
+        /*
+        if($careerId!=null)
+        {
+            $allPositions= $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
+            try {
+
+                $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
+
+                try {
+                    $allPositions= $this->jobPositionDAO->getAll();
+                    $this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, $allPositions, $message);
                 }
-
-               $flag=0;
-               foreach ($finalArray as $value)
-               {
-                   if($value->getJobOfferId()==$pos)
-                   {
-                       $flag=1;
-                   }
-               }
-
-               if($flag==0)
-               {
-                   foreach ($subArray as $values) //unify job position
-                   {
-                       //var_dump($values->getJobPosition()); //es un objeto
-                       array_push($positionArray, $values->getJobPosition()); //array con 3 objetos
-                   }
-
-                   //var_dump($positionArray); //array con objetos
-
-                   $finalOffer= $subArray[0];
-                   $finalOffer->setJobPosition($positionArray);
-
-                   array_push($finalArray, $finalOffer);
-                   $positionArray=null;
-                   $finalOffer=null;
-                   $subArray=null;
-                   $i++;
-               }
-               else
-               {
-                   $i++;
-               }
-
+                catch (\PDOException $ex)
+                {
+                    echo $ex->getMessage();
+                }
             }
-
+            catch (\PDOException $ex)
+            {
+                echo $ex->getMessage();
+            }
         }
-        else if(is_object($offer))
-        {
-           array_push($finalArray, $offer);
-        }
+        */
 
-        return $finalArray;
+
+            //$this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, null, $message);
 
     }
-
-
 
 
 
