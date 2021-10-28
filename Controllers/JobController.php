@@ -42,8 +42,28 @@ class JobController
         $this->jobOfferDAO= new JobOfferDAO();
         $this->jobOfferPositionDAO= new JobOfferPositionDAO();
         $this->jobPositionDAO = new JobPositionDAO();
-
     }
+
+
+    /**
+     *
+     * FALTA HACER EL SHOW EDIT Y REMOVE DE JOB OFFERS!!!!!
+     *
+     */
+
+
+    /**
+     * Call the extend view of a JobOffer
+     * @param $id
+     */
+    public function showJobOfferViewMore($id)
+    {
+        require_once(VIEWS_PATH . "checkLoggedUser.php");
+
+        $jobOffer = $this->jobOfferDAO->getJobOffer($id);
+        require_once(VIEWS_PATH."jobOfferViewMore.php");
+    }
+
 
 
     /**
