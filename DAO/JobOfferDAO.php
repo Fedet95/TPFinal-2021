@@ -119,9 +119,40 @@ class JobOfferDAO implements IJobOfferDAO
 
     }
 
+
     function update(JobOffer $jobOffer)
     {
 
+        try
+        {
+
+
+            $query= "UPDATE ".$this->tableName." SET activeJobOffer = :activeJobOffer , remote = :remote, publishDate = :publishDate, endDate = :endDate, title = :title, dedication = :dedication, descriptionOffer = :descriptionOffer, salary = :salary, creationAdminId = :creationAdminId, companyId = :companyId, careerIdOffer = :careerIdOffer
+            WHERE (jobOfferId = :jobOfferId)";
+
+                $parameters["activeJobOffer"] =  $jobOffer->getActive();
+                $parameters["remote"] = $jobOffer->getRemote();
+                $parameters["publishDate"] =  $jobOffer->getPublishDate();
+                $parameters["endDate"] = $jobOffer->getEndDate();
+                $parameters["title"] =  $jobOffer->getTitle();
+                $parameters["dedication"] = $jobOffer->getDedication();
+                $parameters["descriptionOffer"] = $jobOffer->getDescription();
+               $parameters["salary"] = $jobOffer->getSalary();
+               $parameters["creationAdminId"] = $jobOffer->getCreationAdmin()->getAdministratorId();
+               $parameters["companyId"] = $jobOffer->getCompany()->getCompanyId();
+               $parameters["careerIdOffer"] = $jobOffer->getCareer()->getCareerId();
+            $parameters["jobOfferId"] = $jobOffer->getJobOfferId();
+
+
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
     }
 
 
@@ -156,7 +187,6 @@ class JobOfferDAO implements IJobOfferDAO
             throw $ex;
         }
     }
-
 
 
 

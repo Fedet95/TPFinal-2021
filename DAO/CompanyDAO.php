@@ -209,38 +209,6 @@ class CompanyDAO implements lCompanyDAO
         }
     }
 
-    /*
-
-     * Validate if a company id exist
-     * @param $id
-
-    public function searchIdValidation($id)
-    {
-        try
-        {
-            $query= "SELECT * FROM ".$this->tableName." WHERE (companyId= :companyId)";
-
-            $parameters['companyId']=$id;
-
-            $this->connection = Connection::GetInstance();
-
-            $result = $this->connection->Execute($query, $parameters);
-
-            $flag=0;
-            if(!empty($result))
-            {
-                $flag=1;
-            }
-
-            return $flag;
-        }
-        catch (\PDOException $ex)
-        {
-            throw $ex;
-        }
-    }
-    */
-
 
 
     /**

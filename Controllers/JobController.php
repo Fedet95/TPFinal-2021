@@ -129,7 +129,7 @@ class JobController
      * Call the "edi job offer" view
      * @param string $message
      */
-    public function showEditJobOfferView($allCompanies, $allCareers, $jobOfferEdit, $allPositions=null, $message = "")
+    public function showEditJobOfferView($allCompanies, $allCareers, $jobOfferEdit, $allPositions = null, $message = "", $careerId = null, $values = null)
     {
         $edit=1;
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
@@ -235,12 +235,6 @@ class JobController
     //--------------------------------------------------------------------
 
 
-
-
-
-
-
-
     /**
      * Start the new job offer creation, sending to the second part of the form
      */
@@ -343,11 +337,6 @@ class JobController
                 }
             }
         }
-
-
-
-        //$this->showCreateJobOfferView("", $career);
-
     }
 
     /**
@@ -420,15 +409,43 @@ class JobController
 */
 
 
-   public function editJobOffer($jobOfferId, $careerId=null)
-   {
-       require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+    public function editJobOffer($jobOfferId, $careerId = null, $message = "", $values = null)
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-       $jobOffer= $this->jobOfferDAO->getJobOffer($jobOfferId);
-       $allCompanies = $this->companyDAO->getAll();
-       $allCareers= $this->careersOrigin->start($this->careersOrigin);
-       $this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, null, null);
-   }
+
+        try {
+            $jobOffer = $this->jobOfferDAO->getJobOffer($jobOfferId);
+        } catch (\PDOException $ex) {
+            echo $ex->getMessage();
+        }
+
+        try {
+            $allCompanies = $this->companyDAO->getAll();
+        } catch (\PDOException $ex) {
+            echo $ex->getMessage();
+        }
+
+        try {
+            $allCareers = $this->careersOrigin->start($this->careersOrigin);
+        } catch (\PDOException $ex) {
+            echo $ex->getMessage();
+        }
+
+
+        if ($values != null) {
+            try {
+                $allPositions = $this->jobPositionDAO->getAll();
+            } catch (\PDOException $ex) {
+                echo $ex->getMessage();
+            }
+
+            $this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, $allPositions, $message, $careerId, $values);
+        } else {
+            $this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, null, $message);
+        }
+
+    }
 
 
     public function editJobOfferFirstPart($company, $career, $publishDate, $endDate, $jobOfferId)
@@ -441,60 +458,149 @@ class JobController
         //var_dump($endDate);
         //var_dump($jobOfferId);
 
-        //HACER DESDE ACA!!!
         $endDateValidation = $this->validateEndDate($endDate);
         if ($endDateValidation == null) {
             $message = "Error, enter a valid Job Offer End Date";
             $flag = 1;
-            $this->showCreateJobOfferView($message);
+            //$this->showCreateJobOfferView($message);
+            $this->editJobOffer($jobOfferId, null, $message);
+        } else {
+            $values = array("company" => $company, "career" => $career, "publishDate" => $publishDate, "endDate" => $endDate, "jobOfferId" => $jobOfferId);
+            //$this->showCreateJobOfferView("", $career, $values);
+
+            $this->editJobOffer($jobOfferId, $career, null, $values);
         }
-        else
-        {
-            $values= array("company"=>$company, "career"=>$career, "publishDate"=>$publishDate, "endDate"=>$endDate );
-            $this->showCreateJobOfferView("", $career, $values);
-        }
-
-
-
-
-
-
-        //$jobOffer= $this->jobOfferDAO->getJobOffer($jobOfferId);
-        //$allCompanies = $this->companyDAO->getAll();
-        //$allCareers= $this->careersOrigin->start($this->careersOrigin);
-        //$message=null;
-
-
-        /*
-        if($careerId!=null)
-        {
-            $allPositions= $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
-            try {
-
-                $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
-
-                try {
-                    $allPositions= $this->jobPositionDAO->getAll();
-                    $this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, $allPositions, $message);
-                }
-                catch (\PDOException $ex)
-                {
-                    echo $ex->getMessage();
-                }
-            }
-            catch (\PDOException $ex)
-            {
-                echo $ex->getMessage();
-            }
-        }
-        */
-
-
-            //$this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, null, $message);
-
     }
 
 
+    /**
+     * End the new job offer, adding to data base
+     */
+    public function editJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $active, $values)
+    {
+        $postvalue = unserialize(base64_decode($values));
+
+        if ($values == '') {
+            $message = "Error, complete all fields";
+            $this->showEditJobOfferView($message, $postvalue['career'], $postvalue);
+        }
+
+
+        try {
+            $allOffers= $this->jobOfferDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+        try {
+            $searchedOffer= $this->jobOfferDAO->getJobOffer($postvalue['jobOfferId']);
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+
+        $flag=0;
+       if(is_array($allOffers))
+       {
+           foreach ($allOffers as $value)
+           {
+               if($value->getTitle()==$title)
+               {
+                   $flag=1;
+                   if($value->getCompany()->getCompanyId()==$searchedOffer->getCompany()->getCompanyId())
+                   {
+                       $flag=2; //mal
+                       if($value->getJobOfferId()==$searchedOffer->getJobOfferId())
+                       {
+                           $flag=3; //bien
+                       }
+                   }
+               }
+           }
+       }else
+       {
+           if($allOffers->getTitle()==$title)
+           {
+               if($allOffers->getCompany()->getCompanyId()==$searchedOffer->getCompany()->getCompanyId())
+               {
+                   $flag=1;
+               }
+           }
+       }
+
+        if($flag==1 || $flag==2)
+        {
+            $message = "Error, the entered Job Offer Title is already in use by the offering company";
+            $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $postvalue);
+        }
+        else {
+            $newJobOffer = new JobOffer();
+            $newJobOffer->setDescription($description);
+            $newJobOffer->setActive($active);
+            $newJobOffer->setDedication($dedication);
+            $newJobOffer->setEndDate($postvalue['endDate']);
+            $newJobOffer->setPublishDate($postvalue['publishDate']);
+            $newJobOffer->setRemote($remote);
+            $newJobOffer->setSalary($salary);
+            $newJobOffer->setTitle($title);
+            $newJobOffer->setJobOfferId($postvalue['jobOfferId']);
+
+            $career = new Career();
+            $career->setCareerId($postvalue['career']);
+            $newJobOffer->setCareer($career);
+
+            $company = new Company();
+            $company->setCompanyId($postvalue['company']);
+            $newJobOffer->setCompany($company);
+
+            $admin = new Administrator();
+            $admin->setAdministratorId($this->loggedUser->getAdministratorId());
+            $newJobOffer->setCreationAdmin($admin);
+
+            $positionsArray = array();
+            foreach ($position as $value) {
+                $newJobPosition = new JobPosition();
+                $newJobPosition->setJobPositionId($value);
+                array_push($positionsArray, $newJobPosition);
+            }
+
+
+            //buscar todos los jobOfferPosition que tienen como id esta jobOffer y borrarlos, y agregar los nuevos
+            $this->jobOfferPositionDAO->remove($postvalue['jobOfferId']);
+            $newJobOffer->setJobPosition($positionsArray);
+
+
+            try {
+
+                $this->jobOfferDAO->update($newJobOffer); //update job offer to JobOffer DAO
+
+                foreach ($newJobOffer->getJobPosition() as $value) {
+                    $op = new JobOfferPosition();
+                    $op->setJobPositionId($value->getJobPositionId());
+                    $op->setJoOfferId($postvalue['jobOfferId']);
+                    $this->jobOfferPositionDAO->add($op); //add job OfferxPosition to JobOfferPosition DAO (N:M table) //luego de eliminar los anteriores
+                }
+
+                $message = "Job Offer successfully updated";
+                $this->showJobOfferManagementView("$message");
+
+            } catch (\PDOException $ex) {
+                $message= "Error, try again";
+                if ($ex->getCode() == 23000) //unique constraint
+                {
+                    $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $values);
+
+                } else {
+                    $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $values);
+                }
+            }
+
+        }
+    }
 
 
 

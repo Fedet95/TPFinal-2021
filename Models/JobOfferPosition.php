@@ -5,9 +5,22 @@ namespace Models;
 class JobOfferPosition
 {
 
+    private $jobOfferPositionId;
     private $joOfferId;
     private $jobPositionId;
 
+
+
+    public function getJobOfferPositionId()
+    {
+        return $this->jobOfferPositionId;
+    }
+
+
+    public function setJobOfferPositionId($jobOfferPositionId)
+    {
+        $this->jobOfferPositionId = $jobOfferPositionId;
+    }
 
     public function getJoOfferId()
     {

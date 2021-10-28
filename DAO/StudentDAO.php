@@ -272,49 +272,6 @@ class StudentDAO implements lStudentDAO
 
 
 
-    /*
-
-     * Update json student values with information from API file (at student login)
-     * @param $student
-    public function updateStudentFile($student =null, $studentsArray = null)
-    {
-        try
-        {
-            $searchedStudent=$this->getStudent($student->getStudentId());
-
-            if($searchedStudent!=null)
-            {
-                if($searchedStudent!=$student)
-                {
-                    try{
-                        $this->update($student);
-                    }
-                    catch(\PDOException $ex)
-                    {
-                        var_dump($ex);
-                    }
-                }
-            }
-            else
-            {
-                try {
-                    $this->add($student);
-                }
-                catch (\PDOException $ex)
-                {
-                    var_dump($ex);
-                }
-            }
-        }
-        catch (\PDOException $ex)
-        {
-            var_dump($ex);
-        }
-
-    }
-     */
-
-
 
     /**
      * Search an Student by id, returning the student or null
@@ -367,7 +324,7 @@ class StudentDAO implements lStudentDAO
 
         }, $array);
 
-        return count($resultado) > 1 ? $resultado : $resultado['0']; //devuelve un array si es mas de 1 dato, O un objeto si es 1 solo dato y sino NULL
+        return count($resultado) > 1 ? $resultado : $resultado['0'];
 
     }
 

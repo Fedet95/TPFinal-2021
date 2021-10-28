@@ -76,7 +76,7 @@ else {
     <main class="py-3">
         <section id="listado">
             <div class="container">
-                <h2 class="mb-4 text-center text-muted">Create Job Offer PARTE 2</h2>
+                <h2 class="mb-4 text-center text-muted">Create Job Offer</h2>
                 <div class="row justify-content-center">
                     <form action="<?php echo FRONT_ROOT . "Job/addJobOfferSecondPart" ?>" method="POST" class="bg-light-alpha p-5 border" >
                         <div class="col-sm-10 offset-sm-1 text-center">
