@@ -8,7 +8,9 @@ use DAO\OriginCareerDAO;
 use DAO\CompanyDAO;
 use DAO\CountryDAO;
 use DAO\OriginJobPositionDAO;
+use DAO\StudentDAO;
 use Models\Administrator;
+use Models\Appointment;
 use Models\Career;
 use Models\Company;
 use Models\JobOffer;
@@ -116,6 +118,8 @@ class JobController
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
+        $edit=null;
+        $remove=null;
         $allCompanies = $this->companyDAO->getAll();
         //$allCountrys = $this->countryDAO->getAll();
         $allOffers= $this->jobOfferDAO->getAll();
@@ -339,6 +343,7 @@ class JobController
         }
     }
 
+
     /**
      * Validate if the entered job offer end date is valid
      */
@@ -448,33 +453,28 @@ class JobController
     }
 
 
+    /**
+     * Start the update of a job offer, adding to data base
+     */
     public function editJobOfferFirstPart($company, $career, $publishDate, $endDate, $jobOfferId)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        //var_dump($company);
-        //var_dump($career);
-        //var_dump($publishDate);
-        //var_dump($endDate);
-        //var_dump($jobOfferId);
 
         $endDateValidation = $this->validateEndDate($endDate);
         if ($endDateValidation == null) {
             $message = "Error, enter a valid Job Offer End Date";
-            $flag = 1;
-            //$this->showCreateJobOfferView($message);
+
             $this->editJobOffer($jobOfferId, null, $message);
         } else {
             $values = array("company" => $company, "career" => $career, "publishDate" => $publishDate, "endDate" => $endDate, "jobOfferId" => $jobOfferId);
-            //$this->showCreateJobOfferView("", $career, $values);
-
             $this->editJobOffer($jobOfferId, $career, null, $values);
         }
     }
 
 
     /**
-     * End the new job offer, adding to data base
+     * End the update of a job offer, adding to data base
      */
     public function editJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $active, $values)
     {
@@ -603,6 +603,132 @@ class JobController
     }
 
 
+
+
+
+    public function showRemoveJobOfferView($jobOffer, $cant=null, $company=null, $text=null, $finalMessage=null)
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        $edit=null;
+        $remove=1;
+        require_once(VIEWS_PATH . "jobOffersManagement.php");
+    }
+
+
+
+    public function removeJobOffer($id, $accept=null, $sub = null, $text=null)
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        if($accept==null)
+        {
+            try
+            {
+                $searchedOffer= $this->jobOfferDAO->getJobOffer($id);
+                if($searchedOffer!=null)
+                {
+                    $app= new Appointment();
+                    $appointments= $searchedOffer->getAppointment();
+                    array_push($appointments, $app);
+                    if(!empty($appointments)) //ESTO TIENE QUE SER ! (NEGATIVO) ESTA ASI PARA VER LA PANTALLA <<-------------------------------
+                    {
+                        $cant=count($appointments);
+
+                        try {
+                            $company= $this->companyDAO->getCompany($searchedOffer->getCompany()->getCompanyId());
+                        }
+                        catch (\PDOException $ex)
+                        {
+                            echo $ex->getMessage();
+                        }
+
+                        $this->showRemoveJobOfferView($searchedOffer, $cant, $company);
+                    }
+                    else
+                    {
+                        $finalMessage="The job offer had no applications and was successfully eliminated";
+                        $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
+                    }
+                }
+            }
+            catch (\PDOException $ex)
+            {
+                echo $ex->getMessage();
+            }
+        }
+        else if($accept!=null && $text==null)
+        {
+            if($accept=="true")
+            {
+                $searchedOffer= $this->jobOfferDAO->getJobOffer($id);
+                $this->showRemoveJobOfferView($searchedOffer, null, null, null, "Empty");
+            }
+            else
+            {
+                $this->showJobOfferManagementView("Remove operation aborted");
+            }
+
+        }
+        else if($text!=null)
+        {
+
+            $searchedOffer= $this->jobOfferDAO->getJobOffer($id);
+            $appointments= $searchedOffer->getAppointment();
+            $count=$this->jobOfferDAO->remove($id); //VER SI SE ELIMINA EN CASCADA
+
+            if($count>0)
+            {
+
+                $studentsId= array();
+                foreach ($appointments as $value)
+                {
+                    array_push($studentsId,$value->getStudent()->getStudentId());
+                }
+
+                $allStudents= new StudentDAO();
+                $allStudents->getAll();
+                $studentsEmails= array();
+                foreach ($allStudents as $student)
+                {
+                    foreach ($studentsId as $id)
+                    {
+                        if($student->getStudentId()==$id)
+                        {
+                            array_push($studentsEmails, $student->getEmail());
+                            $this->sendEmail($student->getEmail(), $sub, $text);
+                        }
+                    }
+                }
+                $finalMessage="Job offer was successfully removed and applicants were notified";
+                $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
+
+                //$this->sendEmail("juanpayetta@gmail.com", $sub, $text);
+                //$this->sendEmail("pablopayetta@gmail.com", $sub, $text);
+
+            }
+            else
+            {
+                $finalMessage="Job offer cannot be removed please try again";
+                $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
+            }
+
+        }
+
+    }
+
+
+    public function sendEmail ($email, $sub, $text)
+    {
+        $to = $email;
+        $subject = $sub;
+        $message = $text;
+        $headers = 'From: tpfinalutn2021@gmail.com' . "\r\n" .
+            'MIME-Version: 1.0' . "\r\n" .
+            'Content-type: text/html; charset=utf-8';
+        if (mail($to, $subject, $message, $headers))
+            echo "Email sent";
+        else
+            echo "Email sending failed";
+    }
 
 
 

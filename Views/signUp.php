@@ -53,8 +53,8 @@ include_once('header.php');
 
                     <div class="form-group col-3">
                         <label class="text-muted text-strong text">Last Name</label>
-                        <input type="text" name="cuit" id="contactNo" readonly class="form-control text-center"
-                               placeholder="Enter cuit" value="<?php echo $student->getLastName() ?>">
+                        <input type="text" name="lastname" id="contactNo" readonly class="form-control text-center"
+                                value="<?php echo $student->getLastName() ?>">
                     </div>
 
 

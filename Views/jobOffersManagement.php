@@ -8,7 +8,7 @@ include_once('header.php');
 include_once('nav.php');
 ?>
 
-<?php if (!isset($edit)) { ?>
+
     <link rel="stylesheet" href="../Views/css/linearicons.css">
     <link rel="stylesheet" href="../Views/css/font-awesome.min.css">
     <link rel="stylesheet" href="../Views/css/bootstrap.css">
@@ -18,7 +18,7 @@ include_once('nav.php');
     <link rel="stylesheet" href="../Views/css/owl.carousel.css">
     <link rel="stylesheet" href="../Views/css/main.css">
 
-
+<?php if ($edit==null && $remove==null) { ?>
     <section class="download-area section-gap" id="app">
         <div class="container">
             <div class="row">
@@ -137,10 +137,17 @@ include_once('nav.php');
                         <li><a href="#">Intern</a></li>
                         <li><a href="#">part Time</a></li>
                     </ul>
-                    <strong class="offset-10"><?php if (isset($message)) {
+                    <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {
                             echo $message;
-                        } ?></strong>
-                    <?php foreach ($allOffers as $value) {
+                        } ?></h6>
+                    <?php
+                    if(is_object($allOffers))
+                    { $offer= $allOffers;
+                        $allOffers= array();
+                        array_push($allOffers, $offer);
+                    }
+
+                    foreach ($allOffers as $value) {
 
                         foreach ($allCompanies as $company) {
                             if ($value->getCompany()->getCompanyId() == $company->getCompanyId()) {
@@ -217,7 +224,7 @@ include_once('nav.php');
                                                 <div class="titles">
                                                     <a href="single.html"><h4><?php echo $value->getTitle() ?></h4></a>
                                                     <!--TITLE-->
-                                                    <h6><?php echo $company->getName() ?></h6> <!--COMPANY NAME-->
+                                                    <h5><?php echo $company->getName() ?></h5> <!--COMPANY NAME-->
                                                 </div>
                                             </div>
                                             <br>
@@ -225,7 +232,7 @@ include_once('nav.php');
                                                 <p class=""> <!--CAREER-->
                                                     <?php echo $value->getCareer()->getDescription() ?>
                                                 </p>
-                                                <h5>Job Nature: <?php echo $value->getDedication(); ?></h5>
+                                                <I><h5>Job Nature: <?php echo $value->getDedication(); ?></h5></I>
                                                 <!--DEDICATION-->
                                                 <p class="address"><span class="lnr lnr-map"></span>
                                                     Country: <?php echo $company->getCountry()->getName() ?> </p>
@@ -266,7 +273,7 @@ include_once('nav.php');
 
                                                 <?php if ($loggedUser instanceof Administrator) { ?>
                                                     <td>
-                                                        <form action="<?php echo FRONT_ROOT . " PONER EL ROOT CORRESPONDIENTE  " ?>"
+                                                        <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
                                                               method="POST">
                                                             <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
                                                             <button type="submit" name="id" class="btn ml-auto d-block"
@@ -293,6 +300,145 @@ include_once('nav.php');
                                     </div>
                                     <?php
                                 }
+                                else
+                                    {
+                                        if($value->getActive() == "false" && $loggedUser instanceof  Administrator)
+                                            {
+                                                ?>
+
+                                                <div class="single-post d-flex flex-row">
+                                                    <div class="thumb ">
+                                                        <img><?php echo '<img src="../uploads/' . $company->getLogo()->getFile() . '" height="150" width="180"/>'; ?>
+                                                        <!--  <img src="../Views/img/post.png" alt=""> --LOGO-->
+                                                        <div class="">
+                                                            <ul class="tags offset-1 ">
+                                                                <?php if ($value->getCareer()->getCareerID() == 1 || $value->getCareer()->getCareerID() == 2) { ?>
+                                                                    <li>
+                                                                        <?php if ($value->getCareer()->getCareerID() == 3) { ?>
+                                                                            <a href="#">Naval</a>
+                                                                        <?php } else { ?>   <a href="#">Fishing</a>  <?php } ?>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Engineering</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Harbor</a>
+                                                                    </li>
+                                                                <?php } else if ($value->getCareer()->getCareerID() == 3 || $value->getCareer()->getCareerID() == 4) { ?>
+                                                                    <li>
+                                                                        <?php if ($value->getCareer()->getCareerID() == 3) { ?>
+                                                                            <a href="#">Programming</a>
+                                                                        <?php } else { ?>    <a href="#">Systems</a>  <?php } ?>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Development</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Technology</a>
+                                                                    </li>
+                                                                <?php } else if ($value->getCareer()->getCareerID() == 5) { ?>
+                                                                    <li>
+                                                                        <a href="#">Textile</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Fabrics</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Manufacturing</a>
+                                                                    </li>
+                                                                <?php } else if ($value->getCareer()->getCareerID() == 6) { ?>
+                                                                    <li>
+                                                                        <a href="#">Administration</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Management</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Organization</a>
+                                                                    </li>
+                                                                <?php } else if ($value->getCareer()->getCareerID() == 7 || $value->getCareer()->getCareerID() == 8) { ?>
+                                                                    <li>
+                                                                        <a href="#">Ecology</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Enviroment</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Investigation</a>
+                                                                    </li>
+                                                                <?php } ?>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="details">
+                                                        <div class="offset-3 title d-flex flex justify-content-between">
+                                                            <div class="titles">
+                                                                <a href="single.html"><h4><?php echo $value->getTitle() ?></h4></a>
+                                                                <!--TITLE-->
+                                                                <h5><?php echo $company->getName() ?></h5> <!--COMPANY NAME-->
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row offset-3">
+                                                            <p class="text-strong text-muted ">Inactive</p>
+                                                            <h5 class=""> <!--CAREER-->
+                                                                <I> <?php echo $value->getCareer()->getDescription() ?></I>
+                                                            </h5>
+                                                            <h5>Job Nature: <?php echo $value->getDedication(); ?></h5>
+                                                            <!--DEDICATION-->
+                                                            <p class="address"><span class="lnr lnr-map"></span>
+                                                                Country: <?php echo $company->getCountry()->getName() ?> </p>
+                                                            <!--COUNTRY-->
+                                                            <p class="address"><span class="lnr lnr-map"></span>
+                                                                City: <?php echo $company->getCity()->getName() ?> </p>
+                                                            <!--COUNTRY-->
+                                                            <p class="address"><span class="lnr lnr-database"></span> Publish
+                                                                Date: <?php echo $value->getPublishDate() ?>  </p>
+                                                            <!--PUBLISHDATE-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row offset-3">
+                                                        <ul class="btns">
+                                                            <td>
+                                                                <form action="<?php echo FRONT_ROOT . "Job/showJobOfferViewMore" ?>"
+                                                                      method="POST">
+                                                                    <button type="submit" name="id" class="btn ml-auto d-block"
+                                                                            value="<?php echo $value->getJobOfferId() ?>"> View More
+                                                                    </button>
+                                                                </form>
+                                                                <br>
+                                                            </td>
+                                                            <?php if ($loggedUser instanceof Administrator) { ?>
+                                                                <td>
+                                                                    <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
+                                                                          method="POST">
+                                                                        <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
+                                                                        <button type="submit" name="id" class="btn ml-auto d-block"
+                                                                                value="<?php echo $value->getJobOfferId() ?>">
+                                                                            Remove
+                                                                        </button>
+                                                                    </form>
+                                                                </td>
+                                                                <br>
+                                                                <td>
+                                                                    <form action="<?php echo FRONT_ROOT . "Job/editJobOffer" ?>"
+                                                                          method="POST">
+                                                                        <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
+                                                                        <button type="submit" name="id"
+                                                                                class="btn ml-auto d-block"
+                                                                                value="<?php echo $value->getJobOfferId() ?>"> Edit
+                                                                        </button>
+                                                                    </form>
+                                                                </td>
+
+                                                            <?php } ?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                            }
+                                    }
                             }
                         }
                     } ?>
@@ -305,8 +451,14 @@ include_once('nav.php');
 
 <?php } ?>
 
+
+
     <!--EDIT JOB OFFER AREA-->
-<?php if (($loggedUser instanceof Administrator) && ($edit != null) && ($careerId == null) && ($jobOfferEdit->getJobOfferId() != null)) { ?>
+<?php
+if(($edit != null) && ($loggedUser instanceof Administrator) && ($jobOfferEdit->getJobOfferId() != null))
+{
+ if(($careerId == null))
+ { ?>
     <main class="py-3">
         <section id="listado">
             <section id="listado">
@@ -314,7 +466,7 @@ include_once('nav.php');
                     <h2 class="mb-4 text-center text-muted">Edit Job Offer</h2>
                     <div class="row justify-content-center">
                         <form action="<?php echo FRONT_ROOT . "Job/editJobOfferFirstPart" ?>" method="POST">
-                            <strong class="h2 offset-md-5"><?php if (isset($message)) {
+                            <strong class="h5 offset-md-5"><?php if (isset($message)) {
                                     echo $message;
                                 } ?></strong>
                             <div class="row  col-sm-10 offset-sm-1 text-center bg-light-alpha p-5 border">
@@ -326,18 +478,16 @@ include_once('nav.php');
                                             <?php foreach ($allCompanies as $valueC) {
                                                 if ($valueC->getCompanyId() == $jobOfferEdit->getCompany()->getCompanyId()) {
                                                     ?>
-
-                                                    <option selected
-                                                            value="<?php echo $jobOfferEdit->getCompany()->getCompanyId() ?>"><?php echo $valueC->getName() ?></option>
-
+                                                    <option selected value="<?php echo $jobOfferEdit->getCompany()->getCompanyId() ?>"><?php echo $valueC->getName() ?></option>
                                                 <?php }
                                             }
                                             foreach ($allCompanies as $value) {
                                                 if ($value->getActive() == 'true') {
+                                                    if($value->getCompanyId()!=$jobOfferEdit->getCompany()->getCompanyId()){
                                                     ?>
                                                     <option value="<?php echo $value->getCompanyId() ?>"><?php echo $value->getName() ?></option>
                                                     <?php
-                                                }
+                                                }}
                                             }
                                             ?>
                                         </select>
@@ -360,10 +510,11 @@ include_once('nav.php');
                                         }
                                         foreach ($allCareers as $value) {
                                             if ($value->getActive() == 'true') {
+                                                if($value->getCareerId()!=$jobOfferEdit->getCareer()->getCareerId()){
                                                 ?>
                                                 <option value="<?php echo $value->getCareerId() ?>"><?php echo $value->getDescription() ?></option>
                                                 <?php
-                                            }
+                                            }}
                                         }
                                         ?>
                                     </select>
@@ -396,8 +547,9 @@ include_once('nav.php');
                 </div>
             </section>
     </main>
-<?php } else {
-    if (($loggedUser instanceof Administrator) && ($careerId != null) && ($edit != null) && ($jobOfferEdit->getJobOfferId() != null)) {
+<?php } else
+{
+    if (($careerId != null)) {
         ?>
         <!--PARTE 2-->
         <main class="py-3">
@@ -425,11 +577,12 @@ include_once('nav.php');
         $actualPositions=array();
         foreach ($jobOfferEdit->getJobPosition() as $valueJ)
         {
+            if($valueJ->getCareer()->getCareerId()==$careerId){
             ?>
             <option selected value="<?php echo $valueJ->getJobPositionId() ?>"><?php echo $valueJ->getDescription() ?></option>
             <?php
             array_push($actualPositions,$valueJ->getJobPositionId());
-        }
+        }}
 
         foreach ($allPositions as $value)
         {
@@ -533,11 +686,163 @@ include_once('nav.php');
     </section>
     </main>
 
+<?php }}?>
 
+<!--REMOVE JOB OFFER AREA -->
+<?php if(isset($remove)){?>
+<?php if(($remove != null) && ($loggedUser instanceof Administrator)){
+    if(($jobOffer!= null) && ($cant!=null)){  ?>
+
+        <main class="py-3">
+            <section id="listado">
+                <h2 class="mb-4 text-muted text-center">Remove Job Offer:  <?php echo $jobOffer->getTitle() ?></h2>
+                <div class="container">
+                    <strong class="text-muted text-strong"><?php if (isset($message)) {
+                            echo $message;
+                        } ?></strong>
+                    <div class="row justify-content-center offset-sm-1 text-center bg-light-alpha p-5 border">
+
+                        <div class="form-group col-3">
+                            <label for="" class="text-muted text-strong text">Title</label>
+                            <input type="text" name="title" class="form-control text-center"
+                                   value="<?php echo $jobOffer->getTitle() ?>" readonly>
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label class="text-muted text-strong text">Company</label>
+                            <input type="text" name="company" id="contactNo" readonly class="form-control text-center"  value="<?php echo $company->getName() ?>">
+                        </div>
+
+
+                        <div class="form-group col-3">
+                            <label class="text-muted text-strong text" for="">Publish Date</label>
+                            <input type="text" name="publishdate" class="form-control text-center" value="<?php echo $jobOffer->getPublishDate() ?>"
+                                   readonly>
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label class="text-muted text-strong text">End Date</label>
+                            <input type="text" name="fileNumber" class="form-control text-center"
+                                   value="<?php echo $jobOffer->getEndDate() ?>" readonly>
+                        </div>
+
+
+                        <div class="form-group col-3">
+                            <label class="text-muted text-strong" for="">Career</label>
+                            <input type="text" name="career" class="form-control text-center"
+                                   value="<?php echo $jobOffer->getCareer()->getDescription() ?>" readonly>
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label class="text-muted text-strong text" for="">Active</label>
+                            <input type="text" name="active" class="form-control text-center"
+                                   value="<?php if($jobOffer->getActive()=='true'){ echo "Active";}else {echo "Inactive";} ?>" readonly>
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label class="text-muted text-strong text" for="">Appointments</label>
+                            <input type="text" name="appointments" class="form-control text-center"
+                                   value="<?php echo $cant ?>" readonly>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="container">
+                    <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>" method="POST">
+                        <div>
+                            <input type="hidden" name="offerId" value="<?php echo $jobOffer->getJobOfferId()?>">
+                        </div>
+                        <div class="justify-content-center align-items-center offset-sm-1 text-center bg-light-alpha border py-3">
+                            <p class="text-strong h6">The job offer you want to delete currently has applications, please confirm if you want to continue.</p>
+                            <br>
+                            <div class="form-group">
+                                <p class="text-muted text-strong text">Confirmation</p>
+                                <label for="active"  class="h5">Accept</label>
+                                <input type="radio" name="accept" value="true" class="radioSize" required id="active">
+                                <br>
+                                <label for="inactive" class="h5">Decline</label>
+                                <input type="radio" name="accept" value="false" class="radioSize" required
+                                       id="inactive">
+                            </div>
+
+                            <div class="form-group">
+                                <br>
+                                <button type="submit" name="button" class="offset-3 btn btn-dark ml-auto">CONFIRM </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </main>
+    <?php }else { if($cant==null){ if(isset($finalMessage)) { if($finalMessage=="Empty"){ ?>
+
+        <main class="py-3">
+            <section id="">
+                <h2 class="mb-4 text-muted text-center offset-0">Send a Message</h2>
+                <div class="container">
+                    <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>" method="POST">
+                        <div>
+                            <input type="hidden" name="offerId" value="<?php echo $jobOffer->getJobOfferId()?>">
+                            <input type="hidden" name="accept" value="<?php echo "true"?>">
+                        </div>
+                        <div class="justify-content-center align-items-center offset-sm-1 text-center bg-light-alpha border py-5">
+                            <p class="text-strong">Send a message to the applicants notifying them of the withdrawal.</p>
+                            <br>
+
+                            <div class="form-group">
+                                <label class="text-muted text-strong text" for="">Subject</label>
+                                <input type="text" name="sub" class="form-control text-center offset-2" style="width: 675px; height: 30px" placeholder="Enter email subject here..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea name="text" class="form-control offset-2" placeholder="Message..."  style="width: 675px; height: 30px" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <br>
+                                <button type="submit" name="button" class="offset-2 btn btn-dark ml-auto">SEND</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </main>
+        <?php
+    }else  { ?>
+
+        <main class="py-3">
+            <section id="">
+                <h2 class="mb-4 text-muted text-center offset-0">Remove Job Offer</h2>
+                <div class="container">
+                    <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="POST">
+                        <div class="justify-content-center align-items-center offset-sm-1 text-center bg-light-alpha border py-5">
+                             <p class="offset-2 text-muted form-control " style="width: 675px; height: 30px"><?php echo $finalMessage?></p>
+                            <div class="form-group">
+                                <br>
+                                <button type="submit" name="button" class="offset-2 btn btn-dark ml-auto">BACK</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </main>
+
+        <br><br><br><br><br><br><br>
 
 
 <?php
+    }
+
+    }
+    }}
 }
+}
+
+?>
+
+<?php
 include_once('footer.php');
 ?>
 

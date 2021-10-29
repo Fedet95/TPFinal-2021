@@ -116,6 +116,20 @@ class JobOfferDAO implements IJobOfferDAO
 
     function remove($id)
     {
+        try
+        {
+            $query = "DELETE FROM ".$this->tableName." WHERE (jobOfferId = :jobOfferId)";
+
+            $parameters["jobOfferId"] =  $id;
+
+            $this->connection = Connection::GetInstance();
+
+            return $count=$this->connection->ExecuteNonQuery($query, $parameters);
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
 
     }
 

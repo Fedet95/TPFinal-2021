@@ -17,6 +17,8 @@ class JobOffer
  private $company;
  private $jobPosition = array();
  private $career;
+ private $appointment = array();
+
 
 
 
@@ -174,6 +176,19 @@ class JobOffer
     {
         $this->career = $career;
     }
+
+
+    public function getAppointment()
+    {
+        return $this->appointment;
+    }
+
+
+    public function setAppointment(Appointment $appointment)
+    {
+        $this->appointment = $appointment;
+    }
+
 
 
 
