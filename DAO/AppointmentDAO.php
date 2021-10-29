@@ -1,7 +1,10 @@
 <?php
 
 namespace DAO;
+
 use Models\Appointment;
+use Models\JobOffer;
+use Models\Student;
 
 class AppointmentDAO implements IAppointmentDAO
 {
@@ -55,308 +58,91 @@ class AppointmentDAO implements IAppointmentDAO
         }
     }
 
-}
-
-
-/*
-
- * Search an student by id, and remove
- * @param $studentId
-
-function remove($studentId)
-{
-    try
+    function remove($studentId)
     {
-        $query = "DELETE FROM ".$this->tableName." WHERE (studentId = :studentId)";
+        try {
+            $query = "DELETE FROM " . $this->tableName . " WHERE (studentId = :studentId)";
 
-        $parameters["studentId"] =  $studentId;
+            $parameters["studentId"] = $studentId;
 
-        $this->connection = Connection::GetInstance();
+            $this->connection = Connection::GetInstance();
 
-        return $count=$this->connection->ExecuteNonQuery($query, $parameters);
-    }
-    catch(\PDOException $ex)
-    {
-        throw $ex;
-    }
-}
-
-
-
- * Returns all values from Data base
- * @return array
- *
-public function getStudent($studentId)
-{
-    try
-    {
-        $query= "SELECT * FROM ".$this->tableName." s INNER JOIN ".$this->tableName2." c ON s.career= c.careerId WHERE (s.studentId= :studentId)";
-
-        $parameters['studentId']=$studentId;
-
-        $this->connection = Connection::GetInstance();
-
-        $result = $this->connection->Execute($query, $parameters);
-
-        $mapedArray=null;
-        if(!empty($result))
-        {
-            $mapedArray= $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+            return $count = $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch (\PDOException $ex) {
+            throw $ex;
         }
-
-        return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
     }
-    catch (\PDOException $ex)
+
+    function getAppointment($appointmentId)
     {
-        throw $ex;
-    }
-}
+        try {
+            $query = "SELECT * FROM " . $this->tableName . " c INNER JOIN " . $this->tableName2 . " co ON c.jobOfferAppointmentId= co.jobOfferId
+            INNER JOIN " . $this->tableName3 . " ci ON c.studentAppointmentId= ci.studentId  WHERE (appointmentId= :appointmentId)";
+
+            ///EL WHERE MUY IMPORTANTE PARA SOLO LEVANTAR UN REGISTRO DE LA TABLA
 
 
+            $parameters['appointmentId'] = $appointmentId;
 
+            $this->connection = Connection::GetInstance();
 
+            $result = $this->connection->Execute($query, $parameters);
 
-     * Get student by id from Json file
-     * @param $companyId
-
-    function getStudent($studentId)
-    {
-        $this->RetrieveData();
-
-        $student = null;
-        foreach($this->studentList as $key => $value)
-        {
-            if($value->getStudentId()==$studentId)
-            {
-                $student = $this->studentList[$key];
+            $mapedArray = null;
+            if (!empty($result)) {
+                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
             }
+
+            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        } catch (\PDOException $ex) {
+            throw $ex;
         }
-        return $student;
     }
 
-
-function update(Student $student)
-{
-
-    try
+    public function mapear($array)
     {
-        if($student->getPassword()==null)
-        {
-            $query= "UPDATE ".$this->tableName." SET studentId = :studentId, career = :career, firstName = :firstName, lastName = :lastName, dni = :dni, phoneNumber = :phoneNumber, email = :email
-            WHERE (studentId = :studentId)";
+        $array = is_array($array) ? $array : [];
 
-            $parameters["studentId"] =  $student->getStudentId();
-            $parameters["career"] = $student->getCareer()->getCareerId();
-            $parameters["firstName"] =  $student->getFirstName();
-            $parameters["lastName"] = $student->getLastName();
-            $parameters["dni"] =  $student->getDni();
-            $parameters["phoneNumber"] = $student->getPhoneNumber();
-            $parameters["email"] = $student->getEmail();
-        }
-        else
-        {
-            $query= "UPDATE ".$this->tableName." SET  password = :password WHERE (studentId = :studentId)";
-            $parameters["studentId"] =  $student->getStudentId();
-            $parameters["password"] = $student->getPassword();
+        $resultado = array_map(function ($value) {
 
-        }
+            $appointment = new Appointment();
 
+            $appointment->setAppointmentId($value["appointmentId"]);
+            $appointment->setDate($value["dateAppointment"]);
 
-        $this->connection = Connection::GetInstance();
+            $jobOfferId = $value['jobOfferId'];
+            $title = $value['title'];
+            $company = $value['company'];
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
-    }
-    catch(\PDOException $ex)
-    {
-        throw $ex;
-    }
-}
+            $jobOffer = new JobOffer();
+            $jobOffer->setTitle($title);
+            $jobOffer->setJobOfferId($jobOfferId);
+            $jobOffer->setCompany($company);
 
+            $appointment->setJobOffer($jobOffer);
 
+            $studentId = $value["studentId"];
+            $firstName = $value["firstName"];
+            $lastName = $value["lastName"];
+            $dni = $value["dni"];
+            $phoneNumber = $value["phoneNumber"];
 
- * Update json student values with information from origin file (at student login)
- * @param $student
- *
-public function updateStudentFile($student =null, $studentsArray = null)
-{
+            $student = new Student();
+            $student->setStudentId($studentId);
+            $student->setFirstName($firstName);
+            $student->setLastName($lastName);
+            $student->setDni($dni);
+            $student->setPhoneNumber($phoneNumber);
 
-    if($student!=null)
-    {
-        try
-        {
-            $searchedStudent=$this->getStudent($student->getStudentId());
+            $appointment->setStudent($student);
 
-            if($searchedStudent!=null)
-            {
-                if($searchedStudent!=$student)
-                {
-                    try{
-                        $this->update($student);
-                    }
-                    catch(\PDOException $ex)
-                    {
-                        echo $ex->getMessage();
-                    }
-                }
-            }
-            else
-            {
-                try {
-                    $this->add($student);
-                }
-                catch (\PDOException $ex)
-                {
-                    echo $ex->getMessage();
-                }
-            }
-        }
-        catch (\PDOException $ex)
-        {
-            echo $ex->getMessage();
-        }
-    }
-    else if($studentsArray!=null)
-    {
-        foreach ($studentsArray as $value)
-        {
-            try
-            {
-                $searchedStudent=$this->getStudent($value->getStudentId());
+            return $appointment;
 
-                if($searchedStudent!=null)
-                {
-                    if($searchedStudent!=$value)
-                    {
-                        try{
-                            $this->update($value);
-                        }
-                        catch(\PDOException $ex)
-                        {
-                            echo $ex->getMessage();
-                        }
-                    }
-                }
-                else
-                {
-                    try {
-                        $this->add($value);
-                    }
-                    catch (\PDOException $ex)
-                    {
-                        echo $ex->getMessage();
-                    }
-                }
-            }
-            catch (\PDOException $ex)
-            {
-                echo $ex->getMessage();
-            }
-        }
-    }
-}
+        }, $array);
 
+        return count($resultado) > 1 ? $resultado : $resultado['0']; //devuelve un array si es mas de 1 dato, O un objeto si es 1 solo dato y sino NULL
 
-
-
-
- * Update json student values with information from API file (at student login)
- * @param $student
-public function updateStudentFile($student =null, $studentsArray = null)
-{
-    try
-    {
-        $searchedStudent=$this->getStudent($student->getStudentId());
-
-        if($searchedStudent!=null)
-        {
-            if($searchedStudent!=$student)
-            {
-                try{
-                    $this->update($student);
-                }
-                catch(\PDOException $ex)
-                {
-                    var_dump($ex);
-                }
-            }
-        }
-        else
-        {
-            try {
-                $this->add($student);
-            }
-            catch (\PDOException $ex)
-            {
-                var_dump($ex);
-            }
-        }
-    }
-    catch (\PDOException $ex)
-    {
-        var_dump($ex);
     }
 
-
-
-
-
-
-
- * Search an Student by id, returning the student or null
- * @param $studentId
- * @return mixed|null
- *
-public function GetByStudentId($studentId)
-{
-    $this->RetrieveData();
-    $studentFounded = null;
-
-    if (!empty($this->studentList)) {
-        foreach ($this->studentList as $student) {
-            if ($student->getStudentId() == $studentId) {
-                $studentFounded = $student;
-            }
-        }
-    }
-
-    return $studentFounded;
-}
-
-
-
-public function mapear ($array)
-{
-    $array = is_array($array) ? $array : []; //si lo que viene como parametro es un array lo deja como viene, sino lo guarda como array vacio
-
-    $resultado = array_map(function ($value){
-
-        $student = new Student();
-
-        $student->setStudentId($value["studentId"]);
-
-        $careerId=$value['careerId'];
-        $careerDescription=$value['description'];
-        $career= new Career();
-        $career->setDescription($careerDescription);
-        $career->setCareerId($careerId);
-        $student->setCareer($career);
-
-        $student->setFirstName($value["firstName"]);
-        $student->setLastName($value["lastName"]);
-        $student->setDni($value["dni"]);
-        $student->setPhoneNumber($value["phoneNumber"]);
-        $student->setEmail($value["email"]);
-        $student->setPassword($value['password']);
-
-        return $student;
-
-    }, $array);
-
-    return count($resultado) > 1 ? $resultado : $resultado['0']; //devuelve un array si es mas de 1 dato, O un objeto si es 1 solo dato y sino NULL
 
 }
-
-
-
- *
- */

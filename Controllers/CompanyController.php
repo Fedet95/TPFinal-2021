@@ -38,9 +38,7 @@ class CompanyController
         $this->adminDAO = new AdministratorDAO();
         $this->loggedUser = $this->loggedUserValidation();
     }
-
-
-    /**
+ /**
      * Call the "createCompany" view
      * @param string $message
      */

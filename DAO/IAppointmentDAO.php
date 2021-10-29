@@ -9,6 +9,4 @@ interface IAppointmentDAO
     public function add(Appointment $appointment);
     function getAll();
     function remove($appointmentID);
-    function update(Appointment $appointment);
-
 }

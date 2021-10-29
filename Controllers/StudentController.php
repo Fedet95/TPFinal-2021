@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 use DAO\StudentDAO;
-use DAO\StudentRepository;
+
 
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 

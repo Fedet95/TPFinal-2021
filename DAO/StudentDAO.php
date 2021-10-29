@@ -127,29 +127,6 @@ class StudentDAO implements lStudentDAO
         }
     }
 
-
-
-/*
-
-     * Get student by id from Json file
-     * @param $companyId
-
-    function getStudent($studentId)
-    {
-        $this->RetrieveData();
-
-        $student = null;
-        foreach($this->studentList as $key => $value)
-        {
-            if($value->getStudentId()==$studentId)
-            {
-                $student = $this->studentList[$key];
-            }
-        }
-        return $student;
-    }
-*/
-
     function update(Student $student)
     {
 
@@ -268,30 +245,6 @@ class StudentDAO implements lStudentDAO
                 }
             }
         }
-    }
-
-
-
-
-    /**
-     * Search an Student by id, returning the student or null
-     * @param $studentId
-     * @return mixed|null
-     */
-    public function GetByStudentId($studentId)
-    {
-        $this->RetrieveData();
-        $studentFounded = null;
-
-        if (!empty($this->studentList)) {
-            foreach ($this->studentList as $student) {
-                if ($student->getStudentId() == $studentId) {
-                    $studentFounded = $student;
-                }
-            }
-        }
-
-        return $studentFounded;
     }
 
 
