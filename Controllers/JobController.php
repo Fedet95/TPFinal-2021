@@ -1,6 +1,8 @@
 <?php
+
 namespace Controllers;
 require_once(VIEWS_PATH . "checkLoggedUser.php");
+
 use DAO\JobOfferDAO;
 use DAO\JobOfferPositionDAO;
 use DAO\JobPositionDAO;
@@ -38,11 +40,11 @@ class JobController
     {
         $this->companyDAO = new CompanyDAO();
         $this->countryDAO = new CountryDAO();
-        $this->careersOrigin= new OriginCareerDAO();
-        $this->jobPositionsOrigin= new OriginJobPositionDAO();
+        $this->careersOrigin = new OriginCareerDAO();
+        $this->jobPositionsOrigin = new OriginJobPositionDAO();
         $this->loggedUser = $this->loggedUserValidation();
-        $this->jobOfferDAO= new JobOfferDAO();
-        $this->jobOfferPositionDAO= new JobOfferPositionDAO();
+        $this->jobOfferDAO = new JobOfferDAO();
+        $this->jobOfferPositionDAO = new JobOfferPositionDAO();
         $this->jobPositionDAO = new JobPositionDAO();
     }
 
@@ -64,12 +66,11 @@ class JobController
 
         try {
             $jobOffer = $this->jobOfferDAO->getJobOffer($id);
-        }catch (\PDOException $ex)
-        {
+        } catch (\PDOException $ex) {
             echo $ex->getMessage();
         }
 
-        require_once(VIEWS_PATH."jobOfferViewMore.php");
+        require_once(VIEWS_PATH . "jobOfferViewMore.php");
     }
 
 
@@ -77,31 +78,26 @@ class JobController
      * Call the "createJobOffer" view
      * @param string $message
      */
-    public function showCreateJobOfferView($message = "", $careerId= null, $values=null)
+    public function showCreateJobOfferView($message = "", $careerId = null, $values = null)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
         $allCompanies = $this->companyDAO->getAll();
         $allCountrys = $this->countryDAO->getAll();
-        $allCareers= $this->careersOrigin->start($this->careersOrigin);
+        $allCareers = $this->careersOrigin->start($this->careersOrigin);
 
-        if($careerId!=null)
-        {
-            $allPositions= $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
+        if ($careerId != null) {
+            $allPositions = $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
             try {
 
                 $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
 
                 try {
-                    $allPositions= $this->jobPositionDAO->getAll();
-                }
-                catch (\PDOException $ex)
-                {
+                    $allPositions = $this->jobPositionDAO->getAll();
+                } catch (\PDOException $ex) {
                     echo $ex->getMessage();
                 }
-            }
-            catch (\PDOException $ex)
-            {
+            } catch (\PDOException $ex) {
                 echo $ex->getMessage();
             }
         }
@@ -121,9 +117,7 @@ class JobController
         $edit=null;
         $remove=null;
         $allCompanies = $this->companyDAO->getAll();
-        //$allCountrys = $this->countryDAO->getAll();
-        $allOffers= $this->jobOfferDAO->getAll();
-        //$allOffers= $this->unifyAllOffer($offers);
+        $allOffers = $this->jobOfferDAO->getAll();
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
     }
@@ -135,27 +129,23 @@ class JobController
      */
     public function showEditJobOfferView($allCompanies, $allCareers, $jobOfferEdit, $allPositions = null, $message = "", $careerId = null, $values = null)
     {
-        $edit=1;
+        $edit = 1;
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
     }
 
 
-
 //--------------------------------------------------------------------------------------------
 
-    public function showJobPositionManagment($message = "",$jobPosition = null)
+    public function showJobPositionManagement($message = "", $jobPosition = null)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        if($jobPosition == null)
-        {
-            $allPositions= $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
+        if ($jobPosition == null) {
+            $allPositions = $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
             $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
-        }
-        else
-        {
+        } else {
             $this->jobPositionDAO->updateJobPositionFile($jobPosition);
         }
 
@@ -185,42 +175,31 @@ class JobController
         $allCareers = $this->careersOrigin->start($this->careersOrigin);
         $flag = 0;
 
-        if($careerId == null)
-        {
+        if ($careerId == null) {
             $this->showCreateJobPositionView("Please select a Career Reference");
 
-        }else
-        {
-            if($descriptionJob == null)
-            {
+        } else {
+            if ($descriptionJob == null) {
                 $this->showCreateJobPositionView("Please write a Description Job");
-            }
-            else
-            {
-                foreach ($allCareers as $value)
-                {
-                    if($value->getCareerId() == $careerId)
-                    {
-                        if(strcasecmp($value->getDescription(),$descriptionJob) == 0)
-                        {
+            } else {
+                foreach ($allCareers as $value) {
+                    if ($value->getCareerId() == $careerId) {
+                        if (strcasecmp($value->getDescription(), $descriptionJob) == 0) {
                             $flag = 1;
                         }
 
                     }
-                    if($flag == 1)
-                    {
+                    if ($flag == 1) {
                         break;
                     }
                 }
             }
 
         }
-        if($flag == 1)
-        {
+        if ($flag == 1) {
             $this->showCreateJobPositionView("This Job Position already exist");
 
-        } else
-        {
+        } else {
             $newJobPosition = new JobPosition();
             $newJobPosition->setJobPositionId(($this->jobPositionDAO->getMaxId()));
             $newJobPosition->setDescription($descriptionJob);
@@ -249,11 +228,9 @@ class JobController
             $message = "Error, enter a valid Job Offer End Date";
             $flag = 1;
             $this->showCreateJobOfferView($message);
-        }
-         else
-        {
-            $values= array("company"=>$company, "career"=>$career, "publishDate"=>$publishDate, "endDate"=>$endDate );
-           $this->showCreateJobOfferView("", $career, $values);
+        } else {
+            $values = array("company" => $company, "career" => $career, "publishDate" => $publishDate, "endDate" => $endDate);
+            $this->showCreateJobOfferView("", $career, $values);
         }
     }
 
@@ -265,21 +242,17 @@ class JobController
     {
         $postvalue = unserialize(base64_decode($values));
 
-        if($values=='')
-        {
+        if ($values == '') {
             $message = "Error, complete all fields";
-            var_dump($postvalue['career']);
-            $this->showCreateJobOfferView($message,$postvalue['career'], $postvalue );
+            $this->showCreateJobOfferView($message, $postvalue['career'], $postvalue);
         }
 
 
-        $titleValidation = $this->validateUniqueTitle($title, $postvalue['company'] );
+        $titleValidation = $this->validateUniqueTitle($title, $postvalue['company']);
         if ($titleValidation == 1) {
             $message = "Error, the entered Job Offer Title is already in use by the offering company";
-            $this->showCreateJobOfferView($message,$postvalue['career'], $postvalue );
-        }
-        else
-        {
+            $this->showCreateJobOfferView($message, $postvalue['career'], $postvalue);
+        } else {
             $newJobOffer = new JobOffer();
             $newJobOffer->setDescription($description);
             $newJobOffer->setActive($active);
@@ -322,22 +295,18 @@ class JobController
                     $this->jobOfferPositionDAO->add($op); //add job OfferxPosition to JobOfferPosition DAO (N:M table)
                 }
 
-                   $message= "Job Offer successfully added";
-                    $this->showJobOfferManagementView("$message");
+                $message = "Job Offer successfully added";
+                $this->showJobOfferManagementView("$message");
 
-            }
-            catch (\PDOException $ex)
-            {
+            } catch (\PDOException $ex) {
                 if ($ex->getCode() == 23000) //unique constraint
                 {
-                  $message = "Error, the entered Job Offer Title is already in use by the offering company";
-                  $this->showCreateJobOfferView($message,$postvalue['career'], $values );
+                    $message = "Error, the entered Job Offer Title is already in use by the offering company";
+                    $this->showCreateJobOfferView($message, $postvalue['career'], $values);
 
-                }
-                else
-                {
+                } else {
                     $message = "Error, try again";
-                    $this->showCreateJobOfferView($message,$postvalue['career'], $values );
+                    $this->showCreateJobOfferView($message, $postvalue['career'], $values);
                 }
             }
         }
@@ -349,7 +318,7 @@ class JobController
      */
     public function validateEndDate($date)
     {
-        $validate =null;
+        $validate = null;
         if (strtotime($date) >= time()) {
             $validate = 1;
         }
@@ -364,54 +333,52 @@ class JobController
      */
     public function validateUniqueTitle($title, $id)
     {
-        $validate =null;
+        $validate = null;
         try {
             $JobOfferTitleSearch = $this->jobOfferDAO->searchTitleValidation($title, $id);
-            if ($JobOfferTitleSearch ==1) //wrong
+            if ($JobOfferTitleSearch == 1) //wrong
             {
-                $validate=1;
+                $validate = 1;
             }
-        }
-        catch (\PDOException $ex)
-        {
-            $validate=1;
+        } catch (\PDOException $ex) {
+            $validate = 1;
             echo $ex->getMessage();
         }
         return $validate;
     }
 
 
-/*
-     * Makes one jobOffer object with all their positions
-     * @param $offer
-     * @return mixed|null
-    public function unifyOffer($offer)
-    {
-        $positionArray=array();
-        $finalOffer=null;
-        if(is_array($offer))
+    /*
+         * Makes one jobOffer object with all their positions
+         * @param $offer
+         * @return mixed|null
+        public function unifyOffer($offer)
         {
-            $finalOffer=$offer[0];
-
-            foreach ($offer as $values)
+            $positionArray=array();
+            $finalOffer=null;
+            if(is_array($offer))
             {
-                $pos= new JobPosition();
-                $pos->setJobPositionId($values->getJobPosition()->getJobPositionId());
-                $pos->setDescription($values->getJobPosition()->getDescription());
-                $pos->setCareer($values->getJobPosition()->getCareer());
-                array_push($positionArray, $pos);
+                $finalOffer=$offer[0];
+
+                foreach ($offer as $values)
+                {
+                    $pos= new JobPosition();
+                    $pos->setJobPositionId($values->getJobPosition()->getJobPositionId());
+                    $pos->setDescription($values->getJobPosition()->getDescription());
+                    $pos->setCareer($values->getJobPosition()->getCareer());
+                    array_push($positionArray, $pos);
+                }
+                $finalOffer->setJobPosition($positionArray);
             }
-            $finalOffer->setJobPosition($positionArray);
-        }
-        else if(is_object($offer))
-        {
-            $finalOffer=$offer;
+            else if(is_object($offer))
+            {
+                $finalOffer=$offer;
+            }
+
+            return $finalOffer;
         }
 
-        return $finalOffer;
-    }
-
-*/
+    */
 
 
     public function editJobOffer($jobOfferId, $careerId = null, $message = "", $values = null)
@@ -742,16 +709,12 @@ class JobController
 
         if (isset($_SESSION['loggedadmin'])) {
             $loggedUser = $_SESSION['loggedadmin'];
-        }
-        else if(isset($_SESSION['loggedstudent'])) {
+        } else if (isset($_SESSION['loggedstudent'])) {
             $loggedUser = $_SESSION['loggedstudent'];
         }
 
-        return  $loggedUser;
+        return $loggedUser;
     }
-
-
-
 
 
 }

@@ -28,12 +28,18 @@ class StudentController
     }
 
 
-    public function showStudentListView()
+    public function showStudentListView($valueToSearch = null, $back = null, $message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $allStudents= $this->studentDAO->getAll();
-        $searchedStudent=$this->searchStudentFiltre($allStudents);
+        try {
+            $allStudents = $this->studentDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+        $searchedStudent=$this->searchStudentFiltreASD($allStudents, $valueToSearch, $back);
         require_once(VIEWS_PATH . "studentList.php");
 
     }
@@ -54,6 +60,7 @@ class StudentController
      */
     public function searchStudentFiltre($allStudents)
     {
+
         $searchedStudents = array();
         if (isset($_POST['search'])) //click boton de filtrado
         {
@@ -78,6 +85,34 @@ class StudentController
         return $searchedStudents;
     }
 
+    public function searchStudentFiltreASD($allStudents, $valueToSearch)
+    {
+        $searchedStudent = array();
+
+        if($valueToSearch!=null)
+        {
+            foreach ($allStudents as $value)
+            {
+                if (strcasecmp($value->getName(), $valueToSearch) == 0)
+                {
+                    array_push($searchedStudent, $value);
+                }
+            }
+        }
+        else
+        {
+            $searchedStudent = $allStudents;
+        }
+
+
+
+        if($valueToSearch=='Show all students' || $valueToSearch=='Back')
+        {
+            $searchedStudent = $allStudents;
+        }
+
+        return $searchedStudent;
+    }
 
     /**
      * Validate if the admin/stundent has logged in the system correctly

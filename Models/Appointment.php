@@ -8,6 +8,9 @@ class Appointment
   private $jobOffer; // (objeto)
   private $student; // (objeto)
   private $date;
+  private $message;
+  private $cv; // (objeto?)
+
 
 
     public function getAppointmentId()
@@ -56,5 +59,24 @@ class Appointment
         $this->date = $date;
     }
 
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    public function setMessage($message)
+    {
+        $this->message = $message;
+    }
+
+    public function getCv()
+    {
+        return $this->cv;
+    }
+
+    public function setCv($cv)
+    {
+        $this->cv = $cv;
+    }
 
 }
