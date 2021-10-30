@@ -7,18 +7,9 @@
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="appointments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/img/jobSearch.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/img/post.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/img/r1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/jobOfferViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOfferViewMore.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
     </list>
     <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="Changes by Fede" />
-    <list id="af60e691-328f-4020-b1af-4fc76ece5be8" name="Changes by paye_" comment="appointments">
-      <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Appointment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Appointment.php" afterDir="false" />
-    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,7 +97,7 @@
       <workItem from="1635254847304" duration="41876000" />
       <workItem from="1635341477964" duration="39162000" />
       <workItem from="1635426280447" duration="79703000" />
-      <workItem from="1635603139953" duration="13059000" />
+      <workItem from="1635603139953" duration="13991000" />
     </task>
     <task id="LOCAL-00001" summary="mi subida">
       <created>1633917102951</created>
@@ -374,7 +365,21 @@
       <option name="project" value="LOCAL" />
       <updated>1635563676701</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="appointments">
+      <created>1635616447072</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1635616447072</updated>
+    </task>
+    <task id="LOCAL-00040" summary="appointments">
+      <created>1635616518582</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1635616518582</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

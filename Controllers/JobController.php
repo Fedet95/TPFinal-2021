@@ -210,7 +210,15 @@ class JobController
 
         if($valueToSearch!=null)
         {
-            $searchedValue = $this->searchJobFiltre($allOffers, $valueToSearch, $back);
+            if(is_numeric($valueToSearch))
+            {
+                $searchedValue = $this->searchJobFiltre($allOffers, $valueToSearch, $back);
+            }
+            else
+            {
+                $searchedValue = $this->searchJobCareerFiltre($allOffers, $valueToSearch, $back);
+            }
+
         }
 
 
@@ -841,7 +849,7 @@ class JobController
 
 
     /**
-     * Returns a searched company or all companies otherwise
+     * Returns a searched job offer by position or all offers otherwise
      * @param $allOffers
      * @return array|mixed
      */
@@ -851,14 +859,13 @@ class JobController
 
         if($valueToSearch!=null)
         {
-var_dump($valueToSearch);
+
             foreach ($allOffers as $value)
             {
                 $positions= $value->getJobPosition();
 
                 foreach ($positions as $pos )
                 {
-                    var_dump($pos);
                     //var_dump($pos->getJobPositionId());
                     if ($pos->getJobPositionId() == $valueToSearch) //no es case sensitive
                     {
@@ -873,9 +880,6 @@ var_dump($valueToSearch);
             $searchedOffer = $allOffers;
         }
 
-   var_dump($searchedOffer);
-
-
         if($valueToSearch=='Show all Offers' || $valueToSearch=='Back')
         {
             $searchedOffer = $allOffers;
@@ -884,6 +888,39 @@ var_dump($valueToSearch);
         return $searchedOffer;
     }
 
+
+    /**
+     * Returns a searched job offer by career or all offers otherwise
+     * @param $allOffers
+     * @return array|mixed
+     */
+    public function searchJobCareerFiltre($allOffers, $valueToSearch)
+    {
+        $searchedOffer = array();
+
+        if($valueToSearch!=null)
+        {
+
+            foreach ($allOffers as $value)
+            {
+                    if ($value->getCareer()->getDescription() == $valueToSearch) //no es case sensitive
+                    {
+                        array_push($searchedOffer, $value);
+                    }
+            }
+        }
+        else
+        {
+            $searchedOffer = $allOffers;
+        }
+
+        if($valueToSearch=='Show all Offers' || $valueToSearch=='Back')
+        {
+            $searchedOffer = $allOffers;
+        }
+
+        return $searchedOffer;
+    }
 
 
 

@@ -85,7 +85,7 @@ include_once('nav.php');
                             if($car->getActive()=='true' && $car->getDescription()=="University technician in textile production")
                             {
                                 ?>
-                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
                                 <input type="submit" class=" btn btn-light  ml-auto" name="button" value="Textile Production">
                                 <?php
                             }} ?>
@@ -105,7 +105,7 @@ include_once('nav.php');
                             if($car->getActive()=='true' && $car->getDescription()=="University technician in computer systems")
                             {
                                 ?>
-                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
                                 <input type="submit" class=" btn btn-light ml-auto" name="button" value=" Ing Comp systems">
                                 <?php
                             }} ?>
@@ -125,7 +125,7 @@ include_once('nav.php');
                             if($car->getActive()=='true' && $car->getDescription()=="University technician in programming")
                             {
                                 ?>
-                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
                                 <input type="submit" class=" btn btn-light ml-auto" name="button" value="Tech programming">
                                 <?php
                             }} ?>
@@ -145,7 +145,7 @@ include_once('nav.php');
                                 if($car->getActive()=='true' && $car->getDescription()=="Naval engineering")
                                     {
                                         ?>
-                                            <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                            <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
                                         <input type="submit" class=" btn btn-light ml-auto" name="button" value="Naval">
                                         <?php
                                     }} ?>
@@ -165,7 +165,7 @@ include_once('nav.php');
                             if($car->getActive()=='true' && $car->getDescription()=="University technician in administration")
                             {
                                 ?>
-                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
                                 <input type="submit" class=" btn btn-light ml-auto" name="button" value="Administration">
                                 <?php
                             }} ?>
@@ -185,7 +185,7 @@ include_once('nav.php');
                             if($car->getActive()=='true' && $car->getDescription()=="University technician in environmental procedures and technologies")
                             {
                                 ?>
-                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
                                 <input type="submit" class=" btn btn-light ml-auto" name="button" value="Environmental">
                                 <?php
                             }} ?>
