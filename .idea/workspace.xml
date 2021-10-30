@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/Views/applyJobOffer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/estilos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/jobOfferViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOfferViewMore.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/AppointmentHistoryDAODAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentHistoryDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/adminListView.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminListView.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/applyJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/applyJobOffer.php" afterDir="false" />
     </list>
-    <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="Changes by Fede" />
+    <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="Changes by Fede">
+      <change beforePath="$PROJECT_DIR$/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/adminListView.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminListView.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +36,27 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/Views/adminListView.php">
+      <ranges>
+        <range start1="8" end1="9" start2="8" end2="9" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
+        <range start1="15" end1="26" start2="15" end2="19" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
+        <range start1="33" end1="34" start2="26" end2="27" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
+        <range start1="36" end1="44" start2="29" end2="37" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
+        <range start1="65" end1="67" start2="58" end2="60" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
+        <range start1="71" end1="71" start2="64" end2="65" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
+        <range start1="73" end1="75" start2="67" end2="69" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
+        <range start1="87" end1="88" start2="81" end2="84" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="91" end1="91" start2="87" end2="88" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/Controllers/AdminController.php">
+      <ranges>
+        <range start1="5" end1="5" start2="5" end2="6" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="31" end1="31" start2="32" end2="114" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
+      </ranges>
+    </file>
   </component>
   <component name="ProjectId" id="1ySBkMTs6YzgRSxILEKaOJWvsUQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -99,7 +123,7 @@
       <workItem from="1635254847304" duration="41876000" />
       <workItem from="1635341477964" duration="39162000" />
       <workItem from="1635426280447" duration="79703000" />
-      <workItem from="1635603139953" duration="16287000" />
+      <workItem from="1635603139953" duration="17338000" />
     </task>
     <task id="LOCAL-00001" summary="mi subida">
       <created>1633917102951</created>
@@ -388,7 +412,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635620262511</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="update">
+      <created>1635623047234</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1635623047234</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

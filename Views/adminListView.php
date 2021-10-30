@@ -85,7 +85,9 @@ include_once('nav.php');
     </div>
 </div>
 <br><br><br><br><br><br>
-<br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br>
 <?php
 include_once('footer.php');
 ?>

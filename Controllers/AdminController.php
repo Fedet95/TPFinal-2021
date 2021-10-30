@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use DAO\AdministratorDAO;
+use Models\Administrator;
 
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 
