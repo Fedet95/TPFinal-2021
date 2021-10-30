@@ -29,12 +29,10 @@ include_once('nav.php');
                         <img class="img-fluid" src="../Views/img/offerMore.png" alt="">
                     </div>
                     <div class="col-lg-6 download-right">
-                        <h1>Download the <br>
-                            Job Listing App Today!</h1>
+                        <h1>Do not miss  <br>
+                            this incredible opportunity!</h1>
                         <p class="subs">
-                            It won’t be a bigger problem to find one video game lover in your neighbor. Since the
-                            introduction of Virtual Game, it has been achieving great heights so far as its popularity and
-                            technological advancement are concerned.
+                            We offer you a wide variety of job offers from the best companies so that you can find your dream job. Do not wait any longer and expand your work horizons.
                         </p>
                     </div>
                 </div>
