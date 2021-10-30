@@ -4,24 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="fix errors and validations">
+    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="appointments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/AdministratorDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AdministratorDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/administratorControlPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/administratorControlPanel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/estilos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/img/xxxx.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/img/jobSearch.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/img/post.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/img/r1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOfferViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOfferViewMore.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/jobPositionManagment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobPositionManagment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/nav-admin.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/nav-student.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
     </list>
     <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="Changes by Fede" />
-    <list id="af60e691-328f-4020-b1af-4fc76ece5be8" name="Changes by paye_" comment="Update">
+    <list id="af60e691-328f-4020-b1af-4fc76ece5be8" name="Changes by paye_" comment="appointments">
       <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Appointment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Appointment.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,37 +41,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/Views/jobOffersManagement.php">
-      <ranges>
-        <range start1="77" end1="77" start2="77" end2="78" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="78" end1="82" start2="79" end2="93" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="84" end1="84" start2="95" end2="96" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="85" end1="85" start2="97" end2="98" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="86" end1="90" start2="99" end2="114" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="93" end1="93" start2="117" end2="118" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="94" end1="98" start2="119" end2="134" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="101" end1="101" start2="137" end2="138" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="102" end1="106" start2="139" end2="154" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="109" end1="109" start2="157" end2="158" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="110" end1="114" start2="159" end2="174" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="117" end1="117" start2="177" end2="178" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="118" end1="122" start2="179" end2="193" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="134" end1="138" start2="205" end2="297" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="139" end1="142" start2="298" end2="312" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="231" end1="234" start2="401" end2="404" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="252" end1="253" start2="422" end2="423" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="263" end1="265" start2="433" end2="435" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="277" end1="279" start2="447" end2="448" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="288" end1="289" start2="457" end2="457" changelist="af60e691-328f-4020-b1af-4fc76ece5be8" />
-        <range start1="290" end1="291" start2="458" end2="459" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="404" end1="405" start2="572" end2="573" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="415" end1="416" start2="583" end2="584" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="427" end1="428" start2="595" end2="596" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="452" end1="454" start2="620" end2="620" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-      </ranges>
-    </file>
-  </component>
   <component name="ProjectId" id="1ySBkMTs6YzgRSxILEKaOJWvsUQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -87,7 +52,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../job-listing-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -140,7 +105,8 @@
       <workItem from="1635207657888" duration="468000" />
       <workItem from="1635254847304" duration="41876000" />
       <workItem from="1635341477964" duration="39162000" />
-      <workItem from="1635426280447" duration="79636000" />
+      <workItem from="1635426280447" duration="79703000" />
+      <workItem from="1635603139953" duration="13059000" />
     </task>
     <task id="LOCAL-00001" summary="mi subida">
       <created>1633917102951</created>
@@ -387,7 +353,28 @@
       <option name="project" value="LOCAL" />
       <updated>1635540076778</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="filter and offers">
+      <created>1635563642586</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1635563642586</updated>
+    </task>
+    <task id="LOCAL-00037" summary="appointments">
+      <created>1635563663499</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1635563663499</updated>
+    </task>
+    <task id="LOCAL-00038" summary="appointments">
+      <created>1635563676701</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1635563676701</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -418,9 +405,11 @@
     <MESSAGE value="delete old repositories" />
     <MESSAGE value="update" />
     <MESSAGE value="update offers" />
-    <MESSAGE value="fix errors and validations" />
     <MESSAGE value="Update" />
     <MESSAGE value="Changes by Fede" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes by Fede" />
+    <MESSAGE value="fix errors and validations" />
+    <MESSAGE value="filter and offers" />
+    <MESSAGE value="appointments" />
+    <option name="LAST_COMMIT_MESSAGE" value="appointments" />
   </component>
 </project>

@@ -15,7 +15,6 @@ include_once('nav.php');
     <link rel="stylesheet" href="../Views/css/magnific-popup.css">
     <link rel="stylesheet" href="../Views/css/nice-select.css">
     <link rel="stylesheet" href="../Views/css/animate.min.css">
-    <link rel="stylesheet" href="../Views/css/owl.carousel.css">
     <link rel="stylesheet" href="../Views/css/main.css">
 
 <?php if ($edit==null && $remove==null) { ?>
@@ -87,7 +86,7 @@ include_once('nav.php');
                             {
                                 ?>
                                 <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
-                                <input type="submit" class=" btn btn-light ml-auto" name="button" value="Textile Production">
+                                <input type="submit" class=" btn btn-light  ml-auto" name="button" value="Textile Production">
                                 <?php
                             }} ?>
                         </form>
@@ -198,12 +197,12 @@ include_once('nav.php');
     </section>
 
 
+
     <section class="post-area section-gap">
         <div class="container">
             <div class="row justify-content-center d-flex bg-light-alpha p-5 border">
                 <div class="col-md-9 post-list">
                     <ul class="cat-list">
-
 
                         <div class="form-group offset-7">  <!--JOB POSITION FILTER-->
                             <table>
@@ -246,7 +245,7 @@ include_once('nav.php');
                         </div>
 
                         <!--
-                        <div class="form-group offset-7">
+                        <div class="form-group offset-7">   //FILTER CAREERS EQUAL TO JOB POSITIONS FILTER
                             <table>
                                 <thead>
                                 <tr>
@@ -279,8 +278,11 @@ include_once('nav.php');
                                 </thead>
                             </table>
                         </div>
+
                 -->
+
                         <div class="form-group offset-lg-10">
+
                             <table>
                                 <thead>
                                 <tr>
@@ -309,6 +311,7 @@ include_once('nav.php');
 
 
                     <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
+
 
                     <?php
                     if(is_object($allOffers))
@@ -580,7 +583,6 @@ include_once('nav.php');
                                                                 <td>
                                                                     <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
                                                                           method="POST">
-                                                                        <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
                                                                         <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                                                                 value="<?php echo $value->getJobOfferId() ?>">
                                                                             Remove
@@ -591,7 +593,6 @@ include_once('nav.php');
                                                                 <td>
                                                                     <form action="<?php echo FRONT_ROOT . "Job/editJobOffer" ?>"
                                                                           method="POST">
-                                                                        <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
                                                                         <button type="submit" name="id"
                                                                                 class="btn ml-auto buttonPer d-block"
                                                                                 value="<?php echo $value->getJobOfferId() ?>"> Edit
@@ -610,14 +611,68 @@ include_once('nav.php');
                             }
                         }
                     } ?>
+
                     <a class="text-uppercase loadmore-btn mx-auto d-block" href="category.html">Load More job Posts</a>
+                </div>
+
+   <!--ESTA ES LA BARRA DEL COSTADO, BORRAR SI NO SALE-->
+                <div class="col-lg-3 sidebar">
+                    <div class="single-slidebar">
+                        <h4>Jobs by Location</h4>
+                        <ul class="cat-list">
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>New York</p><span>37</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Park Montana</p><span>57</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Atlanta</p><span>33</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Arizona</p><span>36</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Florida</p><span>47</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Rocky Beach</p><span>27</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Chicago</p><span>17</span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="single-slidebar">
+                        <h4>Jobs by Category</h4>
+                        <ul class="cat-list">
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Technology</p><span>37</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Media & News</p><span>57</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Goverment</p><span>33</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Medical</p><span>36</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Restaurants</p><span>47</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Developer</p><span>27</span></a></li>
+                            <li><a class="justify-content-between d-flex" href="category.html"><p>Accounting</p><span>17</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  <!--BORRAR HASTA ACA PARA SACAR BARRA DEL COSTADO-->
+    <!-- End post Area -->
 
                 </div>
             </div>
     </section>
+
     <!-- End post Area -->
 
 <?php } ?>
+
+<!-- Start callto-action Area -->
+<section class="callto-action-area section-gap" id="join">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content col-lg-9">
+                <div class="title text-center">
+                    <h1 class="mb-10 text-white">Join us today without any hesitation</h1>
+                    <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                    <a class="primary-btn" href="#">I am a Candidate</a>
+                    <a class="primary-btn" href="#">Request Free Demo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End calto-action Area -->
+
 
     <!--EDIT JOB OFFER AREA-->
 <?php
@@ -853,6 +908,8 @@ if(($edit != null) && ($loggedUser instanceof Administrator) && ($jobOfferEdit->
     </main>
 
 <?php }}?>
+
+
 
 <!--REMOVE JOB OFFER AREA -->
 <?php if(isset($remove)){?>

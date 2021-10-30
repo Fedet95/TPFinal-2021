@@ -57,22 +57,6 @@ class JobController
      */
 
 
-    /**
-     * Call the extend view of a JobOffer
-     * @param $id
-     */
-    public function showJobOfferViewMore($id)
-    {
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
-
-        try {
-            $jobOffer = $this->jobOfferDAO->getJobOffer($id);
-        } catch (\PDOException $ex) {
-            echo $ex->getMessage();
-        }
-
-        require_once(VIEWS_PATH . "jobOfferViewMore.php");
-    }
 
 
     /**
@@ -138,6 +122,35 @@ class JobController
 
 
     /**
+     * Call the extend view of a JobOffer
+     * @param $id
+     */
+    public function showJobOfferViewMore($id)
+    {
+        require_once(VIEWS_PATH . "checkLoggedUser.php");
+
+        try {
+            $jobOffer = $this->jobOfferDAO->getJobOffer($id);
+
+            try
+            {
+                $company= $this->companyDAO->getCompany($jobOffer->getCompany()->getCompanyId());
+            }
+            catch (\PDOException $ex)
+            {
+                echo $ex->getMessage();
+            }
+
+        } catch (\PDOException $ex) {
+            echo $ex->getMessage();
+        }
+
+        require_once(VIEWS_PATH . "jobOfferViewMore.php");
+    }
+
+
+
+    /**
      * Call the "job offer management" view
      * @param string $message
      */
@@ -147,6 +160,7 @@ class JobController
 
         $edit=null;
         $remove=null;
+
 
         try
         {
@@ -206,7 +220,6 @@ class JobController
 
     /**
      * Call the "edi job offer" view
-     * @param string $message
      */
     public function showEditJobOfferView($allCompanies, $allCareers, $jobOfferEdit, $allPositions = null, $message = "", $careerId = null, $values = null)
     {
@@ -215,6 +228,20 @@ class JobController
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
     }
+
+
+
+    /**
+     * Call the "remove job offer" view
+     */
+    public function showRemoveJobOfferView($jobOffer, $cant=null, $company=null, $text=null, $finalMessage=null)
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        $edit=null;
+        $remove=1;
+        require_once(VIEWS_PATH . "jobOffersManagement.php");
+    }
+
 
 
 //--------------------------------------------------------------------------------------------
@@ -696,18 +723,6 @@ class JobController
 
 
 
-
-
-    public function showRemoveJobOfferView($jobOffer, $cant=null, $company=null, $text=null, $finalMessage=null)
-    {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
-        $edit=null;
-        $remove=1;
-        require_once(VIEWS_PATH . "jobOffersManagement.php");
-    }
-
-
-
     public function removeJobOffer($id, $accept=null, $sub = null, $text=null)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
@@ -836,13 +851,15 @@ class JobController
 
         if($valueToSearch!=null)
         {
-
+var_dump($valueToSearch);
             foreach ($allOffers as $value)
             {
                 $positions= $value->getJobPosition();
 
                 foreach ($positions as $pos )
                 {
+                    var_dump($pos);
+                    //var_dump($pos->getJobPositionId());
                     if ($pos->getJobPositionId() == $valueToSearch) //no es case sensitive
                     {
                         array_push($searchedOffer, $value);
@@ -856,7 +873,7 @@ class JobController
             $searchedOffer = $allOffers;
         }
 
-
+   var_dump($searchedOffer);
 
 
         if($valueToSearch=='Show all Offers' || $valueToSearch=='Back')
