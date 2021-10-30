@@ -28,13 +28,12 @@ class AppointmentController
 
 
             require_once(VIEWS_PATH . ""); ///LLEVAR A LA VISTA DONDE LE MUESTRA SU APPOINMENT ACTUAL
-
+        ///
+        ///
+        ///
     }
 
-
-
-
-    public function addAppointment($appointmentId,JobOffer $jobOffer, Student $student, $date)
+    public function addAppointment($appointmentId,JobOffer $jobOffer, Student $student, $date, $message, $cv)
     {
         require_once(VIEWS_PATH . "checkLoggedStudent.php");
 
@@ -49,8 +48,8 @@ class AppointmentController
             $appointment->setJobOffer($jobOffer);
             $appointment->setStudent($student);
             $appointment->setDate($date);
-///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!
-/// ///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!
+            $appointment->setMessage($message);
+            $appointment->setCv($cv);
 
             try {
 
@@ -106,8 +105,8 @@ class AppointmentController
     }
 
 
-
     public function Remove($studentId)
+
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 

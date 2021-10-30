@@ -18,12 +18,14 @@ class AppointmentDAO implements IAppointmentDAO
     public function add(Appointment $appointment)   ////AGREGAR LOS ATRIBUTOS FALTANTES AL APOINMENT!!!!!
     {
         try {
-            $query = "INSERT INTO " . $this->tableName . "(appointmentId, jobOfferAppointmentId, studentAppointmentId, dateAppointment) VALUES (:appointmentId, :jobOfferAppointmentId, :studentAppointmentId, :dateAppointment)";
+            $query = "INSERT INTO " . $this->tableName . "(appointmentId, jobOfferAppointmentId, studentAppointmentId, dateAppointment, message, cv) VALUES (:appointmentId, :jobOfferAppointmentId, :studentAppointmentId, :dateAppointment, :message, :cv)";
 
             $parameters['appointmentId'] = $appointment->getAppointmentId(); //se le ingresa el id porque en este caso NO es auto_increment (ojo los demas DAO)
             $parameters['jobOfferAppointmentId'] = $appointment->getJobOffer()->getJobOfferId();
             $parameters['studentAppointmentId'] = $appointment->getStudent()->getStudentId();
             $parameters['dateAppointment'] = $appointment->getDate();
+            $parameters['message'] = $appointment->getMessage();
+            $parameters['cv'] = $appointment->getCv();
 
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters); //el executeNonquery no retorna array, sino la cantidad de datos modificados
@@ -31,7 +33,6 @@ class AppointmentDAO implements IAppointmentDAO
             throw $ex;
         }
     }
-
 
     function getAll()
     {
@@ -109,6 +110,8 @@ class AppointmentDAO implements IAppointmentDAO
 
             $appointment->setAppointmentId($value["appointmentId"]);
             $appointment->setDate($value["dateAppointment"]);
+            $appointment->setMessage($value["message"]);
+            $appointment->setCv($value["cv"]);
 
             $jobOfferId = $value['jobOfferId'];
             $title = $value['title'];

@@ -9,7 +9,7 @@ class Appointment
   private $student; // (objeto)
   private $date;
   private $message;
-  private $cv; // (objeto?)
+  private $cv;
 
 
 
