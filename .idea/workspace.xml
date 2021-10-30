@@ -6,14 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/AppointmentHistoryDAODAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentHistoryDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/adminListView.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminListView.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/applyJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/applyJobOffer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOfferViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOfferViewMore.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
     </list>
-    <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="Changes by Fede">
-      <change beforePath="$PROJECT_DIR$/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/adminListView.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminListView.php" afterDir="false" />
+    <list id="8c3c4802-3947-405c-9d80-e15b44d717db" name="Changes by Fede" comment="administrar creation" />
+    <list id="f017e539-4287-42bf-9bba-11e9b1269b55" name="Changes by paye_" comment="">
+      <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,23 +38,12 @@
     </file-type-list>
   </component>
   <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/Views/adminListView.php">
+    <file path="$PROJECT_DIR$/DAO/AppointmentDAO.php">
       <ranges>
-        <range start1="8" end1="9" start2="8" end2="9" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
-        <range start1="15" end1="26" start2="15" end2="19" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
-        <range start1="33" end1="34" start2="26" end2="27" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
-        <range start1="36" end1="44" start2="29" end2="37" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
-        <range start1="65" end1="67" start2="58" end2="60" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
-        <range start1="71" end1="71" start2="64" end2="65" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
-        <range start1="73" end1="75" start2="67" end2="69" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
-        <range start1="87" end1="88" start2="81" end2="84" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="91" end1="91" start2="87" end2="88" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/Controllers/AdminController.php">
-      <ranges>
-        <range start1="5" end1="5" start2="5" end2="6" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="31" end1="31" start2="32" end2="114" changelist="8c3c4802-3947-405c-9d80-e15b44d717db" />
+        <range start1="17" end1="18" start2="17" end2="18" changelist="f017e539-4287-42bf-9bba-11e9b1269b55" />
+        <range start1="20" end1="21" start2="20" end2="21" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="22" end1="23" start2="22" end2="22" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="101" end1="101" start2="100" end2="127" changelist="f017e539-4287-42bf-9bba-11e9b1269b55" />
       </ranges>
     </file>
   </component>
@@ -123,7 +112,7 @@
       <workItem from="1635254847304" duration="41876000" />
       <workItem from="1635341477964" duration="39162000" />
       <workItem from="1635426280447" duration="79703000" />
-      <workItem from="1635603139953" duration="17338000" />
+      <workItem from="1635603139953" duration="20419000" />
     </task>
     <task id="LOCAL-00001" summary="mi subida">
       <created>1633917102951</created>
@@ -419,7 +408,21 @@
       <option name="project" value="LOCAL" />
       <updated>1635623047234</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="update">
+      <created>1635624135270</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1635624135270</updated>
+    </task>
+    <task id="LOCAL-00044" summary="administrar creation">
+      <created>1635624145405</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1635624145405</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -454,7 +457,9 @@
     <MESSAGE value="fix errors and validations" />
     <MESSAGE value="filter and offers" />
     <MESSAGE value="appointments" />
+    <MESSAGE value="administrar creation and appointment" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="administrar creation" />
+    <option name="LAST_COMMIT_MESSAGE" value="administrar creation" />
   </component>
 </project>

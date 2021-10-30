@@ -115,7 +115,22 @@ include_once('nav.php');
                               <li>Salary :  <span><?php if($jobOffer->getSalary()==0){ echo "Undefined";}else{echo "$ ". $jobOffer->getSalary();} ?> </span></li>
                           </ul>
                          <div class="apply-btn2">
-                            <a href="#" class="btn">Apply Now</a>
+                             <?php if($loggedUser instanceof Administrator){?>
+                                 <form action="<?php echo FRONT_ROOT . "Appointment/addAppointment" ?>"
+                                       method="POST">
+                                     <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
+                                             value="<?php echo $jobOffer->getJobOfferId() ?>"> View Appointments
+                                     </button>
+                                 </form>
+
+                             <?php } else{?>
+                                 <form action="<?php echo FRONT_ROOT . "Appointment/addAppointment" ?>"
+                                       method="POST">
+                                     <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
+                                             value="<?php echo $jobOffer->getJobOfferId() ?>"> Apply Now
+                                     </button>
+                                 </form>
+                             <?php }?>
                          </div>
                        </div>
                         <div class="post-details4  mb-50">

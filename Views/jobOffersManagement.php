@@ -279,8 +279,21 @@ include_once('nav.php');
                         {
                             $allOffers=$searchedValue;
                         }
-                        else{
-                           $message= "No job offers with these characteristics were found";
+                        else if(empty($searchedValue) && $back==1)
+                        {
+                           $message= "Job offer successfully added";
+                        }
+                        else if(empty($searchedValue) && $back==2)
+                        {
+                            $message= "Job offer successfully updated";
+                        }
+                        else if(empty($searchedValue) && $back==3)
+                        {
+                            $message="Remove operation aborted";
+                        }
+                        else
+                        {
+                            $message= "No job offers with these characteristics were found";
                         }
                     }?>
 
@@ -300,7 +313,7 @@ include_once('nav.php');
                         foreach ($allCompanies as $company) {
                             if ($value->getCompany()->getCompanyId() == $company->getCompanyId()) {
 
-                                if ($value->getActive() == "true") {
+                                if ($value->getActive() == "true" && $company->getActive=='true') {
                                     ?>
 
                                     <div class="single-post d-flex flex-row">
@@ -628,22 +641,24 @@ include_once('nav.php');
 
     <!-- End post Area -->
 
-<?php } ?>
 
-<!-- Start callto-action Area -->
-<section class="callto-action-area section-gap"  id="join">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="menu-content col-lg-9">
-                <div class="title text-center">
-                    <h1 class="mb-10 text-white">Our selection of offers is updated every day!</h1>
-                    <p class="text-white">We offer you a wide variety of job offers from the best companies</p>
+    <!-- Start callto-action Area -->
+    <section class="callto-action-area section-gap"  id="join">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content col-lg-9">
+                    <div class="title text-center">
+                        <h1 class="mb-10 text-white">Our selection of offers is updated every day!</h1>
+                        <p class="text-white">We offer you a wide variety of job offers from the best companies</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- End calto-action Area -->
+    </section>
+    <!-- End calto-action Area -->
+
+
+<?php } ?>
 
 
     <!--EDIT JOB OFFER AREA-->

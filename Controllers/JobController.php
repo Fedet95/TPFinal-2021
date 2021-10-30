@@ -447,7 +447,7 @@ class JobController
                 }
 
                 $message = "Job Offer successfully added";
-                $this->showJobOfferManagementView("$message");
+                $this->showJobOfferManagementView(null,"$message", 1);
 
             } catch (\PDOException $ex) {
                 if ($ex->getCode() == 23000) //unique constraint
@@ -713,7 +713,7 @@ class JobController
                 }
 
                 $message = "Job Offer successfully updated";
-                $this->showJobOfferManagementView(null, "$message");
+                $this->showJobOfferManagementView(null, "$message", 2); //for message
 
             } catch (\PDOException $ex) {
                 $message= "Error, try again";
@@ -779,7 +779,7 @@ class JobController
             }
             else
             {
-                $this->showJobOfferManagementView(null, "Remove operation aborted");
+                $this->showJobOfferManagementView(null, "Remove operation aborted", 3);
             }
 
         }
