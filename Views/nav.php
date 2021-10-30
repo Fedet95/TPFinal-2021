@@ -128,6 +128,7 @@ if (isset($_SESSION['loggedstudent']))
             {
                 ?>
                 <a class="nav-link" href="<?php echo  FRONT_ROOT."Student/showStudentListView"?>">Students</a>
+                <a class="nav-link" href="<?php echo  FRONT_ROOT."Admin/showAdminListView"?>">Administrators</a>
 
                 <?php
             }

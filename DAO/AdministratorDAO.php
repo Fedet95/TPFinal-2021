@@ -11,9 +11,61 @@ class AdministratorDAO implements lAdministratorDAO
 
 
     /**
-     * No hay metodo add ya que viene harcodeado desde la misma base de datos
+     * add a Company to Data base
+     * @param Administrator $admin
      */
 
+
+    function add(Administrator $administrator)
+    {
+
+        try {
+
+            $query = "INSERT INTO " . $this->tableName . "(firstNameAdmin, lastNameAdmin, employeeNumber, emailAdmin, passwordAdmin, activeAdmin) VALUES (:firstNameAdmin, :lastNameAdmin, :employeeNumber, :emailAdmin, :passwordAdmin, :activeAdmin)";
+
+            $parameters['firstNameAdmin'] = $administrator->getFirstName();
+            $parameters['lastNameAdmin'] = $administrator->getLastName();
+            $parameters['employeeNumber'] = $administrator->getEmployeeNumber();
+            $parameters['emailAdmin'] = $administrator->getEmail();
+            $parameters['passwordAdmin'] = $administrator->getPassword();
+            $parameters['activeAdmin'] = $administrator->getActive();
+
+
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters); //el executeNonquery no retorna array, sino la cantidad de datos modificados
+
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
+     * Get admin from Data base
+     * @param $administratorId
+     */
+
+    function getAdmin($administratorId)
+    {
+
+        try {
+            $query = "SELECT * FROM " . $this->tableName . " WHERE (administratorId= :administratorId)";
+
+            $parameters['administratorId'] = $administratorId;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, $parameters);
+
+            $mapedArray = null;
+            if (!empty($result)) {
+                $mapedArray = $this->mapear($result);
+            }
+
+            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+    }
 
     /**
      * Returns all values from data Base
@@ -41,6 +93,50 @@ class AdministratorDAO implements lAdministratorDAO
 
     }
 
+    /**
+     * Update admin values
+     * @param Administrator $admin
+     */
+    function update(Administrator $admin)
+    {
+        try {
+            $query = "UPDATE " . $this->tableName . " SET firstNameAdmin = :firstNameAdmin, lastNameAdmin = :lastNameAdmin , employeeNumber = :employeeNumber, emailAdmin = :emailAdmin, passwordAdmin = :passwordAdmin, activeAdmin = :activeAdmin
+            WHERE (administratorId = :administratorId)";
+
+            $parameters['firstNameAdmin'] = $admin->getFirstName();
+            $parameters['lastNameAdmin'] = $admin->getLastName();
+            $parameters['employeeNumber'] = $admin->getEmployeeNumber();
+            $parameters['emailAdmin'] = $admin->getEmail();
+            $parameters['passwordAdmin'] = $admin->getPassword();
+            $parameters['activeAdmin'] = $admin->getActive();
+            $parameters['administratorId'] = $admin->getAdministratorId();
+
+            $this->connection = Connection::GetInstance();
+
+            return $count = $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
+     * Remove admin from Data base
+     * @param $administratorId
+     */
+    function remove($administratorId)
+    {
+        try {
+            $query = "DELETE FROM " . $this->tableName . " WHERE (administratorId = :administratorId)";
+
+            $parameters["administratorId"] = $administratorId;
+
+            $this->connection = Connection::GetInstance();
+
+            return $count = $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+    }
 
     /**
      * Search an administrator by email, returning the administrator or null
@@ -96,28 +192,6 @@ class AdministratorDAO implements lAdministratorDAO
         return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
     }
 
-
-    private function update($value)
-    {
-        try {
-            $query = "UPDATE " . $this->tableName . " SET activeAdmin = :activeAdmin, firstNameAdmin = :firstNameAdmin, lastNameAdmin = :lastNameAdmin, emailAdmin = :emailAdmin, administratorId = :administratorId, employeeNumber = :employeeNumber, passwordAdmin = :passwordAdmin
-            WHERE (administratorId = :administratorId)";
-
-            $parameters['activeAdmin'] = $value->getActive();
-            $parameters['firstNameAdmin'] = $value->getFirstName();
-            $parameters['lastNameAdmin'] = $value->getLastName();
-            $parameters['emailAdmin'] = $value->getEmail();
-            $parameters['administratorId'] = $value->getAdministratorId();
-            $parameters['employeeNumber'] = $value->getEmployeeNumber();
-            $parameters['passwordAdmin'] = $value->getPassword();
-
-            $this->connection = Connection::GetInstance();
-
-            $this->connection->ExecuteNonQuery($query, $parameters);
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
-    }
 
     public function mapear($array)
     {

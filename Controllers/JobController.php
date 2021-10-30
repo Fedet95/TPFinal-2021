@@ -29,6 +29,7 @@ class JobController
     private $companyDAO;
     private $countryDAO;
     private $careersOrigin;
+    private $allCareers;
     private $jobPositionsOrigin;
     private $loggedUser;
     private $jobOfferDAO;
@@ -82,9 +83,39 @@ class JobController
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $allCompanies = $this->companyDAO->getAll();
-        $allCountrys = $this->countryDAO->getAll();
-        $allCareers = $this->careersOrigin->start($this->careersOrigin);
+        try {
+            $allCompanies = $this->companyDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+           echo  $ex->getMessage();
+        }
+
+        try {
+
+            $allCountrys = $this->countryDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+           echo  $ex->getMessage();
+        }
+
+        try {
+            if($this->allCareers==null)
+            {
+                $allCareers = $this->careersOrigin->start($this->careersOrigin);
+            }
+            else
+            {
+                $allCareers= $this->allCareers;
+            }
+
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
 
         if ($careerId != null) {
             $allPositions = $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
@@ -110,14 +141,64 @@ class JobController
      * Call the "job offer management" view
      * @param string $message
      */
-    public function showJobOfferManagementView($message = "")
+    public function showJobOfferManagementView($valueToSearch=null, $message = "",  $back=null)
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
         $edit=null;
         $remove=null;
-        $allCompanies = $this->companyDAO->getAll();
-        $allOffers = $this->jobOfferDAO->getAll();
+
+        try
+        {
+            $allCompanies = $this->companyDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+        try
+        {
+            $allOffers = $this->jobOfferDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+        try
+        {
+            if($this->allCareers==null)
+            {
+                $allCareers = $this->careersOrigin->start($this->careersOrigin);
+            }
+            else
+            {
+                $allCareers= $this->allCareers;
+            }
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+
+        $allPositions = $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
+        $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
+
+        try {
+            $allPositions = $this->jobPositionDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+        if($valueToSearch!=null)
+        {
+            $searchedValue = $this->searchJobFiltre($allOffers, $valueToSearch, $back);
+        }
+
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
     }
@@ -138,18 +219,21 @@ class JobController
 
 //--------------------------------------------------------------------------------------------
 
-    public function showJobPositionManagement($message = "", $jobPosition = null)
+    public function showJobPositionManagement($message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        if ($jobPosition == null) {
-            $allPositions = $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
-            $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
-        } else {
-            $this->jobPositionDAO->updateJobPositionFile($jobPosition);
-        }
+        $allPositions = $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
+        $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
 
-        $allPositions = $this->jobPositionDAO->getAll();
+
+        try {
+            $allPositions = $this->jobPositionDAO->getAll();
+        }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
 
         require_once(VIEWS_PATH . "jobPositionManagment.php");
     }
@@ -159,10 +243,28 @@ class JobController
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $allCareers = $this->careersOrigin->start($this->careersOrigin);
+        if($this->allCareers==null)
+        {
+            $allCareers = $this->careersOrigin->start($this->careersOrigin);
+        }
+        else
+        {
+            $allCareers= $this->allCareers;
+        }
 
 
         require_once(VIEWS_PATH . "createJobPosition.php");
+
+    }
+
+    public function showJobPositionViewMore($careerDescription, $message = "")
+    {
+        require_once(VIEWS_PATH . "checkLoggedUser.php");
+
+        $careerToShow = $careerDescription;
+        $allPositions = $this->jobPositionDAO->getAll();
+
+        require_once(VIEWS_PATH . "jobPositionViewMore.php");
 
     }
 
@@ -171,8 +273,15 @@ class JobController
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
-        $allJobPositions = $this->jobPositionDAO->getAll();
-        $allCareers = $this->careersOrigin->start($this->careersOrigin);
+        if($this->allCareers==null)
+        {
+            $allCareers = $this->careersOrigin->start($this->careersOrigin);
+        }
+        else
+        {
+            $allCareers= $this->allCareers;
+        }
+
         $flag = 0;
 
         if ($careerId == null) {
@@ -208,8 +317,15 @@ class JobController
             $careerAux->setCareerId($careerId);
             $newJobPosition->setCareer($careerAux);
 
-            $this->jobPositionDAO->add($newJobPosition);
-            $this->showJobPositionManagment("Job Position succesfully created", $newJobPosition);
+            try {
+                $this->jobPositionDAO->add($newJobPosition);
+            }
+            catch (\PDOException $ex)
+            {
+               echo  $ex->getMessage();
+            }
+
+            $this->showJobPositionManagement("Job Position succesfully created");
         }
 
     }
@@ -399,7 +515,16 @@ class JobController
         }
 
         try {
-            $allCareers = $this->careersOrigin->start($this->careersOrigin);
+
+            if($this->allCareers==null)
+            {
+                $allCareers = $this->careersOrigin->start($this->careersOrigin);
+            }
+            else
+            {
+                $allCareers= $this->allCareers;
+            }
+
         } catch (\PDOException $ex) {
             echo $ex->getMessage();
         }
@@ -553,7 +678,7 @@ class JobController
                 }
 
                 $message = "Job Offer successfully updated";
-                $this->showJobOfferManagementView("$message");
+                $this->showJobOfferManagementView(null, "$message");
 
             } catch (\PDOException $ex) {
                 $message= "Error, try again";
@@ -631,7 +756,7 @@ class JobController
             }
             else
             {
-                $this->showJobOfferManagementView("Remove operation aborted");
+                $this->showJobOfferManagementView(null, "Remove operation aborted");
             }
 
         }
@@ -670,6 +795,7 @@ class JobController
 
                 //$this->sendEmail("juanpayetta@gmail.com", $sub, $text);
                 //$this->sendEmail("pablopayetta@gmail.com", $sub, $text);
+                //$this->sendEmail("ftacchini95@gmail.com", $sub, $text);
 
             }
             else
@@ -696,6 +822,51 @@ class JobController
         else
             echo "Email sending failed";
     }
+
+
+
+    /**
+     * Returns a searched company or all companies otherwise
+     * @param $allOffers
+     * @return array|mixed
+     */
+    public function searchJobFiltre($allOffers, $valueToSearch)
+    {
+        $searchedOffer = array();
+
+        if($valueToSearch!=null)
+        {
+
+            foreach ($allOffers as $value)
+            {
+                $positions= $value->getJobPosition();
+
+                foreach ($positions as $pos )
+                {
+                    if ($pos->getJobPositionId() == $valueToSearch) //no es case sensitive
+                    {
+                        array_push($searchedOffer, $value);
+                    }
+                }
+
+            }
+        }
+        else
+        {
+            $searchedOffer = $allOffers;
+        }
+
+
+
+
+        if($valueToSearch=='Show all Offers' || $valueToSearch=='Back')
+        {
+            $searchedOffer = $allOffers;
+        }
+
+        return $searchedOffer;
+    }
+
 
 
 

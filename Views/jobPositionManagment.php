@@ -10,18 +10,47 @@ include_once('nav.php');
         <table class="table bg bg-light-alpha border" style="text-align:center;">
             <thead>
             <tr>
-                <th class="text-muted text-strong" style="width: 25%;">ID</th>
                 <th class="text-muted text-strong" style="width: 25%;">Career</th>
-                <th class="text-muted text-strong" style="width: 25%;">Job Description</th>
+                <th class="text-muted text-strong" style="width: 25%;">View Job Positions</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($allPositions as $valuePosition) {
-                ?>
+
+            <?php
+            $careerToShow = null;
+            foreach ($allPositions as $valuePosition) { ?>
                 <tr>
-                    <td><?php echo $valuePosition->getJobPositionId() ?></td>
-                    <td><?php echo $valuePosition->getCareer()->getDescription() ?></td>
-                    <td><?php echo $valuePosition->getDescription() ?></td>
+
+                    <?php
+                    if ($careerToShow == null) { ?>
+
+                        <td><?php echo $valuePosition->getCareer()->getDescription() ?></td>
+
+                        <?php $careerToShow = $valuePosition->getCareer()->getDescription() ?>
+                        <td>
+                        <form action="<?php echo FRONT_ROOT ."Job/showJobPositionViewMore" ?>"  method="POST">
+                            <button type="submit" name="careerDescription" class="btn btn-dark ml-auto d-block"
+                                    value="<?php echo $valuePosition->getCareer()->getDescription() ?>"> View
+                            </button>
+                        </form>
+                        </td>
+                        <?php
+                    } else if (strcasecmp($valuePosition->getCareer()->getDescription(), $careerToShow) == 0) {
+
+                    } else { ?>
+                        <td><?php echo $valuePosition->getCareer()->getDescription() ?></td>
+                        <?php $careerToShow = $valuePosition->getCareer()->getDescription() ?>
+                        <td>
+                        <form action="<?php echo FRONT_ROOT ."Job/showJobPositionViewMore" ?>" method="POST">
+                            <button type="submit" name="careerDescription"  class="btn btn-dark ml-auto d-block"
+                                    value="<?php echo $valuePosition->getCareer()->getDescription() ?>"> View
+                            </button>
+                        </form>
+                        </td>
+                        <?php
+                    }
+                    ?>
+
                 </tr>
                 <?php
             }

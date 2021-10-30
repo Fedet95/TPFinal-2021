@@ -75,51 +75,122 @@ include_once('nav.php');
             </div>
             <div class="row">
                 <div class="col-lg-2 col-md-4 col-sm-6">
+                    <br>
                     <div class="single-fcat">
-                        <a href="category.html">
-                            <img src="img/o1.png" alt="">
-                        </a>
-                        <p>Accounting</p>
+                            <img src="../Views/img/o1.png" alt="">
+                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
+                        <?php
+
+                        foreach ($allCareers as $car) {
+
+                            if($car->getActive()=='true' && $car->getDescription()=="University technician in textile production")
+                            {
+                                ?>
+                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                <input type="submit" class=" btn btn-light ml-auto" name="button" value="Textile Production">
+                                <?php
+                            }} ?>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <br>
+                    <div class="single-fcat">
+                            <img src="../Views/img/o2.png" alt="">
+                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
+                        <?php
+
+                        foreach ($allCareers as $car) {
+
+                            if($car->getActive()=='true' && $car->getDescription()=="University technician in computer systems")
+                            {
+                                ?>
+                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                <input type="submit" class=" btn btn-light ml-auto" name="button" value=" Ing Comp systems">
+                                <?php
+                            }} ?>
+                        </form>
+
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
+                    <br>
                     <div class="single-fcat">
-                        <a href="category.html">
-                            <img src="img/o2.png" alt="">
-                        </a>
-                        <p>Development</p>
+                        <img src="../Views/img/o3.png" alt="">
+                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
+                        <?php
+
+                        foreach ($allCareers as $car) {
+
+                            if($car->getActive()=='true' && $car->getDescription()=="University technician in programming")
+                            {
+                                ?>
+                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                <input type="submit" class=" btn btn-light ml-auto" name="button" value="Tech programming">
+                                <?php
+                            }} ?>
+                        </form>
+
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
+                    <br>
                     <div class="single-fcat">
-                        <a href="category.html">
-                            <img src="img/o3.png" alt="">
-                        </a>
-                        <p>Technology</p>
+                            <img src="../Views/img/o4.png" alt="">
+                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
+                        <?php
+
+                            foreach ($allCareers as $car) {
+
+                                if($car->getActive()=='true' && $car->getDescription()=="Naval engineering")
+                                    {
+                                        ?>
+                                            <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                        <input type="submit" class=" btn btn-light ml-auto" name="button" value="Naval">
+                                        <?php
+                                    }} ?>
+                        </form>
+
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
+                    <br>
                     <div class="single-fcat">
-                        <a href="category.html">
-                            <img src="img/o4.png" alt="">
-                        </a>
-                        <p>Media & News</p>
+                            <img src="../Views/img/o5.png" alt="">
+                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
+                        <?php
+
+                        foreach ($allCareers as $car) {
+
+                            if($car->getActive()=='true' && $car->getDescription()=="University technician in administration")
+                            {
+                                ?>
+                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                <input type="submit" class=" btn btn-light ml-auto" name="button" value="Administration">
+                                <?php
+                            }} ?>
+                        </form>
+
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
+                    <br>
                     <div class="single-fcat">
-                        <a href="category.html">
-                            <img src="img/o5.png" alt="">
-                        </a>
-                        <p>Medical</p>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <div class="single-fcat">
-                        <a href="category.html">
-                            <img src="img/o6.png" alt="">
-                        </a>
-                        <p>Goverment</p>
+                            <img src="../Views/img/o6.png" alt="">
+                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
+                        <?php
+
+                        foreach ($allCareers as $car) {
+
+                            if($car->getActive()=='true' && $car->getDescription()=="University technician in environmental procedures and technologies")
+                            {
+                                ?>
+                                <input type="hidden" name="valueToSearch" value="<?php echo $car->getCareerId()?>">
+                                <input type="submit" class=" btn btn-light ml-auto" name="button" value="Environmental">
+                                <?php
+                            }} ?>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -132,14 +203,113 @@ include_once('nav.php');
             <div class="row justify-content-center d-flex bg-light-alpha p-5 border">
                 <div class="col-md-9 post-list">
                     <ul class="cat-list">
-                        <li><a href="#">Recent</a></li>
-                        <li><a href="#">Full Time</a></li>
-                        <li><a href="#">Intern</a></li>
-                        <li><a href="#">part Time</a></li>
+
+
+                        <div class="form-group offset-7">  <!--JOB POSITION FILTER-->
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
+                                            <div>
+                                                <div class="form-group">
+                                                    <br>
+                                                    <select name="valueToSearch"  class="form-control"  required="required">
+                                                        <option value="" selected disabled class="text-center">Select Position</option>
+                                                        <?php
+                                                        foreach ($allPositions as $value)
+                                                        {
+                                                            foreach ($allCareers as $car) {
+
+                                                            if($value->getCareer()->getCareerId()==$car->getCareerId())
+                                                            {
+                                                                if($car->getActive()=='true')
+                                                                    {
+                                                                ?>
+                                                                <option value="<?php echo $value->getJobPositionId()?>"><?php echo $value->getDescription()?></option>
+                                                                <?php
+                                                            }}}
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                    </th>
+                                        <th>
+                                        <input type="submit" class="btn btn-light ml-auto" name="search" value="Filter">
+                                    </th>
+                                        </form>
+                                    </th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                        <!--
+                        <div class="form-group offset-7">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
+                                        <div>
+                                            <div class="form-group">
+                                                <br>
+                                                <select name="valueToSearch"  class="form-control"  required="required">
+                                                    <option value="" selected disabled class="text-center">Select Career</option>
+                                                    <?php
+                                                    foreach ($allCareers as $car) {
+                                                                if($car->getActive()=='true')
+                                                                {
+                                                                    ?>
+                                                                    <option value="<?php echo $car->getCareerId()?>"><?php echo $car->getDescription()?></option>
+                                                                    <?php
+                                                                }}
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    <th>
+                                        <input type="submit" class="btn btn-light ml-auto" name="search" value="Filter">
+                                    </th>
+
+                                    </form>
+                                    </th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                -->
+                        <div class="form-group offset-lg-10">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>
+                                    <th>
+                                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post" ">
+                                        <input type="submit" name="all" class="btn btn-close-white ml-auto" value="Show all Offers">
+                                        </form>
+                                    </th>
+                                    </th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </ul>
-                    <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {
-                            echo $message;
-                        } ?></h6>
+
+                    <?php if(isset($searchedValue)) {
+                        if(!empty($searchedValue))
+                        {
+                            $allOffers=$searchedValue;
+                        }
+                        else{
+                           $message= "No job offers with these characteristics were found";
+                        }
+                    }?>
+
+
+                    <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
+
                     <?php
                     if(is_object($allOffers))
                     { $offer= $allOffers;
@@ -229,9 +399,9 @@ include_once('nav.php');
                                             </div>
                                             <br>
                                             <div class="row offset-3">
-                                                <p class=""> <!--CAREER-->
-                                                    <?php echo $value->getCareer()->getDescription() ?>
-                                                </p>
+                                                <h5 class=""> <!--CAREER-->
+                                                    <I> <?php echo $value->getCareer()->getDescription() ?></I>
+                                                </h5>
                                                 <I><h5>Job Nature: <?php echo $value->getDedication(); ?></h5></I>
                                                 <!--DEDICATION-->
                                                 <p class="address"><span class="lnr lnr-map"></span>
@@ -250,7 +420,7 @@ include_once('nav.php');
                                                 <td>
                                                     <form action="<?php echo FRONT_ROOT . "Job/showJobOfferViewMore" ?>"
                                                           method="POST">
-                                                        <button type="submit" name="id" class="btn ml-auto d-block"
+                                                        <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                                                 value="<?php echo $value->getJobOfferId() ?>"> View More
                                                         </button>
                                                     </form>
@@ -261,8 +431,8 @@ include_once('nav.php');
                                                     <?php if ($value->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) { ?>
                                                         <form action="<?php echo FRONT_ROOT . " PONER EL ROOT CORRESPONDIENTE  " ?>"
                                                               method="POST">
-                                                            <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
-                                                            <button type="submit" name="id" class="btn ml-auto d-block"
+                                                            <!--**************************************************PONER EL ROOT CORRESPONDIENTE ***********************************/ -->
+                                                            <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                                                     value="<?php echo $value->getJobOfferId() ?>">Apply
                                                             </button>
                                                         </form>
@@ -275,8 +445,7 @@ include_once('nav.php');
                                                     <td>
                                                         <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
                                                               method="POST">
-                                                            <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
-                                                            <button type="submit" name="id" class="btn ml-auto d-block"
+                                                            <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                                                     value="<?php echo $value->getJobOfferId() ?>">
                                                                 Remove
                                                             </button>
@@ -288,7 +457,7 @@ include_once('nav.php');
                                                               method="POST">
                                                             <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
                                                             <button type="submit" name="id"
-                                                                    class="btn ml-auto d-block"
+                                                                    class="btn buttonPer ml-auto d-block"
                                                                     value="<?php echo $value->getJobOfferId() ?>"> Edit
                                                             </button>
                                                         </form>
@@ -402,7 +571,7 @@ include_once('nav.php');
                                                             <td>
                                                                 <form action="<?php echo FRONT_ROOT . "Job/showJobOfferViewMore" ?>"
                                                                       method="POST">
-                                                                    <button type="submit" name="id" class="btn ml-auto d-block"
+                                                                    <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                                                             value="<?php echo $value->getJobOfferId() ?>"> View More
                                                                     </button>
                                                                 </form>
@@ -413,7 +582,7 @@ include_once('nav.php');
                                                                     <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
                                                                           method="POST">
                                                                         <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
-                                                                        <button type="submit" name="id" class="btn ml-auto d-block"
+                                                                        <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                                                                 value="<?php echo $value->getJobOfferId() ?>">
                                                                             Remove
                                                                         </button>
@@ -425,7 +594,7 @@ include_once('nav.php');
                                                                           method="POST">
                                                                         <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
                                                                         <button type="submit" name="id"
-                                                                                class="btn ml-auto d-block"
+                                                                                class="btn ml-auto buttonPer d-block"
                                                                                 value="<?php echo $value->getJobOfferId() ?>"> Edit
                                                                         </button>
                                                                     </form>
@@ -450,8 +619,6 @@ include_once('nav.php');
     <!-- End post Area -->
 
 <?php } ?>
-
-
 
     <!--EDIT JOB OFFER AREA-->
 <?php
