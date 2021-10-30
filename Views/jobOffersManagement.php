@@ -455,7 +455,6 @@ include_once('nav.php');
                                                     <td>
                                                         <form action="<?php echo FRONT_ROOT . "Job/editJobOffer" ?>"
                                                               method="POST">
-                                                            <!--********PONER EL ROOT CORRESPONDIENTE *****/ -->
                                                             <button type="submit" name="id"
                                                                     class="btn buttonPer ml-auto d-block"
                                                                     value="<?php echo $value->getJobOfferId() ?>"> Edit

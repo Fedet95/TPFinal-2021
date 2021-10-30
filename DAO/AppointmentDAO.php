@@ -15,7 +15,7 @@ class AppointmentDAO implements IAppointmentDAO
     private $tableName3 = "students";
 
 
-    public function add(Appointment $appointment)
+    public function add(Appointment $appointment)   ////AGREGAR LOS ATRIBUTOS FALTANTES AL APOINMENT!!!!!
     {
         try {
             $query = "INSERT INTO " . $this->tableName . "(appointmentId, jobOfferAppointmentId, studentAppointmentId, dateAppointment) VALUES (:appointmentId, :jobOfferAppointmentId, :studentAppointmentId, :dateAppointment)";
@@ -73,16 +73,16 @@ class AppointmentDAO implements IAppointmentDAO
         }
     }
 
-    function getAppointment($appointmentId)
+    function getAppointment($studentId) //lo utilizamos para comprobar si ya hay un apoinment del usuario
     {
         try {
-            $query = "SELECT * FROM " . $this->tableName . " c INNER JOIN " . $this->tableName2 . " co ON c.jobOfferAppointmentId= co.jobOfferId
-            INNER JOIN " . $this->tableName3 . " ci ON c.studentAppointmentId= ci.studentId  WHERE (appointmentId= :appointmentId)";
+
+            $query = "SELECT * FROM " . $this->tableName . " WHERE (studentId= :studentId)";
 
             ///EL WHERE MUY IMPORTANTE PARA SOLO LEVANTAR UN REGISTRO DE LA TABLA
 
 
-            $parameters['appointmentId'] = $appointmentId;
+            $parameters['studentId'] = $studentId;
 
             $this->connection = Connection::GetInstance();
 

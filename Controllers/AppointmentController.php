@@ -22,29 +22,46 @@ class AppointmentController
         $this->loggedUser = $this->loggedUserValidation();
     }
 
+    public function showAppointmentView($message = "")
+    {
+        require_once(VIEWS_PATH . "checkLoggedStudent.php");
+
+
+            require_once(VIEWS_PATH . ""); ///LLEVAR A LA VISTA DONDE LE MUESTRA SU APPOINMENT ACTUAL
+
+    }
+
+
+
 
     public function addAppointment($appointmentId,JobOffer $jobOffer, Student $student, $date)
     {
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
+        require_once(VIEWS_PATH . "checkLoggedStudent.php");
 
-        $appointment = new Appointment();
+        if ($this->AppointmentDAO->getAppointment($student->getStudentId()) == null) {
 
-        $appointment->setAppointmentId($appointmentId);
-        $appointment->setJobOffer($jobOffer);
-        $appointment->setStudent($student);
-        $appointment->setDate($date);
+            $this->showAppointmentView("Only one active application is allowed");
 
+        } else {
 
-        try {
-            $this->AppointmentDAO->add($appointment);
-          ///  $this-> /// mostrar vista*************************************************
-        }
-        catch (\PDOException $ex)
-        {
-            echo $ex->getMessage();
+            $appointment = new Appointment();
+            $appointment->setAppointmentId($appointmentId);
+            $appointment->setJobOffer($jobOffer);
+            $appointment->setStudent($student);
+            $appointment->setDate($date);
+///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!
+/// ///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!///AGREGAR ATRIBUTOS FALTANTES !!!!!!!!!!!!!!!!
+
+            try {
+
+                $this->AppointmentDAO->add($appointment);
+                $this->showAppointmentView("Successfully added application");
+
+            } catch (\PDOException $ex) {
+                echo $ex->getMessage();
+            }
         }
     }
-
 
     public function showAppointmentList($valueToSearch = null, $back = null, $message = "")
     {
