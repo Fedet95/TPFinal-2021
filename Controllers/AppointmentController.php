@@ -3,6 +3,8 @@
 namespace Controllers;
 
 use DAO\AppointmentDAO;
+use DAO\JobOfferDAO;
+use DAO\OriginStudentDAO;
 use Models\Appointment;
 use Models\JobOffer;
 use Models\Student;
@@ -46,7 +48,7 @@ class AppointmentController
 
     }
 
-    public function addAppointment($appointmentId,JobOffer $jobOffer, Student $student, $date, $message, $cv)
+    public function addAppointment($text, $studentId, $jobOfferId, $cv)
     {
         require_once(VIEWS_PATH . "checkLoggedStudent.php");
 
@@ -91,12 +93,10 @@ class AppointmentController
 
         try {
             $allAppointment = $this->AppointmentDAO->getAll();
-        }
-        catch (\PDOException $ex)
-        {
+        } catch (\PDOException $ex) {
             echo $ex->getMessage();
         }
-        $searchedAppointment=$this->searchAppointmentFiltreASD($allAppointment, $valueToSearch, $back);
+        $searchedAppointment = $this->searchAppointmentFiltreASD($allAppointment, $valueToSearch, $back);
         /// require_once(VIEWS_PATH . *******AGREGAR VISTA ****);
     }
 
@@ -104,23 +104,18 @@ class AppointmentController
     {
         $searchedAppointment = array();
 
-        if($valueToSearch!=null)
-        {
-            foreach ($allAppointment as $value)
-            {
-                if ($value-> getAppointmentId== $valueToSearch)  // ID == ID
+        if ($valueToSearch != null) {
+            foreach ($allAppointment as $value) {
+                if ($value->getAppointmentId == $valueToSearch)  // ID == ID
                 {
                     array_push($searchedAppointment, $value);
                 }
             }
-        }
-        else
-        {
+        } else {
             $searchedAppointment = $allAppointment;
         }
 
-        if($valueToSearch=='Show all apointments' || $valueToSearch=='Back')
-        {
+        if ($valueToSearch == 'Show all apointments' || $valueToSearch == 'Back') {
             $searchedAppointment = $allAppointment;
         }
 
@@ -136,9 +131,7 @@ class AppointmentController
         try {
             $this->AppointmentDAO->remove($studentId);
             /// $this-> ///*****LLAMAR A LA VISTA ***///();
-        }
-        catch (\PDOException $ex)
-        {
+        } catch (\PDOException $ex) {
             echo $ex->getMessage();
         }
     }
@@ -266,7 +259,6 @@ class AppointmentController
             return $appointment;
         }
     }
-
 
 
 
