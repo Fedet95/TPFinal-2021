@@ -15,7 +15,7 @@ class AppointmentDAO implements IAppointmentDAO
     private $tableName3 = "students";
 
 
-    public function add(Appointment $appointment)   ////AGREGAR LOS ATRIBUTOS FALTANTES AL APOINMENT!!!!!
+    public function add(Appointment $appointment)
     {
         try {
             $query = "INSERT INTO " . $this->tableName . "(jobOfferAppointmentId, studentAppointmentId, dateAppointment, message, cv) VALUES (:jobOfferAppointmentId, :studentAppointmentId, :dateAppointment, :message, :cv)";
@@ -99,11 +99,38 @@ class AppointmentDAO implements IAppointmentDAO
         }
     }
 
+    function getStudentAppointment($jobOfferAppointmentId)
+    {
+        try {
+
+            $query = "SELECT * FROM " . $this->tableName . " c INNER JOIN " . $this->tableName3 . "WHERE (jobOfferAppointmentId= :jobOfferAppointmentId)";
+
+            ///EL WHERE MUY IMPORTANTE PARA SOLO LEVANTAR UN REGISTRO DE LA TABLA
+
+            $parameters['jobOfferAppointmentId'] = $jobOfferAppointmentId;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, $parameters);
+
+            $mapedArray = null;
+            if (!empty($result)) {
+                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+            }
+
+            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+    }
+
+
     public function mapear($array)
     {
         $array = is_array($array) ? $array : [];
 
         $resultado = array_map(function ($value) {
+
 
             $appointment = new Appointment();
 
@@ -112,16 +139,19 @@ class AppointmentDAO implements IAppointmentDAO
             $appointment->setMessage($value["message"]);
             $appointment->setCv($value["cv"]);
 
-            $jobOfferId = $value['jobOfferId'];
-            $title = $value['title'];
-            $company = $value['company'];
+            if(isset($value['jobOfferId'])) {
 
-            $jobOffer = new JobOffer();
-            $jobOffer->setTitle($title);
-            $jobOffer->setJobOfferId($jobOfferId);
-            $jobOffer->setCompany($company);
+                $jobOfferId = $value['jobOfferId'];
+                $title = $value['title'];
+                $company = $value['company'];
 
-            $appointment->setJobOffer($jobOffer);
+                $jobOffer = new JobOffer();
+                $jobOffer->setTitle($title);
+                $jobOffer->setJobOfferId($jobOfferId);
+                $jobOffer->setCompany($company);
+
+                $appointment->setJobOffer($jobOffer);
+            }
 
             $studentId = $value["studentId"];
             $firstName = $value["firstName"];
