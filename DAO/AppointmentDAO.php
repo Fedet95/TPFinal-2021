@@ -27,7 +27,8 @@ class AppointmentDAO implements IAppointmentDAO
             $parameters['cv'] = $appointment->getCv();
 
             $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($query, $parameters); //el executeNonquery no retorna array, sino la cantidad de datos modificados
+          return $count= $this->connection->ExecuteNonQuery($query, $parameters);
+
         } catch (\PDOException $ex) {
             throw $ex;
         }

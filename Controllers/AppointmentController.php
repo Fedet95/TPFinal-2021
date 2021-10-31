@@ -3,9 +3,14 @@
 namespace Controllers;
 
 use DAO\AppointmentDAO;
+use DAO\AppointmentHistoryDAO;
 use DAO\JobOfferDAO;
 use DAO\OriginStudentDAO;
+use Models\Administrator;
 use Models\Appointment;
+use Models\AppointmentHistory;
+use Models\Career;
+use Models\Company;
 use Models\JobOffer;
 use Models\Student;
 
@@ -15,12 +20,15 @@ require_once(VIEWS_PATH . "checkLoggedUser.php");
 class AppointmentController
 {
 
-    private $AppointmentDAO;
+    private $appointmentDAO;
+    private $jobOfferDAO;
+    private $loggedUser;
 
     public function __construct()
     {
-        $this->AppointmentDAO = new AppointmentDAO();
-        $this->JobOfferDAO = new JobOfferDAO();
+        $this->appointmentDAO = new AppointmentDAO();
+        $this->jobOfferDAO = new JobOfferDAO();
+        $this->loggedUser= $this->loggedUserValidation();
     }
 
     public function showApplyView( $studentId, $jobOfferId, $message = "")
@@ -38,7 +46,56 @@ class AppointmentController
         }
     }
 
+    public function showAppointmentList($valueToSearch = null, $back = null, $message = "")
+    {
+        require_once(VIEWS_PATH . "checkLoggedUser.php");
 
+        if($this->loggedUser instanceof Student)
+        {
+            try {
+                $actualAppointment= $this->appointmentDAO->getStudentAppointment($this->loggedUser->getStudentId());
+            }
+            catch (\PDOException $ex)
+            {
+                echo $ex->getMessage();
+            }
+
+            $appointmentHistory= new AppointmentHistoryDAO();
+            try {
+
+               $historyAppointments= $appointmentHistory->getHistoryAppointments($this->loggedUser->getStudentId());
+            }
+            catch (\PDOException $ex)
+            {
+                echo $ex->getMessage();
+            }
+
+
+        }
+        else if($this->loggedUser instanceof Administrator)
+        {
+            try {
+                $actualAppointment= $this->appointmentDAO->getAll(); //ANALIZAR SI SOLO BUSCO LAS APPOINTMENTS DE UNA JOB OFFER PARTICULAR
+
+            }catch (\PDOException $ex)
+            {
+                 echo $ex->getMessage();
+            }
+
+        }
+
+        try {
+            $allAppointment = $this->appointmentDAO->getAll();
+        } catch (\PDOException $ex) {
+            echo $ex->getMessage();
+        }
+        $searchedAppointment = $this->searchAppointmentFiltreASD($allAppointment, $valueToSearch, $back);
+        /// require_once(VIEWS_PATH . *******AGREGAR VISTA ****);
+    }
+
+
+
+    /*
     public function showAppointmentView($message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedStudent.php");
@@ -47,14 +104,15 @@ class AppointmentController
         require_once(VIEWS_PATH . "applyJobOffer.php"); //cambiarrrrrrrrrrrrrrrrrr
 
     }
+    */
 
     public function addAppointment($text, $studentId, $jobOfferId, $cv)
     {
         require_once(VIEWS_PATH . "checkLoggedStudent.php");
 
-        if ($this->AppointmentDAO->getAppointment($studentId) != null) {
+        if ($this->appointmentDAO->getAppointment($studentId) != null) {
 
-            $this->showAppointmentView("Only one active application is allowed");
+            $this->showAppointmentList($valueToSearch = null, $back = null, "Only one active application is allowed");
 
         } else {
 
@@ -73,8 +131,35 @@ class AppointmentController
                 $appointment->setStudent($student);
 
                 try {
-                    $this->AppointmentDAO->add($appointment);
-                    $this->showAppointmentView("Successfully added application");
+                   $count= $this->appointmentDAO->add($appointment);
+
+                   if($count>0)
+                   {
+                       $searchOffer= $this->jobOfferDAO->getJobOffer($jobOfferId);
+                       $history= new AppointmentHistory();
+                       $history->setJobOfferTittle($searchOffer->getTitle());
+                       $history->setAppointmentDate($appointment->getDate());
+                       $career= new Career();
+                       $career->setDescription($searchOffer->getCareer()->getDescription());
+                       $history->setCareer($career);
+                       $student= new Student();
+                       $student->setStudentId($studentId);
+                       $history->setStudent($student);
+                       $company= new Company();
+                       $company->setName($searchOffer->getCompany()->getName());
+                       $company->setCuit($searchOffer->getCompany()->getCuit());
+                       $history->setCompany($company);
+                       $historyDAO= new AppointmentHistoryDAO();
+                       try {
+                           $historyDAO->add($history);
+                       }
+                       catch (\PDOException $ex)
+                       {
+                           echo $ex->getMessage();
+                       }
+                   }
+
+                    $this->showAppointmentList($valueToSearch = null, $back = null, "Successfully added application");
 
                 } catch (\PDOException $ex) {
                     echo $ex->getMessage();
@@ -87,18 +172,6 @@ class AppointmentController
         }
     }
 
-    public function showAppointmentList($valueToSearch = null, $back = null, $message = "")
-    {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
-
-        try {
-            $allAppointment = $this->AppointmentDAO->getAll();
-        } catch (\PDOException $ex) {
-            echo $ex->getMessage();
-        }
-        $searchedAppointment = $this->searchAppointmentFiltreASD($allAppointment, $valueToSearch, $back);
-        /// require_once(VIEWS_PATH . *******AGREGAR VISTA ****);
-    }
 
     public function searchAppointmentFiltreASD($allAppointment, $valueToSearch)
     {
@@ -129,7 +202,7 @@ class AppointmentController
         require_once(VIEWS_PATH . "checkLoggedStudent.php");
 
         try {
-            $this->AppointmentDAO->remove($studentId);
+            $this->appointmentDAO->remove($studentId);
             /// $this-> ///*****LLAMAR A LA VISTA ***///();
         } catch (\PDOException $ex) {
             echo $ex->getMessage();
@@ -142,7 +215,7 @@ class AppointmentController
         //C. Ver el alumno propuesto para una oferta laboral
         try
         {
-            $searchedJobOffer = $this->JobOfferDAO->getJobOffer($jobOfferId);
+            $searchedJobOffer = $this->jobOfferDAO->getJobOffer($jobOfferId);
 
         }catch(\PDOException $ex){
 
@@ -151,7 +224,7 @@ class AppointmentController
 
         try
         {
-            $arrayApointments = $this->AppointmentDAO->getStudentAppointment($jobOfferId);
+            $arrayApointments = $this->appointmentDAO->getStudentAppointment($jobOfferId);
         }catch (\PDOException $ex)
         {
             throw $ex;
@@ -172,6 +245,12 @@ class AppointmentController
 
     }
 
+
+    /**
+     * Validate if an student is currently active
+     * @param $studentId
+     * @return int
+     */
     public function validateActiveStudent($studentId)
     {
         $studentsOrigin= new OriginStudentDAO();
@@ -261,5 +340,22 @@ class AppointmentController
     }
 
 
+
+    /**
+     * Validate if the admin/student has logged in the system correctly
+     * @return mixed|null
+     */
+    public function loggedUserValidation()
+    {
+        $loggedUser = null;
+
+        if (isset($_SESSION['loggedadmin'])) {
+            $loggedUser = $_SESSION['loggedadmin'];
+        } else if (isset($_SESSION['loggedstudent'])) {
+            $loggedUser = $_SESSION['loggedstudent'];
+        }
+
+        return $loggedUser;
+    }
 
 }

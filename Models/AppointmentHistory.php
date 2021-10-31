@@ -6,10 +6,10 @@ class AppointmentHistory
 {
     private $historyId;
     private $jobOfferTittle;
-    private $jobOfferCompanyName;
-    private $jobOfferCompanyCuit;
-    private $historyCareerId;
-    private $historyStudentId;
+    private $company;
+    private $career;
+    private $student;
+    private $appointmentDate;
 
     public function getHistoryId()
     {
@@ -31,42 +31,54 @@ class AppointmentHistory
         $this->jobOfferTittle = $jobOfferTittle;
     }
 
-    public function getJobOfferCompanyName()
+
+    public function getCompany()
     {
-        return $this->jobOfferCompanyName;
+        return $this->company;
     }
 
-    public function setJobOfferCompanyName(Company $jobOfferCompanyName)
+
+    public function setCompany($company)
     {
-        $this->jobOfferCompanyName = $jobOfferCompanyName;
-    }
-    public function getJobOfferCompanyCuit()
-    {
-        return $this->jobOfferCompanyCuit;
+        $this->company = $company;
     }
 
-    public function setJobOfferCompanyCuit(Company $jobOfferCompanyCuit)
+
+    public function getCareer()
     {
-        $this->jobOfferCompanyCuit = $jobOfferCompanyCuit;
+        return $this->career;
     }
 
-    public function getHistoryCareedId()
+
+    public function setCareer($career)
     {
-        return $this->historyCareerId;
+        $this->career = $career;
     }
 
-    public function setHistoryCareedId(Career $historyCareerId)
+
+    public function getStudent()
     {
-        $this->historyCareerId = $historyCareerId;
+        return $this->student;
     }
 
-    public function getHistoryStudentId()
+
+    public function setStudent($student)
     {
-        return $this->historyStudentId;
+        $this->student = $student;
     }
 
-    public function setHistoryStudentId(Student $historyStudentId)
+    public function getAppointmentDate()
     {
-        $this->historyStudentId = $historyStudentId;
+        return $this->appointmentDate;
     }
+
+
+    public function setAppointmentDate($appointmentDate)
+    {
+        $this->appointmentDate = $appointmentDate;
+    }
+
+
+
+
 }

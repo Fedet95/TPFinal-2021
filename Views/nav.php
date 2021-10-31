@@ -141,6 +141,15 @@ if (isset($_SESSION['loggedstudent']))
                 <?php
             }
             ?>
+            </li class="nav-item active">
+            <?php
+            if($loggedUser instanceof Student)
+            {
+                ?>
+                <a class="nav-link" href="<?php echo  FRONT_ROOT."Appointment/showStudentListView"?>">Students</a>
+                <?php
+            }
+            ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/Logout"?>">Logout</a>
             </li>

@@ -236,7 +236,7 @@ include_once('nav.php');
                                                                 if($car->getActive()=='true')
                                                                 {
                                                                     ?>
-                                                                    <option value="<?php echo $car->getCareerId()?>"><?php echo $car->getDescription()?></option>
+                                                                    <option value="<?php echo $car->getDescription()?>"><?php echo $car->getDescription()?></option>
                                                                     <?php
                                                                 }}
                                                     ?>

@@ -251,9 +251,9 @@ class JobOfferDAO implements IJobOfferDAO
             $admin->setLastName($value['lastNameAdmin']);
             $jobOffer->setCreationAdmin($admin);
 
+
             $jobPosition= new JobPosition();
             $jobPosition->setJobPositionId($value["jobPositionIdOp"]);
-
 
             if(isset($value['descriptionJob']))
             {
@@ -267,6 +267,7 @@ class JobOfferDAO implements IJobOfferDAO
                 $jobPosition->setCareer($career);
             }
             $jobOffer->setJobPosition($jobPosition);
+
 
 
             return $jobOffer;
