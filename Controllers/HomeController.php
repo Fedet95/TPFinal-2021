@@ -86,21 +86,6 @@ class HomeController
             {
                     if ($searchedStudent->getActive()) //if is TRUE
                     {
-                        /* NO LE CARGAMOS LA CARRERA POR AHORA, SE UTILIZARA UNA QUERY CUANDO SE LA NECESITE (JOIN CON EL ALUMNO)
-                        $this->getCareersOrigin();
-                        $searchCareer= $this->searchCareer($searchedStudent->getCareer()->getCareerId());
-
-                        if($searchCareer)
-                        {
-                            $searchedStudent->getCareer()->setDescription($searchCareer->getDescription());
-                            $searchedStudent->getCareer()->setActive($searchCareer->getActive());
-                        }
-                        else
-                        {
-                            $message = 'Your career was not found, please get in contact with the university';
-                            $this->Index($message);
-                        }
-                        */
 
                         try {
                             $studentFromDao= $this->studentDAO->getStudent($searchedStudent->getStudentId());

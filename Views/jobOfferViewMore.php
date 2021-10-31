@@ -124,8 +124,9 @@ include_once('nav.php');
                                  </form>
 
                              <?php } else{?>
-                                 <form action="<?php echo FRONT_ROOT . "Appointment/addAppointment" ?>"
+                                 <form action="<?php echo FRONT_ROOT . "Appointment/showApplyView" ?>"
                                        method="POST">
+                                     <input type="hidden" name="studentId" value="<?php echo $loggedUser->getStudentId() ?>">
                                      <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                              value="<?php echo $jobOffer->getJobOfferId() ?>"> Apply Now
                                      </button>

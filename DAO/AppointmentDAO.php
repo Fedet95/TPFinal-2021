@@ -77,12 +77,12 @@ class AppointmentDAO implements IAppointmentDAO
     {
         try {
 
-            $query = "SELECT * FROM " . $this->tableName . " WHERE (studentId= :studentId)";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE (studentAppointmentId= :studentAppointmentId)";
 
             ///EL WHERE MUY IMPORTANTE PARA SOLO LEVANTAR UN REGISTRO DE LA TABLA
 
 
-            $parameters['studentId'] = $studentId;
+            $parameters['studentAppointmentId'] = $studentId;
 
             $this->connection = Connection::GetInstance();
 

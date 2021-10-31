@@ -131,7 +131,7 @@ else {
                             <div class="col-lg-15">
                                 <div class="form-group">
                                     <label class="text-muted text-strong" for="">Description</label>
-                                    <p><textarea name="description" placeholder="" class="form-control" required></textarea></p>
+                                    <p><textarea name="description" placeholder="Job Offer information..." class="form-control" required></textarea></p>
                                 </div>
                             </div>
 

@@ -313,7 +313,7 @@ include_once('nav.php');
                         foreach ($allCompanies as $company) {
                             if ($value->getCompany()->getCompanyId() == $company->getCompanyId()) {
 
-                                if ($value->getActive() == "true" && $company->getActive=='true') {
+                                if ($value->getActive() == "true" && $company->getActive()=='true') {
                                     ?>
 
                                     <div class="single-post d-flex flex-row">
@@ -420,9 +420,9 @@ include_once('nav.php');
                                                 <?php if ($loggedUser instanceof Student) { ?>
                                                     <td>
                                                     <?php if ($value->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) { ?>
-                                                        <form action="<?php echo FRONT_ROOT . " PONER EL ROOT CORRESPONDIENTE  " ?>"
+                                                        <form action="<?php echo FRONT_ROOT ."Appointment/showApplyView" ?>"
                                                               method="POST">
-                                                            <!--**************************************************PONER EL ROOT CORRESPONDIENTE ***********************************/ -->
+                                                            <input type="hidden" name="studentId" value="<?php echo $loggedUser->getStudentId() ?>">
                                                             <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                                                     value="<?php echo $value->getJobOfferId() ?>">Apply
                                                             </button>

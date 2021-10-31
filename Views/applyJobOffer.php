@@ -1,162 +1,100 @@
 <?php
+
 use Models\Administrator;
 use Models\Student;
 
-require_once(VIEWS_PATH . "checkLoggedUser.php");
+require_once(VIEWS_PATH . "checkLoggedStudent.php");
 include_once('header.php');
 include_once('nav.php');
 ?>
 
-<?php
-if(isset($remove)){?>
-    <?php if(($remove != null) && ($loggedUser instanceof Administrator)){
-        if(($jobOffer!= null) && ($cant!=null)){  ?>
 
-            <main class="py-3">
-                <section id="listado">
-                    <h2 class="mb-4 text-muted text-center">Remove Job Offer:  <?php echo $jobOffer->getTitle() ?></h2>
-                    <div class="container">
-                        <strong class="text-muted text-strong"><?php if (isset($message)) {
-                                echo $message;
-                            } ?></strong>
-                        <div class="row justify-content-center offset-sm-1 text-center bg-light-alpha p-5 border">
+<link rel="stylesheet" href="../Views/css/estilos.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-                            <div class="form-group col-3">
-                                <label for="" class="text-muted text-strong text">Title</label>
-                                <input type="text" name="title" class="form-control text-center"
-                                       value="<?php echo $jobOffer->getTitle() ?>" readonly>
+<h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+            <h3>Welcome</h3>
+            <p>You are 30 seconds away from getting your dream job!</p>
+        </div>
+        <div class="col-md-9 register-right">
+            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                       aria-controls="home" aria-selected="true">Good Luck</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Apply as a Employee</h3>
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input readonly type="text" class="form-control" placeholder="First Name *"
+                                       value="<?php echo $loggedUser->getFirstName() ?>"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="dni" class="form-control" readonly
+                                       value="<?php echo $loggedUser->getDni() ?>"/>
+                            </div>
+                            <div class="form-group">
+
+                                <input type="text" readonly class="form-control"
+                                       value="<?php echo $loggedUser->getPhoneNumber() ?>"/>
                             </div>
 
-                            <div class="form-group col-3">
-                                <label class="text-muted text-strong text">Company</label>
-                                <input type="text" name="company" id="contactNo" readonly class="form-control text-center"  value="<?php echo $company->getName() ?>">
+                            <form action="<?php echo FRONT_ROOT . "Appointment/addAppointment" ?>" method="POST"
+                                  enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    <label class="text-muted">Add your Curriculum</label>
+                                    <input type="file" name="cv" class="form-control" required>
+                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" readonly
+                                       value="<?php echo $loggedUser->getLastName() ?>"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" readonly
+                                       value="<?php echo $loggedUser->getEmail() ?>"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="date" class="form-control" readonly
+                                       value="<?php echo (new \DateTime())->format('Y-m-d'); ?>"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-muted">Message</label>
+                                <textarea name="text" placeholder="Enter a message... " class="form-control"
+                                          required></textarea>
                             </div>
 
+                            <input type="hidden" name="studentId" value="<?php echo $loggedUser->getStudentId() ?>">
 
-                            <div class="form-group col-3">
-                                <label class="text-muted text-strong text" for="">Publish Date</label>
-                                <input type="text" name="publishdate" class="form-control text-center" value="<?php echo $jobOffer->getPublishDate() ?>"
-                                       readonly>
-                            </div>
-
-                            <div class="form-group col-3">
-                                <label class="text-muted text-strong text">End Date</label>
-                                <input type="text" name="fileNumber" class="form-control text-center"
-                                       value="<?php echo $jobOffer->getEndDate() ?>" readonly>
-                            </div>
-
-
-                            <div class="form-group col-3">
-                                <label class="text-muted text-strong" for="">Career</label>
-                                <input type="text" name="career" class="form-control text-center"
-                                       value="<?php echo $jobOffer->getCareer()->getDescription() ?>" readonly>
-                            </div>
-
-                            <div class="form-group col-3">
-                                <label class="text-muted text-strong text" for="">Active</label>
-                                <input type="text" name="active" class="form-control text-center"
-                                       value="<?php if($jobOffer->getActive()=='true'){ echo "Active";}else {echo "Inactive";} ?>" readonly>
-                            </div>
-
-                            <div class="form-group col-3">
-                                <label class="text-muted text-strong text" for="">Appointments</label>
-                                <input type="text" name="appointments" class="form-control text-center"
-                                       value="<?php echo $cant ?>" readonly>
-                            </div>
+                            <input type="hidden" name="jobOfferId" value="<?php echo $jobOfferId?>">
+                            <input type="submit" class="btnRegister" value="Apply"/>
+                            </form>
                         </div>
                     </div>
-                    <br>
-                    <div class="container">
-                        <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>" method="POST">
-                            <div>
-                                <input type="hidden" name="offerId" value="<?php echo $jobOffer->getJobOfferId()?>">
-                            </div>
-                            <div class="justify-content-center align-items-center offset-sm-1 text-center bg-light-alpha border py-3">
-                                <p class="text-strong h6">The job offer you want to delete currently has applications, please confirm if you want to continue.</p>
-                                <br>
-                                <div class="form-group">
-                                    <p class="text-muted text-strong text">Confirmation</p>
-                                    <label for="active"  class="h5">Accept</label>
-                                    <input type="radio" name="accept" value="true" class="radioSize" required id="active">
-                                    <br>
-                                    <label for="inactive" class="h5">Decline</label>
-                                    <input type="radio" name="accept" value="false" class="radioSize" required
-                                           id="inactive">
-                                </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                <div class="form-group">
-                                    <br>
-                                    <button type="submit" name="button" class="offset-3 btn btn-dark ml-auto">CONFIRM </button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </section>
-            </main>
-        <?php }else { if($cant==null){ if(isset($finalMessage)) { if($finalMessage=="Empty"){ ?>
-
-            <main class="py-3">
-                <section id="">
-                    <h2 class="mb-4 text-muted text-center offset-0">Send a Message</h2>
-                    <div class="container">
-                        <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>" method="POST">
-                            <div>
-                                <input type="hidden" name="offerId" value="<?php echo $jobOffer->getJobOfferId()?>">
-                                <input type="hidden" name="accept" value="<?php echo "true"?>">
-                            </div>
-                            <div class="justify-content-center align-items-center offset-sm-1 text-center bg-light-alpha border py-5">
-                                <p class="text-strong">Send a message to the applicants notifying them of the withdrawal.</p>
-                                <br>
-
-                                <div class="form-group">
-                                    <label class="text-muted text-strong text" for="">Subject</label>
-                                    <input type="text" name="sub" class="form-control text-center offset-2" style="width: 675px; height: 30px" placeholder="Enter email subject here..." required>
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea name="text" class="form-control offset-2" placeholder="Message..."  style="width: 675px; height: 30px" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <br>
-                                    <button type="submit" name="button" class="offset-2 btn btn-dark ml-auto">SEND</button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </section>
-            </main>
-            <?php
-        }else  { ?>
-
-            <main class="py-3">
-                <section id="">
-                    <h2 class="mb-4 text-muted text-center offset-0">Remove Job Offer</h2>
-                    <div class="container">
-                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="POST">
-                            <div class="justify-content-center align-items-center offset-sm-1 text-center bg-light-alpha border py-5">
-                                <p class="offset-2 text-muted form-control " style="width: 675px; height: 30px"><?php echo $finalMessage?></p>
-                                <div class="form-group">
-                                    <br>
-                                    <button type="submit" name="button" class="offset-2 btn btn-dark ml-auto">BACK</button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </section>
-            </main>
-
-            <br><br><br><br><br><br><br>
+</div>
 
 
-            <?php
-        }
-
-        }
-        }}
-    }
-}
-
+<?php
+include_once('footer.php');
 ?>
+
+
+
+
