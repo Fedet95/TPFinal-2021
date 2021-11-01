@@ -5,6 +5,7 @@ namespace DAO;
 use Models\AppointmentHistory;
 use Models\Career;
 use Models\Company;
+use Models\JobOffer;
 use Models\Student;
 
 class AppointmentHistoryDAO implements IAppointmentHistoryDAO
@@ -18,9 +19,11 @@ class AppointmentHistoryDAO implements IAppointmentHistoryDAO
     {
         try
         {
-            $query = "INSERT INTO " . $this->tablename . " (jobOfferTittle, jobOfferCompanyName, jobOfferCompanyCuit, historyCareerName, historyStudentId, appointmentDate) VALUES (:jobOfferTittle, :jobOfferCompanyName, :jobofferCompanyCuit, :historyCareedName, :historyStudentId, :appointmentDate)";
+            $hola="hola";
+            var_dump($hola);
+            $query = "INSERT INTO " . $this->tablename . " (jobOfferTitle, jobOfferCompanyName, jobOfferCompanyCuit, historyCareerName, historyStudentId, appointmentDate) VALUES (:jobOfferTitle, :jobOfferCompanyName, :jobOfferCompanyCuit, :historyCareerName, :historyStudentId, :appointmentDate)";
 
-            $parameters['jobOfferTittle'] = $appointmentHistory->getJobOfferTittle();
+            $parameters['jobOfferTitle'] = $appointmentHistory->getJobOfferTittle()->getTitle();
             $parameters['jobOfferCompanyName'] = $appointmentHistory->getCompany()->getName();
             $parameters['jobOfferCompanyCuit'] = $appointmentHistory->getCompany()->getCuit();
             $parameters['historyCareerName'] = $appointmentHistory->getCareer()->getDescription();
@@ -101,7 +104,9 @@ class AppointmentHistoryDAO implements IAppointmentHistoryDAO
 
            $appointment->setHistoryId($value["historyId"]);
            $appointment->setAppointmentDate($value['appointmentDate']);
-           $appointment->setJobOfferTittle($value["jobOfferTitle"]);
+           $offer= new JobOffer();
+           $offer->setTitle($value["jobOfferTitle"]);
+           $appointment->setJobOfferTittle($offer);
            $career= new Career();
            $career->setDescription($value["historyCareerName"]);
            $appointment->setCareer($career);

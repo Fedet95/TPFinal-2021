@@ -4,6 +4,7 @@ namespace Controllers;
 
 use DAO\AppointmentDAO;
 use DAO\AppointmentHistoryDAO;
+use DAO\CompanyDAO;
 use DAO\JobOfferDAO;
 use DAO\OriginStudentDAO;
 use Models\Administrator;
@@ -52,8 +53,10 @@ class AppointmentController
 
         if($this->loggedUser instanceof Student)
         {
+
             try {
-                $actualAppointment= $this->appointmentDAO->getStudentAppointment($this->loggedUser->getStudentId());
+                $actualAppointment= $this->appointmentDAO->getAppointment($this->loggedUser->getStudentId());
+
             }
             catch (\PDOException $ex)
             {
@@ -64,18 +67,21 @@ class AppointmentController
             try {
 
                $historyAppointments= $appointmentHistory->getHistoryAppointments($this->loggedUser->getStudentId());
+
             }
             catch (\PDOException $ex)
             {
                 echo $ex->getMessage();
             }
 
+            require_once(VIEWS_PATH . "appointmentsList.php");
 
         }
         else if($this->loggedUser instanceof Administrator)
         {
             try {
                 $actualAppointment= $this->appointmentDAO->getAll(); //ANALIZAR SI SOLO BUSCO LAS APPOINTMENTS DE UNA JOB OFFER PARTICULAR
+                require_once(VIEWS_PATH . "appointmentsList.php");
 
             }catch (\PDOException $ex)
             {
@@ -90,7 +96,7 @@ class AppointmentController
             echo $ex->getMessage();
         }
         $searchedAppointment = $this->searchAppointmentFiltreASD($allAppointment, $valueToSearch, $back);
-        /// require_once(VIEWS_PATH . *******AGREGAR VISTA ****);
+
     }
 
 
@@ -110,66 +116,88 @@ class AppointmentController
     {
         require_once(VIEWS_PATH . "checkLoggedStudent.php");
 
-        if ($this->appointmentDAO->getAppointment($studentId) != null) {
+        try {
 
-            $this->showAppointmentList($valueToSearch = null, $back = null, "Only one active application is allowed");
+           $searchedAppointment =$this->appointmentDAO->getAppointment($studentId);
 
-        } else {
+            if ($searchedAppointment != null) {
+                $this->showAppointmentList($valueToSearch = null, $back = null, "Only one active application is allowed");
 
-            $appointment = new Appointment();
-            $appointment= $this->validateCv($appointment);
+            } else {
 
-            if($appointment!=null)
-            {
-                $appointment->setMessage($text);
-                $jobOffer = new JobOffer();
-                $jobOffer->setJobOfferId($jobOfferId);
-                $appointment->setJobOffer($jobOffer);
-                $appointment->setDate((new \DateTime())->format('Y-m-d'));
-                $student= new Student();
-                $student->setStudentId($studentId);
-                $appointment->setStudent($student);
+                $appointment = new Appointment();
+                $appointment= $this->validateCv($appointment);
 
-                try {
-                   $count= $this->appointmentDAO->add($appointment);
+                if($appointment!=null)
+                {
+                    $appointment->setMessage($text);
+                    $jobOffer = new JobOffer();
+                    $jobOffer->setJobOfferId($jobOfferId);
+                    $appointment->setJobOffer($jobOffer);
+                    $appointment->setDate((new \DateTime())->format('Y-m-d'));
+                    $student= new Student();
+                    $student->setStudentId($studentId);
+                    $appointment->setStudent($student);
 
-                   if($count>0)
-                   {
-                       $searchOffer= $this->jobOfferDAO->getJobOffer($jobOfferId);
-                       $history= new AppointmentHistory();
-                       $history->setJobOfferTittle($searchOffer->getTitle());
-                       $history->setAppointmentDate($appointment->getDate());
-                       $career= new Career();
-                       $career->setDescription($searchOffer->getCareer()->getDescription());
-                       $history->setCareer($career);
-                       $student= new Student();
-                       $student->setStudentId($studentId);
-                       $history->setStudent($student);
-                       $company= new Company();
-                       $company->setName($searchOffer->getCompany()->getName());
-                       $company->setCuit($searchOffer->getCompany()->getCuit());
-                       $history->setCompany($company);
-                       $historyDAO= new AppointmentHistoryDAO();
-                       try {
-                           $historyDAO->add($history);
-                       }
-                       catch (\PDOException $ex)
-                       {
-                           echo $ex->getMessage();
-                       }
-                   }
+                    try {
+                        $count= $this->appointmentDAO->add($appointment);
 
-                    $this->showAppointmentList($valueToSearch = null, $back = null, "Successfully added application");
+                        if($count>0)
+                        {
+                            $searchOffer= $this->jobOfferDAO->getJobOffer($jobOfferId);
+                            $history= new AppointmentHistory();
+                            $offer= new JobOffer();
+                            $offer->setTitle($searchOffer->getTitle());
+                           $history->setJobOfferTittle($offer);
+                            $history->setAppointmentDate($appointment->getDate());
+                            $career= new Career();
+                            $career->setDescription($searchOffer->getCareer()->getDescription());
+                            $history->setCareer($career);
+                            $student= new Student();
+                            $student->setStudentId($studentId);
+                            $history->setStudent($student);
+                            try {
+                                $companyDao= new CompanyDAO();
+                                $searchCompany= $companyDao->getCompany($searchOffer->getCompany()->getCompanyId());
+                                $company= new Company();
+                                $company->setName($searchCompany->getName());
+                                $company->setCuit($searchCompany->getCuit());
+                                $history->setCompany($company);
+                            }
+                            catch (\PDOException $ex)
+                            {
+                                echo $ex->getMessage();
+                            }
 
-                } catch (\PDOException $ex) {
-                    echo $ex->getMessage();
+                            var_dump($history);
+                            $historyDAO= new AppointmentHistoryDAO();
+                            try {
+                                $historyDAO->add($history);
+                            }
+                            catch (\PDOException $ex)
+                            {
+                                echo $ex->getMessage();
+                            }
+                        }
+
+                        $this->showAppointmentList($valueToSearch = null, $back = null, "Successfully added application");
+
+                    } catch (\PDOException $ex) {
+                        echo $ex->getMessage();
+                    }
+                }
+                else
+                {
+                    $this->showApplyView($studentId, $jobOfferId, "Please enter a validad curriculum file");
                 }
             }
-            else
-            {
-                $this->showApplyView($studentId, $jobOfferId, "Please enter a validad curriculum file");
-            }
+
         }
+        catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
     }
 
 
@@ -283,8 +311,12 @@ class AppointmentController
         $statusMsg = '';
         // File upload path
         $targetDir = "uploads/";
-        $fileName = basename($_FILES["cv"]["name"]);
-        $targetFilePath = $targetDir . $fileName;
+        //$fileName = basename($_FILES["cv"]["name"]);
+
+        $temp = explode(".", $_FILES["cv"]["name"]); //tomo la extension
+        $newfilename = $this->loggedUser->getDni() . '.' . end($temp); //le doy nuevo nombre y le concateno la extension
+
+        $targetFilePath = $targetDir . $newfilename;
         $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
         $flag=0;
@@ -293,11 +325,12 @@ class AppointmentController
             $allowTypes = array('pdf','doc', 'docx');
             if (!file_exists($targetFilePath)) { //image already exist in the folder
                 if(in_array($fileType, $allowTypes)){
-                    // Upload file to server
-                    if(move_uploaded_file($_FILES["cv"]["tmp_name"], $targetFilePath)){ //image doesn't exist in the folder, add it
-                        // Insert image file name into database
 
-                        $appointment->setCv($fileName);
+                    // Upload file to server
+                    if(move_uploaded_file($_FILES["cv"]["tmp_name"], $targetFilePath)){ //image doesn't exist in the folder, add it (si no funciona, sacar el . $newfilename)
+
+                        // Insert image file name into database
+                        $appointment->setCv($newfilename); //---->antes era $filename y lo cambie por $newfilename
 
                     }else{
                         /* $statusMsg = "Sorry, there was an error uploading your file";*/
@@ -317,9 +350,9 @@ class AppointmentController
                 $flag=1;
                 foreach($files as $value)
                 {
-                   if($value == $fileName)
+                   if($value == $newfilename) //--->antes era $filename y lo camnbie por newfilename
                    {
-                       $appointment->setCv($fileName);
+                       $appointment->setCv($newfilename); //--->antes era $filename y lo camnbie por newfilename
                        $flag=0;
                    }
                 }

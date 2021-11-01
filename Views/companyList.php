@@ -42,7 +42,7 @@ include_once('nav.php');
                             <tr>
                                 <td><?php echo $valueCompany->getName() ?></td>
                                 <td><?php echo $valueCompany->getIndustry()->getType() ?></td>
-                                <td><?php echo '<img src="data:image;base64,' . $valueCompany->getLogo() . '" height="50" width="50"/>'; ?></td>
+                                <td><?php echo '<img src="../uploads/' .$valueCompany->getLogo()->getFile() . '" height="50" width="50"/>'; ?></td>
                                 <td>
                                     <form action="<?php echo FRONT_ROOT . "Company/showCompanyViewMore" ?>" method="POST">
                                         <button type="submit" name="id" class="btn btn-dark ml-auto"

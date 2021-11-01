@@ -102,7 +102,7 @@ if (isset($_SESSION['loggedstudent']))
                     else if($loggedUser instanceof Student)
                     {
                         ?>
-                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Job Offers Management</a>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Search Job Offers</a>
                         <?php
                     }
                     ?>
@@ -118,7 +118,7 @@ if (isset($_SESSION['loggedstudent']))
                     else if($loggedUser instanceof Student)
                     {
                         ?>
-                        <a class="dropdown-item" href="#">View Our Portfolio</a>
+                        <!--<a class="dropdown-item" href="#">View Our Portfolio</a>-->
                         <?php
                     }
                     ?>
@@ -146,7 +146,7 @@ if (isset($_SESSION['loggedstudent']))
             if($loggedUser instanceof Student)
             {
                 ?>
-                <a class="nav-link" href="<?php echo  FRONT_ROOT."Appointment/showStudentListView"?>">Students</a>
+                <a class="nav-link" href="<?php echo  FRONT_ROOT."Appointment/showAppointmentList"?>">Appointments</a>
                 <?php
             }
             ?>

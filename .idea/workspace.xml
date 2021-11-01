@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/Views/appointmentsList.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DAO/AppointmentHistoryDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentHistoryDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/AppointmentHistory.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/AppointmentHistory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/appointmentsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentsList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/companyList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyList.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/Nuevo Documento de Microsoft Word.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +101,7 @@
       <workItem from="1635254847304" duration="41876000" />
       <workItem from="1635341477964" duration="39162000" />
       <workItem from="1635426280447" duration="79703000" />
-      <workItem from="1635603139953" duration="43632000" />
+      <workItem from="1635603139953" duration="59748000" />
     </task>
     <task id="LOCAL-00001" summary="mi subida">
       <created>1633917102951</created>
@@ -440,7 +439,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635642463535</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="update">
+      <created>1635695416888</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1635695416888</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -476,9 +482,9 @@
     <MESSAGE value="filter and offers" />
     <MESSAGE value="appointments" />
     <MESSAGE value="administrar creation and appointment" />
-    <MESSAGE value="update" />
     <MESSAGE value="administrar creation" />
     <MESSAGE value="Changes by paye_" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes by paye_" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>

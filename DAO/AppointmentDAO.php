@@ -3,6 +3,8 @@
 namespace DAO;
 
 use Models\Appointment;
+use Models\Career;
+use Models\Company;
 use Models\JobOffer;
 use Models\Student;
 
@@ -80,9 +82,6 @@ class AppointmentDAO implements IAppointmentDAO
 
             $query = "SELECT * FROM " . $this->tableName . " WHERE (studentAppointmentId= :studentAppointmentId)";
 
-            ///EL WHERE MUY IMPORTANTE PARA SOLO LEVANTAR UN REGISTRO DE LA TABLA
-
-
             $parameters['studentAppointmentId'] = $studentId;
 
             $this->connection = Connection::GetInstance();
@@ -100,15 +99,16 @@ class AppointmentDAO implements IAppointmentDAO
         }
     }
 
-    function getStudentAppointment($jobOfferAppointmentId)
+    /*
+     function getStudentAppointment($studentAppointmentId)
     {
         try {
 
-            $query = "SELECT * FROM " . $this->tableName . " c INNER JOIN " . $this->tableName3 . "WHERE (jobOfferAppointmentId= :jobOfferAppointmentId)";
+            $query = "SELECT * FROM " . $this->tableName . " c INNER JOIN " . $this->tableName3 . "WHERE (studentAppointmentId= :studentAppointmentId)";
 
             ///EL WHERE MUY IMPORTANTE PARA SOLO LEVANTAR UN REGISTRO DE LA TABLA
 
-            $parameters['jobOfferAppointmentId'] = $jobOfferAppointmentId;
+            $parameters['studentAppointmentId'] = $studentAppointmentId;
 
             $this->connection = Connection::GetInstance();
 
@@ -125,13 +125,14 @@ class AppointmentDAO implements IAppointmentDAO
         }
     }
 
+     */
+
 
     public function mapear($array)
     {
         $array = is_array($array) ? $array : [];
 
         $resultado = array_map(function ($value) {
-
 
             $appointment = new Appointment();
 
@@ -140,32 +141,33 @@ class AppointmentDAO implements IAppointmentDAO
             $appointment->setMessage($value["message"]);
             $appointment->setCv($value["cv"]);
 
-            if(isset($value['jobOfferId'])) {
+            $jobOffer = new JobOffer();
+            $jobOffer->setJobOfferId($value['jobOfferAppointmentId']);
 
-                $jobOfferId = $value['jobOfferId'];
-                $title = $value['title'];
-                $company = $value['company'];
-
-                $jobOffer = new JobOffer();
-                $jobOffer->setTitle($title);
-                $jobOffer->setJobOfferId($jobOfferId);
+            if(isset($value['title'])) //for Get all (inner join with job offer table)
+            {
+                $jobOffer->setTitle($value['title']);
+                $company= new Company();
+                $company->setCompanyId($value['companyId']);
                 $jobOffer->setCompany($company);
-
-                $appointment->setJobOffer($jobOffer);
+                $career= new Career();
+                $career->setCareerId($value['careerIdOffer']);
+                $jobOffer->setCareer($career);
             }
 
-            $studentId = $value["studentId"];
-            $firstName = $value["firstName"];
-            $lastName = $value["lastName"];
-            $dni = $value["dni"];
-            $phoneNumber = $value["phoneNumber"];
+            $appointment->setJobOffer($jobOffer);
+
 
             $student = new Student();
-            $student->setStudentId($studentId);
-            $student->setFirstName($firstName);
-            $student->setLastName($lastName);
-            $student->setDni($dni);
-            $student->setPhoneNumber($phoneNumber);
+            $student->setStudentId($value["studentAppointmentId"]);
+
+            if(isset($value['firstName'])) //for Get all (inner join with student table)
+            {
+                $student->setFirstName($value["firstName"]);
+                $student->setLastName($value["lastName"]);
+                $student->setDni($value["dni"]);
+                $student->setPhoneNumber($value["phoneNumber"]);
+            }
 
             $appointment->setStudent($student);
 
