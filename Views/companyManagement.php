@@ -6,6 +6,7 @@ include_once('nav.php');
 
 <div class="ml-auto col-auto">
     <h3 class=" text-center text-muted py-3">Companies List</h3>
+    <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
     <div class="scrollable container-fluid">
         <div class="form-group">
             <table>

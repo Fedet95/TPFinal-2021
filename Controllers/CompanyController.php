@@ -724,12 +724,9 @@ class CompanyController
     /**
      * Remove a company from the system
      */
-    public function Remove($id, $accept=null, $sub = null, $text=null)
+    public function Remove($id)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
-
-        $company= $this->companyDAO->getCompany($id);
-
 
         try {
             $offerDAO= new JobOfferDAO();
@@ -758,7 +755,9 @@ class CompanyController
             }
             else
             {
-                $message="Se elimina porque no hay ninguna oferta en el sistema";
+                $this->companyDAO->remove($id);
+                $this->showCompanyManagement(null, null, "Company removed successfully");
+
             }
 
             try {
@@ -784,27 +783,56 @@ class CompanyController
 
                         if($flag==0)
                         {
-                            $message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo activa con postulaciones";
+                            $this->companyDAO->remove($id);
+                            $this->showCompanyManagement(null, null, "Company removed successfully");
+                            //no tiene ninguna oferta de trabajo activa con postulaciones
                         }
                         else
                         {
-                            $message="Se inactiva porque esta compañia tiene una oferta de trabajo activa con postulaciones";
+
+                            try {
+                                $company= $this->companyDAO->getCompany($id);
+                                if($company->getActive()=='true')
+                                {
+                                    $company->setActive("false");
+                                    $message= "Company status changed to 'Inactive' due to existing active job offer with appointments. Remove after expiration date.";
+                                }
+                                else
+                                {
+                                    $message= "Company current status is 'Inactive' due to existing active job offer with appointments and previous remove operation.";
+                                }
+
+                            }catch (\PDOException $ex)
+                            {
+                                echo $ex->getMessage();
+                            }
+
+
+                            $this->companyDAO->update($company);
+                            $this->showCompanyManagement(null, null, $message);
+
                         }
                     }
                     else
                     {
-                        $message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo con postulaciones";
-                    }
+                        $this->companyDAO->remove($id);
+                        $this->showCompanyManagement(null, null, "Company removed successfully");
+                    }   //no hay postulaciones
                 }
                 else{
 
                     if(!empty($inactiveOffers))
                     {
-                        $message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo";
+                        $this->companyDAO->remove($id);
+                        $this->showCompanyManagement(null, null, "Company removed successfully");
+                        //$message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo";
                     }
                     else
                     {
-                        $message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo activa (tiene inactivas)";
+
+                        $this->companyDAO->remove($id);
+                        $this->showCompanyManagement(null, null, "Company removed successfully");
+                        //$message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo activa (tiene inactivas)";
                     }
 
                 }
@@ -817,62 +845,6 @@ class CompanyController
         {
             echo $ex->getMessage();
         }
-
-
-
-
-        if($accept==null)
-        {
-            try
-            {
-
-                $company= $this->companyDAO->getCompany($id);
-
-                $searchedOffer= $this->jobOfferDAO->getJobOffer($id);
-
-                if($searchedOffer!=null)
-                {
-                    $appointments=$this->getAppointmentArray($id);
-
-                    if(!empty($appointments)) //ESTO TIENE QUE SER ! (NEGATIVO) ESTA ASI PARA VER LA PANTALLA <<---
-                    {
-                        $cant=count($appointments);
-
-                        try {
-                            $company= $this->companyDAO->getCompany($searchedOffer->getCompany()->getCompanyId());
-                        }
-                        catch (\PDOException $ex)
-                        {
-                            echo $ex->getMessage();
-                        }
-
-                        $this->showRemoveJobOfferView($searchedOffer, $cant, $company);
-                    }
-                    else
-                    {
-                        $count=$this->jobOfferDAO->remove($id); //VER SI SE ELIMINA EN CASCADA
-                        if($count>0)
-                        {
-                            $finalMessage="The job offer had no applications and was successfully eliminated";
-                            $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
-                        }
-                        else
-                        {
-                            $finalMessage="Job offer cannot be removed please try again";
-                            $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
-                        }
-
-                    }
-                }
-            }
-            catch (\PDOException $ex)
-            {
-                echo $ex->getMessage();
-            }
-        }
-
-
-
     }
 
 

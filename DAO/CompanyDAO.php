@@ -27,8 +27,6 @@ class CompanyDAO implements lCompanyDAO
      */
     function add(Company $company)
     {
-        var_dump($company);
-
         try {
 
             $query= "INSERT INTO ".$this->tableName."(name, foundationDate, cuit, aboutUs, companyLink, email, logo, activeCompany, industry, city, country, creationAdmin) VALUES (:name, :foundationDate, :cuit, :aboutUs, :companyLink, :email, :logo, :activeCompany, :industry, :city, :country, :creationAdmin)";

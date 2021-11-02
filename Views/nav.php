@@ -76,15 +76,6 @@ if (isset($_SESSION['loggedstudent']))
                         <?php
                     }
                     ?>
-                    <div class="dropdown-divider"></div>
-                    <?php
-                    if($loggedUser instanceof Administrator)
-                    {
-                        ?>
-                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Student/showStudentListView"?>">Student List</a>
-                        <?php
-                    }
-                        ?>
                 </div>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
