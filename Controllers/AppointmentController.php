@@ -102,7 +102,7 @@ class AppointmentController
         {
             try {
 
-                $allAppointments= $this->appointmentDAO->getAll(); //ANALIZAR SI SOLO BUSCO LAS APPOINTMENTS DE UNA JOB OFFER PARTICULAR
+                $allAppointments= $this->appointmentDAO->getAll();
 
                 if($allAppointments!=null)
                 {
@@ -113,7 +113,7 @@ class AppointmentController
                     {
                         try
                         {   //find the joboffer and set the appointment array
-                            $searchedJobOffer= $this->jobOfferDAO->getJobOffer($valueToSearch); //llenar array
+                            $searchedJobOffer= $this->jobOfferDAO->getJobOffer($valueToSearch); //search jobOffer llenar array
                             $searchedJobOffer->setAppointment($allAppointments);
                             $allAppointments= $searchedJobOffer->getAppointment();
 

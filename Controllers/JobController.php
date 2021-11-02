@@ -3,6 +3,7 @@
 namespace Controllers;
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 
+use DAO\AppointmentDAO;
 use DAO\JobOfferDAO;
 use DAO\JobOfferPositionDAO;
 use DAO\JobPositionDAO;
@@ -12,13 +13,11 @@ use DAO\CountryDAO;
 use DAO\OriginJobPositionDAO;
 use DAO\StudentDAO;
 use Models\Administrator;
-use Models\Appointment;
 use Models\Career;
 use Models\Company;
 use Models\JobOffer;
 use Models\JobOfferPosition;
 use Models\JobPosition;
-use Models\Student;
 
 
 /**
@@ -739,11 +738,11 @@ class JobController
             try
             {
                 $searchedOffer= $this->jobOfferDAO->getJobOffer($id);
+
                 if($searchedOffer!=null)
                 {
-                    $app= new Appointment();
-                    $appointments= $searchedOffer->getAppointment();
-                    array_push($appointments, $app);
+                    $appointments=$this->getAppointmentArray($id);
+
                     if(!empty($appointments)) //ESTO TIENE QUE SER ! (NEGATIVO) ESTA ASI PARA VER LA PANTALLA <<-------------------------------
                     {
                         $cant=count($appointments);
@@ -760,8 +759,18 @@ class JobController
                     }
                     else
                     {
-                        $finalMessage="The job offer had no applications and was successfully eliminated";
-                        $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
+                        $count=$this->jobOfferDAO->remove($id); //VER SI SE ELIMINA EN CASCADA
+                        if($count>0)
+                        {
+                            $finalMessage="The job offer had no applications and was successfully eliminated";
+                            $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
+                        }
+                        else
+                        {
+                            $finalMessage="Job offer cannot be removed please try again";
+                            $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
+                        }
+
                     }
                 }
             }
@@ -845,6 +854,73 @@ class JobController
         else
             echo "Email sending failed";
     }
+
+
+
+    public function getAppointmentArray($jobOfferId)
+    {
+        try {
+
+            $appointmentDAO= new AppointmentDAO();
+            $allAppointments= $appointmentDAO->getAll();
+
+            if($allAppointments!=null)
+            {
+                //search appointments from this jobofferid
+                $allAppointments=$this->searchAppointments($allAppointments, $jobOfferId); //valueToSearch = $jobOffer ID
+
+                if($allAppointments!=null)
+                {
+                    try
+                    {   //find the joboffer and set the appointment array
+                        $searchedJobOffer= $this->jobOfferDAO->getJobOffer($jobOfferId); //search jobOffer llenar array
+                        $searchedJobOffer->setAppointment($allAppointments);
+                        $allAppointments= $searchedJobOffer->getAppointment();
+                    }
+                    catch (\PDOException $ex)
+                    {
+                        echo $ex->getMessage();
+                    }
+
+                }
+            }
+
+        }catch (\PDOException $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+
+        return $allAppointments;
+    }
+
+
+    public function searchAppointments($allAppointments, $jobOfferId)
+    {
+        $appointments= array();
+
+        if(is_array($allAppointments)) {
+            foreach ($allAppointments as $value) {
+                if ($value->getJobOffer()->getJobOfferId() == $jobOfferId) {
+                    array_push($appointments, $value);
+                }
+            }
+
+        }
+        else if(is_object($allAppointments))
+        {
+            if ($allAppointments->getJobOffer()->getJobOfferId() == $jobOfferId)
+            {
+                array_push($appointments, $allAppointments);
+            }
+        }
+        if (empty($appointments)) {
+            $appointments = null;
+        }
+
+        return $appointments;
+    }
+
 
 
 
