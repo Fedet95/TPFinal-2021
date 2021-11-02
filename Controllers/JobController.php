@@ -498,38 +498,6 @@ class JobController
     }
 
 
-    /*
-         * Makes one jobOffer object with all their positions
-         * @param $offer
-         * @return mixed|null
-        public function unifyOffer($offer)
-        {
-            $positionArray=array();
-            $finalOffer=null;
-            if(is_array($offer))
-            {
-                $finalOffer=$offer[0];
-
-                foreach ($offer as $values)
-                {
-                    $pos= new JobPosition();
-                    $pos->setJobPositionId($values->getJobPosition()->getJobPositionId());
-                    $pos->setDescription($values->getJobPosition()->getDescription());
-                    $pos->setCareer($values->getJobPosition()->getCareer());
-                    array_push($positionArray, $pos);
-                }
-                $finalOffer->setJobPosition($positionArray);
-            }
-            else if(is_object($offer))
-            {
-                $finalOffer=$offer;
-            }
-
-            return $finalOffer;
-        }
-
-    */
-
 
     public function editJobOffer($jobOfferId, $careerId = null, $message = "", $values = null)
     {

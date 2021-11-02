@@ -66,9 +66,9 @@ class AppointmentDAO implements IAppointmentDAO
     function remove($studentId)
     {
         try {
-            $query = "DELETE FROM " . $this->tableName . " WHERE (studentId = :studentId)";
+            $query = "DELETE FROM " . $this->tableName . " WHERE (studentAppointmentId = :studentAppointmentId)";
 
-            $parameters["studentId"] = $studentId;
+            $parameters["studentAppointmentId"] = $studentId;
 
             $this->connection = Connection::GetInstance();
 

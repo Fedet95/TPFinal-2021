@@ -102,10 +102,10 @@ include_once('nav.php');
                             <div class="row offset-3">
                                 <ul class="btns">
                                     <td>
-                                        <form action="<?php echo FRONT_ROOT . "Job/showJobOfferViewMore" ?>"
+                                        <form action="<?php echo FRONT_ROOT . "Appointment/Remove" ?>"
                                               method="POST">
                                             <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
-                                                    value="<?php echo $actualAppointment->getJobOffer()->getJobOfferId() ?>"><strong>Drop out Appointment</strong>
+                                                    value="<?php echo $loggedUser->getStudentId() ?>"><strong>Drop out Appointment</strong>
                                             </button>
                                         </form>
                                         <br>
@@ -121,6 +121,14 @@ include_once('nav.php');
     <?php }else { ?>
         <div class="title text-center my-5">
             <h4 class="mb-3">You do not have any active application, look at the job offers!</h4>
+        </div>
+        <div class="title text-center my-5">
+        <form  action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>"
+              method="POST">
+            <button type="submit" name="id" class="btn buttonPer "
+                    value=""><strong>Search Job Offers Now! </strong>
+            </button>
+        </form>
         </div>
     <?php } ?>
 
