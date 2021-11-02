@@ -722,11 +722,12 @@ class CompanyController
     /**
      * Remove a company from the system
      */
-    public function Remove($id)
+    public function Remove($id, $accept=null, $sub = null, $text=null)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
         try {
+            $company= $this->companyDAO->getCompany($id);
             $this->companyDAO->remove($id);
             $this->showCompanyManagement();
         }
@@ -734,6 +735,67 @@ class CompanyController
         {
             echo $ex->getMessage();
         }
+
+
+        if($accept==null)
+        {
+            try
+            {
+
+                $company= $this->companyDAO->getCompany($id);
+
+                $searchedOffer= $this->jobOfferDAO->getJobOffer($id);
+
+                if($searchedOffer!=null)
+                {
+                    $appointments=$this->getAppointmentArray($id);
+
+                    if(!empty($appointments)) //ESTO TIENE QUE SER ! (NEGATIVO) ESTA ASI PARA VER LA PANTALLA <<---
+                    {
+                        $cant=count($appointments);
+
+                        try {
+                            $company= $this->companyDAO->getCompany($searchedOffer->getCompany()->getCompanyId());
+                        }
+                        catch (\PDOException $ex)
+                        {
+                            echo $ex->getMessage();
+                        }
+
+                        $this->showRemoveJobOfferView($searchedOffer, $cant, $company);
+                    }
+                    else
+                    {
+                        $count=$this->jobOfferDAO->remove($id); //VER SI SE ELIMINA EN CASCADA
+                        if($count>0)
+                        {
+                            $finalMessage="The job offer had no applications and was successfully eliminated";
+                            $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
+                        }
+                        else
+                        {
+                            $finalMessage="Job offer cannot be removed please try again";
+                            $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
+                        }
+
+                    }
+                }
+            }
+            catch (\PDOException $ex)
+            {
+                echo $ex->getMessage();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
     }
 
 

@@ -711,7 +711,7 @@ class JobController
                 {
                     $appointments=$this->getAppointmentArray($id);
 
-                    if(!empty($appointments)) //ESTO TIENE QUE SER ! (NEGATIVO) ESTA ASI PARA VER LA PANTALLA <<-------------------------------
+                    if(!empty($appointments)) //ESTO TIENE QUE SER ! (NEGATIVO) ESTA ASI PARA VER LA PANTALLA <<---
                     {
                         $cant=count($appointments);
 

@@ -313,7 +313,7 @@ include_once('nav.php');
                         foreach ($allCompanies as $company) {
                             if ($value->getCompany()->getCompanyId() == $company->getCompanyId()) {
 
-                                if ($value->getActive() == "true" && $company->getActive()=='true') {
+                                if ($value->getActive() == "true" && $company->getActive()=='true' && strtotime($value->getEndDate()) > strtotime(date("Y-m-d"))) {
                                     ?>
 
                                     <div class="single-post d-flex flex-row">

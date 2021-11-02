@@ -60,7 +60,7 @@ include_once('nav.php');
                                     <ul>
                                         <li><?php echo $company->getName() ?></li>
                                         <li><i class="fas fa-map-marker-alt"></i><?php echo $company->getCountry()->getName().", ".$company->getCity()->getName()  ?></li>
-                                        <li><?php if($jobOffer->getSalary()==0){ echo "Undefined";}else{echo "$ ". $jobOffer->getSalary();} ?></li>
+                                        <li>Salary: <?php if($jobOffer->getSalary()==0){ echo "Undefined";}else{echo "$ ". $jobOffer->getSalary();} ?></li>
                                     </ul>
                                 </div>
                             </div>
@@ -124,14 +124,18 @@ include_once('nav.php');
                                  </form>
 
                              <?php } else{?>
-                                 <form action="<?php echo FRONT_ROOT . "Appointment/showApplyView" ?>"
-                                       method="POST">
-                                     <input type="hidden" name="studentId" value="<?php echo $loggedUser->getStudentId() ?>">
-                                     <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
-                                             value="<?php echo $jobOffer->getJobOfferId() ?>"> Apply Now
-                                     </button>
-                                 </form>
-                             <?php }?>
+                                     <td>
+                                     <?php if ($jobOffer->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) { ?>
+                                         <form action="<?php echo FRONT_ROOT ."Appointment/showApplyView" ?>"
+                                               method="POST">
+                                             <input type="hidden" name="studentId" value="<?php echo $loggedUser->getStudentId() ?>">
+                                             <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
+                                                     value="<?php echo $jobOffer->getJobOfferId() ?>">Apply
+                                             </button>
+                                         </form>
+                                         <br>
+                                         </td>
+                                     <?php }} ?>
                          </div>
                        </div>
                         <div class="post-details4  mb-50">
