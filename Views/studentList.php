@@ -23,6 +23,11 @@ include_once('nav.php');
                             <input type="submit" class="btn btn-dark ml-auto" name="all" value="Show all students" >
                         </form>
                     </th>
+                    <th>
+                        <form action="<?php echo FRONT_ROOT . "Student/showStudentListView" ?>" method="post"">
+                        <input type="submit" class="btn btn-dark ml-auto" name="registered" value="Show only registered" >
+                        </form>
+                    </th>
                 </tr>
                 </thead>
             </table>

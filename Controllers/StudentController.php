@@ -93,7 +93,7 @@ class StudentController
         {
             foreach ($allStudents as $value)
             {
-                if (strcasecmp($value->getName(), $valueToSearch) == 0)
+                if (strcasecmp($value->getFirstName(), $valueToSearch) == 0)
                 {
                     array_push($searchedStudent, $value);
                 }
@@ -104,7 +104,10 @@ class StudentController
             $searchedStudent = $allStudents;
         }
 
-
+        if($valueToSearch=='Show only registered')
+        {
+            $searchedStudent = $this->studentDAO->getOnlyRegistered();
+        }
 
         if($valueToSearch=='Show all students' || $valueToSearch=='Back')
         {

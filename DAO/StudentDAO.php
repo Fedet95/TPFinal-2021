@@ -10,8 +10,8 @@ class StudentDAO implements lStudentDAO
 {
 
     private $connection;
-    private $tableName= "students";
-    private $tableName2= "careers";
+    private $tableName = "students";
+    private $tableName2 = "careers";
 
     /**
      * Add an student to the Data base
@@ -19,28 +19,24 @@ class StudentDAO implements lStudentDAO
      */
     public function add(Student $student)
     {
-        try
-        {
-            $query= "INSERT INTO ".$this->tableName."(studentId, career, firstName, lastName, dni, phoneNumber, email, password) VALUES (:studentId, :career, :firstName, :lastName, :dni, :phoneNumber, :email, :password)";
+        try {
+            $query = "INSERT INTO " . $this->tableName . "(studentId, career, firstName, lastName, dni, phoneNumber, email, password) VALUES (:studentId, :career, :firstName, :lastName, :dni, :phoneNumber, :email, :password)";
 
-            $parameters['studentId']=$student->getStudentId(); //se le ingresa el id porque en este caso NO es auto_increment (ojo los demas DAO)
-            $parameters['career']=$student->getCareer()->getCareerId();
-            $parameters['firstName']=$student->getFirstName();
-            $parameters['lastName']=$student->getLastName();
-            $parameters['dni']=$student->getDni();
-            $parameters['phoneNumber']=$student->getPhoneNumber();
-            $parameters['email']=$student->getEmail();
-            $parameters['password']=$student->getPassword();
+            $parameters['studentId'] = $student->getStudentId(); //se le ingresa el id porque en este caso NO es auto_increment (ojo los demas DAO)
+            $parameters['career'] = $student->getCareer()->getCareerId();
+            $parameters['firstName'] = $student->getFirstName();
+            $parameters['lastName'] = $student->getLastName();
+            $parameters['dni'] = $student->getDni();
+            $parameters['phoneNumber'] = $student->getPhoneNumber();
+            $parameters['email'] = $student->getEmail();
+            $parameters['password'] = $student->getPassword();
 
-            $this->connection =Connection::GetInstance();
+            $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters); //el executeNonquery no retorna array, sino la cantidad de datos modificados
-        }
-        catch(\PDOException $ex)
-        {
+        } catch (\PDOException $ex) {
             throw $ex;
         }
     }
-
 
 
     /**
@@ -49,18 +45,15 @@ class StudentDAO implements lStudentDAO
      */
     function remove($studentId)
     {
-        try
-        {
-            $query = "DELETE FROM ".$this->tableName." WHERE (studentId = :studentId)";
+        try {
+            $query = "DELETE FROM " . $this->tableName . " WHERE (studentId = :studentId)";
 
-            $parameters["studentId"] =  $studentId;
+            $parameters["studentId"] = $studentId;
 
             $this->connection = Connection::GetInstance();
 
-            return $count=$this->connection->ExecuteNonQuery($query, $parameters);
-        }
-        catch(\PDOException $ex)
-        {
+            return $count = $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch (\PDOException $ex) {
             throw $ex;
         }
     }
@@ -74,7 +67,7 @@ class StudentDAO implements lStudentDAO
     {
 
         try {
-            $query= "SELECT * FROM ".$this->tableName." s INNER JOIN ".$this->tableName2." c ON s.career= c.careerId";
+            $query = "SELECT * FROM " . $this->tableName . " s INNER JOIN " . $this->tableName2 . " c ON s.career= c.careerId";
 
             //$query= "SELECT  b.beerType, b.code, b.name, bt.id FROM ".$this->secondTableName." b INNER JOIN ".$this->tableName." bt ON b.beerType = bt.id WHERE (bt.id = :id)";
 
@@ -82,16 +75,13 @@ class StudentDAO implements lStudentDAO
 
             $result = $this->connection->Execute($query, array());
 
-            $mapedArray=null;
-            if(!empty($result))
-            {
-                $mapedArray= $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+            $mapedArray = null;
+            if (!empty($result)) {
+                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        }
-        catch (\PDOException $ex)
-        {
+        } catch (\PDOException $ex) {
             throw $ex;
         }
     }
@@ -103,26 +93,45 @@ class StudentDAO implements lStudentDAO
      */
     public function getStudent($studentId)
     {
-        try
-        {
-            $query= "SELECT * FROM ".$this->tableName." s INNER JOIN ".$this->tableName2." c ON s.career= c.careerId WHERE (s.studentId= :studentId)";
+        try {
+            $query = "SELECT * FROM " . $this->tableName . " s INNER JOIN " . $this->tableName2 . " c ON s.career= c.careerId WHERE (s.studentId= :studentId)";
 
-            $parameters['studentId']=$studentId;
+            $parameters['studentId'] = $studentId;
 
             $this->connection = Connection::GetInstance();
 
             $result = $this->connection->Execute($query, $parameters);
 
-            $mapedArray=null;
-            if(!empty($result))
-            {
-                $mapedArray= $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+            $mapedArray = null;
+            if (!empty($result)) {
+                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        } catch (\PDOException $ex) {
+            throw $ex;
         }
-        catch (\PDOException $ex)
-        {
+    }
+
+    public function getOnlyRegistered()
+    {
+
+        try {
+            $query = "SELECT * FROM " . $this->tableName . " s INNER JOIN " . $this->tableName2 . " c ON s.career= c.careerId WHERE (s.password IS NOT NULL)";
+
+            //$query= "SELECT  b.beerType, b.code, b.name, bt.id FROM ".$this->secondTableName." b INNER JOIN ".$this->tableName." bt ON b.beerType = bt.id WHERE (bt.id = :id)";
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, array());
+
+            $mapedArray = null;
+            if (!empty($result)) {
+                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+            }
+
+            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        } catch (\PDOException $ex) {
             throw $ex;
         }
     }
@@ -130,25 +139,21 @@ class StudentDAO implements lStudentDAO
     function update(Student $student)
     {
 
-        try
-        {
-            if($student->getPassword()==null)
-            {
-                $query= "UPDATE ".$this->tableName." SET studentId = :studentId, career = :career, firstName = :firstName, lastName = :lastName, dni = :dni, phoneNumber = :phoneNumber, email = :email
+        try {
+            if ($student->getPassword() == null) {
+                $query = "UPDATE " . $this->tableName . " SET studentId = :studentId, career = :career, firstName = :firstName, lastName = :lastName, dni = :dni, phoneNumber = :phoneNumber, email = :email
             WHERE (studentId = :studentId)";
 
-                $parameters["studentId"] =  $student->getStudentId();
+                $parameters["studentId"] = $student->getStudentId();
                 $parameters["career"] = $student->getCareer()->getCareerId();
-                $parameters["firstName"] =  $student->getFirstName();
+                $parameters["firstName"] = $student->getFirstName();
                 $parameters["lastName"] = $student->getLastName();
-                $parameters["dni"] =  $student->getDni();
+                $parameters["dni"] = $student->getDni();
                 $parameters["phoneNumber"] = $student->getPhoneNumber();
                 $parameters["email"] = $student->getEmail();
-            }
-            else
-            {
-                $query= "UPDATE ".$this->tableName." SET  password = :password WHERE (studentId = :studentId)";
-                $parameters["studentId"] =  $student->getStudentId();
+            } else {
+                $query = "UPDATE " . $this->tableName . " SET  password = :password WHERE (studentId = :studentId)";
+                $parameters["studentId"] = $student->getStudentId();
                 $parameters["password"] = $student->getPassword();
 
             }
@@ -157,9 +162,7 @@ class StudentDAO implements lStudentDAO
             $this->connection = Connection::GetInstance();
 
             $this->connection->ExecuteNonQuery($query, $parameters);
-        }
-        catch(\PDOException $ex)
-        {
+        } catch (\PDOException $ex) {
             throw $ex;
         }
     }
@@ -169,78 +172,52 @@ class StudentDAO implements lStudentDAO
      * Update json student values with information from origin file (at student login)
      * @param $student
      */
-    public function updateStudentFile($student =null, $studentsArray = null)
+    public function updateStudentFile($student = null, $studentsArray = null)
     {
 
-        if($student!=null)
-        {
-            try
-            {
-                $searchedStudent=$this->getStudent($student->getStudentId());
+        if ($student != null) {
+            try {
+                $searchedStudent = $this->getStudent($student->getStudentId());
 
-                if($searchedStudent!=null)
-                {
-                    if($searchedStudent!=$student)
-                    {
-                        try{
+                if ($searchedStudent != null) {
+                    if ($searchedStudent != $student) {
+                        try {
                             $this->update($student);
-                        }
-                        catch(\PDOException $ex)
-                        {
+                        } catch (\PDOException $ex) {
                             echo $ex->getMessage();
                         }
                     }
-                }
-                else
-                {
+                } else {
                     try {
                         $this->add($student);
-                    }
-                    catch (\PDOException $ex)
-                    {
+                    } catch (\PDOException $ex) {
                         echo $ex->getMessage();
                     }
                 }
-            }
-            catch (\PDOException $ex)
-            {
+            } catch (\PDOException $ex) {
                 echo $ex->getMessage();
             }
-        }
-        else if($studentsArray!=null)
-        {
-            foreach ($studentsArray as $value)
-            {
-                try
-                {
-                    $searchedStudent=$this->getStudent($value->getStudentId());
+        } else if ($studentsArray != null) {
+            foreach ($studentsArray as $value) {
+                try {
+                    $searchedStudent = $this->getStudent($value->getStudentId());
 
-                    if($searchedStudent!=null)
-                    {
-                        if($searchedStudent!=$value)
-                        {
-                            try{
+                    if ($searchedStudent != null) {
+                        if ($searchedStudent != $value) {
+                            try {
                                 $this->update($value);
-                            }
-                            catch(\PDOException $ex)
-                            {
+                            } catch (\PDOException $ex) {
                                 echo $ex->getMessage();
                             }
                         }
-                    }
-                    else
-                    {
+                    } else {
                         try {
                             $this->add($value);
-                        }
-                        catch (\PDOException $ex)
-                        {
+                        } catch (\PDOException $ex) {
                             echo $ex->getMessage();
                         }
                     }
-                }
-                catch (\PDOException $ex)
-                {
+                } catch (\PDOException $ex) {
                     echo $ex->getMessage();
                 }
             }
@@ -248,20 +225,19 @@ class StudentDAO implements lStudentDAO
     }
 
 
-
-    public function mapear ($array)
+    public function mapear($array)
     {
         $array = is_array($array) ? $array : []; //si lo que viene como parametro es un array lo deja como viene, sino lo guarda como array vacio
 
-        $resultado = array_map(function ($value){
+        $resultado = array_map(function ($value) {
 
             $student = new Student();
 
             $student->setStudentId($value["studentId"]);
 
-            $careerId=$value['careerId'];
-            $careerDescription=$value['description'];
-            $career= new Career();
+            $careerId = $value['careerId'];
+            $careerDescription = $value['description'];
+            $career = new Career();
             $career->setDescription($careerDescription);
             $career->setCareerId($careerId);
             $student->setCareer($career);
@@ -280,8 +256,6 @@ class StudentDAO implements lStudentDAO
         return count($resultado) > 1 ? $resultado : $resultado['0'];
 
     }
-
-
 
 
 }

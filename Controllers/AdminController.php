@@ -26,6 +26,12 @@ class AdminController
 
         $allAdmins = $this->adminDAO->getAll();
 
+        if(is_object($allAdmins))
+        { $admin= $allAdmins;
+            $allAdmins= array();
+            array_push($allAdmins, $admin);
+        }
+
         require_once(VIEWS_PATH . "adminListView.php");
 
     }
@@ -35,6 +41,23 @@ class AdminController
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
         require_once(VIEWS_PATH . "createAdmin.php");
+
+    }
+
+    public function showAdminEditView($id,$message = "")
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        try
+        {
+
+            $admin = $this->adminDAO->getAdmin($id);
+            require_once(VIEWS_PATH . "editAdmin.php");
+
+        }catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
 
     }
 
@@ -124,6 +147,61 @@ class AdminController
         }
     }
 
+    public function updateAdmin($firstName, $lastName, $employeeNumber, $email, $password, $active, $id)
+    {
+
+        $allAdmins = $this->adminDAO->getAll();
+
+        $flag = 0;
+
+        foreach ($allAdmins as $value)
+        {
+            if($value->getAdministratorId() != $id)
+            {
+                if (strcasecmp($value->getEmployeeNumber(), $employeeNumber) == 0) {
+                    $flag = 1;
+                    $message = "The employee number " . $employeeNumber . " is already registered";
+                    break;
+                } else if (strcasecmp($value->getEmail(), $email) == 0) {
+                    $flag = 1;
+                    $message = "The emaail " . $email . "is already registered";
+                    break;
+                }
+
+            }
+
+        }
+        if ($flag == 1) {
+            $this->showAdminEditView($id,$message);
+        } else {
+            $adminAux = new Administrator();
+            $adminAux->setFirstName($firstName);
+            $adminAux->setLastName($lastName);
+            $adminAux->setEmployeeNumber($employeeNumber);
+            $adminAux->setEmail($email);
+            $adminAux->setPassword($password);
+            if($active=='true')
+            {
+                $adminAux->setActive(1);
+            }
+            else
+            {
+                $adminAux->setActive(0);
+            }
+
+
+            try {
+
+                $this->adminDAO->update($adminAux);
+                $this->showAdminListView("Admin succesfullly edited");
+
+            } catch (\PDOException $ex) {
+
+                echo $ex->getMessage();
+            }
+        }
+
+    }
     public function loggedUserValidation()
     {
         $loggedUser = null;

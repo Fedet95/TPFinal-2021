@@ -29,7 +29,7 @@ include_once('nav.php');
                         <?php $careerToShow = $valuePosition->getCareer()->getDescription() ?>
                         <td>
                         <form action="<?php echo FRONT_ROOT ."Job/showJobPositionViewMore" ?>"  method="POST">
-                            <button type="submit" name="careerDescription" class="btn btn-dark ml-auto d-block"
+                            <button type="submit" name="careerDescription" class="btn btn-dark m-lg-auto d-block"
                                     value="<?php echo $valuePosition->getCareer()->getDescription() ?>"> View
                             </button>
                         </form>
@@ -42,7 +42,7 @@ include_once('nav.php');
                         <?php $careerToShow = $valuePosition->getCareer()->getDescription() ?>
                         <td>
                         <form action="<?php echo FRONT_ROOT ."Job/showJobPositionViewMore" ?>" method="POST">
-                            <button type="submit" name="careerDescription"  class="btn btn-dark ml-auto d-block"
+                            <button type="submit" name="careerDescription"  class="btn btn-dark m-lg-auto d-block"
                                     value="<?php echo $valuePosition->getCareer()->getDescription() ?>"> View
                             </button>
                         </form>
