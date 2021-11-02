@@ -58,10 +58,36 @@ class CareerDAO implements lCareerDAO
     }
 
 
-    function remove($id)
+    /**
+     * Returns a career by id from Data base
+     * @return array
+     */
+    public function getCareer($careerId)
     {
-        // TODO: Implement remove() method.
+        try
+        {
+            $query= "SELECT * FROM ".$this->tableName." c WHERE (c.careerId= :careerId)";
+
+            $parameters['careerId']=$careerId;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, $parameters);
+
+            $mapedArray=null;
+            if(!empty($result))
+            {
+                $mapedArray= $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+            }
+
+            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        }
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
     }
+
 
 
 

@@ -4,6 +4,7 @@ namespace Controllers;
 
 use DAO\AppointmentDAO;
 use DAO\AppointmentHistoryDAO;
+use DAO\CareerDAO;
 use DAO\CompanyDAO;
 use DAO\JobOfferDAO;
 use DAO\OriginStudentDAO;
@@ -39,7 +40,16 @@ class AppointmentController
         $flag=$this->validateActiveStudent($studentId);
         if($flag==1)
         {
-            require_once(VIEWS_PATH . "applyJobOffer.php");
+            $validate=$this->uniqueAppointment($studentId);
+            if($validate==1)
+            {
+                $this->showAppointmentList($valueToSearch = null, $back = null, "Only one active application is allowed");
+            }
+            else
+            {
+                require_once(VIEWS_PATH . "applyJobOffer.php");
+            }
+
         }
         else
         {
@@ -63,6 +73,17 @@ class AppointmentController
                 echo $ex->getMessage();
             }
 
+            try {
+                $career= new CareerDAO();
+                $searchCareer= $career->getCareer($actualAppointment->getJobOffer()->getCareer()->getCareerId());
+
+            }catch (\PDOException $ex)
+            {
+                echo $ex->getMessage();
+            }
+
+
+
             $appointmentHistory= new AppointmentHistoryDAO();
             try {
 
@@ -80,7 +101,49 @@ class AppointmentController
         else if($this->loggedUser instanceof Administrator)
         {
             try {
-                $actualAppointment= $this->appointmentDAO->getAll(); //ANALIZAR SI SOLO BUSCO LAS APPOINTMENTS DE UNA JOB OFFER PARTICULAR
+
+                $allAppointments= $this->appointmentDAO->getAll(); //ANALIZAR SI SOLO BUSCO LAS APPOINTMENTS DE UNA JOB OFFER PARTICULAR
+
+                if($allAppointments!=null)
+                {
+                    //search appointments from this jobofferid
+                    $allAppointments=$this->searchAppointments($allAppointments, $valueToSearch); //valueToSearch = $jobOffer ID
+
+                    if($allAppointments!=null)
+                    {
+                        try
+                        {   //find the joboffer and set the appointment array
+                            $searchedJobOffer= $this->jobOfferDAO->getJobOffer($valueToSearch); //llenar array
+                            $searchedJobOffer->setAppointment($allAppointments);
+                            $allAppointments= $searchedJobOffer->getAppointment();
+
+                            try {
+                                $career= new CareerDAO();
+                                $searchCareer= $career->getCareer($allAppointments[0]->getJobOffer()->getCareer()->getCareerId());
+
+                            }catch (\PDOException $ex)
+                            {
+                                echo $ex->getMessage();
+                            }
+                        }
+                        catch (\PDOException $ex)
+                        {
+                            echo $ex->getMessage();
+                        }
+
+                    }
+                    else
+                    {
+                        $message="There are currently no applications for the selected job offer ";
+                    }
+                }
+                else
+                {
+                    $message="There are currently no applications in the system";
+                }
+
+
+                //$searchedJobOffer= $this->jobOfferDAO->getJobOffer($valueToSearch);
                 require_once(VIEWS_PATH . "appointmentsList.php");
 
             }catch (\PDOException $ex)
@@ -100,30 +163,26 @@ class AppointmentController
     }
 
 
-
-    /*
-    public function showAppointmentView($message = "")
+    public function uniqueAppointment($studentId)
     {
-        require_once(VIEWS_PATH . "checkLoggedStudent.php");
+        $searchedAppointment =$this->appointmentDAO->getAppointment($studentId);
 
+        $validate=0;
+        if ($searchedAppointment != null)
+        {
+            $validate=1;
 
-        require_once(VIEWS_PATH . "applyJobOffer.php"); //cambiarrrrrrrrrrrrrrrrrr
-
+        }
+        return $validate;
     }
-    */
+
+
+
 
     public function addAppointment($text, $studentId, $jobOfferId, $cv)
     {
         require_once(VIEWS_PATH . "checkLoggedStudent.php");
 
-        try {
-
-           $searchedAppointment =$this->appointmentDAO->getAppointment($studentId);
-
-            if ($searchedAppointment != null) {
-                $this->showAppointmentList($valueToSearch = null, $back = null, "Only one active application is allowed");
-
-            } else {
 
                 $appointment = new Appointment();
                 $appointment= $this->validateCv($appointment);
@@ -148,7 +207,7 @@ class AppointmentController
                             $history= new AppointmentHistory();
                             $offer= new JobOffer();
                             $offer->setTitle($searchOffer->getTitle());
-                           $history->setJobOfferTittle($offer);
+                           $history->setJobOffer($offer);
                             $history->setAppointmentDate($appointment->getDate());
                             $career= new Career();
                             $career->setDescription($searchOffer->getCareer()->getDescription());
@@ -190,13 +249,7 @@ class AppointmentController
                 {
                     $this->showApplyView($studentId, $jobOfferId, "Please enter a validad curriculum file");
                 }
-            }
 
-        }
-        catch (\PDOException $ex)
-        {
-            echo $ex->getMessage();
-        }
 
     }
 
@@ -207,7 +260,7 @@ class AppointmentController
 
         if ($valueToSearch != null) {
             foreach ($allAppointment as $value) {
-                if ($value->getAppointmentId == $valueToSearch)  // ID == ID
+                if ($value->getAppointmentId() == $valueToSearch)  // ID == ID
                 {
                     array_push($searchedAppointment, $value);
                 }
@@ -371,6 +424,41 @@ class AppointmentController
             return $appointment;
         }
     }
+
+
+    public function searchAppointments($allAppointments, $jobOfferId)
+    {
+        $appointments= array();
+
+        if(is_array($allAppointments)) {
+            foreach ($allAppointments as $value) {
+                if ($value->getJobOffer()->getJobOfferId() == $jobOfferId) {
+                    array_push($appointments, $value);
+                }
+            }
+
+        }
+        else if(is_object($allAppointments))
+        {
+            if ($allAppointments->getJobOffer()->getJobOfferId() == $jobOfferId)
+            {
+                array_push($appointments, $allAppointments);
+            }
+        }
+        if (empty($appointments)) {
+            $appointments = null;
+        }
+
+            return $appointments;
+    }
+
+
+
+    public function removeAppointment($studentId)
+    {
+
+    }
+
 
 
 

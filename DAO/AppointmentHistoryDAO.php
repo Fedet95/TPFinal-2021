@@ -23,7 +23,7 @@ class AppointmentHistoryDAO implements IAppointmentHistoryDAO
             var_dump($hola);
             $query = "INSERT INTO " . $this->tablename . " (jobOfferTitle, jobOfferCompanyName, jobOfferCompanyCuit, historyCareerName, historyStudentId, appointmentDate) VALUES (:jobOfferTitle, :jobOfferCompanyName, :jobOfferCompanyCuit, :historyCareerName, :historyStudentId, :appointmentDate)";
 
-            $parameters['jobOfferTitle'] = $appointmentHistory->getJobOfferTittle()->getTitle();
+            $parameters['jobOfferTitle'] = $appointmentHistory->getJobOffer()->getTitle();
             $parameters['jobOfferCompanyName'] = $appointmentHistory->getCompany()->getName();
             $parameters['jobOfferCompanyCuit'] = $appointmentHistory->getCompany()->getCuit();
             $parameters['historyCareerName'] = $appointmentHistory->getCareer()->getDescription();
@@ -106,7 +106,7 @@ class AppointmentHistoryDAO implements IAppointmentHistoryDAO
            $appointment->setAppointmentDate($value['appointmentDate']);
            $offer= new JobOffer();
            $offer->setTitle($value["jobOfferTitle"]);
-           $appointment->setJobOfferTittle($offer);
+           $appointment->setJobOffer($offer);
            $career= new Career();
            $career->setDescription($value["historyCareerName"]);
            $appointment->setCareer($career);

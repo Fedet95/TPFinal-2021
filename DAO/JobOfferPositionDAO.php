@@ -71,51 +71,6 @@ class JobOfferPositionDAO implements IJobOfferPosition
 
 
 
-/*
-    /**
-     * Returns a job offer position from Data base
-     * @return array
-
-    public function getJobOfferPosition(JobOfferPosition $offerPosition)
-    {
-        try
-        {
-            $query= "SELECT * FROM ".$this->tableName." WHERE (jobPositionIdOp= :jobPositionIdOp) AND (jobOfferIdOp = :jobOfferIdOp)";
-
-            $parameters['jobPositionIdOp']=$offerPosition->getJobPositionId();
-            $parameters['jobOfferIdOp']=$offerPosition->getJoOfferId();
-
-
-            $this->connection = Connection::GetInstance();
-
-            $result = $this->connection->Execute($query, $parameters);
-
-            $mapedArray=null;
-            if(!empty($result))
-            {
-                $mapedArray= $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
-            }
-
-            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        }
-        catch (\PDOException $ex)
-        {
-            throw $ex;
-        }
-    }
-*/
-
-
-
-
-
-    function getAll()
-    {
-        // TODO: Implement getAll() method.
-    }
-
-
-
     public function mapear ($array)
     {
         $array = is_array($array) ? $array : []; //si lo que viene como parametro es un array lo deja como viene, sino lo guarda como array vacio

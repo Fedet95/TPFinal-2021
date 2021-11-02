@@ -116,7 +116,7 @@ include_once('nav.php');
                           </ul>
                          <div class="apply-btn2">
                              <?php if($loggedUser instanceof Administrator){?>
-                                 <form action="<?php echo FRONT_ROOT . "Appointment/addAppointment" ?>"
+                                 <form action="<?php echo FRONT_ROOT . "Appointment/showAppointmentList" ?>"
                                        method="POST">
                                      <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                              value="<?php echo $jobOffer->getJobOfferId() ?>"> View Appointments

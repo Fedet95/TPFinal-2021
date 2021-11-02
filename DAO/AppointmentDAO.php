@@ -5,6 +5,7 @@ namespace DAO;
 use Models\Appointment;
 use Models\Career;
 use Models\Company;
+use Models\Country;
 use Models\JobOffer;
 use Models\Student;
 
@@ -15,6 +16,7 @@ class AppointmentDAO implements IAppointmentDAO
     private $tableName = "appointment";
     private $tableName2 = "jobOffers";
     private $tableName3 = "students";
+    private $tableName4= "companies";
 
 
     public function add(Appointment $appointment)
@@ -80,7 +82,8 @@ class AppointmentDAO implements IAppointmentDAO
     {
         try {
 
-            $query = "SELECT * FROM " . $this->tableName . " WHERE (studentAppointmentId= :studentAppointmentId)";
+            $query = "SELECT * FROM " . $this->tableName . " a INNER JOIN " . $this->tableName2 . " j ON a.jobOfferAppointmentId= j.jobOfferId
+            INNER JOIN " . $this->tableName4 . " co ON j.companyId= co.companyId WHERE (a.studentAppointmentId= :studentAppointmentId)";
 
             $parameters['studentAppointmentId'] = $studentId;
 
@@ -99,33 +102,6 @@ class AppointmentDAO implements IAppointmentDAO
         }
     }
 
-    /*
-     function getStudentAppointment($studentAppointmentId)
-    {
-        try {
-
-            $query = "SELECT * FROM " . $this->tableName . " c INNER JOIN " . $this->tableName3 . "WHERE (studentAppointmentId= :studentAppointmentId)";
-
-            ///EL WHERE MUY IMPORTANTE PARA SOLO LEVANTAR UN REGISTRO DE LA TABLA
-
-            $parameters['studentAppointmentId'] = $studentAppointmentId;
-
-            $this->connection = Connection::GetInstance();
-
-            $result = $this->connection->Execute($query, $parameters);
-
-            $mapedArray = null;
-            if (!empty($result)) {
-                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
-            }
-
-            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
-    }
-
-     */
 
 
     public function mapear($array)
@@ -141,20 +117,32 @@ class AppointmentDAO implements IAppointmentDAO
             $appointment->setMessage($value["message"]);
             $appointment->setCv($value["cv"]);
 
+
             $jobOffer = new JobOffer();
             $jobOffer->setJobOfferId($value['jobOfferAppointmentId']);
-
-            if(isset($value['title'])) //for Get all (inner join with job offer table)
+            if(isset($value['title'])) //for Get all (inner join with job offer table) // for getAppointment  (inner join with job offer table)
             {
                 $jobOffer->setTitle($value['title']);
+                $jobOffer->setRemote($value["remote"]);
+                $jobOffer->setPublishDate($value["publishDate"]);
+                $jobOffer->setEndDate($value["endDate"]);
+                $jobOffer->setDedication($value['dedication']);
+                $jobOffer->setDescription($value["descriptionOffer"]);
                 $company= new Company();
                 $company->setCompanyId($value['companyId']);
-                $jobOffer->setCompany($company);
                 $career= new Career();
                 $career->setCareerId($value['careerIdOffer']);
                 $jobOffer->setCareer($career);
             }
 
+            if(isset($value['name'])) //for getAppointment  (inner join with companies table)
+            {
+                $company->setName($value['name']);
+                $company->setEmail($value['email']);
+                $company->setCompanyLink($value['companyLink']);
+            }
+
+            $jobOffer->setCompany($company);
             $appointment->setJobOffer($jobOffer);
 
 
@@ -167,9 +155,10 @@ class AppointmentDAO implements IAppointmentDAO
                 $student->setLastName($value["lastName"]);
                 $student->setDni($value["dni"]);
                 $student->setPhoneNumber($value["phoneNumber"]);
+                $student->setEmail($value["email"]);
             }
-
             $appointment->setStudent($student);
+
 
             return $appointment;
 

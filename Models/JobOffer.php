@@ -184,7 +184,7 @@ class JobOffer
     }
 
 
-    public function setAppointment(Appointment $appointment)
+    public function setAppointment($appointment)
     {
         $this->appointment = $appointment;
     }

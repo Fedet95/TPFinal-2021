@@ -9,10 +9,24 @@
       <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DAO/AppointmentHistoryDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentHistoryDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/CareerDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CareerDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/IJobOfferPosition.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/IJobOfferPosition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/JobOfferPositionDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferPositionDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/lCareerDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/lCareerDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/AppointmentHistory.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/AppointmentHistory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/JobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/JobOffer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/appointmentsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentsList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/companyList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/Nuevo Documento de Microsoft Word.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOfferViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOfferViewMore.php" afterDir="false" />
+    </list>
+    <list id="4783e703-428e-4318-828b-e6a3a61525ac" name="Changes by Fede" comment="">
+      <change beforePath="$PROJECT_DIR$/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/StudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/StudentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/StudentDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobPositionManagment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobPositionManagment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/studentList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentList.php" afterDir="false" />
+    </list>
+    <list id="911e557e-171a-4c62-af3e-fb5b7be5905f" name="Changes by paye_" comment="">
+      <change beforePath="$PROJECT_DIR$/Views/studentListViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentListViewMore.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,21 +115,7 @@
       <workItem from="1635254847304" duration="41876000" />
       <workItem from="1635341477964" duration="39162000" />
       <workItem from="1635426280447" duration="79703000" />
-      <workItem from="1635603139953" duration="59748000" />
-    </task>
-    <task id="LOCAL-00001" summary="mi subida">
-      <created>1633917102951</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1633917102951</updated>
-    </task>
-    <task id="LOCAL-00002" summary="mi subida2">
-      <created>1633917223344</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1633917223344</updated>
+      <workItem from="1635603139953" duration="82403000" />
     </task>
     <task id="LOCAL-00003" summary="mi subida777">
       <created>1633917466923</created>
@@ -446,7 +446,21 @@
       <option name="project" value="LOCAL" />
       <updated>1635695416888</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="update">
+      <created>1635793875685</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1635793875687</updated>
+    </task>
+    <task id="LOCAL-00051" summary="update">
+      <created>1635793885845</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1635793885845</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

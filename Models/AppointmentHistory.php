@@ -5,7 +5,7 @@ namespace Models;
 class AppointmentHistory
 {
     private $historyId;
-    private $jobOfferTittle;
+    private $jobOffer;
     private $company;
     private $career;
     private $student;
@@ -21,14 +21,14 @@ class AppointmentHistory
         $this->historyId = $historyId;
     }
 
-    public function getJobOfferTittle()
+    public function getJobOffer()
     {
-        return $this->jobOfferTittle;
+        return $this->jobOffer;
     }
 
-    public function setJobOfferTittle(JobOffer $jobOfferTittle)
+    public function setJobOffer(JobOffer $jobOffer)
     {
-        $this->jobOfferTittle = $jobOfferTittle;
+        $this->jobOffer = $jobOffer;
     }
 
 
