@@ -60,8 +60,6 @@ class JobOfferDAO implements IJobOfferDAO
             INNER JOIN ".$this->tableName5." ca ON o.careerIdOffer= ca.careerId";
 
 
-            //INNER JOIN ".$this->tableName6." jp ON op.jobPositionIdOp = jp.jobPositionId WHERE (op.jobOfferIdOp= :jobOfferId)
-
             $this->connection = Connection::GetInstance();
 
             $result = $this->connection->Execute($query, array());
@@ -359,7 +357,6 @@ class JobOfferDAO implements IJobOfferDAO
         else if(is_object($offer))
         {
             $finalArray=$offer;
-            //array_push($finalArray, $offer);
         }
 
         return $finalArray;

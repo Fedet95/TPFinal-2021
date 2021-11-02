@@ -7,7 +7,7 @@ include_once('nav.php');
 <main class="py-3">
     <section id="listado" class="mb-5">
         <div class="container">
-            <h2 class="mb-3 text-center text-muted">Student</h2>
+            <h2 class="mb-3 text-center text-muted">Students</h2>
 
             <div class="bg-light-alpha p-2 text-center">
                 <div class="row">

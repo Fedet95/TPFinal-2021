@@ -3,10 +3,12 @@ namespace Controllers;
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 
 use DAO\AdministratorDAO;
+use DAO\AppointmentDAO;
 use DAO\CityDAO;
 use DAO\CompanyDAO;
 use DAO\CountryDAO;
 use DAO\IndustryDAO;
+use DAO\JobOfferDAO;
 use DAO\LogoDAO;
 use Models\City;
 use Models\Company;
@@ -726,15 +728,97 @@ class CompanyController
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
+        $company= $this->companyDAO->getCompany($id);
+
+
         try {
-            $company= $this->companyDAO->getCompany($id);
-            $this->companyDAO->remove($id);
-            $this->showCompanyManagement();
+            $offerDAO= new JobOfferDAO();
+            $allOffers= $offerDAO->getAll();
+
+
+            if($allOffers!=null)
+            {
+                $activeOffers= array();
+                $inactiveOffers= array();
+
+                foreach ($allOffers as $value)
+                {
+                    if($value->getCompany()->getCompanyId()==$id)
+                    {
+                        if($value->getActive()=='true')
+                        {
+                            array_push($activeOffers, $value);
+                        }
+                        else
+                        {
+                            array_push($inactiveOffers, $value);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $message="Se elimina porque no hay ninguna oferta en el sistema";
+            }
+
+            try {
+
+                if (!empty($activeOffers)) {
+                    $appointmentDAO = new AppointmentDAO();
+                    $allAppointments = $appointmentDAO->getAll();
+                    $searchedAppointments = array();
+
+                    $flag=0;
+                    if ($allAppointments != null)
+                    {
+                        foreach ($allAppointments as $appointment)
+                        {
+                            foreach ($activeOffers as $offers)
+                            {
+                                if ($appointment->getJobOffer()->getJobOfferId() == $offers->getJobOfferId())
+                                {
+                                    $flag=1; //no se elimina, se inactiva la empresa
+                                }
+                            }
+                        }
+
+                        if($flag==0)
+                        {
+                            $message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo activa con postulaciones";
+                        }
+                        else
+                        {
+                            $message="Se inactiva porque esta compañia tiene una oferta de trabajo activa con postulaciones";
+                        }
+                    }
+                    else
+                    {
+                        $message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo con postulaciones";
+                    }
+                }
+                else{
+
+                    if(!empty($inactiveOffers))
+                    {
+                        $message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo";
+                    }
+                    else
+                    {
+                        $message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo activa (tiene inactivas)";
+                    }
+
+                }
+            }catch (\PDOException $ex)
+            {
+                echo $ex->getMessage();
+            }
         }
         catch (\PDOException $ex)
         {
             echo $ex->getMessage();
         }
+
+
 
 
         if($accept==null)
@@ -786,13 +870,6 @@ class CompanyController
                 echo $ex->getMessage();
             }
         }
-
-
-
-
-
-
-
 
 
 

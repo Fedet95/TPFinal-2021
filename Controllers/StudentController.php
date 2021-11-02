@@ -53,37 +53,6 @@ class StudentController
     }
 
 
-    /**
-     * Returns a searched student or all students otherwise
-     * @param $allStudents
-     * @return array|mixed
-     */
-    public function searchStudentFiltre($allStudents)
-    {
-
-        $searchedStudents = array();
-        if (isset($_POST['search'])) //click boton de filtrado
-        {
-            if (isset($_POST['valueToSearch'])) {
-                $valueToSearch = $_POST['valueToSearch']; //dni buscado
-
-                $dniReplace= str_replace("-", "", $valueToSearch);
-
-                foreach ($allStudents as $value) {
-                    $dniValueReplace= str_replace("-", "", $value->getDni());
-                    if($dniValueReplace==$dniReplace)
-                    {
-                        array_push($searchedStudents, $value);
-                    }
-                }
-            } else {
-                $searchedStudents = $allStudents;
-            }
-        } else {
-            $searchedStudents = $allStudents;
-        }
-        return $searchedStudents;
-    }
 
     public function searchStudentFiltreASD($allStudents, $valueToSearch)
     {

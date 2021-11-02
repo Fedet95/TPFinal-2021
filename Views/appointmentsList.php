@@ -101,7 +101,8 @@ include_once('nav.php');
                             </div>
                             <div class="row offset-3">
                                 <ul class="btns">
-                                    <td>
+                                    <td
+                                        <?php if(strtotime($actualAppointment->getJobOffer()->getEndDate()) > strtotime(date("Y-m-d")))?>
                                         <form action="<?php echo FRONT_ROOT . "Appointment/Remove" ?>"
                                               method="POST">
                                             <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
