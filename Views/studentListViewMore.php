@@ -22,7 +22,7 @@ include_once('nav.php');
                 <th class="text-muted text-strong" style="width: 15%;">Active</th>
                 <th class="text-muted text-strong"  style="width: 30%;">Career</th>-
                 <th class="text-muted text-strong" style="width: 15%;">Back</th>
-                
+                ////PALBO VIENDOOOOOOOOOOOOOOOOOOO
 
             </tr>
             </thead>
