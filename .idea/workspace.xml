@@ -5,14 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/Views/viewCv.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/CompanyDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CompanyDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/companyManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyManagement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/companyViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyViewMore.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/applyJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/applyJobOffer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/appointmentsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentsList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/06-684-0100.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/63-025-8112.docx" beforeDir="false" />
     </list>
-    <list id="911e557e-171a-4c62-af3e-fb5b7be5905f" name="Changes by paye_" comment="Changes by paye_" />
+    <list id="911e557e-171a-4c62-af3e-fb5b7be5905f" name="Changes by paye_" comment="Changes by paye_">
+      <change beforePath="$PROJECT_DIR$/Views/studentListViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentListViewMore.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +49,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Theme-DeepBlueAdmin" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -102,21 +105,7 @@
       <workItem from="1635426280447" duration="79703000" />
       <workItem from="1635603139953" duration="102349000" />
       <workItem from="1635891334513" duration="900000" />
-      <workItem from="1635894145697" duration="2636000" />
-    </task>
-    <task id="LOCAL-00013" summary="Update">
-      <created>1634684459576</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1634684459576</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Update">
-      <created>1634684496494</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1634684496494</updated>
+      <workItem from="1635894145697" duration="11216000" />
     </task>
     <task id="LOCAL-00015" summary="Update">
       <created>1634693983930</created>
@@ -447,7 +436,21 @@
       <option name="project" value="LOCAL" />
       <updated>1635894401396</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="update">
+      <created>1635896810280</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1635896810280</updated>
+    </task>
+    <task id="LOCAL-00063" summary="update">
+      <created>1635896820149</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1635896820149</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

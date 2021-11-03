@@ -5,10 +5,10 @@ use Models\Student;
 
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 include_once('header.php');
-include_once('nav.php');
+include_once('nav.php');;
+
+
 ?>
-
-
 
     <link rel="stylesheet" href="../Views/css/main.css">
     <link rel="stylesheet" href="../Views/css/linearicons.css">
@@ -101,7 +101,7 @@ include_once('nav.php');
                             </div>
                             <div class="row offset-3">
                                 <ul class="btns">
-                                    <td
+                                    <td>
                                         <?php if(strtotime($actualAppointment->getJobOffer()->getEndDate()) > strtotime(date("Y-m-d")))?>
                                         <form action="<?php echo FRONT_ROOT . "Appointment/Remove" ?>"
                                               method="POST">
@@ -226,10 +226,11 @@ include_once('nav.php');
                                 <div class="row offset-3">
                                     <ul class="btns">
                                         <td>
-                                            <form action="<?php echo FRONT_ROOT . "Job/showJobOfferViewMore" ?>"
+                                            <form target="_blank" action="<?php echo FRONT_ROOT . "Appointment/viewCv" ?>"
                                                   method="POST">
-                                                <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
-                                                        value="<?php echo $actualAppointment->getJobOffer()->getJobOfferId() ?>"><strong>Show </strong>
+                                                <button type="submit" name="filename" class="btn buttonPer ml-auto d-block"
+                                                value="<?php echo $actualAppointment->getStudent()->getDni() ?>" ><strong>View CV</strong>
+
                                                 </button>
                                             </form>
                                             <br>

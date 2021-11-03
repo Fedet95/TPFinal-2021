@@ -140,16 +140,6 @@ class AppointmentController
             }
         }
 
-        /*
-
-        try {
-            $allAppointment = $this->appointmentDAO->getAll();
-        } catch (\PDOException $ex) {
-            echo $ex->getMessage();
-        }
-        $searchedAppointment = $this->searchAppointmentFiltreASD($allAppointment, $valueToSearch, $back);
-        */
-
     }
 
 
@@ -362,7 +352,7 @@ class AppointmentController
             $flag = 0;
             if (!empty($_FILES["cv"]["name"])) {
                 // Allow certain file formats
-                $allowTypes = array('pdf', 'doc', 'docx');
+                $allowTypes = array('pdf');
                 if (!file_exists($targetFilePath)) { //image already exist in the folder
                     if (in_array($fileType, $allowTypes)) {
 
@@ -449,5 +439,15 @@ class AppointmentController
 
             return $loggedUser;
         }
+
+
+    /**
+     * Show view to look pdf cv
+     */
+        public function viewCv($filename)
+        {
+            require_once(VIEWS_PATH . "viewCv.php");
+        }
+
 
     }

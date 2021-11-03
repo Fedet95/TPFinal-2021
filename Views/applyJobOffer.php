@@ -53,7 +53,7 @@ include_once('nav.php');
                                   enctype="multipart/form-data">
 
                                 <div class="form-group">
-                                    <label class="text-muted">Add your Curriculum</label>
+                                    <label class="text-muted">Add your Curriculum (only PDF)</label>
                                     <input type="file" name="cv" class="form-control" required>
                                 </div>
                         </div>
