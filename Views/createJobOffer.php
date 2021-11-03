@@ -79,7 +79,7 @@ else {
                 <h2 class="mb-4 text-center text-muted">Create Job Offer</h2>
                 <div class="row justify-content-center">
                     <form action="<?php echo FRONT_ROOT . "Job/addJobOfferSecondPart" ?>" method="POST" class="bg-light-alpha p-5 border" >
-                        <div class="col-sm-10 offset-sm-1 text-center">
+                        <div class=" col-lg-12 text-center">
                             <strong><?php if(isset($message)){ echo $message;}?></strong>
                             <div class="form-group">
                                 <label class="text-muted text-strong text" for="">Title</label>
@@ -138,6 +138,7 @@ else {
                             <div class="col-lg-15">
                                 <div class="form-group">
                                     <label class="text-muted text-strong" for="">Salary</label>
+                                    <br>
                                     <input required type="number" name="salary" min="0.00" step="0.01"
                                 </div>
                             </div>
@@ -163,7 +164,7 @@ else {
 
                             </div>
                             <div>
-                                <button type="submit" name="button" class="btn btn-dark ml-auto my-3 col-6 align-items-center justify-content-center">Agregar</button>
+                                <button type="submit" name="button" class="btn btn-dark ml-auto my-3 col-6 align-items-center justify-content-center">Add Offer</button>
 
                             </div>
                     </form>

@@ -151,7 +151,6 @@ class AdminController
     {
 
         $allAdmins = $this->adminDAO->getAll();
-
         $flag = 0;
 
         foreach ($allAdmins as $value)
@@ -180,6 +179,9 @@ class AdminController
             $adminAux->setEmployeeNumber($employeeNumber);
             $adminAux->setEmail($email);
             $adminAux->setPassword($password);
+            $adminAux->setAdministratorId($id);
+
+
             if($active=='true')
             {
                 $adminAux->setActive(1);
@@ -189,10 +191,9 @@ class AdminController
                 $adminAux->setActive(0);
             }
 
-
             try {
 
-                $this->adminDAO->update($adminAux);
+               $cant= $this->adminDAO->update($adminAux);
                 $this->showAdminListView("Admin succesfullly edited");
 
             } catch (\PDOException $ex) {

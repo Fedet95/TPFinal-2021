@@ -230,13 +230,13 @@ class JobOfferDAO implements IJobOfferDAO
 
             $company = new Company();
             $company->setCompanyId($value["companyId"]); //SI SE ELIMINAN LOS ATRIBUTOS COMENTADOS, ELIMINAR EL JOIN CON "COMPANY" DEL GET ALL!!!!
-            //$company->setName($value["name"]);
+            $company->setName($value["name"]);
             //$company->setFoundationDate($value["foundationDate"]);
             //$company->setCuit($value["cuit"]);
             //$company->setAboutUs($value["aboutUs"]);
-            //$company->setEmail($value["email"]);
+            $company->setEmail($value["email"]);
             //$company->setActive($value["activeCompany"]);
-            //$company->setCompanyLink($value['companyLink']);
+            $company->setCompanyLink($value['companyLink']);
             $jobOffer->setCompany($company);
 
 

@@ -100,7 +100,7 @@ class AdministratorDAO implements lAdministratorDAO
     function update(Administrator $admin)
     {
         try {
-            $query = "UPDATE " . $this->tableName . " SET firstNameAdmin = :firstNameAdmin, lastNameAdmin = :lastNameAdmin , employeeNumber = :employeeNumber, emailAdmin = :emailAdmin, passwordAdmin = :passwordAdmin, activeAdmin = :activeAdmin
+            $query = "UPDATE " . $this->tableName. " SET firstNameAdmin= :firstNameAdmin, lastNameAdmin = :lastNameAdmin , employeeNumber = :employeeNumber, emailAdmin = :emailAdmin, passwordAdmin = :passwordAdmin, activeAdmin = :activeAdmin
             WHERE (administratorId = :administratorId)";
 
             $parameters['firstNameAdmin'] = $admin->getFirstName();

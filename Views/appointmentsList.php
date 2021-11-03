@@ -15,32 +15,24 @@ include_once('nav.php');;
 
 
 
-    <section class="download-area section-gap" id="app">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 download-left">
-                    <img class="img-fluid" src="../Views/img/appoint.png" alt="">
-                </div>
-                <br><br>
-                <div class="col-lg-6 download-right">
-                    <h1>Find your<br>
-                        Dream Job Today!</h1>
-                    <p class="subs">
-                        We offer you a wide variety of job offers from the best companies so that you can find your
-                        dream job. Do not wait any longer and expand your work horizons.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
 <?php if($loggedUser instanceof Student){?>
 
     <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
 
-    <div class="title text-center my-5">
-        <h1 class="mb-3">Active Appointment</h1>
-    </div>
+
+    <!-- Start callto-action Area -->
+    <section class="callto-action-area section-gap"  id="join">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content col-lg-9">
+                    <div class="title text-center">
+                        <h1 class="mb-10 text-white">Active Appointment</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End calto-action Area -->
 
     <?php
     if (is_object($historyAppointments)) {
@@ -133,11 +125,24 @@ include_once('nav.php');;
         </div>
     <?php } ?>
 
+    <!-- Start callto-action Area -->
+    <section class="callto-action-area section-gap"  id="join">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content col-lg-9">
+                    <div class="title text-center">
+                        <h1 class="mb-10 text-white">Appointment History</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End calto-action Area -->
+
+
+
     <?php if(isset($historyAppointments) && $historyAppointments!=null){?>
 
-        <div class="title text-center">
-            <h1 class="mb-3">Appointment History</h1>
-        </div>
 
         <!--Start appointment history area-->
 
@@ -182,18 +187,88 @@ include_once('nav.php');;
     <?php } } else if($loggedUser instanceof  Administrator){?>
 
 
-    <div class="title text-center my-5">
-        <h1 class="mb-3">Current Appointments</h1>
-    </div>
+    <!-- Start callto-action Area -->
+    <section class="callto-action-area section-gap"  id="join">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content col-lg-9">
+                    <div class="title text-center">
+                        <h1 class="mb-10 text-white">Current Appointments</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End calto-action Area -->
+
+    <?php if(isset($allAppointments) && $allAppointments!=null){  $offerId=$allAppointments[0]->getJobOffer()->getJobOfferId()?>
+
+    <main class="py-5">
+        <section id="listado" class="mb-3">
+            <div class="container">
+                <h3 class="mb-4 text-center text-muted">Job Offer: <?php echo $searchedJobOffer->getTitle()?></h3>
+
+
+                <div class="bg-light-alpha p-3 border">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 text-center justify-content-center">
+                            <label class="text-muted text-strong" for="">Company</label>
+                            <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo  $searchedJobOffer->getCompany()->getName()?>">
+                        </div>
+
+                        <div class="col-lg-4 text-center">
+                            <label class="text-muted text-strong" for="">Email</label>
+                            <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo   $searchedJobOffer->getCompany()->getEmail()?>">
+                        </div>
+
+                        <div class="col-lg-4 text-center">
+                            <label class="text-muted text-strong"  for="">Website</label>
+                            <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo  $searchedJobOffer->getCompany()->getCompanyLink()?>">
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <br>
+                            <label class="text-muted text-strong"  for="">Publish Date</label>
+                            <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo  $searchedJobOffer->getPublishDate()?>">
+                        </div>
+
+                        <div class="col-lg-4 text-center">
+                            <br>
+                            <label class="text-muted text-strong"  for="">End Date</label>
+                            <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo  $searchedJobOffer->getEndDate()?>">
+                        </div>
+
+                        <div class="col-lg-4 text-center">
+                            <br>
+                            <label class="text-muted text-strong"  for="">Career</label>
+                            <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $searchedJobOffer->getCareer()->getDescription()?>">
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <br>
+                            <label class="text-muted text-strong"  for="">Number of Appoiments </label>
+                            <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo count($allAppointments)?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Start actual appointment-->
 
-    <?php if(isset($allAppointments) && $allAppointments!=null){
 
+            <form action="<?php echo FRONT_ROOT . "Job/showJobOfferViewMore" ?>"
+                  method="POST">
+                <button type="submit" name="id" class="btn buttonPer m-lg-auto d-block"
+                        value="<?php echo $offerId ?>"><strong>Back to Job Offer info</strong>
+                </button>
+            </form>
+
+
+<?php
         foreach ($allAppointments as $actualAppointment){
         ?>
 
-            <section class="post-area section-gap">
+            <section class="post-area ">
                 <div class="container">
                     <div class="row justify-content-center d-flex ">
                         <div class="col-lg-7 post-list bg-light-alpha p-5 border">

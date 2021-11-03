@@ -602,39 +602,6 @@ include_once('nav.php');
 
                 </div>
 
-   <!--ESTA ES LA BARRA DEL COSTADO, BORRAR SI NO SALE-->
-                <div class="col-lg-3 sidebar">
-                    <div class="single-slidebar">
-                        <h4>Jobs by Location</h4>
-                        <ul class="cat-list">
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>New York</p><span>37</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Park Montana</p><span>57</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Atlanta</p><span>33</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Arizona</p><span>36</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Florida</p><span>47</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Rocky Beach</p><span>27</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Chicago</p><span>17</span></a></li>
-                        </ul>
-                    </div>
-
-                    <div class="single-slidebar">
-                        <h4>Jobs by Category</h4>
-                        <ul class="cat-list">
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Technology</p><span>37</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Media & News</p><span>57</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Goverment</p><span>33</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Medical</p><span>36</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Restaurants</p><span>47</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Developer</p><span>27</span></a></li>
-                            <li><a class="justify-content-between d-flex" href="category.html"><p>Accounting</p><span>17</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>  <!--BORRAR HASTA ACA PARA SACAR BARRA DEL COSTADO-->
-    <!-- End post Area -->
-
                 </div>
             </div>
     </section>

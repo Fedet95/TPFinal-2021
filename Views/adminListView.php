@@ -64,7 +64,7 @@ include_once('nav.php');
 
 
                     <td>
-                        <form action="<?php echo FRONT_ROOT . "Admin/Edit" ?>" method="POST">
+                        <form action="<?php echo FRONT_ROOT . "Admin/showAdminEditView" ?>" method="POST">
                             <button type="submit" name="id" class="btn btn-dark m-lg-auto d-block"
                                     value="<?php echo $value->getAdministratorId() ?>"> Edit
                             </button>

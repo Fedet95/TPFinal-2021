@@ -5,17 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/Views/viewCv.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/applyJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/applyJobOffer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/AdministratorDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AdministratorDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/adminListView.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminListView.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/appointmentsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentsList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/06-684-0100.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/63-025-8112.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/createJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/createJobOffer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
     </list>
-    <list id="911e557e-171a-4c62-af3e-fb5b7be5905f" name="Changes by paye_" comment="Changes by paye_">
-      <change beforePath="$PROJECT_DIR$/Views/studentListViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentListViewMore.php" afterDir="false" />
-    </list>
+    <list id="911e557e-171a-4c62-af3e-fb5b7be5905f" name="Changes by paye_" comment="Changes by paye_" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,28 +105,8 @@
       <workItem from="1635426280447" duration="79703000" />
       <workItem from="1635603139953" duration="102349000" />
       <workItem from="1635891334513" duration="900000" />
-      <workItem from="1635894145697" duration="11216000" />
-    </task>
-    <task id="LOCAL-00015" summary="Update">
-      <created>1634693983930</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1634693983930</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Update views and other fixes, datalist">
-      <created>1634751275391</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1634751275391</updated>
-    </task>
-    <task id="LOCAL-00017" summary="delete old repositories">
-      <created>1635208271147</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1635208271147</updated>
+      <workItem from="1635894145697" duration="11253000" />
+      <workItem from="1635960098679" duration="6702000" />
     </task>
     <task id="LOCAL-00018" summary="update">
       <created>1635208508055</created>
@@ -450,7 +430,28 @@
       <option name="project" value="LOCAL" />
       <updated>1635896820149</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="update">
+      <created>1635951009886</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1635951009886</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Changes by paye_">
+      <created>1635951020304</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1635951020304</updated>
+    </task>
+    <task id="LOCAL-00066" summary="update">
+      <created>1635951026498</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1635951026498</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
