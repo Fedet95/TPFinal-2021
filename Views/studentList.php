@@ -34,12 +34,12 @@ include_once('nav.php');
                     </th>
                     <th>
                         <form action="<?php echo FRONT_ROOT . "Student/showStudentListView" ?>" method="post"">
-                            <input type="submit" class="btn btn-dark ml-auto" name="all" value="Show all students" >
+                            <input type="submit" class="btn btn-dark ml-auto" name="valueToSearch" value="Show all students" >
                         </form>
                     </th>
                     <th>
                         <form action="<?php echo FRONT_ROOT . "Student/showStudentListView" ?>" method="post"">
-                        <input type="submit" class="btn btn-dark ml-auto" name="registered" value="Show only registered" >
+                        <input type="submit" class="btn btn-dark ml-auto" name="valueToSearch" value="Show only registered" >
                         </form>
                     </th>
                 </tr>
