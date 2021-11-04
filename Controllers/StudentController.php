@@ -1,4 +1,5 @@
 <?php
+
 namespace Controllers;
 
 use DAO\OriginStudentDAO;
@@ -15,7 +16,7 @@ class StudentController
 
     public function __construct()
     {
-        $this->studentDAO= new StudentDAO();
+        $this->studentDAO = new StudentDAO();
         $this->loggedUser = $this->loggedUserValidation();
     }
 
@@ -37,12 +38,10 @@ class StudentController
 
         try {
             $allStudents = $this->studentDAO->getAll();
-        }
-        catch (\PDOException $ex)
-        {
+        } catch (\PDOException $ex) {
             echo $ex->getMessage();
         }
-        $searchedStudent=$this->searchStudentFiltreASD($allStudents, $valueToSearch, $back);
+        $searchedStudent = $this->searchStudentFiltreASD($allStudents, $valueToSearch, $back);
         require_once(VIEWS_PATH . "studentList.php");
 
     }
@@ -70,33 +69,27 @@ class StudentController
     }
 
 
-
     public function searchStudentFiltreASD($allStudents, $valueToSearch)
     {
         $searchedStudent = array();
 
-        if($valueToSearch!=null)
-        {
-            foreach ($allStudents as $value)
-            {
-                if (strcasecmp($value->getFirstName(), $valueToSearch) == 0)
-                {
+        if ($valueToSearch != null) {
+
+            foreach ($allStudents as $value) {
+                $dniValueReplace= str_replace("-", "", $value->getDni());
+                if ($dniValueReplace== $valueToSearch) {
                     array_push($searchedStudent, $value);
                 }
             }
-        }
-        else
-        {
+        } else {
             $searchedStudent = $allStudents;
         }
 
-        if($valueToSearch=='Show only registered')
-        {
+        if ($valueToSearch == 'Show only registered') {
             $searchedStudent = $this->studentDAO->getOnlyRegistered();
         }
 
-        if($valueToSearch=='Show all students' || $valueToSearch=='Back')
-        {
+        if ($valueToSearch == 'Show all students' || $valueToSearch == 'Back') {
             $searchedStudent = $allStudents;
         }
 
@@ -113,15 +106,12 @@ class StudentController
 
         if (isset($_SESSION['loggedadmin'])) {
             $loggedUser = $_SESSION['loggedadmin'];
-        }
-        else if(isset($_SESSION['loggedstudent'])) {
+        } else if (isset($_SESSION['loggedstudent'])) {
             $loggedUser = $_SESSION['loggedstudent'];
         }
 
-        return  $loggedUser;
+        return $loggedUser;
     }
-
-
 
 
 }

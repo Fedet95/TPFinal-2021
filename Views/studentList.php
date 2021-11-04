@@ -50,11 +50,12 @@ include_once('nav.php');
         <table class="table bg-light-alpha border" style="text-align:center; ">
             <thead>
             <tr>
-                <th class="text-muted text-strong" style="width: 25%;">First Name</th>
-                <th class="text-muted text-strong" style="width: 25%;">Last Name</th>
-                <th class="text-muted text-strong" style="width: 30%;">DNI</th>
-                <th class="text-muted text-strong" style="width: 30%;">Career</th>
-                <th class="text-muted text-strong" style="width: 30%;">View More</th>
+                <th class="text-muted text-strong" style="width: 15%;">First Name</th>
+                <th class="text-muted text-strong" style="width: 15%;">Last Name</th>
+                <th class="text-muted text-strong" style="width: 15%;">DNI</th>
+                <th class="text-muted text-strong" style="width: 25%;">Email</th>
+                <th class="text-muted text-strong" style="width: 15%;">Career</th>
+                <th class="text-muted text-strong" style="width: 5%;">View More</th>
             </tr>
             </thead>
             <tbody>
@@ -75,6 +76,7 @@ include_once('nav.php');
                     <td><?php echo $value->getFirstName() ?></td>
                     <td><?php echo $value->getLastName() ?></td>
                     <td><?php echo $value->getDni() ?></td>
+                    <td><?php echo $value->getEmail()?></td>
                     <td><?php echo $value->getCareer()->getDescription() ?></td>
                     <td>
                         <form action="<?php echo FRONT_ROOT . "Student/showMoreStudentView" ?>" method="POST">

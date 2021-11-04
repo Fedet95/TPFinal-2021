@@ -10,8 +10,8 @@ include_once('nav.php');
             <h2 class="mb-3 text-center text-muted">Students</h2>
 
             <div class="bg-light-alpha p-2 text-center">
-                <div class="row">
-                    <div class="col-lg-4">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-3">
                         <label class="text-muted text-strong" for="">First Name</label>
                         <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getFirstName()?>">
                     </div>
@@ -21,7 +21,7 @@ include_once('nav.php');
                         <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getLastName()?>">
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <label class="text-muted text-strong"  for="">DNI</label>
                         <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getDni()?>">
                     </div>
@@ -29,6 +29,21 @@ include_once('nav.php');
                     <div class="col-lg-3">
                         <label class="text-muted text-strong" for="">Email</label>
                         <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getEmail()?>">
+                    </div>
+                    <div class="col-lg-4">
+                        <br>
+                        <label class="text-muted text-strong" for="">PhoneNumber</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getPhoneNumber()?>">
+                    </div>
+                    <div class="col-lg-4">
+                        <br>
+                        <label class="text-muted text-strong" for="">FileNumber</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getFileNumber()?>">
+                    </div>
+                    <div class="col-lg-4">
+                        <br>
+                        <label class="text-muted text-strong" for="">BirthDate</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getBirthDate()?>">
                     </div>
                 </div>
             </div>
