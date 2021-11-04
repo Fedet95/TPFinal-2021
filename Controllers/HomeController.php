@@ -68,6 +68,7 @@ class HomeController
 
     public function showContactUsView($message= "")
     {
+        require_once(VIEWS_PATH."checkLoggedStudent.php");
         require_once (VIEWS_PATH."contactUs.php");
     }
 
@@ -267,7 +268,6 @@ class HomeController
 
     public function sendEmail ($text, $name, $email, $sub)
     {
-
         $to = 'juanpayetta@gmail.com';
         $subject = $sub;
         $message = $text;
