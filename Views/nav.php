@@ -69,12 +69,6 @@ if (isset($_SESSION['loggedstudent']))
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Company Management</a>
                         <?php
                     }
-                    else if($loggedUser instanceof Student)
-                    {
-                        ?>
-                        <a class="dropdown-item" href="#">View Our Portfolio</a>
-                        <?php
-                    }
                     ?>
                 </div>
             <li class="nav-item dropdown">
@@ -104,6 +98,7 @@ if (isset($_SESSION['loggedstudent']))
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Job Offers Management</a>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobPositionManagement"?>">Job Position Managment</a>
+
                         <?php
                     }
                     else if($loggedUser instanceof Student)
@@ -127,7 +122,7 @@ if (isset($_SESSION['loggedstudent']))
             {
                 ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/showContactUsView"?>">Contact us</a>
                 </li>
                 <?php
             }

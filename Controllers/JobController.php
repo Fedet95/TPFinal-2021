@@ -49,13 +49,6 @@ class JobController
     }
 
 
-    /**
-     *
-     * FALTA HACER EL SHOW EDIT Y REMOVE DE JOB OFFERS!!!!!
-     *
-     */
-
-
 
 
     /**
@@ -621,7 +614,11 @@ class JobController
            {
                if($allOffers->getCompany()->getCompanyId()==$searchedOffer->getCompany()->getCompanyId())
                {
-                   $flag=1;
+                   $flag=3;
+               }
+               else
+               {
+                   $flag=2;
                }
            }
        }
@@ -892,6 +889,7 @@ class JobController
 
 
 
+
     /**
      * Returns a searched job offer by position or all offers otherwise
      * @param $allOffers
@@ -903,6 +901,11 @@ class JobController
 
         if($valueToSearch!=null)
         {
+            if(is_object($allOffers))
+            { $offer= $allOffers;
+                $allOffers= array();
+                array_push($allOffers, $offer);
+            }
 
             foreach ($allOffers as $value)
             {
@@ -944,13 +947,26 @@ class JobController
 
         if($valueToSearch!=null)
         {
-
-            foreach ($allOffers as $value)
+            if($allOffers!=null)
             {
-                    if ($value->getCareer()->getDescription() == $valueToSearch) //no es case sensitive
+                if(is_object($allOffers))
+                { $offer= $allOffers;
+                    $allOffers= array();
+                    array_push($allOffers, $offer);
+                }
+
+                foreach ($allOffers as $value)
+                {
+                    if (strcasecmp($value->getCareer()->getDescription(),$valueToSearch)==0) //no es case sensitive
                     {
                         array_push($searchedOffer, $value);
                     }
+                }
+
+            }
+            else
+            {
+                $searchedOffer=null;
             }
         }
         else

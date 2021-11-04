@@ -66,6 +66,10 @@ class HomeController
     }
 
 
+    public function showContactUsView($message= "")
+    {
+        require_once (VIEWS_PATH."contactUs.php");
+    }
 
 
     /**
@@ -261,65 +265,24 @@ class HomeController
 
 
 
-/*
-     * Validate if the entered cuit is valid
-     * @return mixed|null
-    public function validateCuit($cuit)
-    {
-        $valid = false;
-
-        $numlength = strlen((string)$cuit);
-        $num = (string)$cuit;
-
-        if ($numlength != 11) {
-            $valid = false;
-        } else if (substr($num, 0, 1) != '3' || substr($num, 0, 2) != '30') {
-            $valid = false;
-        } else {
-            $valid = true;
-        }
-
-        return $valid;
-    }
-*/
-
-
-    /* NO LO UTILIZAMOS PORQUE NO LE DAREMOS LOS OBJETOS CARRERA A LOS ALUMNOS POR AHORA, NO LO NECESITAN, YA TIENEN ID CAREER DESDE LA API
-     *Update all students from Api to Json
-     * @return mixed
-    public function updateAllDAOStudents($studentsArray)
+    public function sendEmail ($text, $name, $email, $sub)
     {
 
-        foreach($studentsArray as $key => $value)
-        {
-                $searchCareer= $this->searchCareer($value->getCareer()->getCareerId());
-                $career= $value->getCareer();
-                $career->setDescription($searchCareer->getDescription());
-                $career->setActive($searchCareer->getActive());
-                $value->setCareer($career);
-                $studentsArray[$key]=$value;
-        }
+        $to = 'juanpayetta@gmail.com';
+        $subject = $sub;
+        $message = $text;
+        $headers = 'From: '.$email. ' '. "\r\n" .
+            'MIME-Version: 1.0' . "\r\n" .
+            'Content-type: text/html; charset=utf-8';
+        if (mail($to, $subject, $message, $headers))
+            $this->showContactUsView("Thank you for contacting us, we will be responding as soon as possible!");
+
+        else
+            $this->showContactUsView("Error, please try again");
+
     }
-    */
 
 
-
-   /*
-     * Search the student career ID in api, returning the searched career or null
-     * @param $careerId
-     * @return mixed|null
-
-    public function searchCareer($careerId)
-    {
-        $searchedCareer = null;
-        foreach ($this->careersOrigin as $value) {
-            if ($value->getCareerId() == $careerId) {
-                $searchedCareer = $value;
-            }
-        }
-        return $searchedCareer;
-    }
-    */
 
 
 }

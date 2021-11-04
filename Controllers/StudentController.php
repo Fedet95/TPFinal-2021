@@ -1,5 +1,7 @@
 <?php
 namespace Controllers;
+
+use DAO\OriginStudentDAO;
 use DAO\StudentDAO;
 
 
@@ -30,6 +32,7 @@ class StudentController
 
     public function showStudentListView($valueToSearch = null, $back = null, $message = "")
     {
+
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
         try {
@@ -48,7 +51,21 @@ class StudentController
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $searchedStudent=$this->studentDAO->getStudent($studentId);
+        $studentMore = null;
+        $studentsOrigin = new OriginStudentDAO();
+
+        $students = $studentsOrigin->start($studentsOrigin); //trae de la api
+
+
+        if ($students != null) {
+            foreach ($students as $value) {
+
+                if ($value->getStudentId() == $studentId) {
+                    $studentMore = $value;
+                }
+            }
+        }
+
         require_once(VIEWS_PATH . "studentListViewMore.php");
     }
 

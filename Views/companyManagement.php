@@ -4,8 +4,39 @@ include_once('header.php');
 include_once('nav.php');
 ?>
 
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+<!--
+CSS
+============================================= -->
+<link rel="stylesheet" href="css/linearicons.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/nice-select.css">
+<link rel="stylesheet" href="css/animate.min.css">
+<link rel="stylesheet" href="css/owl.carousel.css">
+<link rel="stylesheet" href="css/main.css">
+
+
+
+
 <div class="ml-auto col-auto">
-    <h3 class=" text-center text-muted py-3">Companies List</h3>
+    <!-- Start callto-action Area -->
+    <section class="bg-light-alpha section-gap"  id="join">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content col-lg-9">
+                    <div class="title text-center">
+                        <h1 class="mb-10 text-muted">Companies List</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br><br>
+
+<div class="ml-auto col-auto">
+
     <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
     <div class="scrollable container-fluid">
         <div class="form-group">
@@ -40,13 +71,21 @@ include_once('nav.php');
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($searchedCompany as $valueCompany) {
+
+
+                   <?php if(isset($searchedCompany) && $searchedCompany!=null) {
+                       if (is_object($searchedCompany)) {
+                           $searched = $searchedCompany;
+                           $searchedCompany = array();
+                           array_push($searchedCompany, $searched);
+                       }
+                       foreach ($searchedCompany as $valueCompany) {
                 ?>
                 <tr>
                     <td><?php echo $valueCompany->getCompanyId() ?></td>
                     <td><?php echo $valueCompany->getName() ?></td>
                     <td><?php echo $valueCompany->getIndustry()->getType() ?></td>
-                    <td><?php echo '<img src="../uploads/' .$valueCompany->getLogo()->getFile() . '" height="50" width="50"/>'; ?></td>
+                    <td><?php echo '<img src="../uploads/' .$valueCompany->getLogo()->getFile() . '" height="50" width="70"/>'; ?></td>
 
                     <td>
                         <form action="<?php echo FRONT_ROOT ."Company/showCompanyViewMore" ?>" method="POST">
@@ -56,9 +95,8 @@ include_once('nav.php');
                         </form>
                     </td>
                 </tr>
-                <?php
-            }
-            ?>
+        <?php
+            }}else{?> <h6 class="py-3 text-muted text-center text-strong"><?php echo "There is no company loaded in the system"?></h6>  <?php }?>
             </tbody>
         </table>
     </div>

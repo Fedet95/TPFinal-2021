@@ -17,7 +17,7 @@ include_once('nav.php');;
 
 <?php if($loggedUser instanceof Student){?>
 
-    <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
+    <h6 class="py-3  text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
 
 
     <!-- Start callto-action Area -->
@@ -327,4 +327,5 @@ include_once('nav.php');;
 <?php } }?>
 
 
+<br><br><br>
     <?php include_once("footer.php") ?>

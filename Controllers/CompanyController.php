@@ -742,7 +742,7 @@ class CompanyController
                 {
                     if($value->getCompany()->getCompanyId()==$id)
                     {
-                        if($value->getActive()=='true')
+                        if($value->getActive()=='true' && strtotime($value->getEndDate()) > strtotime(date("Y-m-d")))
                         {
                             array_push($activeOffers, $value);
                         }
@@ -757,6 +757,7 @@ class CompanyController
             {
                 $this->companyDAO->remove($id);
                 $this->showCompanyManagement(null, null, "Company removed successfully");
+                //company with no job offers
 
             }
 

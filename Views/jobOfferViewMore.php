@@ -96,6 +96,16 @@ include_once('nav.php');
                                    <li><?php echo $jobOffer->getCareer()->getDescription() ?></li>
                                </ul>
                             </div>
+                            <div class="post-details2  mb-50">
+                                <ul>
+                                    <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>"
+                                          method="POST">
+                                        <button type="submit" name="id" class="btn buttonPer  d-block">Return
+                                        </button>
+                                    </form>
+                                </ul>
+
+                            </div>
                         </div>
 
                     </div>

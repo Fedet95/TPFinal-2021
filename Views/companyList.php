@@ -5,7 +5,23 @@ include_once('nav.php');
 ?>
 
 <div class="ml-auto col-auto">
-            <h3 class="text-center text-muted py-3">Companies List</h3>
+    <!-- Start callto-action Area -->
+    <section class="bg-light-alpha section-gap"  id="join">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content col-lg-9">
+                    <div class="title text-center">
+                        <h1 class="mb-10 text-muted">Companies List</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br><br>
+
+<div class="ml-auto col-auto">
+
+
             <div class="scrollable container-fluid">
                 <div class="form-group">
                      <table>
