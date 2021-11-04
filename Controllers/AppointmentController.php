@@ -20,6 +20,9 @@ use Models\Student;
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 
 
+/**
+ *
+ */
 class AppointmentController
 {
 
@@ -34,6 +37,12 @@ class AppointmentController
         $this->loggedUser = $this->loggedUserValidation();
     }
 
+    /**
+     * Show the job offer aplly view
+     * @param $studentId
+     * @param $jobOfferId
+     * @param string $message
+     */
     public function showApplyView($studentId, $jobOfferId, $message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedStudent.php");
@@ -55,6 +64,12 @@ class AppointmentController
     }
 
 
+    /**
+     * Show the appointment listing view
+     * @param null $valueToSearch
+     * @param null $back
+     * @param string $message
+     */
     public function showAppointmentList($valueToSearch = null, $back = null, $message = "")
     {
         //valueToSearch = $jobOffer ID
@@ -143,6 +158,11 @@ class AppointmentController
     }
 
 
+    /**
+     * Validates if an student have an actual appointment
+     * @param $studentId
+     * @return int|string|void
+     */
     public function uniqueAppointment($studentId)
     {
         try {
@@ -177,7 +197,14 @@ class AppointmentController
     }
 
 
-        public function addAppointment($text, $studentId, $jobOfferId, $cv)
+    /**
+     * Adds an appointment to the system
+     * @param $text
+     * @param $studentId
+     * @param $jobOfferId
+     * @param $cv
+     */
+    public function addAppointment($text, $studentId, $jobOfferId, $cv)
         {
             require_once(VIEWS_PATH . "checkLoggedStudent.php");
 
@@ -243,7 +270,10 @@ class AppointmentController
         }
 
         //SIN USAR BORRAR!
-        public function searchAppointmentFiltreASD($allAppointment, $valueToSearch)
+
+
+
+    public function searchAppointmentFiltreASD($allAppointment, $valueToSearch)
         {
             $searchedAppointment = array();
 
@@ -266,7 +296,13 @@ class AppointmentController
         }
 
 
-        public function Remove($studentId, $system = null)
+    /**
+     * Remove an appointment from the system
+     * @param $studentId
+     * @param null $system
+     * @return string|void
+     */
+    public function Remove($studentId, $system = null)
         {
             require_once(VIEWS_PATH . "checkLoggedStudent.php");
 
@@ -330,13 +366,22 @@ class AppointmentController
             return $flag;
         }
 
-        public function showWelcomeView($message = "")
+    /**
+     * Show the welcome view
+     * @param string $message
+     */
+    public function showWelcomeView($message = "")
         {
             require_once(VIEWS_PATH . "welcome.php");
         }
 
 
-        public function validateCv($appointment)
+    /**
+     * Validate if a curriculum is correctly loaded
+     * @param $appointment
+     * @return mixed|null
+     */
+    public function validateCv($appointment)
         {
             $statusMsg = '';
             // File upload path
@@ -399,7 +444,13 @@ class AppointmentController
         }
 
 
-        public function searchAppointments($allAppointments, $jobOfferId)
+    /**
+     * Search an appointment from a job offer
+     * @param $allAppointments
+     * @param $jobOfferId
+     * @return array|null
+     */
+    public function searchAppointments($allAppointments, $jobOfferId)
         {
             $appointments = array();
 

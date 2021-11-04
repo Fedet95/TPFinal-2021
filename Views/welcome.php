@@ -10,7 +10,8 @@ include('header.php');
                     <h2 class="text-muted">Find your dream job here</h2>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="<?php echo VIEWS_PATH."img/hero-img.png" ?>" class="img-fluid animated" alt="">
+                    <img src="../Views/img/hero-img.png" class="img-fluid animated" alt="">
+
                 </div>
             </div>
         </div>

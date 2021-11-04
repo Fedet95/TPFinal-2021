@@ -9,6 +9,9 @@ use DAO\StudentDAO;
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 
 
+/**
+ *
+ */
 class StudentController
 {
     private $studentDAO;
@@ -31,6 +34,12 @@ class StudentController
     }
 
 
+    /**
+     * Show the list of students view
+     * @param null $valueToSearch
+     * @param null $back
+     * @param string $message
+     */
     public function showStudentListView($valueToSearch = null, $back = null, $message = "")
     {
 
@@ -46,6 +55,10 @@ class StudentController
 
     }
 
+    /**
+     * Show the extended list of students view
+     * @param $studentId
+     */
     public function showMoreStudentView($studentId)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
@@ -69,6 +82,12 @@ class StudentController
     }
 
 
+    /**
+     * Filter an student by DNI
+     * @param $allStudents
+     * @param $valueToSearch
+     * @return array|mixed|\Models\Student|\Models\Student[]|null
+     */
     public function searchStudentFiltreASD($allStudents, $valueToSearch)
     {
         $searchedStudent = array();

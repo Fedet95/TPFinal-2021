@@ -3,7 +3,7 @@ include_once('header.php');
 ?>
 
 <?php if ($student == null) { ?>
-    <main class="py-5 m-3">
+    <main class="py-5 m-3 "  >
             <header class="text-center">
                 <h1 class=" text-muted text-center">SIGN UP</h1>
             </header>

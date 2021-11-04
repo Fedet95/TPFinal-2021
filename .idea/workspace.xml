@@ -6,11 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/contactUs.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/contactUs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/StudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/adminListView.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/adminListView.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/administratorControlPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/administratorControlPanel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/signUp.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/signUp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/studentControlPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentControlPanel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/studentList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/welcome.php" afterDir="false" />
     </list>
-    <list id="efca4a33-f62d-464c-92fb-5e8fe3eee5ae" name="Changes by Fede" comment="Changes by Fede" />
-    <list id="911e557e-171a-4c62-af3e-fb5b7be5905f" name="Changes by paye_" comment="Changes by paye_" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +53,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../job-listing-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../login" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -101,14 +110,9 @@
       <workItem from="1635603139953" duration="102349000" />
       <workItem from="1635891334513" duration="900000" />
       <workItem from="1635894145697" duration="11253000" />
-      <workItem from="1635960098679" duration="26615000" />
-    </task>
-    <task id="LOCAL-00024" summary="fix errors and validations">
-      <created>1635361512983</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1635361512984</updated>
+      <workItem from="1635960098679" duration="29713000" />
+      <workItem from="1636034701903" duration="4795000" />
+      <workItem from="1636041423182" duration="778000" />
     </task>
     <task id="LOCAL-00025" summary="fix errors and validations">
       <created>1635372970749</created>
@@ -446,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635990996734</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="update">
+      <created>1635991229784</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1635991229784</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

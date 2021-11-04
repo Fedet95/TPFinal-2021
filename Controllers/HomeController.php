@@ -8,6 +8,9 @@ use DAO\OriginStudentDAO;
 use DAO\CareerDAO;
 use DAO\StudentDAO;
 
+/**
+ *
+ */
 class HomeController
 {
     private $administratorDAO;
@@ -265,7 +268,13 @@ class HomeController
     }
 
 
-
+    /**
+     * Send a mail from an student to the administration
+     * @param $text
+     * @param $name
+     * @param $email
+     * @param $sub
+     */
     public function sendEmail ($text, $name, $email, $sub)
     {
         $to = 'juanpayetta@gmail.com';

@@ -19,6 +19,9 @@ use Models\Logo;
 use Models\Student;
 
 
+/**
+ *
+ */
 class CompanyController
 {
     private $companyDAO;
@@ -273,7 +276,12 @@ class CompanyController
     }
 
 
-
+    /**
+     * Validate if an industry is already in the system
+     * @param $industry
+     * @param $company
+     * @return mixed|null
+     */
     public function validateIndustry($industry, $company)
     {
         if(!is_numeric($industry))
@@ -336,6 +344,12 @@ class CompanyController
     }
 
 
+    /**
+     * Validate if a country is already in the system
+     * @param $country
+     * @param $company
+     * @return mixed|null
+     */
     public function validateCountry($country, $company)
     {
         $searchedCountryName=null;
@@ -400,6 +414,12 @@ class CompanyController
     }
 
 
+    /**
+     * Validate if a city is already in the system
+     * @param $city
+     * @param $company
+     * @return mixed|null
+     */
     public function validateCity($city, $company)
     {
         try {
@@ -442,6 +462,11 @@ class CompanyController
     }
 
 
+    /**
+     * Validate if an image is already is loaded correctly
+     * @param $company
+     * @return mixed|null
+     */
     public function validateImage($company)
     {
         $statusMsg = '';
@@ -527,6 +552,11 @@ class CompanyController
     }
 
 
+    /**
+     * Validate if an administrator exist in the system
+     * @param $company
+     * @return mixed|null
+     */
     public function validateAdmin($company)
     {
         try {
@@ -646,6 +676,13 @@ class CompanyController
         return $validate;
     }
 
+
+    /**
+     * Validate if there is only one company with determinated cuit in the system
+     * @param $cuit
+     * @param null $id
+     * @return int
+     */
     public function uniqueCuit($cuit, $id=null)
     {
         $flag=0;
@@ -684,6 +721,13 @@ class CompanyController
         return $flag;
     }
 
+
+    /**
+     * Validates if there is only one company with a determinated name in the system
+     * @param $name
+     * @param null $id
+     * @return int
+     */
     public function uniqueName($name, $id=null)
     {
         $flag=0;

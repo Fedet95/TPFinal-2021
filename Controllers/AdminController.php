@@ -8,6 +8,9 @@ use Models\Administrator;
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 
 
+/**
+ *
+ */
 class AdminController
 {
 
@@ -20,6 +23,11 @@ class AdminController
         $this->loggedUser = $this->loggedUserValidation();
     }
 
+
+    /**
+     * Show the administrator list view
+     * @param string $message
+     */
     public function showAdminListView($message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
@@ -36,6 +44,10 @@ class AdminController
 
     }
 
+    /**
+     * Show the administrator creation view
+     * @param string $message
+     */
     public function showAdminCreateView($message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
@@ -44,7 +56,12 @@ class AdminController
 
     }
 
-    public function showAdminEditView($id,$message = "")
+    /**
+     * Show the administrator edit view
+     * @param $id
+     * @param string $message
+     */
+    public function showAdminEditView($id, $message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
@@ -61,6 +78,15 @@ class AdminController
 
     }
 
+    /**
+     * Adds an administator to the system
+     * @param $firstName
+     * @param $lastName
+     * @param $employeeNumber
+     * @param $email
+     * @param $password
+     * @param $active
+     */
     public function addAdmin($firstName, $lastName, $employeeNumber, $email, $password, $active)
     {
 
@@ -135,6 +161,10 @@ class AdminController
 
     }
 
+    /**
+     * Remove an administtator from the system
+     * @param $id
+     */
     public function Remove($id)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
@@ -147,6 +177,16 @@ class AdminController
         }
     }
 
+    /**
+     * Update the administator values
+     * @param $firstName
+     * @param $lastName
+     * @param $employeeNumber
+     * @param $email
+     * @param $password
+     * @param $active
+     * @param $id
+     */
     public function updateAdmin($firstName, $lastName, $employeeNumber, $email, $password, $active, $id)
     {
 
@@ -203,6 +243,8 @@ class AdminController
         }
 
     }
+
+
     public function loggedUserValidation()
     {
         $loggedUser = null;

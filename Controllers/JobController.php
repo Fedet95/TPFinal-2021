@@ -25,6 +25,9 @@ use Models\JobPosition;
  */
 class JobController
 {
+    /**
+     * @var CompanyDAO
+     */
     private $companyDAO;
     private $countryDAO;
     private $careersOrigin;
@@ -246,6 +249,11 @@ class JobController
 
 //--------------------------------------------------------------------------------------------
 
+
+    /**
+     * Show the job position management listing view
+     * @param string $message
+     */
     public function showJobPositionManagement($message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
@@ -266,6 +274,10 @@ class JobController
     }
 
 
+    /**
+     * Show the job position management creation view
+     * @param string $message
+     */
     public function showCreateJobPositionView($message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
@@ -284,6 +296,11 @@ class JobController
 
     }
 
+    /**
+     * Show the extended job position management listing view
+     * @param $careerDescription
+     * @param string $message
+     */
     public function showJobPositionViewMore($careerDescription, $message = "")
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
@@ -296,6 +313,11 @@ class JobController
     }
 
 
+    /**
+     * Adds a new job position to the system
+     * @param $careerId
+     * @param $descriptionJob
+     */
     public function addJobPosition($careerId, $descriptionJob)
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
@@ -491,7 +513,13 @@ class JobController
     }
 
 
-
+    /**
+     * Edit a job Offer
+     * @param $jobOfferId
+     * @param null $careerId
+     * @param string $message
+     * @param null $values
+     */
     public function editJobOffer($jobOfferId, $careerId = null, $message = "", $values = null)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
@@ -694,7 +722,13 @@ class JobController
     }
 
 
-
+    /**
+     * Remove a job offer from the system and DB
+     * @param $id
+     * @param null $accept
+     * @param null $sub
+     * @param null $text
+     */
     public function removeJobOffer($id, $accept=null, $sub = null, $text=null)
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
@@ -724,9 +758,17 @@ class JobController
                     }
                     else
                     {
-                        $count=$this->jobOfferDAO->remove($id); //VER SI SE ELIMINA EN CASCADA
+
+                        try {
+                            $count=$this->jobOfferDAO->remove($id);
+                        } catch (\PDOException $ex)
+                        {
+                            echo $ex->getMessage();
+                        }
+
                         if($count>0)
                         {
+                            $this->jobOfferPositionDAO->remove($id);
                             $finalMessage="The job offer had no applications and was successfully eliminated";
                             $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
                         }
@@ -762,10 +804,19 @@ class JobController
 
             $searchedOffer= $this->jobOfferDAO->getJobOffer($id);
             $appointments= $searchedOffer->getAppointment();
-            $count=$this->jobOfferDAO->remove($id); //VER SI SE ELIMINA EN CASCADA
+
+            try {
+                $count=$this->jobOfferDAO->remove($id);
+            }
+            catch (\PDOException $ex)
+            {
+                echo $ex->getMessage();
+            }
+
 
             if($count>0)
             {
+                $this->jobOfferPositionDAO->remove($id);
 
                 $studentsId= array();
                 foreach ($appointments as $value)
@@ -790,7 +841,7 @@ class JobController
                 $finalMessage="Job offer was successfully removed and applicants were notified";
                 $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
 
-                //$this->sendEmail("juanpayetta@gmail.com", $sub, $text);
+                $this->sendEmail("juanpayetta@gmail.com", $sub, $text); //me auto envio mensaje para probar que funcione
                 //$this->sendEmail("pablopayetta@gmail.com", $sub, $text);
                 //$this->sendEmail("ftacchini95@gmail.com", $sub, $text);
 
@@ -806,6 +857,12 @@ class JobController
     }
 
 
+    /**
+     * Send a mail from the system to the inserted email
+     * @param $email
+     * @param $sub
+     * @param $text
+     */
     public function sendEmail ($email, $sub, $text)
     {
         $to = $email;
@@ -821,7 +878,10 @@ class JobController
     }
 
 
-
+    /**
+     * Gets the appointment array from a job offer
+     * @param $jobOfferId
+     */
     public function getAppointmentArray($jobOfferId)
     {
         try {
@@ -860,6 +920,12 @@ class JobController
     }
 
 
+    /**
+     * Search an appointment in a job offer
+     * @param $allAppointments
+     * @param $jobOfferId
+     * @return array|null
+     */
     public function searchAppointments($allAppointments, $jobOfferId)
     {
         $appointments= array();
