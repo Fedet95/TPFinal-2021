@@ -201,7 +201,22 @@ include_once('nav.php');;
     </section>
     <!-- End calto-action Area -->
 
+    <section id="hero" class=" align-items-center justify-content-center">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+
+                <div class=" d-flex justify-content-center " data-aos="fade-up" data-aos-delay="200">
+                </div>
+                <div class=" hero-img" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="../Views/img/admini.png" width="400" height="300" class="img-fluid animated" alt="">
+
+                </div>
+            </div>
+        </div>
+    </section><!-- End Hero -->
+
     <?php if(isset($allAppointments) && $allAppointments!=null){  $offerId=$allAppointments[0]->getJobOffer()->getJobOfferId()?>
+
 
     <main class="py-5">
         <section id="listado" class="mb-3">

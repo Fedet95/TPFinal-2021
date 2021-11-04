@@ -13,11 +13,12 @@ if (isset($_SESSION['loggedstudent']))
     $loggedUser= $_SESSION['loggedadmin'];
 }
 
+
 ?>
 
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <img style="max-width:30px; margin-top: -7px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXmuQnI6IpPLYNsDQK5TOfvDOK2sTEfFZ1wRdxVQzlhUwkXikpEKfvvdGZ-2gr0RtewYg&usqp=CAU">
+    <img style="max-width:60px; margin-top: -7px;" src="../Views/img/utn-128x128.png">
     <a class="navbar-brand" href="#">Welcome</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>

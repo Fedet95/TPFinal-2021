@@ -34,6 +34,20 @@ include_once('header.php');
     </div>
     </main>
 
+    <section id="hero" class=" align-items-center justify-content-center">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+
+                <div class=" d-flex justify-content-center " data-aos="fade-up" data-aos-delay="200">
+                </div>
+                <div class=" hero-img" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="../Views/img/admini.png" width="500" height="400" class="img-fluid animated" alt="">
+
+                </div>
+            </div>
+        </div>
+    </section><!-- End Hero -->
+
     <?php
 } else if ($student != null) { ?>
     <main class="py-3">

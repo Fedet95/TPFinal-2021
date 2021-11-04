@@ -30,19 +30,9 @@ include_once('nav.php');
         </div>
     </section>
 
-    <section id="hero" class=" align-items-center justify-content-center offset-1">
-        <div class="container">
-            <div class="row justify-content-center align-items-center">
+    <iframe  class="offset-lg-3" width="900" height="500" src="https://www.youtube.com/embed/pJo_fojED70" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-                <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-                </div>
-                <div class=" col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="../Views/img/admini.png" class="img-fluid animated" alt="">
 
-                </div>
-            </div>
-        </div>
-    </section><!-- End Hero -->
 
 
 </main>

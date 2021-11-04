@@ -384,7 +384,7 @@ include_once('nav.php');
                                             <div class="details">
                                                 <div class="offset-3 title d-flex flex justify-content-between">
                                                     <div class="titles">
-                                                        <a href="single.html"><h4><?php echo $value->getTitle() ?></h4></a>
+                                                        <h4><?php echo $value->getTitle() ?></h4>
                                                         <!--TITLE-->
                                                         <h5><?php echo $company->getName() ?></h5> <!--COMPANY NAME-->
                                                     </div>
