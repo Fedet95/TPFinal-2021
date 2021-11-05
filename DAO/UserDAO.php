@@ -46,12 +46,13 @@ class UserDAO implements lUserDAO
      * Search an student by id, and remove
      * @param $studentId
      */
-    function remove($studentId)
+    function remove($userId, $rolId)
     {
         try {
-            $query = "DELETE FROM " . $this->tableName . " WHERE (studentId = :studentId)";
+            $query = "DELETE FROM " . $this->tableName . " WHERE (userId = :userId and rolId= :rolId)";
 
-            $parameters["studentId"] = $studentId;
+            $parameters["userId"] = $userId;
+            $parameters["rolId"] = $rolId;
 
             $this->connection = Connection::GetInstance();
 
@@ -74,6 +75,30 @@ class UserDAO implements lUserDAO
             //hacemos el inner join solo para traer el "rol name"
 
 
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, array());
+
+            $mapedArray = null;
+            if (!empty($result)) {
+                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+            }
+
+            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+    }
+
+
+    function getRol($rolId) //Bring every user from 1 rol (student OR admin)
+    {
+
+        try {
+            $query = "SELECT * FROM " . $this->tableName . " WHERE rolId = :rolId ";
+
+            $parameters["rolId"] = $rolId;
 
             $this->connection = Connection::GetInstance();
 
@@ -149,24 +174,14 @@ class UserDAO implements lUserDAO
     {
 
         try {
-            if ($student->getPassword() == null) {
-                $query = "UPDATE " . $this->tableName . " SET studentId = :studentId, career = :career, firstName = :firstName, lastName = :lastName, dni = :dni, phoneNumber = :phoneNumber, email = :email
-            WHERE (studentId = :studentId)";
 
-                $parameters["studentId"] = $student->getStudentId();
-                $parameters["career"] = $student->getCareer()->getCareerId();
-                $parameters["firstName"] = $student->getFirstName();
-                $parameters["lastName"] = $student->getLastName();
-                $parameters["dni"] = $student->getDni();
-                $parameters["phoneNumber"] = $student->getPhoneNumber();
-                $parameters["email"] = $student->getEmail();
-            } else {
-                $query = "UPDATE " . $this->tableName . " SET  password = :password WHERE (studentId = :studentId)";
-                $parameters["studentId"] = $student->getStudentId();
-                $parameters["password"] = $student->getPassword();
+                $query = "UPDATE " . $this->tableName . " SET email = :email, password = :password
+            WHERE (userId = :userId and rolId=:rolId )";
 
-            }
-
+                $parameters["userId"] = $user->getUserId();
+                $parameters["password"] = $user->getPassword();
+                $parameters["rolId"] = $user->getRol()->getUserRolId();
+                $parameters["email"] = $user->getEmail();
 
             $this->connection = Connection::GetInstance();
 
