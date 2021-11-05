@@ -233,8 +233,6 @@ class HomeController
 
     public function signUpPassword($password1, $password2, $email)
     {
-        $searchedStudent=$this->searchStudentEmail($email);
-
          if($password1==$password2)
          {
               $user= new User();
