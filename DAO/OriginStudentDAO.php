@@ -2,6 +2,7 @@
 namespace DAO;
 use Models\Career;
 use Models\Student;
+use Models\User;
 
 class OriginStudentDAO
 {
@@ -46,8 +47,10 @@ class OriginStudentDAO
     {
         foreach ($this->response as $key =>$value)
         {
+            //BUSCAR EN LA BASE DE USERS ROL EL OBJETO ROL PARA METERLO EN EL ESTUDIANTE (LO NECESITA EL USER DAO PARA INSERTAR ETC)
+
                 $student= new Student();
-                $student->setStudentId($value['studentId']);
+                $student->setUserId($value['studentId']);
                 $student->setEmail($value['email']);
                 $student->setLastName($value['lastName']);
                 $student->setFirstName($value['firstName']);

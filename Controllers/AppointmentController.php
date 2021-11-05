@@ -15,7 +15,7 @@ use Models\AppointmentHistory;
 use Models\Career;
 use Models\Company;
 use Models\JobOffer;
-use Models\Student;
+use Models\User;
 
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 
@@ -75,7 +75,7 @@ class AppointmentController
         //valueToSearch = $jobOffer ID
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
-        if ($this->loggedUser instanceof Student) {
+        if ($this->loggedUser instanceof User) {
             try {
                 $actualAppointment = $this->appointmentDAO->getAppointment($this->loggedUser->getStudentId());
 
@@ -218,7 +218,7 @@ class AppointmentController
                 $jobOffer->setJobOfferId($jobOfferId);
                 $appointment->setJobOffer($jobOffer);
                 $appointment->setDate((new \DateTime())->format('Y-m-d'));
-                $student = new Student();
+                $student = new User();
                 $student->setStudentId($studentId);
                 $appointment->setStudent($student);
 
@@ -235,7 +235,7 @@ class AppointmentController
                         $career = new Career();
                         $career->setDescription($searchOffer->getCareer()->getDescription());
                         $history->setCareer($career);
-                        $student = new Student();
+                        $student = new User();
                         $student->setStudentId($studentId);
                         $history->setStudent($student);
                         try {

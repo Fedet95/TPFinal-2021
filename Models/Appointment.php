@@ -42,7 +42,7 @@ class Appointment
     }
 
 
-    public function setStudent(student $student)
+    public function setStudent(User $student)
     {
         $this->student = $student;
     }

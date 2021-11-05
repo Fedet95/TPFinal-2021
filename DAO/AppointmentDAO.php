@@ -7,7 +7,7 @@ use Models\Career;
 use Models\Company;
 use Models\Country;
 use Models\JobOffer;
-use Models\Student;
+use Models\User;
 
 class AppointmentDAO implements IAppointmentDAO
 {
@@ -146,7 +146,7 @@ class AppointmentDAO implements IAppointmentDAO
             $appointment->setJobOffer($jobOffer);
 
 
-            $student = new Student();
+            $student = new User();
             $student->setStudentId($value["studentAppointmentId"]);
 
             if(isset($value['firstName'])) //for Get all (inner join with student table)

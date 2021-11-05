@@ -1,7 +1,7 @@
 <?php
 
 use Models\Administrator;
-use Models\Student;
+use Models\User;
 
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 include_once('header.php');
@@ -15,7 +15,7 @@ include_once('nav.php');;
 
 
 
-<?php if($loggedUser instanceof Student){?>
+<?php if($loggedUser instanceof User){?>
 
     <h6 class="py-3  text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
 

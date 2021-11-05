@@ -2,34 +2,37 @@
 
 namespace DAO;
 
+use Models\Administrator;
 use Models\Career;
 use Models\Student;
+use Models\User;
+use Models\UserRol;
 
 
-class StudentDAO implements lStudentDAO
+class UserDAO implements lUserDAO
 {
 
     private $connection;
-    private $tableName = "students";
-    private $tableName2 = "careers";
+    private $tableName = "users";
+    private $tableName2 = "usersRol";
+    private $careers;
+    private $students;
 
     /**
      * Add an student to the Data base
-     * @param Student $student
+     * @param User $user
      */
-    public function add(Student $student)
+    public function add(User $user)
     {
         try {
-            $query = "INSERT INTO " . $this->tableName . "(studentId, career, firstName, lastName, dni, phoneNumber, email, password) VALUES (:studentId, :career, :firstName, :lastName, :dni, :phoneNumber, :email, :password)";
+            $query = "INSERT INTO " . $this->tableName . "(userId, email, password, rolId) VALUES (:userId, :email, :password, :rolId)";
 
-            $parameters['studentId'] = $student->getStudentId(); //se le ingresa el id porque en este caso NO es auto_increment (ojo los demas DAO)
-            $parameters['career'] = $student->getCareer()->getCareerId();
-            $parameters['firstName'] = $student->getFirstName();
-            $parameters['lastName'] = $student->getLastName();
-            $parameters['dni'] = $student->getDni();
-            $parameters['phoneNumber'] = $student->getPhoneNumber();
-            $parameters['email'] = $student->getEmail();
-            $parameters['password'] = $student->getPassword();
+
+            $parameters['userId'] = $user->getUserId();
+            $parameters['email'] = $user->getEmail();
+            $parameters['password'] = $user->getPassword();
+            $parameters['rolId'] = $user->getRol()->getUserRolId();
+
 
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters); //el executeNonquery no retorna array, sino la cantidad de datos modificados
@@ -67,9 +70,10 @@ class StudentDAO implements lStudentDAO
     {
 
         try {
-            $query = "SELECT * FROM " . $this->tableName . " s INNER JOIN " . $this->tableName2 . " c ON s.career= c.careerId";
+            $query = "SELECT * FROM " . $this->tableName . " u INNER JOIN " . $this->tableName2 . " r ON u.rolId = r.userRolId";
+            //hacemos el inner join solo para traer el "rol name"
 
-            //$query= "SELECT  b.beerType, b.code, b.name, bt.id FROM ".$this->secondTableName." b INNER JOIN ".$this->tableName." bt ON b.beerType = bt.id WHERE (bt.id = :id)";
+
 
             $this->connection = Connection::GetInstance();
 
@@ -91,12 +95,15 @@ class StudentDAO implements lStudentDAO
      * Returns all values from Data base
      * @return array
      */
-    public function getStudent($studentId)
+    public function getUser($userId, $rolId)
     {
         try {
-            $query = "SELECT * FROM " . $this->tableName . " s INNER JOIN " . $this->tableName2 . " c ON s.career= c.careerId WHERE (s.studentId= :studentId)";
+            //ANTES TRAIAMOS LAS CAREERS DE LA BASE, AHORA HAY QUE TRAER DE LA API!!!
+            $query = "SELECT * FROM " . $this->tableName . " u INNER JOIN ".$this->tableName2." r ON u.rolId=r.userRolId  WHERE  (u.userId= :userId and u.rolId=:rolId)"; //primary key compuesta
 
-            $parameters['studentId'] = $studentId;
+
+            $parameters['userId'] = $userId;
+            $parameters['rolId'] = $rolId;
 
             $this->connection = Connection::GetInstance();
 
@@ -113,6 +120,7 @@ class StudentDAO implements lStudentDAO
         }
     }
 
+    /*
     public function getOnlyRegistered()
     {
 
@@ -135,8 +143,9 @@ class StudentDAO implements lStudentDAO
             throw $ex;
         }
     }
+    */
 
-    function update(Student $student)
+    function update(User $user)
     {
 
         try {
@@ -177,7 +186,7 @@ class StudentDAO implements lStudentDAO
 
         if ($student != null) {
             try {
-                $searchedStudent = $this->getStudent($student->getStudentId());
+                $searchedStudent = $this->getUser($student->getUserId(), $student->getRol()->getUserRolId());
 
                 if ($searchedStudent != null) {
                     if ($searchedStudent != $student) {
@@ -200,7 +209,8 @@ class StudentDAO implements lStudentDAO
         } else if ($studentsArray != null) {
             foreach ($studentsArray as $value) {
                 try {
-                    $searchedStudent = $this->getStudent($value->getStudentId());
+
+                    $searchedStudent = $this->getUser($student->getUserId(), $student->getRol()->getUserRolId());
 
                     if ($searchedStudent != null) {
                         if ($searchedStudent != $value) {
@@ -231,31 +241,90 @@ class StudentDAO implements lStudentDAO
 
         $resultado = array_map(function ($value) {
 
-            $student = new Student();
+            $user=null;
+            $rol= $value['rolId'];
 
-            $student->setStudentId($value["studentId"]);
+            if($rol==1) //students
+            {
+                $student = new Student();
+                $student->setEmail($value["email"]);
+                $student->setPassword($value['password']);
+                $student->setUserId($value['userId']);
+                $userRol= new UserRol();
+                $userRol->setUserRolId($rol);
+                $student->setRol($userRol);
 
-            $careerId = $value['careerId'];
-            $careerDescription = $value['description'];
-            $career = new Career();
-            $career->setDescription($careerDescription);
-            $career->setCareerId($careerId);
-            $student->setCareer($career);
+                $this->getOriginCareers();
+                $this->getOriginStudents();
 
-            $student->setFirstName($value["firstName"]);
-            $student->setLastName($value["lastName"]);
-            $student->setDni($value["dni"]);
-            $student->setPhoneNumber($value["phoneNumber"]);
-            $student->setEmail($value["email"]);
-            $student->setPassword($value['password']);
+                $searchedStudent=null;
+                foreach ($this->students as $values) //busco el estudiante en la api mediante el ID que me devuelve la base
+                {
+                    if($values->getUserId()==$student->getUserId())
+                    {
+                        $searchedStudent=$values;
+                    }
+                }
 
-            return $student;
+                $searchedCareer= null;
+                foreach ($this->careers as $careers)  //busco las carreras en la api, y busco la carrera que corresponde al id de carrera del estudiante
+                {
+                    if($careers->getCareerId()==$searchedStudent->getCareer()->getCareerId())
+                    {
+                        $searchedCareer= $careers;
+                    }
+                }
+
+                $student->setCareer($searchedCareer); //seteo la carrera al estudiante
+
+                $student->setFirstName($searchedStudent->getFirstName());
+                $student->setLastName($searchedStudent->getLastName());
+                $student->setDni($searchedStudent->getDni());
+                $student->setPhoneNumber($searchedStudent->getPhoneNumber());
+                $user=$student;
+
+            }
+            else if($rol==0) //admin
+            {
+
+                $administrator = new User();
+                $administrator->setUserId($value['userId']);
+                $administrator->setEmail($value['email']);
+                $administrator->setPassword($value['password']);
+                $userRol= new UserRol();
+                $userRol->setUserRolId($rol);
+                $administrator->setRol($userRol);
+
+                $user=$administrator;
+            }
+
+
+            return $user;
 
         }, $array);
 
         return count($resultado) > 1 ? $resultado : $resultado['0'];
 
     }
+
+    public function getOriginCareers()
+    {
+        if($this->careers==null)
+        {
+            $careerOrigin= new OriginCareerDAO();
+            $this->careers= $careerOrigin->start($careerOrigin);
+        }
+    }
+
+    public function getOriginStudents()
+    {
+        if($this->students==null)
+        {
+            $studentOrigin= new OriginStudentDAO();
+            $this->students= $studentOrigin->start($studentOrigin);
+        }
+    }
+
 
 
 }

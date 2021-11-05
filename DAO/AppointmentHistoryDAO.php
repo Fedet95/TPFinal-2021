@@ -6,7 +6,7 @@ use Models\AppointmentHistory;
 use Models\Career;
 use Models\Company;
 use Models\JobOffer;
-use Models\Student;
+use Models\User;
 
 class AppointmentHistoryDAO implements IAppointmentHistoryDAO
 {
@@ -110,7 +110,7 @@ class AppointmentHistoryDAO implements IAppointmentHistoryDAO
            $career= new Career();
            $career->setDescription($value["historyCareerName"]);
            $appointment->setCareer($career);
-           $student= new Student();
+           $student= new User();
            $student->setStudentId($value['historyStudentId']);
            $appointment->setStudent($student);
            $company= new Company();

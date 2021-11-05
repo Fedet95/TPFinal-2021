@@ -16,7 +16,7 @@ use Models\Country;
 use Models\Industry;
 use Models\Administrator;
 use Models\Logo;
-use Models\Student;
+use Models\User;
 
 
 /**
@@ -91,7 +91,7 @@ class CompanyController
         {
             require_once(VIEWS_PATH . "companyManagement.php");
         }
-        else if($this->loggedUser instanceof Student)
+        else if($this->loggedUser instanceof User)
         {
             require_once(VIEWS_PATH . "companyList.php");
         }
@@ -118,7 +118,7 @@ class CompanyController
         {
             require_once(VIEWS_PATH . "companyViewMore.php");
         }
-        else if($this->loggedUser instanceof Student)
+        else if($this->loggedUser instanceof User)
         {
             require_once(VIEWS_PATH."companyViewMoreStudent.php");
         }

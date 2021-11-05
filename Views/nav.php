@@ -1,7 +1,7 @@
 <?php
 //require_once(VIEWS_PATH . "checkLoggedUser.php");
 use Models\Administrator;
-use Models\Student;
+use Models\User;
 
 $loggedUser=null;
 if (isset($_SESSION['loggedstudent']))
@@ -34,7 +34,7 @@ if (isset($_SESSION['loggedstudent']))
                     <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/showAdministratorControlPanelView"?>">Home</a>
                     <?php
                 }
-                else if($loggedUser instanceof Student)
+                else if($loggedUser instanceof User)
                 {
                     ?>
                     <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/showStudentControlPanelView"?>">Home</a>
@@ -55,7 +55,7 @@ if (isset($_SESSION['loggedstudent']))
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCreateCompanyView"?>">Add Company</a>
                         <?php
                     }
-                    else if($loggedUser instanceof Student)
+                    else if($loggedUser instanceof User)
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Companies</a>
@@ -85,7 +85,7 @@ if (isset($_SESSION['loggedstudent']))
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showCreateJobPositionView"?>">Add Job Position</a>
                         <?php
                     }
-                    else if($loggedUser instanceof Student)
+                    else if($loggedUser instanceof User)
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Search Job Offers</a>
@@ -102,7 +102,7 @@ if (isset($_SESSION['loggedstudent']))
 
                         <?php
                     }
-                    else if($loggedUser instanceof Student)
+                    else if($loggedUser instanceof User)
                     {
                         ?>
                         <!--<a class="dropdown-item" href="#">View Our Portfolio</a>-->
@@ -119,7 +119,7 @@ if (isset($_SESSION['loggedstudent']))
 
                 <?php
             }
-            else if($loggedUser instanceof Student)
+            else if($loggedUser instanceof User)
             {
                 ?>
                 <li class="nav-item">
@@ -130,7 +130,7 @@ if (isset($_SESSION['loggedstudent']))
             ?>
             </li class="nav-item active">
             <?php
-            if($loggedUser instanceof Student)
+            if($loggedUser instanceof User)
             {
                 ?>
                 <a class="nav-link" href="<?php echo  FRONT_ROOT."Appointment/showAppointmentList"?>">Appointments</a>

@@ -3,13 +3,18 @@ include('header.php');
 ?>
 
 
-
     <table class=" offset-5 align-items-center justify-content-center">
         <tr>
             <td>
-                <div class="hero-img" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="../Views/img/rsz_1login.png" width="350" height="300" class="img-fluid animated" alt="">
-                </div>
+                <section id="hero" class="d-flex align-items-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="hero-img" data-aos="zoom-in" data-aos-delay="190">
+                                <img src="../Views/img/rsz_1login.png"   width="280" height="180" class="img-fluid animated" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- End Hero -->
             </td>
         </tr>
         <tr>

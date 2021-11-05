@@ -1,7 +1,7 @@
 <?php
 
 use Models\Administrator;
-use Models\Student;
+use Models\User;
 
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 include_once('header.php');
@@ -418,7 +418,7 @@ include_once('nav.php');
                                                         </form>
                                                         <br>
                                                     </td>
-                                                    <?php if ($loggedUser instanceof Student) { ?>
+                                                    <?php if ($loggedUser instanceof User) { ?>
                                                         <td>
                                                         <?php if ($value->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) { ?>
                                                             <form action="<?php echo FRONT_ROOT ."Appointment/showApplyView" ?>"

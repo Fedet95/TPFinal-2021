@@ -1,12 +1,26 @@
 <?php
 namespace Models;
 
-abstract class User
+class User
 {
-    private $email;
+    private $userId;
+    private $email; //no se valida con id, sino con email
     private $active;
     private $password;
-    //no se agrego firstName y lastName por si algun dia empresa tambiem sea user y no poseen estas caracteristicas
+    private $rol;
+
+
+
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+    } //1= student / 0=administrator
 
 
     public function getEmail()
@@ -42,6 +56,21 @@ abstract class User
     {
         $this->password = $password;
     }
+
+
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+
+    public function setRol(UserRol  $rol)
+    {
+        $this->rol = $rol;
+        //1= student / 0=administrator
+    }
+
+
 
 
 

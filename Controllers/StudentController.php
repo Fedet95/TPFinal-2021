@@ -86,7 +86,7 @@ class StudentController
      * Filter an student by DNI
      * @param $allStudents
      * @param $valueToSearch
-     * @return array|mixed|\Models\Student|\Models\Student[]|null
+     * @return array|mixed|\Models\User|\Models\User[]|null
      */
     public function searchStudentFiltreASD($allStudents, $valueToSearch)
     {

@@ -1,7 +1,7 @@
 <?php
 
 use Models\Administrator;
-use Models\Student;
+use Models\User;
 
 require_once(VIEWS_PATH . "checkLoggedStudent.php");
 include_once('header.php');
