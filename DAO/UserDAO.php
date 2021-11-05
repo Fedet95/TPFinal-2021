@@ -3,7 +3,6 @@
 namespace DAO;
 
 use Models\Administrator;
-use Models\Career;
 use Models\Student;
 use Models\User;
 use Models\UserRol;
@@ -25,10 +24,9 @@ class UserDAO implements lUserDAO
     public function add(User $user)
     {
         try {
-            $query = "INSERT INTO " . $this->tableName . "(userId, email, password, rolId) VALUES (:userId, :email, :password, :rolId)";
+            $query = "INSERT INTO " . $this->tableName . "(email, password, rolId) VALUES (:email, :password, :rolId)";
 
 
-            $parameters['userId'] = $user->getUserId();
             $parameters['email'] = $user->getEmail();
             $parameters['password'] = $user->getPassword();
             $parameters['rolId'] = $user->getRol()->getUserRolId();
@@ -46,13 +44,12 @@ class UserDAO implements lUserDAO
      * Search an student by id, and remove
      * @param $studentId
      */
-    function remove($userId, $rolId)
+    function remove($userId)
     {
         try {
-            $query = "DELETE FROM " . $this->tableName . " WHERE (userId = :userId and rolId= :rolId)";
+            $query = "DELETE FROM " . $this->tableName . " WHERE (userId = :userId)";
 
             $parameters["userId"] = $userId;
-            $parameters["rolId"] = $rolId;
 
             $this->connection = Connection::GetInstance();
 
@@ -91,7 +88,9 @@ class UserDAO implements lUserDAO
         }
     }
 
-
+    /**
+     * Returns all values from a determinared rol id
+     */
     function getRol($rolId) //Bring every user from 1 rol (student OR admin)
     {
 
@@ -120,7 +119,7 @@ class UserDAO implements lUserDAO
      * Returns all values from Data base
      * @return array
      */
-    public function getUser($userId, $rolId)
+    public function getUser($userId)
     {
         try {
             //ANTES TRAIAMOS LAS CAREERS DE LA BASE, AHORA HAY QUE TRAER DE LA API!!!
@@ -128,7 +127,6 @@ class UserDAO implements lUserDAO
 
 
             $parameters['userId'] = $userId;
-            $parameters['rolId'] = $rolId;
 
             $this->connection = Connection::GetInstance();
 
@@ -170,6 +168,10 @@ class UserDAO implements lUserDAO
     }
     */
 
+    /**
+     * Update a value in data base
+     * @return array
+     */
     function update(User $user)
     {
 
@@ -193,13 +195,46 @@ class UserDAO implements lUserDAO
 
 
     /**
+     * Search an user by email, returning the user or null
+     * @param $email
+     * @return mixed|null
+     */
+    function searchByEmail($email)
+    {
+
+        try {
+
+            $query = "SELECT * FROM " . $this->tableName . " WHERE (email= :email)";
+
+            $parameters['email'] = $email;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, $parameters);
+
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+
+        $mapedArray = null;
+        if (!empty($result)) {
+            $mapedArray = $this->mapear($result);
+        }
+
+        return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+    }
+
+
+/*
+    /**
      * Update json student values with information from origin file (at student login)
      * @param $student
-     */
+
     public function updateStudentFile($student = null, $studentsArray = null)
     {
 
-        if ($student != null) {
+        if ($student != null)
+        {
             try {
                 $searchedStudent = $this->getUser($student->getUserId(), $student->getRol()->getUserRolId());
 
@@ -207,24 +242,19 @@ class UserDAO implements lUserDAO
                     if ($searchedStudent != $student) {
                         try {
                             $this->update($student);
-                        } catch (\PDOException $ex) {
+                        } catch (\Exception $ex) {
                             echo $ex->getMessage();
                         }
                     }
-                } else {
-                    try {
-                        $this->add($student);
-                    } catch (\PDOException $ex) {
-                        echo $ex->getMessage();
-                    }
                 }
-            } catch (\PDOException $ex) {
+
+            } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }
+
         } else if ($studentsArray != null) {
             foreach ($studentsArray as $value) {
                 try {
-
                     $searchedStudent = $this->getUser($student->getUserId(), $student->getRol()->getUserRolId());
 
                     if ($searchedStudent != null) {
@@ -248,6 +278,7 @@ class UserDAO implements lUserDAO
             }
         }
     }
+    */
 
 
     public function mapear($array)
@@ -301,7 +332,6 @@ class UserDAO implements lUserDAO
             }
             else if($rol==0) //admin
             {
-
                 $administrator = new User();
                 $administrator->setUserId($value['userId']);
                 $administrator->setEmail($value['email']);

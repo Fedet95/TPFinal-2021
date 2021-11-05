@@ -6,7 +6,7 @@ interface lUserDAO
 {
    function add(User $student);
    function getAll();
-   function remove($studentId, $rolId);
+   function remove($studentId);
    function update(User $student);
 
 }

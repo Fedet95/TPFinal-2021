@@ -2,19 +2,23 @@
 
 namespace Controllers;
 
-use DAO\AdministratorDAO;
+
 use DAO\OriginCareerDAO;
 use DAO\OriginStudentDAO;
 use DAO\CareerDAO;
-use DAO\StudentDAO;
+use DAO\UserDAO;
+use DAO\UserRolDAO;
+use Models\Student;
+use Models\User;
 
 /**
  *
  */
 class HomeController
 {
-    private $administratorDAO;
-    private $studentDAO;
+    //private $administratorDAO;
+    private $userDAO;
+    private $userRolDAO;
     private $Sorigin; //api student
     private $studentsOrigin; //students array
     private $careerDAO;
@@ -24,8 +28,9 @@ class HomeController
 
     public function __construct()
     {
-        $this->administratorDAO = new AdministratorDAO();
-        $this->studentDAO = new StudentDAO();
+        //$this->administratorDAO = new AdministratorDAO();
+        $this->userRolDAO= new UserRolDAO();
+        $this->userDAO = new UserDAO();
         $this->Sorigin=new OriginStudentDAO();
         $this->careerDAO=new CareerDAO();
         $this->careersOrigin= new OriginCareerDAO();
@@ -40,8 +45,11 @@ class HomeController
 
     public function welcome($message = "")
     {
+        //$this->Logout();
         require_once(VIEWS_PATH."home.php");
     }
+
+
 
     public function showsignUpView($student=null, $message= "")
     {
@@ -79,6 +87,7 @@ class HomeController
     /**
      * Validate login, sending to the correspondent view
      * @param $email
+     * @param $password
      */
     public function login($email, $password)
     {
@@ -86,94 +95,58 @@ class HomeController
         {
             $message = 'Error, enter a valid email';
             $this->welcome($message);
-        } else
-        {
-            $searchedStudent = $this->searchStudentEmail($email); //busca email del student, retorna student o null
-
-            if ($searchedStudent) //If is not NULL
-            {
-                    if ($searchedStudent->getActive()) //if is TRUE
-                    {
-
-                        try {
-                            $studentFromDao= $this->studentDAO->getStudent($searchedStudent->getStudentId());
-                        }
-                        catch (\PDOException $ex){
-                            echo $ex->getMessage();
-                        }
-
-                        if($studentFromDao==null)
-                        {
-                            $this->studentDAO->updateStudentFile($searchedStudent);
-                        }
-
-                        if($studentFromDao!=null && $studentFromDao->getPassword()==$password)
-                        {
-                            $careers= $this->careersOrigin->start($this->careersOrigin);
-                            $this->careerDAO->getCareersOrigin($careers);
-                            $this->studentDAO->updateStudentFile($searchedStudent);
-                            $_SESSION['loggedstudent']=$searchedStudent;
-                            $this->showStudentControlPanelView();
-                        }
-                        else if($studentFromDao->getPassword()==null)
-                        {
-                            $message = 'You are not registered, please sign up';
-                            $this->showsignUpView(null, $message);
-                        }
-                        else
-                        {
-                            $message = 'Incorrect Password';
-                            $this->welcome($message);
-                        }
-                    }
-                    else
-                    {
-                        $this->studentDAO->updateStudentFile($searchedStudent);
-                        $message = 'Your account is not active, please get in contact with the university';
-                        $this->welcome($message);
-                    }
-
+        } else {
+            try {
+                $searchedUser = $this->userDAO->searchByEmail($email); //retorna un usuario por email, verifico su pass y verifico su rol
+            } catch (\Exception $ex) {
+                echo $ex->getMessage();
             }
-            else
+
+            if ($searchedUser) //si encuentro a un user con ese email (student registrado o administrador)
             {
-                try {
-                    $administrator= $this->administratorDAO->searchByEmail($email); //retorna el administrador o null
-                }
-                catch(\PDOException $ex)
+
+                if ($searchedUser->getPassword() == $password) //verifico la pass, si esta mal no verifico el resto
                 {
-                    echo $ex->getMessage();
+
+                    try {
+                        $userRol = $this->userRolDAO->getRol($searchedUser->getRol()->getUserRolId()); //busco el rol del usuario enviandole el rol ID
+
+                    } catch (\Exception $ex) {
+                        echo $ex->getMessage();
+                    }
+
+                    if (strcasecmp($userRol->getRolName(), 'administrator') == 0) //administrador
+                    {
+                        $_SESSION['loggedadmin'] = $searchedUser;
+                        $this->showAdministratorControlPanelView();
+
+                    } else if (strcasecmp($userRol->getRolName(), 'student') == 0) //registered student
+                    {
+                        $searchedStudent = $this->searchStudentEmail($email); //search api student by email
+
+                        if ($searchedStudent != null) {
+                            if ($searchedStudent->getActive()) {
+
+                                $_SESSION['loggedstudent'] = $searchedUser;
+                                $this->showStudentControlPanelView();
+                            } else {
+                                $message = 'Your account is not active, please get in contact with the university';
+                                $this->welcome($message);
+                            }
+                        }
+
+                    }
+                } else {
+                    $message = 'Incorrect Password';
+                    $this->welcome($message);
                 }
 
-                 if($administrator)
-                 {
-                     if($administrator->getActive())
-                     {
-                         if($administrator->getPassword()==$password)
-                         {
-                             $careers= $this->careersOrigin->start($this->careersOrigin);
-                             $this->careerDAO->getCareersOrigin($careers);
-                             $this->studentDAO->updateStudentFile(null, $this->studentsOrigin);
-                             $_SESSION['loggedadmin']=$administrator;
-                             $this->showAdministratorControlPanelView();
-                         }
-                         else{
-                             $message = 'Incorrect Password';
-                             $this->welcome($message);
-                         }
-                     }
-                     else
-                     {
-                         $message = 'Your account is not active, please get in contact with the university';
-                         $this->welcome($message);
-                     }
-                 }
-                 else
-                 {
-                     $message = 'Error, enter a valid email';
-                     $this->welcome($message);
-                 }
+            } else {
+                $message = 'Error, enter a valid email.';
+                $this->welcome($message);
             }
         }
+
     }
 
 
@@ -184,11 +157,10 @@ class HomeController
      */
     public function searchStudentEmail($email)
     {
-        $students = $this->Sorigin->start($this->Sorigin);
-        $this->studentsOrigin=$students;
+        $this->studentsFromOrigin();
         $searchedStudent = null;
 
-        foreach ($students as $value) {
+        foreach ($this->studentsOrigin as $value) {
             if ($value->getEmail() == $email) {
                 $searchedStudent = $value;
             }
@@ -196,41 +168,61 @@ class HomeController
         return $searchedStudent;
     }
 
+    /**
+     * Returns students from origin
+     * @param $email
+     * @return mixed|null
+     */
+    public function studentsFromOrigin()
+    {
+        if($this->studentsOrigin==null) {
+            $students = $this->Sorigin->start($this->Sorigin);
+            $this->studentsOrigin = $students;
+        }
+    }
+
 
     public function signUp($email, $dni)
     {
-        $searchedStudent= $this->searchStudentEmail($email);
+        $searchedStudent= $this->searchStudentEmail($email); //from origin
         $studentFromDao=null;
-
-        try {
-            $studentFromDao= $this->studentDAO->getStudent($searchedStudent->getStudentId());
-        }
-        catch (\PDOException $ex)
-        {
-            echo $ex->getMessage();
-        }
 
         if($searchedStudent!=null)
         {
-            if($studentFromDao!=null  && $studentFromDao->getPassword()==null)
-            {
-                $dniValueReplace = str_replace("-", "", $searchedStudent->getDni());
-                if ($dniValueReplace == $dni)
-                {
+           if($searchedStudent->getActive())
+           {
+               try {
+                   $studentFromDao= $this->userDAO->searchByEmail($searchedStudent->getEmail()); //search registered student with entered email
+               }
+               catch (\Exception $ex)
+               {
+                   echo $ex->getMessage();
+               }
 
-                    $this->showsignUpView($searchedStudent);
-                }
-                else
-                {
-                    $message="Enter a valid DNI";
-                    $this->showsignUpView(null, $message);
-                }
-            }
-            else
-            {
-                $message="You are currently registered";
-                $this->welcome($message);
-            }
+               if($studentFromDao==null) //if is not registered
+               {
+                   $dniValueReplace = str_replace("-", "", $searchedStudent->getDni());
+                   if ($dniValueReplace == $dni)
+                   {
+                       $this->showsignUpView($searchedStudent); //registre
+                   }
+                   else
+                   {
+                       $message="Enter a valid DNI";
+                       $this->showsignUpView(null, $message);
+                   }
+               }
+               else
+               {
+                   $message="You are currently registered";
+                   $this->welcome($message);
+               }
+           }
+           else
+           {
+               $message = 'Your account is not active, please get in contact with the university';
+               $this->welcome($message);
+           }
         }
         else
         {
@@ -245,13 +237,48 @@ class HomeController
 
          if($password1==$password2)
          {
-              $searchedStudent->setPassword($password1);
-              $this->studentDAO->updateStudentFile($searchedStudent);
+              $user= new User();
+
+             try
+             {
+                 $userRol = $this->userRolDAO->getAll();
+             }catch (\Exception $ex)
+             {
+                 throw $ex;
+             }
+
+             $rol=null;
+             if($userRol!=null)
+             {
+                 if(is_array($userRol))
+                 {
+                     foreach ($userRol as $value)
+                     {
+                         if($value->getRolName()=='student')
+                         {
+                             $rol=$value;
+                         }
+                     }
+                 }
+                 else
+                 {
+                     if($userRol->getRolName()=='student')
+                     {
+                         $rol=$userRol;
+                     }
+                 }
+             }
+
+              $user->setPassword($password1);
+              $user->setRol($rol);
+              $user->setEmail($email);
+              $this->userDAO->add($user);
               $this->welcome("Sign up successfully");
          }
          else
          {
              $message="Passwords do not match";
+             $searchedStudent= $this->searchStudentEmail($email);
              $this->showsignUpView($searchedStudent, $message);
          }
     }
@@ -262,6 +289,7 @@ class HomeController
      */
     public function Logout()
     {
+
         session_destroy();
 
         $this->Index();
