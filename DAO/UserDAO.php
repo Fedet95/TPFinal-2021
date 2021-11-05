@@ -72,7 +72,6 @@ class UserDAO implements lUserDAO
             //hacemos el inner join solo para traer el "rol name"
 
 
-
             $this->connection = Connection::GetInstance();
 
             $result = $this->connection->Execute($query, array());
@@ -123,7 +122,7 @@ class UserDAO implements lUserDAO
     {
         try {
             //ANTES TRAIAMOS LAS CAREERS DE LA BASE, AHORA HAY QUE TRAER DE LA API!!!
-            $query = "SELECT * FROM " . $this->tableName . " u INNER JOIN ".$this->tableName2." r ON u.rolId=r.userRolId  WHERE  (u.userId= :userId and u.rolId=:rolId)"; //primary key compuesta
+            $query = "SELECT * FROM " . $this->tableName . " u INNER JOIN " . $this->tableName2 . " r ON u.rolId=r.userRolId  WHERE  (u.userId= :userId)";
 
 
             $parameters['userId'] = $userId;
@@ -177,13 +176,12 @@ class UserDAO implements lUserDAO
 
         try {
 
-                $query = "UPDATE " . $this->tableName . " SET email = :email, password = :password
-            WHERE (userId = :userId and rolId=:rolId )";
+            $query = "UPDATE " . $this->tableName . " SET  email = :email, password = :password
+            WHERE (userId = :userId)";
 
-                $parameters["userId"] = $user->getUserId();
-                $parameters["password"] = $user->getPassword();
-                $parameters["rolId"] = $user->getRol()->getUserRolId();
-                $parameters["email"] = $user->getEmail();
+            $parameters["userId"] = $user->getUserId();
+            $parameters["password"] = $user->getPassword();
+            $parameters["email"] = $user->getEmail();
 
             $this->connection = Connection::GetInstance();
 
@@ -261,18 +259,13 @@ class UserDAO implements lUserDAO
                         if ($searchedStudent != $value) {
                             try {
                                 $this->update($value);
-                            } catch (\PDOException $ex) {
+                            } catch (\Exception $ex) {
                                 echo $ex->getMessage();
                             }
                         }
-                    } else {
-                        try {
-                            $this->add($value);
-                        } catch (\PDOException $ex) {
-                            echo $ex->getMessage();
-                        }
                     }
-                } catch (\PDOException $ex) {
+
+                } catch (\Exception $ex) {
                     echo $ex->getMessage();
                 }
             }
@@ -287,37 +280,35 @@ class UserDAO implements lUserDAO
 
         $resultado = array_map(function ($value) {
 
-            $user=null;
-            $rol= $value['rolId'];
+            $user = null;
+            $rol = $value['rolId'];
 
-            if($rol==1) //students
+            if ($rol == 2) //students
             {
                 $student = new Student();
                 $student->setEmail($value["email"]);
                 $student->setPassword($value['password']);
                 $student->setUserId($value['userId']);
-                $userRol= new UserRol();
+                $userRol = new UserRol();
                 $userRol->setUserRolId($rol);
                 $student->setRol($userRol);
 
                 $this->getOriginCareers();
                 $this->getOriginStudents();
 
-                $searchedStudent=null;
+                $searchedStudent = null;
                 foreach ($this->students as $values) //busco el estudiante en la api mediante el ID que me devuelve la base
                 {
-                    if($values->getUserId()==$student->getUserId())
-                    {
-                        $searchedStudent=$values;
+                    if ($values->getUserId() == $student->getUserId()) {
+                        $searchedStudent = $values;
                     }
                 }
 
-                $searchedCareer= null;
+                $searchedCareer = null;
                 foreach ($this->careers as $careers)  //busco las carreras en la api, y busco la carrera que corresponde al id de carrera del estudiante
                 {
-                    if($careers->getCareerId()==$searchedStudent->getCareer()->getCareerId())
-                    {
-                        $searchedCareer= $careers;
+                    if ($careers->getCareerId() == $searchedStudent->getCareer()->getCareerId()) {
+                        $searchedCareer = $careers;
                     }
                 }
 
@@ -327,20 +318,21 @@ class UserDAO implements lUserDAO
                 $student->setLastName($searchedStudent->getLastName());
                 $student->setDni($searchedStudent->getDni());
                 $student->setPhoneNumber($searchedStudent->getPhoneNumber());
-                $user=$student;
+                $student->setFileNumber($searchedStudent->getFileNumber());
+                $student->setBirthDate($searchedStudent->getBirthDate());
+                $user = $student;
 
-            }
-            else if($rol==0) //admin
+            } else if ($rol == 1) //admin
             {
                 $administrator = new User();
                 $administrator->setUserId($value['userId']);
                 $administrator->setEmail($value['email']);
                 $administrator->setPassword($value['password']);
-                $userRol= new UserRol();
+                $userRol = new UserRol();
                 $userRol->setUserRolId($rol);
                 $administrator->setRol($userRol);
 
-                $user=$administrator;
+                $user = $administrator;
             }
 
 
@@ -354,22 +346,19 @@ class UserDAO implements lUserDAO
 
     public function getOriginCareers()
     {
-        if($this->careers==null)
-        {
-            $careerOrigin= new OriginCareerDAO();
-            $this->careers= $careerOrigin->start($careerOrigin);
+        if ($this->careers == null) {
+            $careerOrigin = new OriginCareerDAO();
+            $this->careers = $careerOrigin->start($careerOrigin);
         }
     }
 
     public function getOriginStudents()
     {
-        if($this->students==null)
-        {
-            $studentOrigin= new OriginStudentDAO();
-            $this->students= $studentOrigin->start($studentOrigin);
+        if ($this->students == null) {
+            $studentOrigin = new OriginStudentDAO();
+            $this->students = $studentOrigin->start($studentOrigin);
         }
     }
-
 
 
 }
