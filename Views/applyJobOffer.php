@@ -76,7 +76,7 @@ include_once('nav.php');
                                           required></textarea>
                             </div>
 
-                            <input type="hidden" name="studentId" value="<?php echo $loggedUser->getStudentId() ?>">
+                            <input type="hidden" name="studentId" value="<?php echo $loggedUser->getUserId() ?>">
 
                             <input type="hidden" name="jobOfferId" value="<?php echo $jobOfferId?>">
                             <input type="submit" class="btnRegister" value="Apply"/>

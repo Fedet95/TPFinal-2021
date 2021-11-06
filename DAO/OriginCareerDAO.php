@@ -66,6 +66,10 @@ class OriginCareerDAO
         $api->init();
         $api->setOption()->setOption( CURLOPT_RETURNTRANSFER, true)->setOption(CURLOPT_SSL_VERIFYPEER, false)->setOption(CURLOPT_HTTPHEADER, array(API_KEY))->decode();
         $careers= $api->getAll();
+        if(!empty($this->finalArray))
+        {
+            $this->finalArray=array();
+        }
         $api->close();
 
         return $careers;

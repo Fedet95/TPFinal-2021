@@ -7,9 +7,9 @@ use DAO\AppointmentHistoryDAO;
 use DAO\CareerDAO;
 use DAO\CompanyDAO;
 use DAO\JobOfferDAO;
+use DAO\OriginCareerDAO;
 use DAO\OriginStudentDAO;
-use DAO\StudentDAO;
-use Models\Administrator;
+use DAO\UserDAO;
 use Models\Appointment;
 use Models\AppointmentHistory;
 use Models\Career;
@@ -28,14 +28,19 @@ class AppointmentController
 
     private $appointmentDAO;
     private $jobOfferDAO;
+    private $careersOrigin;
+    private $allCareers;
     private $loggedUser;
 
     public function __construct()
     {
         $this->appointmentDAO = new AppointmentDAO();
         $this->jobOfferDAO = new JobOfferDAO();
+        $this->careersOrigin = new OriginCareerDAO();
+        $this->allCareers=null;
         $this->loggedUser = $this->loggedUserValidation();
     }
+
 
     /**
      * Show the job offer aplly view
@@ -75,11 +80,11 @@ class AppointmentController
         //valueToSearch = $jobOffer ID
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
-        if ($this->loggedUser instanceof User) {
+        if ($this->loggedUser->getRol()->getUserRolId()==2) {
             try {
-                $actualAppointment = $this->appointmentDAO->getAppointment($this->loggedUser->getStudentId());
+                $actualAppointment = $this->appointmentDAO->getAppointment($this->loggedUser->getUserId());
 
-            } catch (\PDOException $ex) {
+            } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }
 
@@ -87,18 +92,27 @@ class AppointmentController
             if ($actualAppointment != null) {
                 if (strtotime($actualAppointment->getJobOffer()->getEndDate()) < strtotime(date("Y-m-d"))) {
 
-                    $message = $this->Remove($this->loggedUser->getStudentId(), 1);
+                    $message = $this->Remove($this->loggedUser->getUserId(), 1);
                     $actualAppointment= null;
                 }
                 else
                 {
 
-                    try {
-                        $career = new CareerDAO();
-                        $searchCareer = $career->getCareer($actualAppointment->getJobOffer()->getCareer()->getCareerId());
+                    if($this->allCareers==null)
+                    {
+                        $allCareers = $this->careersOrigin->start($this->careersOrigin);
+                    }
+                    else
+                    {
+                        $allCareers= $this->allCareers;
+                    }
 
-                    } catch (\PDOException $ex) {
-                        echo $ex->getMessage();
+                    foreach ($allCareers as $career)
+                    {
+                        if($career->getCareerId()==$actualAppointment->getJobOffer()->getCareer()->getCareerId())
+                        {
+                            $searchCareer=$career;
+                        }
                     }
                 }
             }
@@ -106,15 +120,15 @@ class AppointmentController
             $appointmentHistory = new AppointmentHistoryDAO();
             try {
 
-                $historyAppointments = $appointmentHistory->getHistoryAppointments($this->loggedUser->getStudentId());
+                $historyAppointments = $appointmentHistory->getHistoryAppointments($this->loggedUser->getUserId());
 
-            } catch (\PDOException $ex) {
+            } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }
 
             require_once(VIEWS_PATH . "appointmentsList.php");
 
-        } else if ($this->loggedUser instanceof Administrator) {
+        } else if ($this->loggedUser->getRol()->getUserRolId()==1) {
             try {
 
                 $allAppointments = $this->appointmentDAO->getAll();
@@ -129,14 +143,25 @@ class AppointmentController
                             $searchedJobOffer->setAppointment($allAppointments);
                             $allAppointments = $searchedJobOffer->getAppointment();
 
-                            try {
-                                $career = new CareerDAO();
-                                $searchCareer = $career->getCareer($allAppointments[0]->getJobOffer()->getCareer()->getCareerId());
 
-                            } catch (\PDOException $ex) {
-                                echo $ex->getMessage();
+                            if($this->allCareers==null)
+                            {
+                                $allCareers = $this->careersOrigin->start($this->careersOrigin);
                             }
-                        } catch (\PDOException $ex) {
+                            else
+                            {
+                                $allCareers= $this->allCareers;
+                            }
+
+                            foreach ($allCareers as $career)
+                            {
+                                if($career->getCareerId()==$allAppointments[0]->getJobOffer()->getCareer()->getCareerId())
+                                {
+                                    $searchCareer=$career;
+                                }
+                            }
+
+                        } catch (\Exception $ex) {
                             echo $ex->getMessage();
                         }
 
@@ -150,7 +175,7 @@ class AppointmentController
 
                 require_once(VIEWS_PATH . "appointmentsList.php");
 
-            } catch (\PDOException $ex) {
+            } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }
         }
@@ -169,7 +194,7 @@ class AppointmentController
 
             $searchedAppointment = $this->appointmentDAO->getAppointment($studentId);
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
              echo $ex->getMessage();
         }
@@ -178,7 +203,7 @@ class AppointmentController
         if ($searchedAppointment != null)
         {
             if (strtotime($searchedAppointment->getJobOffer()->getEndDate()) < strtotime(date("Y-m-d"))) { //no more actual appointment
-                $message = $this->Remove($this->loggedUser->getStudentId(), 1);
+                $message = $this->Remove($this->loggedUser->getUserId(), 1);
                 $validate = 0;
             }
             else //actual appointment correct
@@ -219,7 +244,7 @@ class AppointmentController
                 $appointment->setJobOffer($jobOffer);
                 $appointment->setDate((new \DateTime())->format('Y-m-d'));
                 $student = new User();
-                $student->setStudentId($studentId);
+                $student->setUserId($studentId);
                 $appointment->setStudent($student);
 
                 try {
@@ -236,7 +261,7 @@ class AppointmentController
                         $career->setDescription($searchOffer->getCareer()->getDescription());
                         $history->setCareer($career);
                         $student = new User();
-                        $student->setStudentId($studentId);
+                        $student->setUserId($studentId);
                         $history->setStudent($student);
                         try {
                             $companyDao = new CompanyDAO();
@@ -245,21 +270,21 @@ class AppointmentController
                             $company->setName($searchCompany->getName());
                             $company->setCuit($searchCompany->getCuit());
                             $history->setCompany($company);
-                        } catch (\PDOException $ex) {
+                        } catch (\Exception $ex) {
                             echo $ex->getMessage();
                         }
 
                         $historyDAO = new AppointmentHistoryDAO();
                         try {
                             $historyDAO->add($history);
-                        } catch (\PDOException $ex) {
+                        } catch (\Exception $ex) {
                             echo $ex->getMessage();
                         }
                     }
 
                     $this->showAppointmentList($valueToSearch = null, $back = null, "Successfully added application");
 
-                } catch (\PDOException $ex) {
+                } catch (\Exception $ex) {
                     echo $ex->getMessage();
                 }
             } else {
@@ -310,9 +335,9 @@ class AppointmentController
 
                 $count = $this->appointmentDAO->remove($studentId);
                 if ($count > 0) {
-                    $studentDAO = new StudentDAO();
+                    $studentDAO = new UserDAO();
                     try {
-                        $student = $studentDAO->getStudent($studentId);
+                        $student = $studentDAO->getUser($studentId);
                         $path = "uploads/";
                         $file_pattern = $path . $student->getDni() . '*';
                         $result = array_map("unlink", glob($file_pattern));
@@ -326,7 +351,7 @@ class AppointmentController
                             $flag = 1;
                             $message = "Your current job appointment was terminated as result of reaching the job offer's end date";
                         }
-                    } catch (\PDOException $ex) {
+                    } catch (\Exception $ex) {
                         echo $ex->getMessage();
                     }
                 } else {
@@ -334,7 +359,7 @@ class AppointmentController
                     $this->showAppointmentList(null, null, $message);
                 }
 
-            } catch (\PDOException $ex) {
+            } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }
 
@@ -356,7 +381,7 @@ class AppointmentController
 
             $flag = 0;
             foreach ($allStudents as $value) {
-                if ($value->getStudentId() == $studentId) {
+                if ($value->getUserId() == $studentId) {
                     if ($value->getActive() == 'true') {
                         $flag = 1;
                     }

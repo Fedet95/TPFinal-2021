@@ -82,6 +82,10 @@ class OriginStudentDAO
         $api->setOption()->setOption( CURLOPT_RETURNTRANSFER, true)->setOption(CURLOPT_SSL_VERIFYPEER, false)->setOption(CURLOPT_HTTPHEADER, array(API_KEY))->decode();
         $students= $api->getAll();
         $api->close();
+        if(!empty($this->finalArray))
+        {
+            $this->finalArray=array();
+        }
 
         return $students;
     }

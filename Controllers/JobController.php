@@ -408,7 +408,7 @@ class JobController
         }
         else
         {
-            $endDateValidation = $this->validateEndDate($endDate);
+            $endDateValidation = $this->validateEndDate($endDate, $publishDate);
             if ($endDateValidation == null) {
                 $message = "Error, enter a valid Job Offer End Date";
                 $flag = 1;
@@ -527,11 +527,11 @@ class JobController
     /**
      * Validate if the entered job offer end date is valid
      */
-    public function validateEndDate($date)
+    public function validateEndDate($date, $publishDate)
     {
         $validate = null;
 
-        if ($date>= date('Y-m-d', strtotime('-1 day', strtotime(date("Y-m-d"))))) {
+        if ($date>= date('Y-m-d', strtotime('-1 day', strtotime(date("Y-m-d")))) && $date>$publishDate){
             $validate=1;
         }
 
@@ -738,7 +738,7 @@ class JobController
 
             $newJobOffer = new JobOffer();
             $newJobOffer->setDescription($description);
-            $newJobOffer->setActive($this->validateActive($postvalue['publishDate']), $active);
+            $newJobOffer->setActive($this->validateActive($postvalue['publishDate'], $active));
             $newJobOffer->setDedication($dedication);
             $newJobOffer->setEndDate($postvalue['endDate']);
             $newJobOffer->setPublishDate($postvalue['publishDate']);
