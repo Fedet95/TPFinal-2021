@@ -33,7 +33,7 @@ class AppointmentDAO implements IAppointmentDAO
             $this->connection = Connection::GetInstance();
           return $count= $this->connection->ExecuteNonQuery($query, $parameters);
 
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }
@@ -57,7 +57,7 @@ class AppointmentDAO implements IAppointmentDAO
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }
@@ -72,7 +72,7 @@ class AppointmentDAO implements IAppointmentDAO
             $this->connection = Connection::GetInstance();
 
             return $count = $this->connection->ExecuteNonQuery($query, $parameters);
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }
@@ -96,7 +96,7 @@ class AppointmentDAO implements IAppointmentDAO
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }

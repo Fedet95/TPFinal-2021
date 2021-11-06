@@ -276,7 +276,7 @@ class JobController
         try {
             $allPositions = $this->jobPositionDAO->getAll();
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }
@@ -380,7 +380,7 @@ class JobController
             try {
                 $this->jobPositionDAO->add($newJobPosition);
             }
-            catch (\PDOException $ex)
+            catch (\Exception $ex)
             {
                echo  $ex->getMessage();
             }
@@ -485,7 +485,7 @@ class JobController
                 $message = "Job Offer successfully added";
                 $this->showJobOfferManagementView(null,"$message", 1);
 
-            } catch (\PDOException $ex) {
+            } catch (\Exception $ex) {
                 if ($ex->getCode() == 23000) //unique constraint
                 {
                     $message = "Error, the entered Job Offer Title is already in use by the offering company";
@@ -568,7 +568,7 @@ class JobController
             {
                 $validate = 1;
             }
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             $validate = 1;
             echo $ex->getMessage();
         }
@@ -590,13 +590,13 @@ class JobController
 
         try {
             $jobOffer = $this->jobOfferDAO->getJobOffer($jobOfferId);
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             echo $ex->getMessage();
         }
 
         try {
             $allCompanies = $this->companyDAO->getAll();
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             echo $ex->getMessage();
         }
 
@@ -609,10 +609,6 @@ class JobController
             {
                 $allCareers= $this->allCareers;
             }
-
-        } catch (\PDOException $ex) {
-            echo $ex->getMessage();
-        }
 
 
         if ($values != null) {
