@@ -30,7 +30,7 @@ include_once('nav.php');
                 <td><?php echo $company->getFoundationDate() ?></td>
                 <td><?php echo $company->getCuit() ?></td>
                 <td><?php echo $company->getAboutUs() ?></td>
-                <td><?php echo $company->getCompanyLink() ?></td>
+                <td><a href="#" target="_blank" rel="noopener noreferrer"><?php echo $company->getCompanyLink() ?></a></td>
                 <td><?php echo $company->getEmail() ?></td>
                 <td><?php echo $company->getCountry()->getName() ?></td>
                 <td><?php echo $company->getCity()->getName() ?></td>

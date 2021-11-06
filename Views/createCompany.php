@@ -47,7 +47,7 @@ include_once('nav.php');
                                <div class="form-group">
                                    <label for="countrylist" class="text-muted text-strong text">Current Location Country</label>
                                    <br>
-                                   <input list="listcountrys" name="country" id="countrylist">
+                                   <input list="listcountrys" name="country" id="countrylist" required>
                                    <datalist id="listcountrys"  required>
                                        <option disabled selected>Select country</option>
                                        <?php

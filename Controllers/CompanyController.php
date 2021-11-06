@@ -54,7 +54,7 @@ class CompanyController
         try {
             $allIndustrys = $this->industryDAO->getAll();
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }
@@ -62,7 +62,7 @@ class CompanyController
         try {
             $allCountrys = $this->countryDAO->getAll();
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }
@@ -82,7 +82,7 @@ class CompanyController
             $allCompanys = $this->companyDAO->getAll();
 
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }
@@ -116,7 +116,7 @@ class CompanyController
         try {
             $company = $this->companyDAO->getCompany($id);
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }
@@ -288,7 +288,7 @@ class CompanyController
                     $this->companyDAO->add($company);
                     $this->showCompanyManagement();
                 }
-                catch (\PDOException $ex)
+                catch (\Exception $ex)
                 {
                    echo $ex->getMessage();
                 }
@@ -324,7 +324,7 @@ class CompanyController
                             $company=null;
                         }
                     }
-                    catch(\PDOException $ex)
+                    catch(\Exception $ex)
                     {
                         $company=null;
                         echo $ex->getMessage();
@@ -335,7 +335,7 @@ class CompanyController
                     $company->setIndustry($searchedIndustry);
                 }
             }
-            catch(\PDOException $ex)
+            catch(\Exception $ex)
             {
                 $company=null;
                 echo $ex->getMessage();
@@ -353,7 +353,7 @@ class CompanyController
                     $company=null;
                 }
             }
-            catch (\PDOException $ex)
+            catch (\Exception $ex)
             {
                 $company=null;
                 echo $ex->getMessage();
@@ -394,7 +394,7 @@ class CompanyController
                             $company=null;
                         }
                     }
-                    catch(\PDOException $ex)
+                    catch(\Exception $ex)
                     {
                         $company=null;
                         echo $ex->getMessage();
@@ -405,7 +405,7 @@ class CompanyController
                     $company->setCountry($searchedCountry);
                 }
             }
-            catch (\PDOException $ex)
+            catch (\Exception $ex)
             {
                 $company=null;
                 echo $ex->getMessage();
@@ -423,7 +423,7 @@ class CompanyController
                     $company=null;
                 }
             }
-            catch (\PDOException $ex)
+            catch (\Exception $ex)
             {
                 $company=null;
                 echo $ex->getMessage();
@@ -461,7 +461,7 @@ class CompanyController
                         $company=null;
                     }
                 }
-                catch(\PDOException $ex)
+                catch(\Exception $ex)
                 {
                     echo $ex->getMessage();
                     $company=null;
@@ -472,7 +472,7 @@ class CompanyController
                 $company->setCity($searchedCity);
             }
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
             $company=null;
@@ -521,7 +521,7 @@ class CompanyController
                                 $flag=1;
                             }
                         }
-                        catch (\PDOException $ex)
+                        catch (\Exception $ex)
                         {
                             echo $ex->getMessage();
                             $flag=1;
@@ -550,7 +550,7 @@ class CompanyController
                         $flag=1;
                     }
                 }
-                catch (\PDOException $ex)
+                catch (\Exception $ex)
                 {
                     echo $ex->getMessage();
                     $flag=1;
@@ -589,7 +589,7 @@ class CompanyController
                 $company=null;
             }
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
             $company=null;
@@ -724,7 +724,7 @@ class CompanyController
                             }
                         }
                     }
-                    catch (\PDOException $ex)
+                    catch (\Exception $ex)
                     {
                         $flag=1;
                         echo $ex->getMessage();
@@ -732,7 +732,7 @@ class CompanyController
                 }
             }
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             $flag=1;
             echo $ex->getMessage();
@@ -768,7 +768,7 @@ class CompanyController
                             }
                         }
                     }
-                    catch (\PDOException $ex)
+                    catch (\Exception $ex)
                     {
                         $flag=1;
                         echo $ex->getMessage();
@@ -971,7 +971,7 @@ class CompanyController
 
             $allIndustrys = $this->industryDAO->getAll();
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }

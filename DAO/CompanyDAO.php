@@ -31,7 +31,7 @@ class CompanyDAO implements lCompanyDAO
     {
         try {
 
-            $query= "INSERT INTO ".$this->tableName."(name, foundationDate, cuit, aboutUs, companyLink, email, logo, activeCompany, industry, city, country, creationAdmin) VALUES (:name, :foundationDate, :cuit, :aboutUs, :companyLink, :email, :logo, :activeCompany, :industry, :city, :country, :creationAdmin)";
+            $query= "INSERT INTO ".$this->tableName."(name, foundationDate, cuit, aboutUs, companyLink, emailCompany, logo, active, industry, city, country, creationAdmin) VALUES (:name, :foundationDate, :cuit, :aboutUs, :companyLink, :emailCompany, :logo, :active, :industry, :city, :country, :creationAdmin)";
 
             $parameters['name']=$company->getName();
             $parameters['foundationDate']=$company->getFoundationDate();
@@ -40,11 +40,11 @@ class CompanyDAO implements lCompanyDAO
             $parameters['companyLink']=$company->getCompanyLink();
             $parameters['emailCompany']=$company->getEmail();
             $parameters['logo']=$company->getLogo()->getId();
-            $parameters['activeCompany']=$company->getActive();
+            $parameters['active']=$company->getActive();
             $parameters['industry']=$company->getIndustry()->getId();
             $parameters['city']=$company->getCity()->getId();
             $parameters['country']=$company->getCountry()->getId();
-            $parameters['creationAdmin']=$company->getCreationAdmin()->getAdministratorId();
+            $parameters['creationAdmin']=$company->getCreationAdmin()->getUserId();
 
             $this->connection =Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters); //el executeNonquery no retorna array, sino la cantidad de datos modificados
@@ -258,7 +258,7 @@ class CompanyDAO implements lCompanyDAO
             $parameters['cuit']=$company->getCuit();
             $parameters['aboutUs']=$company->getAboutUs();
             $parameters['companyLink']=$company->getCompanyLink();
-            $parameters['email']=$company->getEmail();
+            $parameters['emailCompany']=$company->getEmail();
             $parameters['logo']=$company->getLogo()->getId();
             $parameters['active']=$company->getActive();
             $parameters['industry']=$company->getIndustry()->getId();
@@ -290,8 +290,17 @@ class CompanyDAO implements lCompanyDAO
             $company->setFoundationDate($value["foundationDate"]);
             $company->setCuit($value["cuit"]);
             $company->setAboutUs($value["aboutUs"]);
-            $company->setEmail($value["email"]);
-            $company->setActive($value["activeCompany"]);
+            $company->setEmail($value["emailCompany"]);
+            $active=$value["active"];
+            if($active==1)
+            {
+                $company->setActive('true');
+            }
+            else
+            {
+                $company->setActive('false');
+            }
+
             $company->setCompanyLink($value['companyLink']);
 
 

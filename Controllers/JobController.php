@@ -64,7 +64,7 @@ class JobController
         try {
             $allCompanies = $this->companyDAO->getAll();
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
            echo  $ex->getMessage();
         }
@@ -680,7 +680,7 @@ class JobController
         try {
             $allOffers= $this->jobOfferDAO->getAll();
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }
@@ -688,7 +688,7 @@ class JobController
         try {
             $searchedOffer= $this->jobOfferDAO->getJobOffer($postvalue['jobOfferId']);
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }
@@ -788,7 +788,7 @@ class JobController
                 $message = "Job Offer successfully updated";
                 $this->showJobOfferManagementView(null, "$message", 2); //for message
 
-            } catch (\PDOException $ex) {
+            } catch (\Exception $ex) {
                 $message= "Error, try again";
                 if ($ex->getCode() == 23000) //unique constraint
                 {
@@ -830,7 +830,7 @@ class JobController
                         try {
                             $company= $this->companyDAO->getCompany($searchedOffer->getCompany()->getCompanyId());
                         }
-                        catch (\PDOException $ex)
+                        catch (\Exception $ex)
                         {
                             echo $ex->getMessage();
                         }
@@ -842,7 +842,7 @@ class JobController
 
                         try {
                             $count=$this->jobOfferDAO->remove($id);
-                        } catch (\PDOException $ex)
+                        } catch (\Exception $ex)
                         {
                             echo $ex->getMessage();
                         }
@@ -862,7 +862,7 @@ class JobController
                     }
                 }
             }
-            catch (\PDOException $ex)
+            catch (\Exception $ex)
             {
                 echo $ex->getMessage();
             }
@@ -889,7 +889,7 @@ class JobController
             try {
                 $count=$this->jobOfferDAO->remove($id);
             }
-            catch (\PDOException $ex)
+            catch (\Exception $ex)
             {
                 echo $ex->getMessage();
             }
@@ -983,7 +983,7 @@ class JobController
                         $searchedJobOffer->setAppointment($allAppointments);
                         $allAppointments= $searchedJobOffer->getAppointment();
                     }
-                    catch (\PDOException $ex)
+                    catch (\Exception $ex)
                     {
                         echo $ex->getMessage();
                     }
@@ -991,7 +991,7 @@ class JobController
                 }
             }
 
-        }catch (\PDOException $ex)
+        }catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }

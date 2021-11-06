@@ -99,15 +99,15 @@ include_once('nav.php');
                                     <p class="text-muted text-strong text">Condition</p>
                                     <?php if($company->getActive() == "true"){?>
                                         <label  for="active">Active</label>
-                                        <input type="radio" name="active" value="true" class="radioSize" required id="active" checked="checked">
+                                        <input type="radio" name="active" value="1" class="radioSize" required id="active" checked="checked">
                                         <label for="inactive">Inactive</label>
-                                        <input type="radio" name="active" value="false" class="radioSize" required id="inactive">
+                                        <input type="radio" name="active" value="0" class="radioSize" required id="inactive">
                                     <?php }else
                                     {?>
                                         <label for="active">Active</label>
-                                        <input type="radio" name="active" value="true" class="radioSize" required id="active" >
+                                        <input type="radio" name="active" value="1" class="radioSize" required id="active" >
                                         <label for="inactive">Inactive</label>
-                                        <input type="radio" name="active" value="false" class="radioSize" required id="inactive" checked="checked">
+                                        <input type="radio" name="active" value="0" class="radioSize" required id="inactive" checked="checked">
                                     <?php }?>
 
                                 </div>

@@ -355,7 +355,21 @@ class JobOfferDAO implements IJobOfferDAO
 
     }
 
+    public function getOriginCareers()
+    {
+        if ($this->allCarrers == null) {
+            $careerOrigin = new OriginCareerDAO();
+            $this->allCarrers = $careerOrigin->start($careerOrigin);
+        }
+    }
 
+    public function getOriginJobPositions()
+    {
+        if ($this->allJobPositions == null) {
+            $jobPositionsOrigin = new OriginJobPositionDAO();
+            $this->allJobPositions = $jobPositionsOrigin->start($jobPositionsOrigin);
+        }
+    }
 
 
 
