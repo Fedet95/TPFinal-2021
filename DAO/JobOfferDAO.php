@@ -8,6 +8,8 @@ use Models\Company;
 use Models\JobOffer;
 use Models\JobOfferPosition;
 use Models\JobPosition;
+use Models\User;
+use Models\UserRol;
 
 class JobOfferDAO implements IJobOfferDAO
 {
@@ -15,16 +17,19 @@ class JobOfferDAO implements IJobOfferDAO
     private $tableName= "jobOffers";
     private $tableName2= "jobOffers_jobPositions";
     private $tableName3 ="companies";
-    private $tableName4 ="administrators";
-    private $tableName5 ="careers";
-    private $tableName6= "jobPositions";
+    private $tableName4 ="users";
+    private $allCarrers;
+    private $allJobPositions;
+    //private $tableName5 ="careers";
+    //private $tableName6= "jobPositions";
+
 
 
     function add(JobOffer $jobOffer)
     {
         try
         {
-            $query= "INSERT INTO ".$this->tableName."(activeJobOffer , remote, publishDate, endDate, title, dedication, descriptionOffer, salary, creationAdminId, companyId, careerIdOffer) VALUES (:activeJobOffer , :remote, :publishDate, :endDate, :title, :dedication, :descriptionOffer, :salary, :creationAdminId, :companyId, :careerIdOffer)";
+            $query= "INSERT INTO ".$this->tableName."(activeJobOffer , remote, publishDate, endDate, title, dedication, descriptionOffer, salary, creationAdmin, companyId, careerIdOffer) VALUES (:activeJobOffer , :remote, :publishDate, :endDate, :title, :dedication, :descriptionOffer, :salary, :creationAdmin, :companyId, :careerIdOffer)";
 
             $parameters['activeJobOffer']=$jobOffer->getActive();
             $parameters['remote']=$jobOffer->getRemote();
@@ -34,7 +39,7 @@ class JobOfferDAO implements IJobOfferDAO
             $parameters['dedication']=$jobOffer->getDedication();
             $parameters['descriptionOffer']=$jobOffer->getDescription();
             $parameters['salary']=$jobOffer->getSalary();
-            $parameters['creationAdminId']=$jobOffer->getCreationAdmin()->getAdministratorId();
+            $parameters['creationAdmin']=$jobOffer->getCreationAdmin()->getUserId();
             $parameters['companyId']=$jobOffer->getCompany()->getCompanyId();
             $parameters['careerIdOffer']=$jobOffer->getCareer()->getCareerId();
 
@@ -54,10 +59,10 @@ class JobOfferDAO implements IJobOfferDAO
         try {
 
             $query= "SELECT * FROM ".$this->tableName." o INNER JOIN ".$this->tableName2." op ON o.jobOfferId= op.jobOfferIdOp
-            INNER JOIN ".$this->tableName6." jp ON op.jobPositionIdOp = jp.jobPositionId 
             INNER JOIN ".$this->tableName3." co ON o.companyId= co.companyId 
-            INNER JOIN ".$this->tableName4." ad ON o.creationAdminId= ad.administratorId
-            INNER JOIN ".$this->tableName5." ca ON o.careerIdOffer= ca.careerId";
+            INNER JOIN ".$this->tableName4." u ON o.creationAdmin= u.userId";
+
+
 
 
             $this->connection = Connection::GetInstance();
@@ -83,14 +88,10 @@ class JobOfferDAO implements IJobOfferDAO
         try {
 
             $query= "SELECT * FROM ".$this->tableName." o INNER JOIN ".$this->tableName2." op ON o.jobOfferId= op.jobOfferIdOp
-            INNER JOIN ".$this->tableName6." jp ON op.jobPositionIdOp = jp.jobPositionId 
             INNER JOIN ".$this->tableName3." co ON o.companyId= co.companyId 
-            INNER JOIN ".$this->tableName4." ad ON o.creationAdminId= ad.administratorId
-            INNER JOIN ".$this->tableName5." ca ON o.careerIdOffer= ca.careerId WHERE (op.jobOfferIdOp= :jobOfferId)";
+            INNER JOIN ".$this->tableName4." u ON o.creationAdmin= u.userId WHERE (op.jobOfferIdOp= :jobOfferId)";
 
             $parameters['jobOfferId']=$jobOfferId;
-
-            //INNER JOIN ".$this->tableName6." jp ON op.jobPositionIdOp = jp.jobPositionId WHERE (op.jobOfferIdOp= :jobOfferId)
 
             $this->connection = Connection::GetInstance();
 
@@ -137,9 +138,7 @@ class JobOfferDAO implements IJobOfferDAO
 
         try
         {
-
-
-            $query= "UPDATE ".$this->tableName." SET activeJobOffer = :activeJobOffer , remote = :remote, publishDate = :publishDate, endDate = :endDate, title = :title, dedication = :dedication, descriptionOffer = :descriptionOffer, salary = :salary, creationAdminId = :creationAdminId, companyId = :companyId, careerIdOffer = :careerIdOffer
+            $query= "UPDATE ".$this->tableName." SET activeJobOffer = :activeJobOffer , remote = :remote, publishDate = :publishDate, endDate = :endDate, title = :title, dedication = :dedication, descriptionOffer = :descriptionOffer, salary = :salary, creationAdmin = :creationAdmin, companyId = :companyId, careerIdOffer = :careerIdOffer
             WHERE (jobOfferId = :jobOfferId)";
 
                 $parameters["activeJobOffer"] =  $jobOffer->getActive();
@@ -150,7 +149,7 @@ class JobOfferDAO implements IJobOfferDAO
                 $parameters["dedication"] = $jobOffer->getDedication();
                 $parameters["descriptionOffer"] = $jobOffer->getDescription();
                $parameters["salary"] = $jobOffer->getSalary();
-               $parameters["creationAdminId"] = $jobOffer->getCreationAdmin()->getAdministratorId();
+               $parameters["creationAdmin"] = $jobOffer->getCreationAdmin()->getUserId();
                $parameters["companyId"] = $jobOffer->getCompany()->getCompanyId();
                $parameters["careerIdOffer"] = $jobOffer->getCareer()->getCareerId();
             $parameters["jobOfferId"] = $jobOffer->getJobOfferId();
@@ -208,7 +207,6 @@ class JobOfferDAO implements IJobOfferDAO
 
         $resultado = array_map(function ($value){
 
-
             $jobOffer = new JobOffer();
 
             $jobOffer->setJobOfferId($value["jobOfferId"]);
@@ -221,52 +219,49 @@ class JobOfferDAO implements IJobOfferDAO
             $jobOffer->setDescription($value["descriptionOffer"]);
             $jobOffer->setSalary($value["salary"]);
 
-            $careerId=$value['careerId'];
-            $careerDescription=$value['description'];
-            $career= new Career();
-            $career->setDescription($careerDescription);
-            $career->setCareerId($careerId);
-            $jobOffer->setCareer($career);
 
-            $company = new Company();
-            $company->setCompanyId($value["companyId"]); //SI SE ELIMINAN LOS ATRIBUTOS COMENTADOS, ELIMINAR EL JOIN CON "COMPANY" DEL GET ALL!!!!
-            $company->setName($value["name"]);
-            //$company->setFoundationDate($value["foundationDate"]);
-            //$company->setCuit($value["cuit"]);
-            //$company->setAboutUs($value["aboutUs"]);
-            $company->setEmail($value["email"]);
-            //$company->setActive($value["activeCompany"]);
-            $company->setCompanyLink($value['companyLink']);
-            $jobOffer->setCompany($company);
+            if(isset($value['companyId']))
+            {
+                $company = new Company();
+                $company->setCompanyId($value["companyId"]);
+                $company->setName($value["name"]);
+                $company->setEmail($value["emailCompany"]);
+                $company->setCompanyLink($value['companyLink']);
+                $jobOffer->setCompany($company);
+            }
 
 
-            $admin= new Administrator();
-            $admin->setAdministratorId($value['administratorId']);
-            //$admin->setActive($value['activeAdmin']);
-            //$admin->setEmail($value['emailAdmin']);
-            $admin->setEmployeeNumber($value['employeeNumber']);
-            $admin->setFirstName($value['firstNameAdmin']);
-            $admin->setLastName($value['lastNameAdmin']);
+            $careerid= $value['careerIdOffer']; //hasta aca bien
+            //var_dump($careerid);
+            $this->getOriginCareers();
+            foreach ($this->allCarrers as $career)
+            {
+                if($career->getCareerId()==$careerid)
+                {
+                    $jobOffer->setCareer($career);
+                }
+            }
+
+
+            $admin= new User();
+            $admin->setEmail($value['email']);
+            $rol= new UserRol();
+            $rol->setUserRolId($value['rolId']);
+            $admin->setRol($rol);
+            $admin->setUserId($value['userId']);
             $jobOffer->setCreationAdmin($admin);
 
 
-            $jobPosition= new JobPosition();
-            $jobPosition->setJobPositionId($value["jobPositionIdOp"]);
 
-            if(isset($value['descriptionJob']))
+            $positionId=$value["jobPositionIdOp"];
+            $this->getOriginJobPositions();
+            foreach ($this->allJobPositions as $value)
             {
-                $jobPosition->setDescription($value['descriptionJob']);
+                if($value->getJobPositionId()==$positionId)
+                {
+                    $jobOffer->setJobPosition($value);
+                }
             }
-
-            if(isset($value['careerIdJob']))
-            {
-                $career= new Career();
-                $career->setCareerId($value['careerIdJob']);
-                $jobPosition->setCareer($career);
-            }
-            $jobOffer->setJobPosition($jobPosition);
-
-
 
             return $jobOffer;
 
@@ -293,27 +288,27 @@ class JobOfferDAO implements IJobOfferDAO
         $finalOffer=null;
         if(is_array($offer))
         {
-            $cant=count($offer);
+            $cant=count($offer); //cuento la cantidad de job offers que me llegan
 
             $i=0;
-            for ($x=0; $x<$cant; $x++)
+            for ($x=0; $x<$cant; $x++) //recorro la cantidad de job offers que tengo
             {
                 $subArray=array();
                 $positionArray= array();
                 $pos=null;
-                foreach ($offer as $value)
+                foreach ($offer as $value) //recorro las job offers
                 {
-                    $id = $offer[$i]->getJobOfferId();
+                    $id = $offer[$i]->getJobOfferId(); //tomo el id de la primer job offer (y asi seguidamente con el contador)
 
-                    if ($value->getJobOfferId() == $id)
+                    if ($value->getJobOfferId() == $id) //busco todas las job offers con esa ID
                     {
-                        $pos=$value->getJobOfferId();
-                        array_push($subArray, $value);//job offers with same id
+                        $pos=$value->getJobOfferId(); //guardo la posicion
+                        array_push($subArray, $value);//job offers con misma id
                     }
                 }
 
                 $flag=0;
-                foreach ($finalArray as $value)
+                foreach ($finalArray as $value) //una de las job offer
                 {
                     if($value->getJobOfferId()==$pos)
                     {
@@ -325,14 +320,11 @@ class JobOfferDAO implements IJobOfferDAO
                 {
                     foreach ($subArray as $values) //unify job position
                     {
-                        //var_dump($values->getJobPosition()); //es un objeto
-                        array_push($positionArray, $values->getJobPosition()); //array con 3 objetos
+                        array_push($positionArray, $values->getJobPosition()); //array con 3 objetos, guardo las job position de cada job offer
                     }
 
-                    //var_dump($positionArray); //array con objetos
-
                     $finalOffer= $subArray[0];
-                    $finalOffer->setJobPosition($positionArray);
+                    $finalOffer->setJobPosition($positionArray); //tomo una de las job offers y le almaceno el array con todas las posiciones
 
                     array_push($finalArray, $finalOffer);
                     $positionArray=null;

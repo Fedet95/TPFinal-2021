@@ -171,7 +171,7 @@ class Company
     }
 
 
-    public function setCreationAdmin(Administrator $creationAdmin)
+    public function setCreationAdmin(User $creationAdmin)
     {
         $this->creationAdmin = $creationAdmin;
     }

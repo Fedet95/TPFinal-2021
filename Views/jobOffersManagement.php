@@ -301,20 +301,22 @@ include_once('nav.php');
 
                         <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
 
-
-                        <?php
+                     <!--
                         if(is_object($allOffers))
                         { $offer= $allOffers;
                             $allOffers= array();
                             array_push($allOffers, $offer);
                         }
+                        -->
 
+
+                   <?php
                         foreach ($allOffers as $value) {
 
                             foreach ($allCompanies as $company) {
                                 if ($value->getCompany()->getCompanyId() == $company->getCompanyId()) {
 
-                                    if ($value->getActive() == "true" && $company->getActive()=='true' && strtotime($value->getEndDate()) > strtotime(date("Y-m-d"))) {
+                                    if ($value->getActive() == "true" && $company->getActive()=='true' && strtotime($value->getEndDate()) >= strtotime(date("Y-m-d")) ) {
                                         ?>
 
                                         <div class="single-post d-flex flex-row">
@@ -418,7 +420,7 @@ include_once('nav.php');
                                                         </form>
                                                         <br>
                                                     </td>
-                                                    <?php if ($loggedUser instanceof User) { ?>
+                                                    <?php if ($loggedUser->getRol()->getUserRolId()==2) { ?>
                                                         <td>
                                                         <?php if ($value->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) { ?>
                                                             <form action="<?php echo FRONT_ROOT ."Appointment/showApplyView" ?>"
@@ -433,7 +435,7 @@ include_once('nav.php');
                                                         <?php }
                                                     } ?>
 
-                                                    <?php if ($loggedUser instanceof Administrator) { ?>
+                                                    <?php if ($loggedUser->getRol()->getUserRolId()==1) { ?>
                                                         <td>
                                                             <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
                                                                   method="POST">
@@ -462,7 +464,7 @@ include_once('nav.php');
                                     }
                                     else
                                     {
-                                        if($value->getActive() == "false" && $loggedUser instanceof  Administrator)
+                                        if($value->getActive() == "false" && $loggedUser->getRol()->getUserRolId()==1)
                                         {
                                             ?>
 
@@ -568,7 +570,7 @@ include_once('nav.php');
                                                             </form>
                                                             <br>
                                                         </td>
-                                                        <?php if ($loggedUser instanceof Administrator) { ?>
+                                                        <?php if ($loggedUser->getRol()->getUserRolId()==1) { ?>
                                                             <td>
                                                                 <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
                                                                       method="POST">
@@ -635,7 +637,7 @@ include_once('nav.php');
 
     <!--EDIT JOB OFFER AREA-->
 <?php
-if(($edit != null) && ($loggedUser instanceof Administrator) && ($jobOfferEdit->getJobOfferId() != null))
+if(($edit != null) && ($loggedUser->getRol()->getUserRolId()==1) && ($jobOfferEdit->getJobOfferId() != null))
 {
  if(($careerId == null))
  { ?>
@@ -703,7 +705,7 @@ if(($edit != null) && ($loggedUser instanceof Administrator) && ($jobOfferEdit->
                                     <div class="form-group  offset-lg-11 col-lg-12">
                                         <label class="text-muted text-strong text">Publish Date</label>
                                         <input type="date" name="publishDate"
-                                               value="<?php echo (new \DateTime())->format('Y-m-d'); ?>" readonly
+                                               value="<?php echo $jobOfferEdit->getPublishDate()?>" required
                                                class="form-control">
                                     </div>
                                 </div>
@@ -872,7 +874,7 @@ if(($edit != null) && ($loggedUser instanceof Administrator) && ($jobOfferEdit->
 
 <!--REMOVE JOB OFFER AREA -->
 <?php if(isset($remove)){?>
-<?php if(($remove != null) && ($loggedUser instanceof Administrator)){
+<?php if(($remove != null) && ($loggedUser->getRol()->getUserRolId()==1)){
     if(($jobOffer!= null) && ($cant!=null)){  ?>
 
         <main class="py-3">

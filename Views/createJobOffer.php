@@ -53,7 +53,7 @@ include_once('nav.php');
                         <div>
                             <div class="form-group  offset-lg-11 col-lg-12">
                                 <label class="text-muted text-strong text">Publish Date</label>
-                                <input type="date" name="publishDate" value="<?php echo (new \DateTime())->format('Y-m-d');?>" readonly class="form-control">
+                                <input type="date" name="publishDate"  class="form-control">
                             </div>
                         </div>
                         <div>
@@ -147,7 +147,7 @@ else {
                                 <div class="form-group">
                                     <p class="text-muted text-strong text">Condition</p>
                                     <label for="active" >Active</label>
-                                    <input type="radio" name="active" value="true" class="radioSize" required id="active">
+                                    <input type="radio" name="active" value="true" checked class="radioSize" required id="active">
                                     <label for="inactive">Inactive</label>
                                     <input type="radio" name="active" value="false" class="radioSize" required
                                            id="inactive">

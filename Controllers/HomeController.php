@@ -16,25 +16,18 @@ use Models\User;
  */
 class HomeController
 {
-    //private $administratorDAO;
     private $userDAO;
     private $userRolDAO;
     private $Sorigin; //api student
     private $studentsOrigin; //students array
-    private $careerDAO;
-    private $careersOrigin; //api careers
 
 
 
     public function __construct()
     {
-        //$this->administratorDAO = new AdministratorDAO();
         $this->userRolDAO= new UserRolDAO();
         $this->userDAO = new UserDAO();
         $this->Sorigin=new OriginStudentDAO();
-        $this->careerDAO=new CareerDAO();
-        $this->careersOrigin= new OriginCareerDAO();
-
     }
 
     public function Index($message = "")

@@ -10,11 +10,11 @@ use DAO\CountryDAO;
 use DAO\IndustryDAO;
 use DAO\JobOfferDAO;
 use DAO\LogoDAO;
+use DAO\UserDAO;
 use Models\City;
 use Models\Company;
 use Models\Country;
 use Models\Industry;
-use Models\Administrator;
 use Models\Logo;
 use Models\User;
 
@@ -29,7 +29,7 @@ class CompanyController
     private $cityDAO;
     private $industryDAO;
     private $logoDAO;
-    private $adminDAO;
+    private $userDAO;
     private $loggedUser;
 
 
@@ -40,7 +40,7 @@ class CompanyController
         $this->cityDAO = new CityDAO();
         $this->industryDAO = new IndustryDAO();
         $this->logoDAO= new LogoDAO();
-        $this->adminDAO = new AdministratorDAO();
+        $this->userDAO = new UserDAO();
         $this->loggedUser = $this->loggedUserValidation();
     }
  /**
@@ -80,6 +80,7 @@ class CompanyController
 
         try {
             $allCompanys = $this->companyDAO->getAll();
+
         }
         catch (\PDOException $ex)
         {
@@ -87,12 +88,18 @@ class CompanyController
         }
 
         $searchedCompany = $this->searchCompanyFiltre($allCompanys, $valueToSearch, $back);
-        if($this->loggedUser instanceof Administrator)
+        if($this->loggedUser->getRol()->getUserRolId()==1)
         {
             require_once(VIEWS_PATH . "companyManagement.php");
         }
-        else if($this->loggedUser instanceof User)
+        else if($this->loggedUser->getRol()->getUserRolId()==2)
         {
+            if(is_object($allCompanys))
+            { $company= $allCompanys;
+                $allCompanys= array();
+                array_push($allCompanys, $company);
+            }
+
             require_once(VIEWS_PATH . "companyList.php");
         }
     }
@@ -114,11 +121,11 @@ class CompanyController
             echo $ex->getMessage();
         }
 
-        if($this->loggedUser instanceof Administrator)
+        if($this->loggedUser->getRol()->getUserRolId()==1)
         {
             require_once(VIEWS_PATH . "companyViewMore.php");
         }
-        else if($this->loggedUser instanceof User)
+        else if($this->loggedUser->getRol()->getUserRolId()==2)
         {
             require_once(VIEWS_PATH."companyViewMoreStudent.php");
         }
@@ -219,6 +226,7 @@ class CompanyController
                 $this->showCreateCompanyView($message);
             }
 
+            var_dump($email);
             $validEmail = $this->validateEmail($email);
             if ($validEmail == false) {
                 $message = "Error, enter a valid email";
@@ -251,6 +259,17 @@ class CompanyController
             $this->showCreateCompanyView($message);
         }
 
+
+
+        $uniqueEmail= $this->uniqueEmail($email);
+        if ($uniqueEmail == 1) {
+            $message = "Error, the company with email " . $email . " is already in the system";
+            $flag = 1;
+            $this->showCreateCompanyView($message);
+        }
+
+        var_dump($email);
+
         //END EXTRA VALIDATION
             //ADD
             if ($flag == 0)
@@ -263,6 +282,8 @@ class CompanyController
                 $company->setEmail($email);
                 $company->setActive($active);
 
+                var_dump($company);
+
                 try {
                     $this->companyDAO->add($company);
                     $this->showCompanyManagement();
@@ -271,7 +292,6 @@ class CompanyController
                 {
                    echo $ex->getMessage();
                 }
-
             }
     }
 
@@ -560,7 +580,7 @@ class CompanyController
     public function validateAdmin($company)
     {
         try {
-            $searchedAdmin = $this->adminDAO->searchById($this->loggedUser->getAdministratorId());
+            $searchedAdmin = $this->userDAO->getUser($this->loggedUser->getUserId());
             if ($searchedAdmin!=null) {
                 $company->setCreationAdmin($searchedAdmin);
             }
@@ -763,6 +783,53 @@ class CompanyController
         }
         return $flag;
     }
+
+
+    /**
+     * Validates if there is only one company with a determinated email in the system
+     * @param $email
+     * @param null $id
+     * @return int
+     */
+    public function uniqueEmail($email, $id=null)
+    {
+        $flag=0;
+        try {
+            $companyEmailSearch = $this->companyDAO->searchEmailValidation($email);
+            if ($companyEmailSearch ==1) {
+                $flag = 1;
+
+                if($id!=null)
+                {
+                    try {
+                        $companySearch= $this->companyDAO->getCompany($id);
+                        if($companySearch!=null)
+                        {
+                            if($companySearch->getEmail()==$email)
+                            {
+                                $flag=0;
+                            }
+                        }
+                    }
+                    catch (\Exception $ex)
+                    {
+                        $flag=1;
+                        echo $ex->getMessage();
+                    }
+                }
+            }
+        }
+        catch (\Exception $ex)
+        {
+            $flag=1;
+            echo $ex->getMessage();
+        }
+        return $flag;
+    }
+
+
+
+
 
 
     /**
@@ -1063,6 +1130,15 @@ class CompanyController
             $this->Edit($id, $message);
         }
 
+        $uniqueEmail=$this->uniqueEmail($email, $id);
+        if ($uniqueEmail == 1) {
+            $message = "Error, the company with name " . $email . " is already in the system";
+            $flag = 1;
+            $this->Edit($id, $message);
+        }
+
+
+
         //END EXTRA VALIDATION
         //UPDATE
         if ($flag == 0)
@@ -1101,13 +1177,27 @@ class CompanyController
 
         if($valueToSearch!=null)
         {
-            foreach ($allCompanys as $value)
-            {
-                if (strcasecmp($value->getName(), $valueToSearch) == 0) //no es case sensitive
-                {
-                    array_push($searchedCompany, $value);
-                }
-            }
+           if($allCompanys!=null)
+           {
+               if(is_object($allCompanys))
+               { $company= $allCompanys;
+                   $allCompanys= array();
+                   array_push($allCompanys, $company);
+               }
+
+               foreach ($allCompanys as $value)
+               {
+                   if (strcasecmp($value->getName(), $valueToSearch) == 0) //no es case sensitive
+                   {
+                       array_push($searchedCompany, $value);
+                   }
+               }
+           }
+           else
+           {
+               $searchedCompany = $allCompanys;
+           }
+
         }
         else
         {

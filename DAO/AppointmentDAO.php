@@ -15,7 +15,7 @@ class AppointmentDAO implements IAppointmentDAO
     private $connection;
     private $tableName = "appointment";
     private $tableName2 = "jobOffers";
-    private $tableName3 = "students";
+    private $tableName3 = "users";
     private $tableName4= "companies";
 
 
@@ -44,8 +44,7 @@ class AppointmentDAO implements IAppointmentDAO
         try {
 
 
-            $query = "SELECT * FROM " . $this->tableName . " c INNER JOIN " . $this->tableName2 . " co ON c.jobOfferAppointmentId= co.jobOfferId
-            INNER JOIN " . $this->tableName3 . " ci ON c.studentAppointmentId= ci.studentId";
+            $query = "SELECT * FROM " . $this->tableName . " c INNER JOIN " . $this->tableName2 . " co ON c.jobOfferAppointmentId= co.jobOfferId";
 
 
             $this->connection = Connection::GetInstance();
@@ -138,7 +137,7 @@ class AppointmentDAO implements IAppointmentDAO
             if(isset($value['name'])) //for getAppointment  (inner join with companies table)
             {
                 $company->setName($value['name']);
-                $company->setEmail($value['email']);
+                $company->setEmail($value['emailCompany']);
                 $company->setCompanyLink($value['companyLink']);
             }
 
@@ -147,18 +146,16 @@ class AppointmentDAO implements IAppointmentDAO
 
 
             $student = new User();
-            $student->setStudentId($value["studentAppointmentId"]);
+            $student->setUserId($value["studentAppointmentId"]);
+            $userdao= new UserDAO();
 
-            if(isset($value['firstName'])) //for Get all (inner join with student table)
+            try {
+                $searchedStudent=$userdao->getUser($value["studentAppointmentId"]);
+                $appointment->setStudent($searchedStudent);
+            }catch (\Exception $ex)
             {
-                $student->setFirstName($value["firstName"]);
-                $student->setLastName($value["lastName"]);
-                $student->setDni($value["dni"]);
-                $student->setPhoneNumber($value["phoneNumber"]);
-                $student->setEmail($value["email"]);
+                echo $ex->getMessage();
             }
-            $appointment->setStudent($student);
-
 
             return $appointment;
 

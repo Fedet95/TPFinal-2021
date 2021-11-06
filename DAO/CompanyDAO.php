@@ -7,6 +7,8 @@ use Models\City;
 use Models\Country;
 use Models\Industry;
 use Models\Logo;
+use Models\User;
+use Models\UserRol;
 
 
 class CompanyDAO implements lCompanyDAO
@@ -17,7 +19,7 @@ class CompanyDAO implements lCompanyDAO
     private $tableName3 ="cities";
     private $tableName4 ="industries";
     private $tableName5 ="logos";
-    private $tableName6 ="administrators";
+    private $tableName6 ="users";
 
 
 
@@ -36,7 +38,7 @@ class CompanyDAO implements lCompanyDAO
             $parameters['cuit']=$company->getCuit();
             $parameters['aboutUs']=$company->getAboutUs();
             $parameters['companyLink']=$company->getCompanyLink();
-            $parameters['email']=$company->getEmail();
+            $parameters['emailCompany']=$company->getEmail();
             $parameters['logo']=$company->getLogo()->getId();
             $parameters['activeCompany']=$company->getActive();
             $parameters['industry']=$company->getIndustry()->getId();
@@ -67,7 +69,7 @@ class CompanyDAO implements lCompanyDAO
             INNER JOIN ".$this->tableName3." ci ON c.city= ci.idCity 
             INNER JOIN ".$this->tableName4." ind ON c.industry= ind.idIndustry
             INNER JOIN ".$this->tableName5." lo ON c.logo= lo.idLogo
-            INNER JOIN ".$this->tableName6." ad ON c.creationAdmin= ad.administratorId";
+            INNER JOIN ".$this->tableName6." u ON c.creationAdmin= u.userId";
 
 
             $this->connection = Connection::GetInstance();
@@ -125,7 +127,7 @@ class CompanyDAO implements lCompanyDAO
             INNER JOIN ".$this->tableName3." ci ON c.city= ci.idCity 
             INNER JOIN ".$this->tableName4." ind ON c.industry= ind.idIndustry
             INNER JOIN ".$this->tableName5." lo ON c.logo= lo.idLogo
-            INNER JOIN ".$this->tableName6." ad ON c.creationAdmin= ad.administratorId WHERE (companyId= :companyId)";
+            INNER JOIN ".$this->tableName6." u ON c.creationAdmin= u.userId WHERE (companyId= :companyId)";
 
             $parameters['companyId']=$companyId;
 
@@ -208,6 +210,37 @@ class CompanyDAO implements lCompanyDAO
     }
 
 
+    /**
+     * Validate if a company email is available
+     * @param $name
+     */
+    public function searchEmailValidation($email)
+    {
+        try
+        {
+            $query= "SELECT * FROM ".$this->tableName." WHERE (emailCompany= :emailCompany)";
+
+            $parameters['emailCompany']=$email;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, $parameters);
+
+            $flag=0;
+            if(!empty($result))
+            {
+                $flag=1;
+            }
+
+            return $flag;
+        }
+        catch (\PDOException $ex)
+        {
+            throw $ex;
+        }
+    }
+
+
 
     /**
      * Update company values
@@ -217,7 +250,7 @@ class CompanyDAO implements lCompanyDAO
     {
         try
         {
-                $query= "UPDATE ".$this->tableName." SET name = :name, foundationDate = :foundationDate, cuit = :cuit, aboutUs = :aboutUs, companyLink = :companyLink, email = :email, logo = :logo, activeCompany= :activeCompany, industry=:industry, city=:city, country=:country, creationAdmin=:creationAdmin
+                $query= "UPDATE ".$this->tableName." SET name = :name, foundationDate = :foundationDate, cuit = :cuit, aboutUs = :aboutUs, companyLink = :companyLink, emailCompany = :emailCompany, logo = :logo, active= :active, industry=:industry, city=:city, country=:country, creationAdmin=:creationAdmin
             WHERE (companyId = :companyId)";
 
             $parameters['name']=$company->getName();
@@ -227,11 +260,11 @@ class CompanyDAO implements lCompanyDAO
             $parameters['companyLink']=$company->getCompanyLink();
             $parameters['email']=$company->getEmail();
             $parameters['logo']=$company->getLogo()->getId();
-            $parameters['activeCompany']=$company->getActive();
+            $parameters['active']=$company->getActive();
             $parameters['industry']=$company->getIndustry()->getId();
             $parameters['city']=$company->getCity()->getId();
             $parameters['country']=$company->getCountry()->getId();
-            $parameters['creationAdmin']=$company->getCreationAdmin()->getAdministratorId();
+            $parameters['creationAdmin']=$company->getCreationAdmin()->getUserId();
             $parameters['companyId']=$company->getCompanyId();
 
             $this->connection = Connection::GetInstance();
@@ -284,23 +317,16 @@ class CompanyDAO implements lCompanyDAO
             $company->setIndustry($industry);
 
 
-            $adminId=$value['administratorId'];
-            $adminFirstName=$value['firstNameAdmin'];
-            $adminLastName=$value['lastNameAdmin'];
-            $adminEmployeenumber=$value['employeeNumber'];
-            $adminEmail=$value['emailAdmin'];
-            $adminPass=$value['passwordAdmin'];
-            $adminActive=$value['activeAdmin'];
+            $userId=$value['userId'];
+            $userEmail=$value['email'];
+            $userRolId=$value['rolId'];
 
-            $admin= new Administrator();
-            $admin->setAdministratorId($adminId);
-            $admin->setActive($adminActive);
-            $admin->setEmail($adminEmail);
-            $admin->setPassword($adminPass);
-            $admin->setEmployeeNumber($adminEmployeenumber);
-            $admin->setFirstName($adminFirstName);
-            $admin->setLastName($adminLastName);
-            $company->setCreationAdmin($admin);
+            $admin= new User();
+            $admin->setEmail($userEmail);
+            $rol= new UserRol();
+            $rol->setUserRolId($userRolId);
+            $admin->setRol($rol);
+            $admin->setUserId($userId);
 
 
             $logoId=$value["idLogo"];

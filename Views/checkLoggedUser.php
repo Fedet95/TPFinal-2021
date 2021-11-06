@@ -11,7 +11,7 @@ if (isset($_SESSION['loggedstudent']))
 else if($loggedUser==null)
 {
     echo "<script>alert('Error, your session time has expired, please login again');";
-    echo "window.location= 'home.php';</script>";
+    echo "window.location= 'Logout';</script>";
 
 }
 

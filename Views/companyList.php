@@ -52,7 +52,8 @@ include_once('nav.php');
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($searchedCompany as $valueCompany)
+                        <?php if(isset($searchedCompany) && $searchedCompany!=null){
+                           foreach ($searchedCompany as $valueCompany)
                             {
                                 ?>
                             <tr>
@@ -68,8 +69,7 @@ include_once('nav.php');
                                 </td>
                             </tr>
                         <?php
-                            }
-                        ?>
+                            }}{?> <h6 class="py-3 text-muted text-center text-strong"><?php echo "There are no company loaded in the system"?></h6>  <?php }?>
                         </tbody>
                     </table>
                 </div>

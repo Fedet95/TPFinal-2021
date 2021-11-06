@@ -1,6 +1,4 @@
 <?php
-//require_once(VIEWS_PATH . "checkLoggedUser.php");
-use Models\Administrator;
 use Models\User;
 
 $loggedUser=null;
@@ -28,13 +26,13 @@ if (isset($_SESSION['loggedstudent']))
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
                 <?php
-                if($loggedUser instanceof Administrator)
+                if($loggedUser->getRol()->getUserRolId()==1)
                 {
                     ?>
                     <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/showAdministratorControlPanelView"?>">Home</a>
                     <?php
                 }
-                else if($loggedUser instanceof User)
+                else if($loggedUser->getRol()->getUserRolId()==2)
                 {
                     ?>
                     <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/showStudentControlPanelView"?>">Home</a>
@@ -49,13 +47,13 @@ if (isset($_SESSION['loggedstudent']))
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <?php
-                    if($loggedUser instanceof Administrator)
+                    if($loggedUser->getRol()->getUserRolId()==1)
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCreateCompanyView"?>">Add Company</a>
                         <?php
                     }
-                    else if($loggedUser instanceof User)
+                    else if($loggedUser->getRol()->getUserRolId()==2)
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Companies</a>
@@ -64,7 +62,7 @@ if (isset($_SESSION['loggedstudent']))
                     ?>
                     <div class="dropdown-divider"></div>
                     <?php
-                    if($loggedUser instanceof Administrator)
+                    if($loggedUser->getRol()->getUserRolId()==1)
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Company Management</a>
@@ -78,14 +76,13 @@ if (isset($_SESSION['loggedstudent']))
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <?php
-                    if($loggedUser instanceof Administrator)
+                    if($loggedUser->getRol()->getUserRolId()==1)
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showCreateJobOfferView"?>">Add Job Offer</a>
-                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showCreateJobPositionView"?>">Add Job Position</a>
                         <?php
                     }
-                    else if($loggedUser instanceof User)
+                    else if($loggedUser->getRol()->getUserRolId()==2)
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Search Job Offers</a>
@@ -94,15 +91,15 @@ if (isset($_SESSION['loggedstudent']))
                     ?>
                     <div class="dropdown-divider"></div>
                     <?php
-                    if($loggedUser instanceof Administrator)
+                    if($loggedUser->getRol()->getUserRolId()==1)
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Job Offers Management</a>
-                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobPositionManagement"?>">Job Position Managment</a>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobPositionManagement"?>">Job Position List</a>
 
                         <?php
                     }
-                    else if($loggedUser instanceof User)
+                    else if($loggedUser->getRol()->getUserRolId()==2)
                     {
                         ?>
                         <!--<a class="dropdown-item" href="#">View Our Portfolio</a>-->
@@ -111,7 +108,7 @@ if (isset($_SESSION['loggedstudent']))
                     ?>
             </li class="nav-item active">
             <?php
-            if($loggedUser instanceof Administrator)
+            if($loggedUser->getRol()->getUserRolId()==1)
             {
                 ?>
                 <a class="nav-link" href="<?php echo  FRONT_ROOT."Student/showStudentListView"?>">Students</a>
@@ -119,7 +116,7 @@ if (isset($_SESSION['loggedstudent']))
 
                 <?php
             }
-            else if($loggedUser instanceof User)
+            else if($loggedUser->getRol()->getUserRolId()==2)
             {
                 ?>
                 <li class="nav-item">
@@ -130,7 +127,7 @@ if (isset($_SESSION['loggedstudent']))
             ?>
             </li class="nav-item active">
             <?php
-            if($loggedUser instanceof User)
+            if($loggedUser->getRol()->getUserRolId()==2)
             {
                 ?>
                 <a class="nav-link" href="<?php echo  FRONT_ROOT."Appointment/showAppointmentList"?>">Appointments</a>

@@ -67,7 +67,7 @@ include_once('nav.php');
                            <div class="col-lg-15">
                                <div class="form-group">
                                    <label for="" class="text-muted text-strong text">Current location City</label>
-                                   <input type="text" name="city" class="form-control" minlength="3" required
+                                   <input type="text"  name="city" class="form-control" minlength="3" required
                                           placeholder="Enter current location city name">
                                </div>
                            </div>
@@ -76,8 +76,8 @@ include_once('nav.php');
                                <div class="form-group">
                                    <label for="industrylist" class="text-muted text-strong text">Industry Area</label>
                                    <br>
-                                   <input list="listindustrys" name="industry" id="industrylist">
-                                   <datalist id="listindustrys" required>
+                                   <input list="listindustrys" name="industry" id="industrylist" required>
+                                   <datalist  id="listindustrys" required>
                                        <option disabled selected>Select industry area</option>
                                        <?php
                                        foreach ($allIndustrys as $value) {
@@ -98,9 +98,9 @@ include_once('nav.php');
                                <div class="form-group">
                                    <p class="text-muted text-strong text">Condition</p>
                                    <label for="active" >Active</label>
-                                   <input type="radio" name="active" value="true" class="radioSize" required id="active">
+                                   <input type="radio" name="active" value="1" checked class="radioSize" required id="active">
                                    <label for="inactive">Inactive</label>
-                                   <input type="radio" name="active" value="false" class="radioSize" required
+                                   <input type="radio" name="active" value="0" class="radioSize" required
                                           id="inactive">
                                </div>
                            </div>
