@@ -27,7 +27,7 @@ class AppointmentHistoryDAO implements IAppointmentHistoryDAO
             $parameters['jobOfferCompanyName'] = $appointmentHistory->getCompany()->getName();
             $parameters['jobOfferCompanyCuit'] = $appointmentHistory->getCompany()->getCuit();
             $parameters['historyCareerName'] = $appointmentHistory->getCareer()->getDescription();
-            $parameters['historyStudentId'] = $appointmentHistory->getStudent()->getStudentId();
+            $parameters['historyStudentId'] = $appointmentHistory->getStudent()->getUserId();
             $parameters['appointmentDate']= $appointmentHistory->getAppointmentDate();
 
             $this->connection = Connection::GetInstance();
@@ -111,7 +111,7 @@ class AppointmentHistoryDAO implements IAppointmentHistoryDAO
            $career->setDescription($value["historyCareerName"]);
            $appointment->setCareer($career);
            $student= new User();
-           $student->setStudentId($value['historyStudentId']);
+           $student->setUserId($value['historyStudentId']);
            $appointment->setStudent($student);
            $company= new Company();
            $company->setName($value['jobOfferCompanyName']);

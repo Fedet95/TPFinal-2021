@@ -64,6 +64,12 @@ body {
     background-color: #c3e6cb; !important;
 }
 
+.btnRegister{
+    background-color: #79e192; !important;
+    color: black; !important;
+}
+
+
 /*---------------------------------------------------
 #Apply
 
@@ -125,8 +131,8 @@ body {
     border: none;
     border-radius: 1.5rem;
     padding: 2%;
-    background: #c5eecb; !important;
-    color: #fff;
+    background: #99e7a6; !important;
+    color: #313336;
     font-weight: 600;
     width: 50%;
     cursor: pointer;

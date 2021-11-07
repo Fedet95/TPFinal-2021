@@ -45,6 +45,11 @@ include_once('nav.php');
                         <label class="text-muted text-strong" for="">BirthDate</label>
                         <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getBirthDate()?>">
                     </div>
+                    <div class="col-lg-4">
+                        <br>
+                        <label class="text-muted text-strong" for="">Career</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getCareer()->getDescription()?>">
+                    </div>
                 </div>
             </div>
     </section>

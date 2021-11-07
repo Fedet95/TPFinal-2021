@@ -79,7 +79,7 @@ include_once('nav.php');
                             <input type="hidden" name="studentId" value="<?php echo $loggedUser->getUserId() ?>">
 
                             <input type="hidden" name="jobOfferId" value="<?php echo $jobOfferId?>">
-                            <input type="submit" class="btnRegister" value="Apply"/>
+                            <input type="submit" class="btnRegister  text-strong font-weight-bold" value="Apply"/>
                             </form>
                         </div>
                     </div>

@@ -5,7 +5,6 @@ namespace DAO;
 use Models\Appointment;
 use Models\Career;
 use Models\Company;
-use Models\Country;
 use Models\JobOffer;
 use Models\User;
 
@@ -25,7 +24,7 @@ class AppointmentDAO implements IAppointmentDAO
             $query = "INSERT INTO " . $this->tableName . "(jobOfferAppointmentId, studentAppointmentId, dateAppointment, message, cv) VALUES (:jobOfferAppointmentId, :studentAppointmentId, :dateAppointment, :message, :cv)";
 
             $parameters['jobOfferAppointmentId'] = $appointment->getJobOffer()->getJobOfferId();
-            $parameters['studentAppointmentId'] = $appointment->getStudent()->getStudentId();
+            $parameters['studentAppointmentId'] = $appointment->getStudent()->getUserId();
             $parameters['dateAppointment'] = $appointment->getDate();
             $parameters['message'] = $appointment->getMessage();
             $parameters['cv'] = $appointment->getCv();

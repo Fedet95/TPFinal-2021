@@ -81,7 +81,7 @@ include_once('nav.php');
                     <td>
                         <form action="<?php echo FRONT_ROOT . "Student/showMoreStudentView" ?>" method="POST">
                             <button type="submit" name="id" class="btn btn-dark ml-auto d-block"
-                                    value="<?php echo $value->getStudentId() ?>"> View More
+                                    value="<?php echo $value->getUserId() ?>"> View More
                             </button>
                         </form>
                     </td>

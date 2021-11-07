@@ -4,7 +4,6 @@ namespace Controllers;
 
 use DAO\AppointmentDAO;
 use DAO\AppointmentHistoryDAO;
-use DAO\CareerDAO;
 use DAO\CompanyDAO;
 use DAO\JobOfferDAO;
 use DAO\OriginCareerDAO;

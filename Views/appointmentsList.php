@@ -15,7 +15,7 @@ include_once('nav.php');;
 
 
 
-<?php if($loggedUser instanceof User){?>
+<?php if($loggedUser->getRol()->getUserRolId()==2){?>
 
     <h6 class="py-3  text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
 
@@ -98,7 +98,7 @@ include_once('nav.php');;
                                         <form action="<?php echo FRONT_ROOT . "Appointment/Remove" ?>"
                                               method="POST">
                                             <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
-                                                    value="<?php echo $loggedUser->getStudentId() ?>"><strong>Drop out Appointment</strong>
+                                                    value="<?php echo $loggedUser->getUserId() ?>"><strong>Drop out Appointment</strong>
                                             </button>
                                         </form>
                                         <br>
@@ -115,6 +115,7 @@ include_once('nav.php');;
         <div class="title text-center my-5">
             <h4 class="mb-3">You do not have any active application, look at the job offers!</h4>
         </div>
+
         <div class="title text-center my-5">
         <form  action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>"
               method="POST">
@@ -123,7 +124,25 @@ include_once('nav.php');;
             </button>
         </form>
         </div>
+
+        <section id="hero" class=" align-items-center justify-content-center">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+
+                    <div class=" d-flex justify-content-center " data-aos="fade-up" data-aos-delay="200">
+                    </div>
+                    <div class=" hero-img" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="../Views/img/admini.png" width="450" height="350" class="img-fluid animated" alt="">
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Hero -->
+
+
     <?php } ?>
+
+
 
     <!-- Start callto-action Area -->
     <section class="callto-action-area section-gap"  id="join">
@@ -181,10 +200,12 @@ include_once('nav.php');;
     <?php }else { ?>
         <div class="title text-center my-5">
             <h4 class="mb-3">You do not have any appoitment history</h4>
+            <br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br>
         </div>
 
 
-    <?php } } else if($loggedUser instanceof  Administrator){?>
+    <?php } } else if($loggedUser->getRol()->getUserRolId()==1){?>
 
 
     <!-- Start callto-action Area -->
