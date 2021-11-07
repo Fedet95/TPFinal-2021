@@ -17,6 +17,99 @@ include_once('nav.php');
     <link rel="stylesheet" href="../Views/css/animate.min.css">
     <link rel="stylesheet" href="../Views/css/main.css">
 
+<!--************************************************ESTADISTICAAAA*********************************************-->
+
+
+<?php $carreras= array ();
+$numeros= array ();
+
+foreach ($allOffers as $value)
+{
+    $flag=0;
+    foreach ($carreras as $carre)
+    {
+        if($carre==$value->getCareer()->getDescription())
+        {
+            $flag=1;
+        }
+    }
+
+    if($flag==0)
+    {
+        array_push($carreras, $value->getCareer()->getDescription());
+    }
+}
+
+foreach ($carreras as $carre)
+{
+    $flag=0;
+    $i=0;
+    foreach ($allOffers as $values)
+    {
+        if($carre==$values->getCareer()->getDescription())
+        {
+            $flag=1;
+            $i++;
+        }
+    }
+
+    if($flag==1)
+    {
+        array_push($numeros, $i);
+    }
+}
+
+var_dump($carreras);
+var_dump($numeros);
+
+?>
+
+
+<div style="width:50%;hieght:50%;text-align:center">
+    <h2 class="page-header" >Analytics Reports </h2>
+    <div>Job Offers per career </div>
+    <canvas  id="chartjs_bar"></canvas>
+</div>
+
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script type="text/javascript">
+    var ctx = document.getElementById("chartjs_bar").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels:<?php echo json_encode($carreras); ?>,
+            datasets: [{
+                backgroundColor: [
+                    "#5969ff",
+                    "#ff407b",
+                    "#25d5f2",
+                    "#ffc750",
+                    "#2ec551",
+                    "#7040fa",
+                    "#ff004e"
+                ],
+                data:<?php echo json_encode($numeros); ?>,
+            }]
+        },
+        options: {
+            legend: {
+                display: true,
+                position: 'bottom',
+
+                labels: {
+                    fontColor: '#71748d',
+                    fontFamily: 'Circular Std Book',
+                    fontSize: 14,
+                }
+            },
+
+
+        }
+    });
+</script>
+
+<!--**********************************************************************************************-->
 
 
 
@@ -313,7 +406,7 @@ include_once('nav.php');
                         -->
 
 
-                   <?php
+                        <?php
                         foreach ($allOffers as $value) {
 
                             foreach ($allCompanies as $company) {

@@ -1,6 +1,6 @@
 <?php
 
-use Models\Administrator;
+
 use Models\User;
 
 require_once(VIEWS_PATH . "checkLoggedUser.php");
@@ -42,6 +42,8 @@ include_once('nav.php');;
     }
     ?>
     <!-- Start actual appointment-->
+
+
 
     <?php if(isset($actualAppointment) && $actualAppointment!=null){?>
 

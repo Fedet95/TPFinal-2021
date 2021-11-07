@@ -26,6 +26,69 @@ class UserController
     }
 
     /**
+     * Show the administrator list view
+     * @param string $message
+     */
+    public function showAdminListView($message = "")
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        $userRol= $this->getRolId("administrator");
+
+        if($userRol!=null)
+        {
+            try {
+                $allAdmins = $this->userDAO->getRol($userRol->getUserRolId());
+            } catch (\Exception $ex) {
+                echo $ex->getMessage();
+            }
+
+            if(is_object($allAdmins))
+            { $admin= $allAdmins;
+                $allAdmins= array();
+                array_push($allAdmins, $admin);
+            }
+
+            require_once(VIEWS_PATH . "adminListView.php");
+        }
+
+    }
+
+    /**
+     * Show the administrator creation view
+     * @param string $message
+     */
+    public function showAdminCreateView($message = "")
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        require_once(VIEWS_PATH . "createAdmin.php");
+
+    }
+
+    /**
+     * Show the administrator edit view
+     * @param $id
+     * @param string $message
+     */
+    public function showAdminEditView($id, $message = "")
+    {
+        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+
+        try
+        {
+            $admin = $this->userDAO->getUser($id);
+            require_once(VIEWS_PATH . "editAdmin.php");
+
+        }catch (\Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
+
+
+    /**
      * * Send to student control panel view
      * @param string $message
      */
@@ -173,75 +236,7 @@ class UserController
 
 
     /**
-     * Show the administrator list view
-     * @param string $message
-     */
-    public function showAdminListView($message = "")
-    {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
-
-        $userRol= $this->getRolId("administrator");
-
-        if($userRol!=null)
-        {
-            try {
-                $allAdmins = $this->userDAO->getRol($userRol->getUserRolId());
-            } catch (\Exception $ex) {
-                echo $ex->getMessage();
-            }
-
-            if(is_object($allAdmins))
-            { $admin= $allAdmins;
-                $allAdmins= array();
-                array_push($allAdmins, $admin);
-            }
-
-            require_once(VIEWS_PATH . "adminListView.php");
-        }
-
-    }
-
-    /**
-     * Show the administrator creation view
-     * @param string $message
-     */
-    public function showAdminCreateView($message = "")
-    {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
-
-        require_once(VIEWS_PATH . "createAdmin.php");
-
-    }
-
-    /**
-     * Show the administrator edit view
-     * @param $id
-     * @param string $message
-     */
-    public function showAdminEditView($id, $message = "")
-    {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
-
-        try
-        {
-            $admin = $this->userDAO->getUser($id);
-            require_once(VIEWS_PATH . "editAdmin.php");
-
-        }catch (\Exception $ex)
-        {
-            throw $ex;
-        }
-
-    }
-
-    /**
      * Adds an administator to the system
-     * @param $firstName
-     * @param $lastName
-     * @param $employeeNumber
-     * @param $email
-     * @param $password
-     * @param $active
      */
     public function addAdmin($email, $password)
     {
