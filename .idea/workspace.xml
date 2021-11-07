@@ -6,15 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/AppointmentHistoryDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentHistoryDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Appointment.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Appointment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/applyJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/applyJobOffer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/appointmentsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentsList.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/estilos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/studentControlPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentControlPanel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/studentList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
     </list>
     <list id="8ccc725f-7d6d-41b9-a85b-19712bbd211e" name="Changes by Fede" comment="Changes by Fede" />
     <list id="90859d74-00b1-413e-984d-c2b993371ef8" name="Changes by paye_" comment="Changes by paye_" />
@@ -116,14 +109,8 @@
       <workItem from="1636118975290" duration="42090000" />
       <workItem from="1636166071510" duration="2072000" />
       <workItem from="1636209930249" duration="7246000" />
-      <workItem from="1636246749457" duration="2980000" />
-    </task>
-    <task id="LOCAL-00040" summary="appointments">
-      <created>1635616518582</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1635616518582</updated>
+      <workItem from="1636246749457" duration="3359000" />
+      <workItem from="1636296208006" duration="2177000" />
     </task>
     <task id="LOCAL-00041" summary="update">
       <created>1635620262511</created>
@@ -461,7 +448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636218360593</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="update">
+      <created>1636249766024</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1636249766024</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -17,6 +17,9 @@ include_once('nav.php');
     <link rel="stylesheet" href="../Views/css/animate.min.css">
     <link rel="stylesheet" href="../Views/css/main.css">
 
+
+
+
 <?php if ($edit==null && $remove==null) { ?>
     <section class="download-area section-gap" id="app">
         <div class="container">
@@ -62,7 +65,7 @@ include_once('nav.php');
                                 {
                                     ?>
                                     <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light  ml-auto" name="button" value="Textile Production">
+                                    <input type="submit" class=" btn btn-light-1 c-filter  ml-auto" name="button" value="Textile Production">
                                     <?php
                                 }} ?>
                             </form>
@@ -82,7 +85,7 @@ include_once('nav.php');
                                 {
                                     ?>
                                     <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light ml-auto" name="button" value=" Ing Comp systems">
+                                    <input type="submit" class=" btn btn-light-1 c-filter ml-auto" name="button" value=" Ing Comp systems">
                                     <?php
                                 }} ?>
                             </form>
@@ -102,7 +105,7 @@ include_once('nav.php');
                                 {
                                     ?>
                                     <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light ml-auto" name="button" value="Tech programming">
+                                    <input type="submit" class=" btn btn-light-1 c-filter ml-auto" name="button" value="Tech programming">
                                     <?php
                                 }} ?>
                             </form>
@@ -122,7 +125,7 @@ include_once('nav.php');
                                 {
                                     ?>
                                     <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light ml-auto" name="button" value="Naval">
+                                    <input type="submit" class=" btn btn-light-1 c-filter ml-auto" name="button" value="Naval">
                                     <?php
                                 }} ?>
                             </form>
@@ -142,7 +145,7 @@ include_once('nav.php');
                                 {
                                     ?>
                                     <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light ml-auto" name="button" value="Administration">
+                                    <input type="submit" class=" btn btn-light-1 c-filter ml-auto" name="button" value="Administration">
                                     <?php
                                 }} ?>
                             </form>
@@ -162,7 +165,7 @@ include_once('nav.php');
                                 {
                                     ?>
                                     <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light ml-auto" name="button" value="Environmental">
+                                    <input type="submit" class=" btn btn-light-1 c-filter ml-auto" name="button" value="Environmental">
                                     <?php
                                 }} ?>
                             </form>
@@ -211,7 +214,7 @@ include_once('nav.php');
                                             </div>
                                         </th>
                                         <th>
-                                            <input type="submit" class="btn btn-light ml-auto" name="search" value="Filter">
+                                            <input type="submit" class="btn btn-light ml-auto filtre-button" name="search" value="Filter">
                                         </th>
                                         </form>
                                         </th>

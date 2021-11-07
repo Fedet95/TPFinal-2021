@@ -58,16 +58,48 @@ body {
 
 .buttonPer{
     background-color: #d3ecd8; !important;
+    border: 3px solid #aae3bc;
+    border-radius: 50px;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    color: #2b2b2c;
 }
+
+.buttonPer:hover{
+    box-shadow: 0 0 10px 0 #aae3bc inset, 0 0 20px 2px #aae3bc;
+    border: 3px solid #aae3bc;
+}
+
+
 
 .callto-action-area{
     background-color: #c3e6cb; !important;
 }
 
-.btnRegister{
-    background-color: #79e192; !important;
-    color: black; !important;
+.filtre-button{
+    margin-bottom: -7px; !important;
+
 }
+
+.c-filter{
+    margin-bottom: -20px; !important;
+
+}
+
+.btn-light-1 {
+    background-color: transparent;
+    border: 3px solid #aae3bc;
+    border-radius: 50px;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    color: #2b2b2c;
+}
+.btn-light-1:hover {
+    box-shadow: 0 0 10px 0 #aae3bc inset, 0 0 20px 2px #aae3bc;
+    border: 3px solid #aae3bc;
+}
+
+
 
 
 /*---------------------------------------------------
