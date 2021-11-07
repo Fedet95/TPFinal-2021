@@ -53,6 +53,30 @@ class UserRolDAO implements lUserRolDAO
     }
 
 
+    function getRolIdByRolName($rolName)
+    {
+        try {
+
+            $query = "SELECT * FROM " . $this->tableName . " WHERE rolName= :rolName";
+
+            $parameters["rolName"] = $rolName;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, $parameters);
+
+            $mapedArray = null;
+            if (!empty($result)) {
+                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+            }
+
+            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+    }
+
+
 
     public function mapear($array)
     {

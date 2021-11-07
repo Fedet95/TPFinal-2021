@@ -27,18 +27,18 @@ include_once('nav.php');
                 <thead>
                 <tr>
                     <th>
-                        <form action="<?php echo FRONT_ROOT . "Student/showStudentListView" ?>" method="post"">
+                        <form action="<?php echo FRONT_ROOT . "User/showStudentListView" ?>" method="post"">
                             <input type="number" name="valueToSearch" placeholder="Enter the student DNI" class="bg-light" required>
                         <button type="submit" class="btn btn-dark ml-auto" name="search"> Filter</button>
                         </form>
                     </th>
                     <th>
-                        <form action="<?php echo FRONT_ROOT . "Student/showStudentListView" ?>" method="post"">
+                        <form action="<?php echo FRONT_ROOT . "User/showStudentListView" ?>" method="post"">
                             <input type="submit" class="btn btn-dark ml-auto" name="valueToSearch" value="Show all students" >
                         </form>
                     </th>
                     <th>
-                        <form action="<?php echo FRONT_ROOT . "Student/showStudentListView" ?>" method="post"">
+                        <form action="<?php echo FRONT_ROOT . "User/showStudentListView" ?>" method="post"">
                         <input type="submit" class="btn btn-dark ml-auto" name="valueToSearch" value="Show only registered" >
                         </form>
                     </th>
@@ -79,9 +79,9 @@ include_once('nav.php');
                     <td><?php echo $value->getEmail()?></td>
                     <td><?php echo $value->getCareer()->getDescription() ?></td>
                     <td>
-                        <form action="<?php echo FRONT_ROOT . "Student/showMoreStudentView" ?>" method="POST">
+                        <form action="<?php echo FRONT_ROOT . "User/showMoreStudentView" ?>" method="POST">
                             <button type="submit" name="id" class="btn btn-dark ml-auto d-block"
-                                    value="<?php echo $value->getUserId() ?>"> View More
+                                    value="<?php echo $value->getEmail() ?>"> View More
                             </button>
                         </form>
                     </td>

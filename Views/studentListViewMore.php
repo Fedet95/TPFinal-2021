@@ -48,7 +48,7 @@ include_once('nav.php');
                         <td><?php echo "Inactive";?></td>
                     <?php }; ?>
                     <td>
-                        <form action="<?php echo FRONT_ROOT . "Student/showStudentListView" ?>" method="post"
+                        <form action="<?php echo FRONT_ROOT . "User/showStudentListView" ?>" method="post"
                               enctype="multipart/form-data">
                             <button type="submit" name="button" class="btn btn-dark m-lg-auto d-block">Return</button>
                         </form>

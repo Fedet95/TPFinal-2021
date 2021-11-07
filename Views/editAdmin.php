@@ -7,28 +7,18 @@ include_once('nav.php');
 <main class="py-5">
     <section id="listado">
         <div class="container">
-            <h2 class="mb-4 text-muted text-center">Edit Admin <?php echo $admin->getFirstName() ?></h2>
+            <h2 class="mb-4 text-muted text-center">Edit Admin</h2>
             <div class="row justify-content-center">
-                <form action="<?php echo FRONT_ROOT . "Admin/UpdateAdmin" ?>" method="POST"
+                <form action="<?php echo FRONT_ROOT . "User/UpdateAdmin" ?>" method="POST"
                       class="bg-light-alpha p-5 border" enctype="multipart/form-data">
                     <div class="col-sm-12  text-center">
                         <strong><?php if (isset($message)) {
                                 echo $message;
                             } ?></strong>
                         <div class="form-group">
-                            <label for="" class="text-muted text-strong text">First Name</label>
-                            <input type="text" name="firstName" class="form-control"
-                                   value="<?php echo $admin->getFirstName() ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="text-muted text-strong text">Last Name</label>
-                            <input type="text" name="lastName" class="form-control"
-                                   value="<?php echo $admin->getLastName() ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="text-muted text-strong text">Employee Number</label>
-                            <input type="text" name="employeeNumber" class="form-control"
-                                   value="<?php echo $admin->getEmployeeNumber() ?>" required>
+                            <label for="" class="text-muted text-strong text">ID</label>
+                            <input type="text" name="id" class="form-control"
+                                   value="<?php echo $admin->getUserId() ?>" readonly>
                         </div>
                         <div class="col-lg-15">
                             <div class="form-group">
@@ -39,35 +29,16 @@ include_once('nav.php');
                         </div>
                         <div class="col-lg-15">
                             <div class="form-group">
-                                <label class="text-muted text-strong text" for="">Password</label>
-                                <input type="password" name="password" class="form-control"
-                                       value="<?php echo $admin->getPassword() ?>" required>
+                                <label class="text-muted text-strong text" for="">Actual Password</label>
+                                <input type="password" name="actualPassword" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-lg-15">
                             <div class="form-group">
-                                <p class="text-muted text-strong text">Condition</p>
-                                <?php if ($admin->getActive() == "1") { ?>
-                                    <label for="active">Active</label>
-                                    <input type="radio" name="active" value="true" class="radioSize" required
-                                           id="active" checked="checked">
-                                    <label for="inactive">Inactive</label>
-                                    <input type="radio" name="active" value="false" class="radioSize" required
-                                           id="inactive">
-                                <?php } else {
-                                    ?>
-                                    <label for="active">Active</label>
-                                    <input type="radio" name="active" value="true" class="radioSize" required
-                                           id="active">
-                                    <label for="inactive">Inactive</label>
-                                    <input type="radio" name="active" value="false" class="radioSize" required
-                                           id="inactive" checked="checked">
-                                <?php } ?>
-
+                                <label class="text-muted text-strong text" for="">New Password</label>
+                                <input type="password" name="newPassword" class="form-control"
+                                        required>
                             </div>
-                        </div>
-                        <div>
-                            <input type="hidden" name="id" value="<?php echo $admin->getAdministratorId() ?>">
                         </div>
                         <div>
                             <button type="submit" name="button"

@@ -90,7 +90,7 @@ class UserDAO implements lUserDAO
     /**
      * Returns all values from a determinared rol id
      */
-    function getRol($rolId) //Bring every user from 1 rol (student OR admin)
+    function getRol($rolId) //Bring every user from 1 rol (student=2 OR admin=1)
     {
 
         try {
@@ -100,7 +100,7 @@ class UserDAO implements lUserDAO
 
             $this->connection = Connection::GetInstance();
 
-            $result = $this->connection->Execute($query, array());
+            $result = $this->connection->Execute($query, $parameters);
 
             $mapedArray = null;
             if (!empty($result)) {
@@ -121,7 +121,7 @@ class UserDAO implements lUserDAO
     public function getUser($userId)
     {
         try {
-            //ANTES TRAIAMOS LAS CAREERS DE LA BASE, AHORA HAY QUE TRAER DE LA API!!!
+
             $query = "SELECT * FROM " . $this->tableName . " u INNER JOIN " . $this->tableName2 . " r ON u.rolId=r.userRolId  WHERE  (u.userId= :userId)";
 
 
@@ -185,7 +185,7 @@ class UserDAO implements lUserDAO
 
             $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($query, $parameters);
+            return $count= $this->connection->ExecuteNonQuery($query, $parameters);
         } catch (\Exception $ex) {
             throw $ex;
         }

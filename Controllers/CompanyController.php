@@ -2,7 +2,7 @@
 namespace Controllers;
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 
-use DAO\AdministratorDAO;
+
 use DAO\AppointmentDAO;
 use DAO\CityDAO;
 use DAO\CompanyDAO;
@@ -226,7 +226,7 @@ class CompanyController
                 $this->showCreateCompanyView($message);
             }
 
-            var_dump($email);
+
             $validEmail = $this->validateEmail($email);
             if ($validEmail == false) {
                 $message = "Error, enter a valid email";

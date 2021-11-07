@@ -111,8 +111,8 @@ if (isset($_SESSION['loggedstudent']))
             if($loggedUser->getRol()->getUserRolId()==1)
             {
                 ?>
-                <a class="nav-link" href="<?php echo  FRONT_ROOT."Student/showStudentListView"?>">Students</a>
-                <a class="nav-link" href="<?php echo  FRONT_ROOT."Admin/showAdminListView"?>">Administrators</a>
+                <a class="nav-link" href="<?php echo  FRONT_ROOT."User/showStudentListView"?>">Students</a>
+                <a class="nav-link" href="<?php echo  FRONT_ROOT."User/showAdminListView"?>">Administrators</a>
 
                 <?php
             }

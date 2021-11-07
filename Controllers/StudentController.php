@@ -9,9 +9,7 @@ use DAO\StudentDAO;
 require_once(VIEWS_PATH . "checkLoggedUser.php");
 
 
-/**
- *
- */
+
 class StudentController
 {
     private $studentDAO;

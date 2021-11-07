@@ -8,7 +8,7 @@ include_once('nav.php');
 <div class="ml-auto col-auto">
     <!-- Start callto-action Area -->
     <section class="bg-light-alpha section-gap"  id="join">
-        <div class="container">
+        <div class="container fa-text-width">
             <div class="row d-flex justify-content-center">
                 <div class="menu-content col-lg-9">
                     <div class="title text-center">
@@ -20,14 +20,14 @@ include_once('nav.php');
     </section>
     <br><br><br>
 
-    <div class="scrollable container-fluid">
+    <div class="scrollable container-fluid offset-lg-3">
         <div class="form-group">
             <table>
                 <thead>
                 <tr>
                     <th>
-                        <form action="<?php echo FRONT_ROOT . "Admin/showAdminCreateView" ?>" method="POST">
-                            <button type="submit" name="" class="btn btn-dark m-lg-auto d-block"
+                        <form action="<?php echo FRONT_ROOT . "User/showAdminCreateView" ?>" method="POST">
+                            <button type="submit" name="" class="btn btn-dark m-lg-auto d-block "
                                     value=""> Create New Admin
                             </button>
                         </form>
@@ -37,17 +37,16 @@ include_once('nav.php');
             </table>
 
         </div>
-        <table class="table bg bg-light-alpha border" style="text-align:center; ">
+        <strong class="offset-lg-2"><?php if (isset($message)) {
+                echo $message;
+            } ?></strong>
+        <table class="table w-auto  bg bg-light-alpha border" style="text-align:center; ">
             <thead>
             <tr>
-                <th class="text-muted text-strong" style="width: 10%;">First Name</th>
-                <th class="text-muted text-strong" style="width: 10%;">Last Name</th>
-                <th class="text-muted text-strong" style="width: 10%;">EmployeeNumber</th>
-                <th class="text-muted text-strong" style="width: 10%;">Email</th>
-                <th class="text-muted text-strong" style="width: 10%;">Password</th>
-                <th class="text-muted text-strong" style="width: 5%;">Active</th>
-                <th class="text-muted text-strong" style="width: 10%;">Remove</th>
-                <th class="text-muted text-strong" style="width: 5%;">Edit</th>
+                <th class="text-muted text-strong" style="width: 16.66%;">ID</th>
+                <th class="text-muted text-strong" style="width: 25%;">Email</th>
+                <th class="text-muted text-strong" style="width: 16.66%;">Remove</th>
+                <th class="text-muted text-strong" style="width: 8.33%;">Edit</th>
             </tr>
             </thead>
             <tbody>
@@ -55,31 +54,21 @@ include_once('nav.php');
             <?php foreach ($allAdmins as $value) {
                 ?>
                 <tr>
-                    <td><?php echo $value->getFirstName() ?></td>
-                    <td><?php echo $value->getLastName() ?></td>
-                    <td><?php echo $value->getEmployeeNumber() ?></td>
+                    <td><?php echo $value->getUserId() ?></td>
                     <td><?php echo $value->getEmail() ?></td>
-                    <td><?php echo $value->getPassword() ?></td>
-                    <?php if ($value->getActive() == 1) {
-                        ?>
-                        <td>Active</td>
-                    <?php } else { ?>
-                        <td>Inactive</td>
-                    <?php } ?>
-
                     <td>
-                        <form action="<?php echo FRONT_ROOT . "Admin/Remove" ?>" method="POST">
+                        <form action="<?php echo FRONT_ROOT . "User/Remove" ?>" method="POST">
                             <button type="submit" name="id" class="btn btn-dark m-lg-auto d-block"
-                                    value="<?php echo $value->getAdministratorId() ?>"> Remove
+                                    value="<?php echo $value->getUserId() ?>"> Remove
                             </button>
                         </form>
                     </td>
 
 
                     <td>
-                        <form action="<?php echo FRONT_ROOT . "Admin/showAdminEditView" ?>" method="POST">
+                        <form action="<?php echo FRONT_ROOT . "User/showAdminEditView" ?>" method="POST">
                             <button type="submit" name="id" class="btn btn-dark m-lg-auto d-block"
-                                    value="<?php echo $value->getAdministratorId() ?>"> Edit
+                                    value="<?php echo $value->getUserId() ?>"> Edit
                             </button>
                         </form>
                     </td>
