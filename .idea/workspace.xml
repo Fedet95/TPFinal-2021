@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update" />
+    <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOfferViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOfferViewMore.php" afterDir="false" />
+    </list>
     <list id="8ccc725f-7d6d-41b9-a85b-19712bbd211e" name="Changes by Fede" comment="Changes by Fede" />
     <list id="90859d74-00b1-413e-984d-c2b993371ef8" name="Changes by paye_" comment="Changes by paye_" />
     <option name="SHOW_DIALOG" value="false" />
@@ -109,14 +113,8 @@
       <workItem from="1636296208006" duration="13809000" />
       <workItem from="1636315853310" duration="4882000" />
       <workItem from="1636320963331" duration="19000" />
-      <workItem from="1636414826856" duration="11666000" />
-    </task>
-    <task id="LOCAL-00049" summary="update">
-      <created>1635695416888</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1635695416888</updated>
+      <workItem from="1636414826856" duration="11687000" />
+      <workItem from="1636463619761" duration="1957000" />
     </task>
     <task id="LOCAL-00050" summary="update">
       <created>1635793875685</created>
@@ -454,7 +452,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636427482034</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="update">
+      <created>1636427500425</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1636427500425</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

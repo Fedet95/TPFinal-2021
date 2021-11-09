@@ -158,7 +158,7 @@ include_once('nav.php');
                             <ul>
                                 <li>Name: <span><?php echo $company->getName() ?> </span></li>
                                 <li>Industry: <span><?php echo $company->getIndustry()->getType() ?></span></li>
-                                <li>Web : <span> <?php echo $company->getCompanyLink() ?></span></li>
+                                <li>Web:<span><a href="#" target="_blank" rel="noopener noreferrer"><?php echo $company->getCompanyLink() ?></a></span></li>
                                 <li>Email: <span><?php echo $company->getEmail() ?></span></li>
                                 <li>Foundation Date: <span><?php echo $company->getFoundationDate() ?></span></li>
 

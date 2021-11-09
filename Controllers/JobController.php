@@ -855,7 +855,7 @@ class JobController
                 }
 
                 $allStudents= new User();
-                $userRol= $this->getRolId("students");
+                $userRol= $this->getRolId("student");
 
                 $userDAO= new UserDAO();
                 try {
@@ -865,6 +865,7 @@ class JobController
                     echo $ex->getMessage();
                 }
 
+                var_dump($allStudents);
                 $studentsEmails= array();
                 foreach ($allStudents as $student)
                 {
@@ -877,10 +878,11 @@ class JobController
                         }
                     }
                 }
+                $this->sendEmail("juanpayetta@gmail.com", $sub, $text); //me auto envio mensaje para probar que funcione
                 $finalMessage="Job offer was successfully removed and applicants were notified";
                 $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
 
-                $this->sendEmail("juanpayetta@gmail.com", $sub, $text); //me auto envio mensaje para probar que funcione
+
                 //$this->sendEmail("pablopayetta@gmail.com", $sub, $text);
                 //$this->sendEmail("ftacchini95@gmail.com", $sub, $text);
 
