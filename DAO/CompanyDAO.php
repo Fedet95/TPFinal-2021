@@ -31,6 +31,7 @@ class CompanyDAO implements lCompanyDAO
     {
         try {
 
+
             $query= "INSERT INTO ".$this->tableName."(name, foundationDate, cuit, aboutUs, companyLink, emailCompany, logo, active, industry, city, country, creationAdmin) VALUES (:name, :foundationDate, :cuit, :aboutUs, :companyLink, :emailCompany, :logo, :active, :industry, :city, :country, :creationAdmin)";
 
             $parameters['name']=$company->getName();
@@ -336,6 +337,7 @@ class CompanyDAO implements lCompanyDAO
             $rol->setUserRolId($userRolId);
             $admin->setRol($rol);
             $admin->setUserId($userId);
+            $company->setCreationAdmin($admin);
 
 
             $logoId=$value["idLogo"];

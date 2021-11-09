@@ -5,9 +5,20 @@ include_once('nav.php');
 ?>
 
 <div class="ml-auto col-auto">
-    <h3 class=" text-center text-muted py-3">Job Positions</h3>
-    <div class="scrollable container-fluid">
-        <table class="table bg bg-light-alpha border" style="text-align:center;">
+        <section class="bg-light-alpha section-gap"  id="join">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="menu-content col-lg-9">
+                        <div class="title text-center">
+                            <h1 class="mb-10 text-muted">Job Positions</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br><br><br>
+    <div class="scrollable container-fluid ">
+        <table class="table w-auto  bg bg-light-alpha border" style="text-align:center;">
             <thead>
             <tr>
                 <th class="text-muted text-strong" style="width: 25%;">Career</th>

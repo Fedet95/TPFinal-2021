@@ -6,7 +6,18 @@ include_once('nav.php');
 
 <?php if(!isset($remove)){?>
 <div class="ml-auto col-auto">
-    <h3 class=" text-center text-muted py-3"> <td><?php echo $company->getName()?></td></h3>
+    <section class="bg-light-alpha section-gap"  id="join">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content col-lg-9">
+                    <div class="title text-center">
+                        <h1 class="mb-10 text-muted"><?php echo $company->getName()?></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   <br><br>
     <div class="scrollable container-fluid">
         <table class="table bg bg-light-alpha border" style="text-align:center;">
             <thead>

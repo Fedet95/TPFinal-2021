@@ -69,7 +69,7 @@ include_once('nav.php');
                                 </td>
                             </tr>
                         <?php
-                            }}{?> <h6 class="py-3 text-muted text-center text-strong"><?php echo "There are no company loaded in the system"?></h6>  <?php }?>
+                            }}else{?> <h6 class="py-3 text-muted text-center text-strong"><?php echo "We couldn't find any company"?></h6>  <?php }?>
                         </tbody>
                     </table>
                 </div>

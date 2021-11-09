@@ -5,14 +5,21 @@ include_once('nav.php');
 ?>
 
 <div class="ml-auto col-auto">
-    <h3 class=" text-center text-muted py-3"><?php echo $careerToShow ?>'s Job Positions</h3>
-    <div class="scrollable container-fluid">
-        <form action="<?php echo FRONT_ROOT . "job/showJobPositionManagement" ?>" method="post"
-              enctype="multipart/form-data">
-            <button type="submit" name="button" class="btn btn-dark ml-auto d-block">Return</button>
-        </form>
+    <section class="bg-light-alpha section-gap"  id="join">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content col-lg-9">
+                    <div class="title text-center">
+                        <h1 class="mb-10 text-muted"><?php echo $careerToShow ?>'s Job Positions</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br><br>
+    <div class="scrollable container-fluid offset-lg-4">
         <br>
-        <table class="table bg bg-light-alpha border" style="text-align:center;">
+        <table class="table  w-auto bg bg-light-alpha border" style="text-align:center;">
             <thead>
             <tr>
                 <th class="text-muted text-strong" style="width: 25%;">ID</th>
@@ -43,6 +50,9 @@ include_once('nav.php');
 
 <!-- / main body -->
 <div class="clear"></div>
+<form action="<?php echo FRONT_ROOT . "job/showJobPositionManagement" ?>" method="post">
+    <button type="submit" name="button" class="btn btn-dark offset-lg-6">Return</button>
+</form>
 
 <br><br><br><br><br><br><br><br><br><br><br>
 <?php

@@ -211,6 +211,7 @@ class CompanyController
         }
 
 
+
         //EXTRA VALIDATIONS
             $validCuit = $this->validateCuit($cuit);
             if ($validCuit == false) {
@@ -268,7 +269,6 @@ class CompanyController
             $this->showCreateCompanyView($message);
         }
 
-        var_dump($email);
 
         //END EXTRA VALIDATION
             //ADD
@@ -282,7 +282,6 @@ class CompanyController
                 $company->setEmail($email);
                 $company->setActive($active);
 
-                var_dump($company);
 
                 try {
                     $this->companyDAO->add($company);
@@ -844,16 +843,25 @@ class CompanyController
             $allOffers= $offerDAO->getAll();
 
 
+            var_dump($allOffers);
             if($allOffers!=null)
             {
+                var_dump($id);
                 $activeOffers= array();
                 $inactiveOffers= array();
 
+                if(is_object($allOffers))
+                { $offer= $allOffers;
+                    $allOffers= array();
+                    array_push($allOffers, $offer);
+                }
+
                 foreach ($allOffers as $value)
                 {
+                    var_dump($value);
                     if($value->getCompany()->getCompanyId()==$id)
                     {
-                        if($value->getActive()=='true' && strtotime($value->getEndDate()) > strtotime(date("Y-m-d")))
+                        if($value->getActive()=='true' && strtotime($value->getEndDate()) >= strtotime(date("Y-m-d")))
                         {
                             array_push($activeOffers, $value);
                         }
@@ -862,16 +870,19 @@ class CompanyController
                             array_push($inactiveOffers, $value);
                         }
                     }
+
+                    var_dump($activeOffers);
+                    var_dump($inactiveOffers);
                 }
             }
             else
             {
+                var_dump($id);
                 $this->companyDAO->remove($id);
                 $this->showCompanyManagement(null, null, "Company removed successfully");
                 //company with no job offers
 
             }
-
             try {
 
                 if (!empty($activeOffers)) {
@@ -879,22 +890,34 @@ class CompanyController
                     $allAppointments = $appointmentDAO->getAll();
                     $searchedAppointments = array();
 
+                    if(is_object($allAppointments))
+                    { $appointment= $allAppointments;
+                        $allAppointments= array();
+                        array_push($allAppointments, $appointment);
+                    }
+
+                    var_dump($allAppointments);
+
                     $flag=0;
                     if ($allAppointments != null)
                     {
                         foreach ($allAppointments as $appointment)
                         {
+                            var_dump($appointment);
                             foreach ($activeOffers as $offers)
                             {
-                                if ($appointment->getJobOffer()->getJobOfferId() == $offers->getJobOfferId())
+                                var_dump($offers);
+                                if (strcmp($appointment->getJobOffer()->getJobOfferId(),$offers->getJobOfferId()) ==0)
                                 {
                                     $flag=1; //no se elimina, se inactiva la empresa
+                                    var_dump($flag);
                                 }
                             }
                         }
 
                         if($flag==0)
                         {
+                            var_dump($flag);
                             $this->companyDAO->remove($id);
                             $this->showCompanyManagement(null, null, "Company removed successfully");
                             //no tiene ninguna oferta de trabajo activa con postulaciones
@@ -904,6 +927,7 @@ class CompanyController
 
                             try {
                                 $company= $this->companyDAO->getCompany($id);
+                                var_dump($company);
                                 if($company->getActive()=='true')
                                 {
                                     $company->setActive("false");
@@ -914,10 +938,11 @@ class CompanyController
                                     $message= "Company current status is 'Inactive' due to existing active job offer with appointments and previous remove operation.";
                                 }
 
-                            }catch (\PDOException $ex)
+                            }catch (\Exception $ex)
                             {
                                 echo $ex->getMessage();
                             }
+
 
 
                             $this->companyDAO->update($company);
@@ -927,6 +952,7 @@ class CompanyController
                     }
                     else
                     {
+                        var_dump($id);
                         $this->companyDAO->remove($id);
                         $this->showCompanyManagement(null, null, "Company removed successfully");
                     }   //no hay postulaciones
@@ -935,6 +961,7 @@ class CompanyController
 
                     if(!empty($inactiveOffers))
                     {
+                        var_dump($id);
                         $this->companyDAO->remove($id);
                         $this->showCompanyManagement(null, null, "Company removed successfully");
                         //$message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo";
@@ -942,18 +969,19 @@ class CompanyController
                     else
                     {
 
+                        var_dump($id);
                         $this->companyDAO->remove($id);
                         $this->showCompanyManagement(null, null, "Company removed successfully");
                         //$message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo activa (tiene inactivas)";
                     }
 
                 }
-            }catch (\PDOException $ex)
+            }catch (\Exception $ex)
             {
                 echo $ex->getMessage();
             }
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }
@@ -979,7 +1007,7 @@ class CompanyController
         try {
             $allCountrys = $this->countryDAO->getAll();
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }
@@ -987,7 +1015,7 @@ class CompanyController
         try {
             $company = $this->companyDAO->getCompany($id);
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             echo $ex->getMessage();
         }
@@ -1052,7 +1080,7 @@ class CompanyController
                             $company->setLogo($searchedCompanyLogo->getLogo());
                         }
                     }
-                    catch (\PDOException $ex)
+                    catch (\Exception $ex)
                     {
                         echo $ex->getMessage();
                     }
@@ -1157,7 +1185,7 @@ class CompanyController
                 $count=$this->companyDAO->update($company);
                 $this->showCompanyManagement();
             }
-            catch (\PDOException $ex)
+            catch (\Exception $ex)
             {
                 echo $ex->getMessage();
             }

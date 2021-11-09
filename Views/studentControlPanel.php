@@ -7,7 +7,9 @@ include_once('nav.php');
 <main class="py-3">
     <section id="listado" class="mb-5">
         <div class="container">
-            <h2 class="mb-3 text-center text-muted">Student</h2>
+
+            <h1 class="mb-3 text-center text-muted">Welcome!</h1>
+            <br>
 
             <div class="bg-light-alpha p-2 text-center">
                 <div class="row align-items-center justify-content-center">
@@ -54,7 +56,6 @@ include_once('nav.php');
             </div>
     </section>
 
-    <iframe  class="offset-lg-3" width="900" height="500" src="https://www.youtube.com/embed/pJo_fojED70" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
     <section id="why-us" class="why-us section-bg justify-content-center align-items-center">
         <div class="container-fluid" data-aos="fade-up">
@@ -112,6 +113,25 @@ include_once('nav.php');
 
         </div>
     </section>
+
+
+    <!-- Start callto-action Area -->
+    <section class="callto-action-area section-gap"  id="join">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="menu-content col-lg-9">
+                    <div class="title text-center">
+                        <h1 class="mb-10">Our selection of offers is updated every day!</h1>
+                        <p>We offer you a wide variety of job offers from the best companies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End calto-action Area -->
+
+    <br><br>
+    <iframe  class="offset-lg-3" width="900" height="500" src="https://www.youtube.com/embed/pJo_fojED70" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 </main>
 <br>

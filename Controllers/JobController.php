@@ -258,8 +258,6 @@ class JobController
 
 
 
-//--------------------------------------------------------------------------------------------
-
 
     /**
      * Show the job position management listing view
@@ -269,29 +267,14 @@ class JobController
     {
         require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
-        $allPositions = $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
-        $this->jobPositionDAO->updateJobPositionFile(null, $allPositions);
-
-
-        try {
-            $allPositions = $this->jobPositionDAO->getAll();
-        }
-        catch (\Exception $ex)
+        if($this->allPositions==null)
         {
-            echo $ex->getMessage();
+            $allPositions= $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
         }
-
-        require_once(VIEWS_PATH . "jobPositionManagment.php");
-    }
-
-
-    /**
-     * Show the job position management creation view
-     * @param string $message
-     */
-    public function showCreateJobPositionView($message = "")
-    {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        else
+        {
+            $allPositions= $this->allPositions;
+        }
 
         if($this->allCareers==null)
         {
@@ -302,10 +285,21 @@ class JobController
             $allCareers= $this->allCareers;
         }
 
+        foreach ($allCareers as $career)
+        {
+            foreach ($allPositions as $position)
+            {
+                if($career->getCareerId()==$position->getCareer()->getCareerId())
+                {
+                    $position->setCareer($career);
+                }
+            }
+        }
 
-        require_once(VIEWS_PATH . "createJobPosition.php");
-
+        require_once(VIEWS_PATH . "jobPositionManagment.php");
     }
+
+
 
     /**
      * Show the extended job position management listing view
@@ -317,21 +311,14 @@ class JobController
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 
         $careerToShow = $careerDescription;
-        $allPositions = $this->jobPositionDAO->getAll();
-
-        require_once(VIEWS_PATH . "jobPositionViewMore.php");
-
-    }
-
-
-    /**
-     * Adds a new job position to the system
-     * @param $careerId
-     * @param $descriptionJob
-     */
-    public function addJobPosition($careerId, $descriptionJob)
-    {
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
+        if($this->allPositions==null)
+        {
+            $allPositions= $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
+        }
+        else
+        {
+            $allPositions= $this->allPositions;
+        }
 
         if($this->allCareers==null)
         {
@@ -342,56 +329,20 @@ class JobController
             $allCareers= $this->allCareers;
         }
 
-        $flag = 0;
-
-        if ($careerId == null) {
-            $this->showCreateJobPositionView("Please select a Career Reference");
-
-        } else {
-            if ($descriptionJob == null) {
-                $this->showCreateJobPositionView("Please write a Description Job");
-            } else {
-                foreach ($allCareers as $value) {
-                    if ($value->getCareerId() == $careerId) {
-                        if (strcasecmp($value->getDescription(), $descriptionJob) == 0) {
-                            $flag = 1;
-                        }
-
-                    }
-                    if ($flag == 1) {
-                        break;
-                    }
+        foreach ($allCareers as $career)
+        {
+            foreach ($allPositions as $position)
+            {
+                if($career->getCareerId()==$position->getCareer()->getCareerId())
+                {
+                    $position->setCareer($career);
                 }
             }
-
         }
-        if ($flag == 1) {
-            $this->showCreateJobPositionView("This Job Position already exist");
 
-        } else {
-            $newJobPosition = new JobPosition();
-            $newJobPosition->setJobPositionId(($this->jobPositionDAO->getMaxId()));
-            $newJobPosition->setDescription($descriptionJob);
-
-            $careerAux = new Career(); ///Pasar objeto tipo carrera o solo id?
-            $careerAux->setCareerId($careerId);
-            $newJobPosition->setCareer($careerAux);
-
-            try {
-                $this->jobPositionDAO->add($newJobPosition);
-            }
-            catch (\Exception $ex)
-            {
-               echo  $ex->getMessage();
-            }
-
-            $this->showJobPositionManagement("Job Position succesfully created");
-        }
+        require_once(VIEWS_PATH . "jobPositionViewMore.php");
 
     }
-
-
-    //--------------------------------------------------------------------
 
 
     /**

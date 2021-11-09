@@ -6,7 +6,20 @@ include_once('nav.php');
 ?>
 
     <div class="ml-auto col-auto">
-        <h3 class="text-center text-muted py-4"><?php echo $company->getName() ?></h3>
+    <div class="ml-auto col-auto">
+        <section class="bg-light-alpha section-gap"  id="join">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="menu-content col-lg-9">
+                        <div class="title text-center">
+                            <h1 class="mb-10 text-muted"><?php echo $company->getName()?></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br><br><br>
+
         <div class="scrollable container-fluid">
             <table class="table bg-light-alpha " style="text-align:center; ">
                 <thead>
@@ -25,7 +38,7 @@ include_once('nav.php');
                 <tr>
                     <td><?php echo $company->getFoundationDate() ?></td>
                     <td><?php echo $company->getAboutUs() ?></td>
-                    <td><?php echo $company->getCompanyLink() ?></td>
+                    <td><a href="#" target="_blank" rel="noopener noreferrer"><?php echo $company->getCompanyLink() ?></a></td>
                     <td><?php echo $company->getEmail() ?></td>
                     <td><?php echo $company->getCountry()->getName() ?></td>
                     <td><?php echo $company->getCity()->getName() ?></td>

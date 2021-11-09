@@ -88,7 +88,8 @@ include_once('nav.php');;
                                         Company Email: <?php echo $actualAppointment->getJobOffer()->getCompany()->getEmail() ?>  </p>
 
                                     <p class="address"><span class="lnr lnr-database"></span>
-                                        Company web: <?php echo $actualAppointment->getJobOffer()->getCompany()->getCompanyLink() ?>  </p>
+
+                                        Company web:  <a href="#" target="_blank" rel="noopener noreferrer"><?php echo $actualAppointment->getJobOffer()->getCompany()->getCompanyLink() ?></a> </p>
 
 
                                 </div>
