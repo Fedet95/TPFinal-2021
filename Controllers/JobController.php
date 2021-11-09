@@ -209,25 +209,6 @@ class JobController
             array_push($allOffers, $offer);
         }
 
-        /*
-        $allCareers = $this->careersOrigin->start($this->careersOrigin);
-        //var_dump($allCareers);
-
-        foreach ($allOffers as $value)
-        {
-            $positions=$value->getJobPosition();
-            $careerId=$positions[0]->getCareer()->getCareerId();
-
-            foreach ($allCareers as $career)
-            {
-                if($career->getCareerId()==$careerId)
-                {
-                    $value->setCareer($career);
-                    //var_dump($career);
-                }
-            }
-        }
-        */
 
         var_dump($allOffers);
         require_once(VIEWS_PATH . "jobOffersManagement.php");

@@ -58,6 +58,7 @@ include_once('nav.php');
 
             <?php
 
+            if(isset($searchedStudent) && $searchedStudent!=null){
             if(is_object($searchedStudent))
             { $student= $searchedStudent;
                 $searchedStudent= array();
@@ -82,7 +83,7 @@ include_once('nav.php');
                     </td>
                 </tr>
                 <?php
-            }
+            }}else{?> <h6 class="py-3 text-muted text-center text-strong"><?php echo "We couldn't find any student"?></h6>  <?php }?>
             ?>
             </tbody>
         </table>

@@ -174,7 +174,11 @@ include_once('nav.php');
             </div>
         </section>
 
-
+        <?php   if(is_object($allOffers))
+        { $offer= $allOffers;
+            $allOffers= array();
+            array_push($allOffers, $offer);
+        }?>
 
         <section class="post-area section-gap">
             <div class="container">
@@ -194,19 +198,55 @@ include_once('nav.php');
                                                     <select name="valueToSearch"  class="form-control"  required="required">
                                                         <option value="" selected disabled class="text-center">Select Position</option>
                                                         <?php
-                                                        foreach ($allPositions as $value)
+                                                        $positionIds= array();
+                                                        foreach ($allOffers as $value)
                                                         {
-                                                            foreach ($allCareers as $car) {
+                                                            $flag=0;
+                                                            if($loggedUser->getRol()->getUserRolId()==1)
+                                                            {
 
-                                                                if($value->getCareer()->getCareerId()==$car->getCareerId())
-                                                                {
-                                                                    if($car->getActive()=='true')
+                                                              foreach ($value->getJobPosition() as $pos){
+
+                                                                  foreach($positionIds as $ids)
+                                                                  {
+                                                                      if($ids==$pos->getJobPositionId())
+                                                                      {
+                                                                          $flag=1;
+                                                                      }
+                                                                  }
+
+                                                                  if($flag==0)
+                                                                  {
+                                                                      array_push($positionIds, $pos->getJobPositionId());
+                                                                      ?>
+                                                                      <option value="<?php echo $pos->getJobPositionId()?>"><?php echo $pos->getDescription()?></option>
+                                                                      <?php
+                                                                  }
+
+                                                        }}else if($loggedUser->getRol()->getUserRolId()==2)
+                                                        {
+
+                                                                if($value->getActive()=='true'){
+
+                                                                foreach ($value->getJobPosition() as $pos){
+
+                                                                    foreach($positionIds as $ids)
                                                                     {
+                                                                        if($ids==$pos->getJobPositionId())
+                                                                        {
+                                                                            $flag=1;
+                                                                        }
+                                                                    }
+
+                                                                    if($flag==0)
+                                                                    {
+                                                                        array_push($positionIds, $pos->getJobPositionId());
                                                                         ?>
-                                                                        <option value="<?php echo $value->getJobPositionId()?>"><?php echo $value->getDescription()?></option>
+                                                                        <option value="<?php echo $pos->getJobPositionId()?>"><?php echo $pos->getDescription()?></option>
                                                                         <?php
-                                                                    }}}
-                                                        }
+                                                                    }
+                                                            }
+                                                        }}}
                                                         ?>
                                                     </select>
                                                 </div>
@@ -235,14 +275,14 @@ include_once('nav.php');
                                                 <select name="valueToSearch"  class="form-control"  required="required">
                                                     <option value="" selected disabled class="text-center">Select Career</option>
                                                     <?php
-                            foreach ($allCareers as $car) {
-                                if($car->getActive()=='true')
-                                {
-                                    ?>
+                                                        foreach ($allCareers as $car) {
+                                                         if($car->getActive()=='true')
+                                                          {
+                                                              ?>
                                                                     <option value="<?php echo $car->getDescription()?>"><?php echo $car->getDescription()?></option>
                                                                     <?php
-                                }}
-                            ?>
+                                                                   }}
+                                                           ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -312,7 +352,9 @@ include_once('nav.php');
                      }?>
 
 
+
                         <?php
+                        //var_dump($allOffers);
                         foreach ($allOffers as $value) {
 
                             foreach ($allCompanies as $company) {
