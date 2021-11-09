@@ -88,6 +88,7 @@ class HomeController
         } else {
             try {
                 $searchedUser = $this->userDAO->searchByEmail($email); //retorna un usuario por email, verifico su pass y verifico su rol
+                var_dump($searchedUser);
             } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }
@@ -114,6 +115,7 @@ class HomeController
                     {
                         $searchedStudent = $this->searchStudentEmail($email); //search api student by email
 
+                        //var_dump($searchedStudent); -->ACA ME MUESTRA BIEN EL USUARIO QUE TRAE DE LA API Y SOLO COMPARA LOS EMAIL
                         if ($searchedStudent != null) {
                             if ($searchedStudent->getActive()) {
 

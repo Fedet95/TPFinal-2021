@@ -297,9 +297,9 @@ class UserDAO implements lUserDAO
                 $this->getOriginStudents();
 
                 $searchedStudent = null;
-                foreach ($this->students as $values) //busco el estudiante en la api mediante el ID que me devuelve la base
+                foreach ($this->students as $values) //busco el estudiante en la api mediante el EMAIL que me devuelve la base
                 {
-                    if ($values->getUserId() == $student->getUserId()) {
+                    if ($values->getEmail() == $student->getEmail()) {
                         $searchedStudent = $values;
                     }
                 }

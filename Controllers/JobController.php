@@ -599,7 +599,7 @@ class JobController
         }
         else
         {
-            $endDateValidation = $this->validateEndDate($endDate);
+            $endDateValidation = $this->validateEndDate($endDate, $publishDate);
             if ($endDateValidation == null) {
                 $message = "Error, enter a valid Job Offer End Date";
 
@@ -820,8 +820,15 @@ class JobController
         {
             if($accept=="true")
             {
-                $searchedOffer= $this->jobOfferDAO->getJobOffer($id);
-                $this->showRemoveJobOfferView($searchedOffer, null, null, null, "Empty");
+                try {
+                    $searchedOffer= $this->jobOfferDAO->getJobOffer($id);
+                    $this->showRemoveJobOfferView($searchedOffer, null, null, null, "Empty");
+                }
+                catch (\Exception $ex)
+                {
+                    echo $ex->getMessage();
+                }
+
             }
             else
             {
@@ -832,8 +839,8 @@ class JobController
         else if($text!=null)
         {
 
-            $searchedOffer= $this->jobOfferDAO->getJobOffer($id);
-            $appointments= $searchedOffer->getAppointment();
+            $searchedOffer= $this->jobOfferDAO->getJobOffer($id);//esta searchedOffer no tiene los appointment
+            $appointments=$this->getAppointmentArray($id);
 
             try {
                 $count=$this->jobOfferDAO->remove($id);
@@ -851,7 +858,7 @@ class JobController
                 $studentsId= array();
                 foreach ($appointments as $value)
                 {
-                    array_push($studentsId,$value->getUser()->getUserId());
+                    array_push($studentsId,$value->getStudent()->getUserId());
                 }
 
                 $allStudents= new User();
@@ -865,7 +872,7 @@ class JobController
                     echo $ex->getMessage();
                 }
 
-                var_dump($allStudents);
+
                 $studentsEmails= array();
                 foreach ($allStudents as $student)
                 {
@@ -875,10 +882,11 @@ class JobController
                         {
                             array_push($studentsEmails, $student->getEmail());
                             $this->sendEmail($student->getEmail(), $sub, $text);
+                            $this->sendEmail("juanpayetta@gmail.com", $sub, $text); //me auto envio mensaje para probar que funcione
                         }
                     }
                 }
-                $this->sendEmail("juanpayetta@gmail.com", $sub, $text); //me auto envio mensaje para probar que funcione
+
                 $finalMessage="Job offer was successfully removed and applicants were notified";
                 $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
 
