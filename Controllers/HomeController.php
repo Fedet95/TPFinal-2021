@@ -53,7 +53,8 @@ class HomeController
      */
     public function showStudentControlPanelView($message = "")
     {
-        require_once(VIEWS_PATH."checkLoggedStudent.php");
+        //require_once(VIEWS_PATH."checkLoggedStudent.php");
+        SessionHelper::checkStudentSession();
         require_once(VIEWS_PATH."studentControlPanel.php"); //panel de control
     }
 
@@ -63,14 +64,16 @@ class HomeController
      */
     public function showAdministratorControlPanelView($message = "")
     {
-        require_once(VIEWS_PATH."checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH."checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
         require_once(VIEWS_PATH."administratorControlPanel.php"); //panel de control
     }
 
 
     public function showContactUsView($message= "")
     {
-        require_once(VIEWS_PATH."checkLoggedStudent.php");
+        //require_once(VIEWS_PATH."checkLoggedStudent.php");
+        SessionHelper::checkStudentSession();
         require_once (VIEWS_PATH."contactUs.php");
     }
 

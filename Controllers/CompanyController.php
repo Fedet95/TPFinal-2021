@@ -51,7 +51,8 @@ class CompanyController
      */
     public function showCreateCompanyView($message = "")
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
         try {
             $allIndustrys = $this->industryDAO->getAll();
@@ -78,7 +79,8 @@ class CompanyController
      */
     public function showCompanyManagement($valueToSearch = null, $back =null, $message = "")
     {
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
+        //require_once(VIEWS_PATH . "checkLoggedUser.php");
+        SessionHelper::checkUserSession();
 
         try {
             $allCompanys = $this->companyDAO->getAll();
@@ -113,7 +115,8 @@ class CompanyController
      */
     public function showCompanyViewMore($id)
     {
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
+        //require_once(VIEWS_PATH . "checkLoggedUser.php");
+        SessionHelper::checkUserSession();
 
         try {
             $company = $this->companyDAO->getCompany($id);
@@ -140,7 +143,8 @@ class CompanyController
      */
     public function showEditCompany($company, $allIndustrys, $allCountrys, $message = "")
     {
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
+        //require_once(VIEWS_PATH . "checkLoggedUser.php");
+        SessionHelper::checkAdminSession();
         require_once(VIEWS_PATH . "editCompany.php");
     }
 
@@ -150,7 +154,8 @@ class CompanyController
      */
     public function addCompany($name, $cuit, $companyLink, $email, $country, $city, $industry, $active, $foundationDate, $aboutUs, $image)
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
             $company = new Company();
             $flag = 0;
@@ -838,7 +843,8 @@ class CompanyController
      */
     public function Remove($id)
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
         try {
             $offerDAO= new JobOfferDAO();
@@ -995,7 +1001,8 @@ class CompanyController
      */
     public function Edit($id, $message=null)
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
         try {
 
@@ -1032,7 +1039,8 @@ class CompanyController
      */
     public function UpdateCompany($name, $cuit, $companyLink, $email, $country, $city, $industry, $active, $foundationDate, $aboutUs, $id, $image)
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
 
         $company = new Company();

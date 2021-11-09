@@ -9,7 +9,7 @@ use Models\Industry;
 use Models\Logo;
 use Models\User;
 use Models\UserRol;
-
+use Mudels\SessionHelper;
 
 class CompanyDAO implements lCompanyDAO
 {

@@ -60,7 +60,8 @@ class JobController
      */
     public function showCreateJobOfferView($message = "", $careerId = null, $values = null)
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
         try {
             $allCompanies = $this->companyDAO->getAll();
@@ -143,7 +144,8 @@ class JobController
      */
     public function showJobOfferManagementView($valueToSearch=null, $message = "",  $back=null)
     {
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
+        //require_once(VIEWS_PATH . "checkLoggedUser.php");
+        SessionHelper::checkUserSession();
 
         $edit=null;
         $remove=null;
@@ -234,7 +236,8 @@ class JobController
     public function showEditJobOfferView($allCompanies, $allCareers, $jobOfferEdit, $allPositions = null, $message = "", $careerId = null, $values = null)
     {
         $edit = 1;
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
     }
@@ -246,7 +249,8 @@ class JobController
      */
     public function showRemoveJobOfferView($jobOffer, $cant=null, $company=null, $text=null, $finalMessage=null)
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
         $edit=null;
         $remove=1;
         require_once(VIEWS_PATH . "jobOffersManagement.php");
@@ -261,7 +265,8 @@ class JobController
      */
     public function showJobPositionManagement($message = "")
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
         if($this->allPositions==null)
         {
@@ -304,7 +309,8 @@ class JobController
      */
     public function showJobPositionViewMore($careerDescription, $message = "")
     {
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
+        //require_once(VIEWS_PATH . "checkLoggedUser.php");
+        SessionHelper::checkUserSession();
 
         $careerToShow = $careerDescription;
         if($this->allPositions==null)
@@ -533,7 +539,8 @@ class JobController
      */
     public function editJobOffer($jobOfferId, $careerId = null, $message = "", $values = null)
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
 
         try {
@@ -584,7 +591,8 @@ class JobController
      */
     public function editJobOfferFirstPart($company, $career, $publishDate, $endDate, $jobOfferId)
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
         $publishDateValidation=$this->validatePublishDate($publishDate);
         if ($publishDateValidation == null) {
@@ -756,7 +764,8 @@ class JobController
      */
     public function removeJobOffer($id, $accept=null, $sub = null, $text=null)
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
         if($accept==null)
         {
             try

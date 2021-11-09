@@ -2,8 +2,10 @@
 
 use Models\Administrator;
 use Models\User;
+use Models\SessionHelper;
 
-require_once(VIEWS_PATH . "checkLoggedStudent.php");
+SessionHelper::checkStudentSession();
+//require_once(VIEWS_PATH . "checkLoggedStudent.php");
 include_once('header.php');
 include_once('nav.php');
 ?>

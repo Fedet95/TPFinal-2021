@@ -1,4 +1,5 @@
 <?php
+
 namespace Controllers;
 
 use Models\SessionHelper;
@@ -10,8 +11,8 @@ use DAO\UserDAO;
 use DAO\UserRolDAO;
 use Models\User;
 
-require_once(VIEWS_PATH . "checkLoggedUser.php");
 
+//require_once(VIEWS_PATH . "checkLoggedUser.php");
 
 
 class UserController
@@ -35,21 +36,21 @@ class UserController
      */
     public function showAdminListView($message = "")
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
-        $userRol= $this->getRolId("administrator");
+        $userRol = $this->getRolId("administrator");
 
-        if($userRol!=null)
-        {
+        if ($userRol != null) {
             try {
                 $allAdmins = $this->userDAO->getRol($userRol->getUserRolId());
             } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }
 
-            if(is_object($allAdmins))
-            { $admin= $allAdmins;
-                $allAdmins= array();
+            if (is_object($allAdmins)) {
+                $admin = $allAdmins;
+                $allAdmins = array();
                 array_push($allAdmins, $admin);
             }
 
@@ -64,7 +65,8 @@ class UserController
      */
     public function showAdminCreateView($message = "")
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
         require_once(VIEWS_PATH . "createAdmin.php");
 
@@ -77,19 +79,17 @@ class UserController
      */
     public function showAdminEditView($id, $message = "")
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
-        try
-        {
+        try {
             $admin = $this->userDAO->getUser($id);
             require_once(VIEWS_PATH . "editAdmin.php");
 
-        }catch (\Exception $ex)
-        {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }
-
 
 
     /**
@@ -98,7 +98,8 @@ class UserController
      */
     public function showStudentControlPanelView($message = "")
     {
-        require_once(VIEWS_PATH . "checkLoggedStudent.php");
+        //require_once(VIEWS_PATH . "checkLoggedStudent.php");
+        SessionHelper::checkStudentSession();
         require_once(VIEWS_PATH . "studentControlPanel.php");
     }
 
@@ -112,22 +113,22 @@ class UserController
     public function showStudentListView($valueToSearch = null, $back = null, $message = "")
     {
 
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
-        $userRol= $this->getRolId("student");
+        $userRol = $this->getRolId("student");
 
 
-        if($userRol!=null)
-        {
+        if ($userRol != null) {
             try {
                 $allStudents = $this->userDAO->getRol($userRol->getUserRolId());
             } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }
 
-            if(is_object($allStudents))
-            { $student= $allStudents;
-                $allStudents= array();
+            if (is_object($allStudents)) {
+                $student = $allStudents;
+                $allStudents = array();
                 array_push($allStudents, $student);
             }
 
@@ -143,27 +144,24 @@ class UserController
      */
     public function showMoreStudentView($email) //antes era con id, pero como el id de la api y de la base son diferentes, puse email que es =
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
-
-        if($this->allStudents==null)
-        {
+        if ($this->allStudents == null) {
             $allStudents = $this->studentsOrigin->start($this->studentsOrigin);
 
-        }
-        else
-        {
-            $allStudents= $this->allStudents;
+        } else {
+            $allStudents = $this->allStudents;
         }
 
 
-        $studentMore=null;
+        $studentMore = null;
 
-            foreach ($allStudents as $value) {
-                if ($value->getEmail() == $email) {
-                    $studentMore = $value;
-                }
+        foreach ($allStudents as $value) {
+            if ($value->getEmail() == $email) {
+                $studentMore = $value;
             }
+        }
 
 
         require_once(VIEWS_PATH . "studentListViewMore.php");
@@ -183,8 +181,8 @@ class UserController
         if ($valueToSearch != null) {
 
             foreach ($allStudents as $value) {
-                $dniValueReplace= str_replace("-", "", $value->getDni());
-                if ($dniValueReplace== $valueToSearch) {
+                $dniValueReplace = str_replace("-", "", $value->getDni());
+                if ($dniValueReplace == $valueToSearch) {
                     array_push($searchedStudent, $value);
                 }
             }
@@ -240,74 +238,71 @@ class UserController
      */
     public function addAdmin($email, $password)
     {
+        SessionHelper::checkAdminSession();
 
-       $userRol= $this->getRolId("administrator");
+        $userRol = $this->getRolId("administrator");
 
-       if($userRol!=null)
-       {
-           try {
-               $allAdmins = $this->userDAO->getRol($userRol->getUserRolId());
-           } catch (\Exception $ex) {
-               echo $ex->getMessage();
-           }
+        if ($userRol != null) {
+            try {
+                $allAdmins = $this->userDAO->getRol($userRol->getUserRolId());
+            } catch (\Exception $ex) {
+                echo $ex->getMessage();
+            }
 
-           if(is_object($allAdmins))
-           { $admin= $allAdmins;
-               $allAdmins= array();
-               array_push($allAdmins, $admin);
-           }
-
-
-           $flag = 0;
-           if ($allAdmins != null) {
-               foreach ($allAdmins as $value) {
-                 if (strcasecmp($value->getEmail(), $email) == 0) {
-                       $flag = 1;
-                       $message = "The Email " . $email . " is already registered";
-                       break;
-                   }
-               }
-               if ($flag == 1) {
-                   $this->showAdminCreateView($message);
-               } else {
-                   $adminAux = new User();
-                   $adminAux->setEmail($email);
-                   $adminAux->setPassword($password);
-                   $adminAux->setRol($userRol);
+            if (is_object($allAdmins)) {
+                $admin = $allAdmins;
+                $allAdmins = array();
+                array_push($allAdmins, $admin);
+            }
 
 
-                   try {
+            $flag = 0;
+            if ($allAdmins != null) {
+                foreach ($allAdmins as $value) {
+                    if (strcasecmp($value->getEmail(), $email) == 0) {
+                        $flag = 1;
+                        $message = "The Email " . $email . " is already registered";
+                        break;
+                    }
+                }
+                if ($flag == 1) {
+                    $this->showAdminCreateView($message);
+                } else {
+                    $adminAux = new User();
+                    $adminAux->setEmail($email);
+                    $adminAux->setPassword($password);
+                    $adminAux->setRol($userRol);
 
-                       $this->userDAO->add($adminAux);
-                       $this->showAdminListView("Administrator succesfullly created");
 
-                   } catch (\Exception $ex) {
+                    try {
 
-                       echo $ex->getMessage();
-                   }
-               }
-           }
-           else
-           {
-               $adminAux = new User();
-               $adminAux->setEmail($email);
-               $adminAux->setPassword($password);
-               $adminAux->setRol($userRol);
+                        $this->userDAO->add($adminAux);
+                        $this->showAdminListView("Administrator succesfullly created");
 
-               try {
+                    } catch (\Exception $ex) {
 
-                   $this->userDAO->add($adminAux);
-                   $this->showAdminListView("Administrator succesfullly created");
+                        echo $ex->getMessage();
+                    }
+                }
+            } else {
+                $adminAux = new User();
+                $adminAux->setEmail($email);
+                $adminAux->setPassword($password);
+                $adminAux->setRol($userRol);
 
-               } catch (\Exception $ex) {
+                try {
 
-                   echo $ex->getMessage();
-               }
-           }
-       }
+                    $this->userDAO->add($adminAux);
+                    $this->showAdminListView("Administrator succesfullly created");
+
+                } catch (\Exception $ex) {
+
+                    echo $ex->getMessage();
+                }
+            }
+        }
 
     }
-
 
 
     /**
@@ -321,43 +316,37 @@ class UserController
 
         $userRol = $this->getRolId("administrator");
 
-            if ($userRol != null) {
+        if ($userRol != null) {
 
-                $flag=0;
-                try {
-                    $allAdmins = $this->userDAO->getRol($userRol->getUserRolId());
-                } catch (\Exception $ex) {
-                    echo $ex->getMessage();
-                }
-
-                if (is_object($allAdmins)) { //only one admin in the system
-                    $flag=1;
-                }
+            $flag = 0;
+            try {
+                $allAdmins = $this->userDAO->getRol($userRol->getUserRolId());
+            } catch (\Exception $ex) {
+                echo $ex->getMessage();
             }
 
-            if($flag==0)
-            {
-                try {
-                    $count= $this->userDAO->remove($id);
-
-                    if($count>0)
-                    {
-                        $message= "Administrator successfully removed";
-                    }
-                    else
-                    {
-                        $message= "Error, try again";
-                    }
-                    $this->showAdminListView($message);
-                } catch (\Exception $ex) {
-                    echo $ex->getMessage();
-                }
+            if (is_object($allAdmins)) { //only one admin in the system
+                $flag = 1;
             }
-            else
-            {
-                $message= "The system currently only has one administrator and cannot be deleted";
+        }
+
+        if ($flag == 0) {
+            try {
+                $count = $this->userDAO->remove($id);
+
+                if ($count > 0) {
+                    $message = "Administrator successfully removed";
+                } else {
+                    $message = "Error, try again";
+                }
                 $this->showAdminListView($message);
+            } catch (\Exception $ex) {
+                echo $ex->getMessage();
             }
+        } else {
+            $message = "The system currently only has one administrator and cannot be deleted";
+            $this->showAdminListView($message);
+        }
     }
 
     /**
@@ -378,9 +367,9 @@ class UserController
         }
 
 
-        if(is_object($allAdmins))
-        { $admin= $allAdmins;
-            $allAdmins= array();
+        if (is_object($allAdmins)) {
+            $admin = $allAdmins;
+            $allAdmins = array();
             array_push($allAdmins, $admin);
         }
 
@@ -392,12 +381,9 @@ class UserController
             $flag = 1;
         }
 
-        if($flag==0)
-        {
-            foreach ($allAdmins as $value)
-            {
-                if($value->getUserId() != $id)
-                {
+        if ($flag == 0) {
+            foreach ($allAdmins as $value) {
+                if ($value->getUserId() != $id) {
                     if (strcasecmp($value->getEmail(), $email) == 0) {
                         $flag = 1;
                         $message = "The email " . $email . " is already registered";
@@ -407,24 +393,20 @@ class UserController
             }
         }
 
-       if($flag==0)
-       {
-           foreach ($allAdmins as $value)
-           {
-               if($value->getUserId()==$id)
-               {
-                   if($value->getPassword()!=$actualPassword)
-                   {
-                       $flag=1;
-                       $message= "Error, incorrect password";
-                   }
-               }
-           }
-       }
+        if ($flag == 0) {
+            foreach ($allAdmins as $value) {
+                if ($value->getUserId() == $id) {
+                    if ($value->getPassword() != $actualPassword) {
+                        $flag = 1;
+                        $message = "Error, incorrect password";
+                    }
+                }
+            }
+        }
 
 
         if ($flag == 1) {
-            $this->showAdminEditView($id,$message);
+            $this->showAdminEditView($id, $message);
         } else {
 
             $adminAux = new User();
@@ -436,9 +418,9 @@ class UserController
 
             try {
 
-                $cant= $this->userDAO->update($adminAux);
+                $cant = $this->userDAO->update($adminAux);
 
-                  $this->showAdminListView("Administrator succesfullly edited");
+                $this->showAdminListView("Administrator succesfullly edited");
 
             } catch (\Exception $ex) {
 
@@ -459,9 +441,6 @@ class UserController
         }
         return $validate;
     }
-
-
-
 
 
 }

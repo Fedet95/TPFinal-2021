@@ -1,5 +1,7 @@
 <?php
-require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+use Models\SessionHelper;
+SessionHelper::checkAdminSession();
+//require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 include_once('header.php');
 include_once('nav.php');
 ?>

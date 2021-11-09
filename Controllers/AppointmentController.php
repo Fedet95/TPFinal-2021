@@ -81,7 +81,8 @@ class AppointmentController
     public function showAppointmentList($valueToSearch = null, $back = null, $message = "")
     {
         //valueToSearch = $jobOffer ID
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
+        //require_once(VIEWS_PATH . "checkLoggedUser.php");
+        SessionHelper::checkUserSession();
 
         if ($this->loggedUser->getRol()->getUserRolId()==2) {
             try {
@@ -130,6 +131,7 @@ class AppointmentController
             }
 
             require_once(VIEWS_PATH . "appointmentsList.php");
+
 
         } else if ($this->loggedUser->getRol()->getUserRolId()==1) {
             try {
@@ -247,7 +249,8 @@ class AppointmentController
      */
     public function addAppointment($text, $studentId, $jobOfferId, $cv)
         {
-            require_once(VIEWS_PATH . "checkLoggedStudent.php");
+            //require_once(VIEWS_PATH . "checkLoggedStudent.php");
+            SessionHelper::checkStudentSession();
 
 
             $appointment = new Appointment();
@@ -345,7 +348,8 @@ class AppointmentController
      */
     public function Remove($studentId, $system = null)
         {
-            require_once(VIEWS_PATH . "checkLoggedStudent.php");
+            //require_once(VIEWS_PATH . "checkLoggedStudent.php");
+            SessionHelper::checkStudentSession();
 
             try {
 
