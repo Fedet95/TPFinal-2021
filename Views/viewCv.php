@@ -1,5 +1,6 @@
 <?php
-
+use Models\SessionHelper;
+SessionHelper::checkAdminSession();
 
 $file = 'uploads/'.$filename.'.pdf';
 $myFileName=$filename;

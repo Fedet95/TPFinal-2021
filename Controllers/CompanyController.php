@@ -1,6 +1,8 @@
 <?php
 namespace Controllers;
-require_once(VIEWS_PATH . "checkLoggedUser.php");
+//require_once(VIEWS_PATH . "checkLoggedUser.php");
+use Models\SessionHelper;
+SessionHelper::checkUserSession();
 
 
 use DAO\AppointmentDAO;

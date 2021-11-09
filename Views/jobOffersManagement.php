@@ -1,9 +1,9 @@
 <?php
-
-use Models\Administrator;
+use Models\SessionHelper;
+SessionHelper::checkUserSession();
 use Models\User;
 
-require_once(VIEWS_PATH . "checkLoggedUser.php");
+//require_once(VIEWS_PATH . "checkLoggedUser.php");
 include_once('header.php');
 include_once('nav.php');
 ?>

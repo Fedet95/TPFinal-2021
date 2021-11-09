@@ -1,7 +1,10 @@
 <?php
 
 namespace Controllers;
-require_once(VIEWS_PATH . "checkLoggedUser.php");
+use Models\SessionHelper;
+//require_once(VIEWS_PATH . "checkLoggedUser.php");
+SessionHelper::checkUserSession();
+
 
 use DAO\AppointmentDAO;
 use DAO\JobOfferDAO;
@@ -20,14 +23,10 @@ use Models\JobPosition;
 use Models\User;
 
 
-/**
- *
- */
+
 class JobController
 {
-    /**
-     * @var CompanyDAO
-     */
+
     private $companyDAO;
     private $countryDAO;
     private $careersOrigin;
@@ -114,7 +113,8 @@ class JobController
      */
     public function showJobOfferViewMore($id, $message= "")
     {
-        require_once(VIEWS_PATH . "checkLoggedUser.php");
+        //require_once(VIEWS_PATH . "checkLoggedUser.php");
+        SessionHelper::checkUserSession();
 
         try {
             $jobOffer = $this->jobOfferDAO->getJobOffer($id);
@@ -347,6 +347,7 @@ class JobController
     public function addJobOfferFirstPart($company, $career, $publishDate, $endDate)
     {
 
+        SessionHelper::checkAdminSession();
         $publishDateValidation=$this->validatePublishDate($publishDate);
         if ($publishDateValidation == null) {
             $message = "Error, enter a valid Job Offer Publish Date";

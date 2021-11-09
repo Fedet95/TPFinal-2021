@@ -6,6 +6,7 @@ namespace Controllers;
 use DAO\OriginStudentDAO;
 use DAO\UserDAO;
 use DAO\UserRolDAO;
+use Models\SessionHelper;
 use Models\User;
 
 /**
@@ -35,7 +36,7 @@ class HomeController
 
     public function welcome($message = "")
     {
-        //$this->Logout();
+
         require_once(VIEWS_PATH."home.php");
     }
 

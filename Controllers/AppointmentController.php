@@ -1,6 +1,9 @@
 <?php
-
 namespace Controllers;
+use Models\SessionHelper;
+//require_once(VIEWS_PATH . "checkLoggedUser.php");
+SessionHelper::checkUserSession();
+
 
 use DAO\AppointmentDAO;
 use DAO\AppointmentHistoryDAO;
@@ -16,7 +19,6 @@ use Models\Company;
 use Models\JobOffer;
 use Models\User;
 
-require_once(VIEWS_PATH . "checkLoggedUser.php");
 
 
 /**
@@ -49,7 +51,8 @@ class AppointmentController
      */
     public function showApplyView($studentId, $jobOfferId, $message = "") //studentId=email
     {
-        require_once(VIEWS_PATH . "checkLoggedStudent.php");
+        //require_once(VIEWS_PATH . "checkLoggedStudent.php");
+        SessionHelper::checkStudentSession();
 
 
         $flag = $this->validateActiveStudent($studentId);

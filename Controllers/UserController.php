@@ -1,6 +1,10 @@
 <?php
 namespace Controllers;
 
+use Models\SessionHelper;
+
+SessionHelper::checkUserSession();
+
 use DAO\OriginStudentDAO;
 use DAO\UserDAO;
 use DAO\UserRolDAO;
@@ -20,7 +24,6 @@ class UserController
 
     public function __construct()
     {
-
         $this->userDAO = new UserDAO();
         $this->loggedUser = $this->loggedUserValidation();
         $this->studentsOrigin = new OriginStudentDAO();
@@ -313,8 +316,8 @@ class UserController
      */
     public function Remove($id)
     {
-        require_once(VIEWS_PATH . "checkLoggedAdmin.php");
-
+        //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
+        SessionHelper::checkAdminSession();
 
         $userRol = $this->getRolId("administrator");
 
@@ -362,7 +365,7 @@ class UserController
      */
     public function updateAdmin($id, $email, $actualPassword, $newPassword)
     {
-
+        SessionHelper::checkAdminSession();
         $userRol = $this->getRolId("administrator");
 
         if ($userRol != null) {
