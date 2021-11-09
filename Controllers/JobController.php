@@ -112,7 +112,7 @@ class JobController
      * Call the extend view of a JobOffer
      * @param $id
      */
-    public function showJobOfferViewMore($id)
+    public function showJobOfferViewMore($id, $message= "")
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
 

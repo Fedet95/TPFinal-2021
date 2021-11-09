@@ -528,7 +528,7 @@ include_once('nav.php');
                                                         <?php if ($value->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) { ?>
                                                             <form action="<?php echo FRONT_ROOT ."Appointment/showApplyView" ?>"
                                                                   method="POST">
-                                                                <input type="hidden" name="studentId" value="<?php echo $loggedUser->getUserId() ?>">
+                                                                <input type="hidden" name="studentId" value="<?php echo $loggedUser->getEmail() ?>">
                                                                 <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                                                         value="<?php echo $value->getJobOfferId() ?>">Apply
                                                                 </button>

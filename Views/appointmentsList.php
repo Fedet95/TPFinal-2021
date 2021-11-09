@@ -17,8 +17,6 @@ include_once('nav.php');;
 
 <?php if($loggedUser->getRol()->getUserRolId()==2){?>
 
-    <h6 class="py-3  text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
-
 
     <!-- Start callto-action Area -->
     <section class="callto-action-area section-gap"  id="join">
@@ -34,6 +32,8 @@ include_once('nav.php');;
     </section>
     <!-- End calto-action Area -->
 
+    <br><br>
+    <h6 class="py-3  text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
     <?php
     if (is_object($historyAppointments)) {
         $history = $historyAppointments;

@@ -20,6 +20,7 @@ include_once('nav.php');
     }</style>
 
 
+
     <main>
         <!-- Hero Area Start-->
         <section class="download-area section-gap" id="app">
@@ -40,7 +41,8 @@ include_once('nav.php');
         </section>
         <!-- Hero Area End -->
 
-
+        <br><br>
+        <h6 class="py-3  text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
         <!-- job post company Start -->
         <div class="job-post-company pt-120 pb-120 ">
             <div class="container bg-light-alpha p-5 border bx-border-radius">
@@ -138,7 +140,7 @@ include_once('nav.php');
                                      <?php if ($jobOffer->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) { ?>
                                          <form action="<?php echo FRONT_ROOT ."Appointment/showApplyView" ?>"
                                                method="POST">
-                                             <input type="hidden" name="studentId" value="<?php echo $loggedUser->getUserId() ?>">
+                                             <input type="hidden" name="studentId" value="<?php echo $loggedUser->getEmail() ?>">
                                              <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                                      value="<?php echo $jobOffer->getJobOfferId() ?>">Apply
                                              </button>

@@ -20,6 +20,7 @@ class UserController
 
     public function __construct()
     {
+
         $this->userDAO = new UserDAO();
         $this->loggedUser = $this->loggedUserValidation();
         $this->studentsOrigin = new OriginStudentDAO();

@@ -43,11 +43,11 @@ class AppointmentController
 
     /**
      * Show the job offer aplly view
-     * @param $studentId
+     * @param $studentId (email)
      * @param $jobOfferId
      * @param string $message
      */
-    public function showApplyView($studentId, $jobOfferId, $message = "")
+    public function showApplyView($studentId, $jobOfferId, $message = "") //studentId=email
     {
         require_once(VIEWS_PATH . "checkLoggedStudent.php");
 
@@ -56,6 +56,7 @@ class AppointmentController
         if ($flag == 1) {
             $validate = $this->uniqueAppointment($studentId);
             if ($validate == 1) {
+                $_SESSION['applyOffer']=$jobOfferId;
                 $this->showAppointmentList($valueToSearch = null, $back = null, "Only one active application is allowed");
             } else {
                 require_once(VIEWS_PATH . "applyJobOffer.php");
@@ -184,14 +185,27 @@ class AppointmentController
 
     /**
      * Validates if an student have an actual appointment
-     * @param $studentId
+     * @param $email
      * @return int|string|void
      */
-    public function uniqueAppointment($studentId)
+    public function uniqueAppointment($email)
     {
+
+        try {
+            $userDAO= new UserDAO();
+            $student= $userDAO->searchByEmail($email);
+
+        }catch (\Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+
         try {
 
-            $searchedAppointment = $this->appointmentDAO->getAppointment($studentId);
+            if($student!=null)
+            {
+                $searchedAppointment = $this->appointmentDAO->getAppointment($student->getUserId());
+            }
         }
         catch (\Exception $ex)
         {
@@ -345,7 +359,23 @@ class AppointmentController
 
                         if (!empty($result) && $system == null) {
                             $message = "Appointment dropped out successfully";
-                            $this->showAppointmentList(null, null, $message);
+
+                            if(isset($_SESSION['applyOffer']))
+                            {
+                                $applyId=$_SESSION['applyOffer'];
+                                $message = "Appointment dropped out successfully. Now you can apply to this fantastic offer!";
+                                $JobController= new JobController();
+                                unset($_SESSION['applyOffer']);
+
+                                $JobController->showJobOfferViewMore($applyId, $message);
+                            }
+                            else
+                            {
+
+                                $message = "Appointment dropped out successfully";
+                                $this->showAppointmentList(null, null, $message);
+                            }
+
                         } else if (!empty($result) && $system != null) {
                             $flag = 1;
                             $message = "Your current job appointment was terminated as result of reaching the job offer's end date";
@@ -370,17 +400,17 @@ class AppointmentController
 
         /**
          * Validate if an student is currently active
-         * @param $studentId
+         * @param $email
          * @return int
          */
-        public function validateActiveStudent($studentId)
+        public function validateActiveStudent($email)
         {
             $studentsOrigin = new OriginStudentDAO();
             $allStudents = $studentsOrigin->start($studentsOrigin);
 
             $flag = 0;
             foreach ($allStudents as $value) {
-                if ($value->getUserId() == $studentId) {
+                if ($value->getEmail() == $email) {
                     if ($value->getActive() == 'true') {
                         $flag = 1;
                     }
