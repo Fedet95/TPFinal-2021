@@ -12,10 +12,22 @@ include_once('nav.php');
     <link rel="stylesheet" href="../Views/css/linearicons.css">
     <link rel="stylesheet" href="../Views/css/font-awesome.min.css">
     <link rel="stylesheet" href="../Views/css/bootstrap.css">
-    <link rel="stylesheet" href="../Views/css/magnific-popup.css">
     <link rel="stylesheet" href="../Views/css/nice-select.css">
-    <link rel="stylesheet" href="../Views/css/animate.min.css">
     <link rel="stylesheet" href="../Views/css/main.css">
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<script>
+    $(function() {
+        $( "#show-option" ).tooltip({
+            show: {
+                effect: "slideDown",
+                delay: 300
+            }
+        });
+    });</script>
 
 
 
@@ -45,10 +57,14 @@ include_once('nav.php');
                 <div class="row d-flex justify-content-center">
                     <div class="menu-content pb-60 col-lg-10">
                         <div class="title text-center">
-                            <h1 class="mb-10">Get your Job</h1>
+                            <h1 class="mb-10">Get your Job!</h1>
                             <p>With a wide variety of offers perfect for you</p>
                         </div>
                     </div>
+                </div>
+
+                <div class="title text-center">
+                    <h4 class="mb-2">Trending careers</h4>
                 </div>
                 <div class="row">
                     <div class="col-lg-2 col-md-4 col-sm-6">
@@ -289,8 +305,8 @@ include_once('nav.php');
                                 </table>
                             </div>
 
-                            <!--
-                        <div class="form-group offset-7">   //FILTER CAREERS EQUAL TO JOB POSITIONS FILTER
+
+                        <div class="form-group offset-7">   <!--FILTER CAREERS EQUAL TO JOB POSITIONS FILTER-->
                             <table>
                                 <thead>
                                 <tr>
@@ -302,19 +318,57 @@ include_once('nav.php');
                                                 <select name="valueToSearch"  class="form-control"  required="required">
                                                     <option value="" selected disabled class="text-center">Select Career</option>
                                                     <?php
-                                                        foreach ($allCareers as $car) {
-                                                         if($car->getActive()=='true')
-                                                          {
-                                                              ?>
-                                                                    <option value="<?php echo $car->getDescription()?>"><?php echo $car->getDescription()?></option>
+                                                    $careerDescription= array();
+                                                    foreach ($allOffers as $value)
+                                                    {
+                                                        $flag=0;
+                                                        if($loggedUser->getRol()->getUserRolId()==1)
+                                                        {
+                                                                foreach($careerDescription as $career)
+                                                                {
+                                                                    if($career==$value->getCareer()->getDescription())
+                                                                    {
+                                                                        $flag=1;
+                                                                    }
+                                                                }
+
+                                                                if($flag==0)
+                                                                {
+                                                                    array_push($careerDescription, $value->getCareer()->getDescription());
+                                                                    ?>
+                                                                    <option value="<?php echo $value->getCareer()->getDescription()?>"><?php echo $value->getCareer()->getDescription()?></option>
                                                                     <?php
-                                                                   }}
-                                                           ?>
+                                                                }
+
+                                                            }else if($loggedUser->getRol()->getUserRolId()==2)
+                                                            {
+
+                                                            if($value->getActive()=='true')
+                                                            {
+                                                                foreach($careerDescription as $career)
+                                                                {
+                                                                    if($career==$value->getCareer()->getDescription())
+                                                                    {
+                                                                        $flag=1;
+                                                                    }
+                                                                }
+
+                                                                    if($flag==0)
+                                                                    {
+                                                                        array_push($careerDescription, $value->getCareer()->getDescription());
+                                                                        ?>
+                                                                        <option value="<?php echo $value->getCareer()->getDescription()?>"><?php echo $value->getCareer()->getDescription()?></option>
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                            }
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
                                     <th>
-                                        <input type="submit" class="btn btn-light ml-auto" name="search" value="Filter">
+                                        <input type="submit" class="btn btn-light ml-auto filtre-button" name="search" value="Filter">
                                     </th>
 
                                     </form>
@@ -324,7 +378,7 @@ include_once('nav.php');
                             </table>
                         </div>
 
-                -->
+
 
                             <div class="form-group offset-lg-10">
 
@@ -481,8 +535,14 @@ include_once('nav.php');
                                                             </form>
                                                             <br>
                                                             </td>
-                                                        <?php }
-                                                    } ?>
+                                                        <?php }else { ?>
+                                                     <td>
+                                                         <input type="button" id="show-option" value="Apply" title="This offer does not correspond to your career" class="btn buttonPer disabled ml-auto d-block">
+                                                    <br>
+                                                    </td>
+
+                                                  <?php
+                                                    }} ?>
 
                                                     <?php if ($loggedUser->getRol()->getUserRolId()==1) { ?>
                                                         <td>
