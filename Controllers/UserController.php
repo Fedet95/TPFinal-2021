@@ -188,9 +188,6 @@ class UserController
             $searchedStudent = $allStudents;
         }
 
-        if ($valueToSearch == 'Show only registered') { //VER QUE ONDA ESTOOOO  <<<<<---------------------------
-            $searchedStudent = $this->studentDAO->getOnlyRegistered();
-        }
 
         if ($valueToSearch == 'Show all students' || $valueToSearch == 'Back') {
             $searchedStudent = $allStudents;
@@ -437,10 +434,8 @@ class UserController
             try {
 
                 $cant= $this->userDAO->update($adminAux);
-              if($cant>0)
-              {
+
                   $this->showAdminListView("Administrator succesfullly edited");
-              }
 
             } catch (\Exception $ex) {
 

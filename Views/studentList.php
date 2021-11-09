@@ -37,11 +37,6 @@ include_once('nav.php');
                             <input type="submit" class="btn btn-dark ml-auto" name="valueToSearch" value="Show all students" >
                         </form>
                     </th>
-                    <th>
-                        <form action="<?php echo FRONT_ROOT . "User/showStudentListView" ?>" method="post"">
-                        <input type="submit" class="btn btn-dark ml-auto" name="valueToSearch" value="Show only registered" >
-                        </form>
-                    </th>
                 </tr>
                 </thead>
             </table>
