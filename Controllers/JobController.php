@@ -10,6 +10,8 @@ use DAO\OriginCareerDAO;
 use DAO\CompanyDAO;
 use DAO\CountryDAO;
 use DAO\OriginJobPositionDAO;
+use DAO\UserDAO;
+use DAO\UserRolDAO;
 use Models\Career;
 use Models\Company;
 use Models\JobOffer;
@@ -849,17 +851,26 @@ class JobController
                 $studentsId= array();
                 foreach ($appointments as $value)
                 {
-                    array_push($studentsId,$value->getStudent()->getStudentId());
+                    array_push($studentsId,$value->getUser()->getUserId());
                 }
 
-                $allStudents= new StudentDAO();
-                $allStudents->getAll();
+                $allStudents= new User();
+                $userRol= $this->getRolId("students");
+
+                $userDAO= new UserDAO();
+                try {
+                    $allStudents=$userDAO->getRol($userRol->getUserRolId());
+                }catch (\Exception $ex)
+                {
+                    echo $ex->getMessage();
+                }
+
                 $studentsEmails= array();
                 foreach ($allStudents as $student)
                 {
                     foreach ($studentsId as $id)
                     {
-                        if($student->getStudentId()==$id)
+                        if($student->getUserId()==$id)
                         {
                             array_push($studentsEmails, $student->getEmail());
                             $this->sendEmail($student->getEmail(), $sub, $text);
@@ -904,6 +915,23 @@ class JobController
         else
             echo "Email sending failed";
     }
+
+
+    /**
+     * Gets the user rol
+     */
+    public function getRolId($rolName)
+    {
+        try {
+            $userRolDAO = new UserRolDAO();
+            $userRol = $userRolDAO->getRolIdByRolName($rolName);
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+
+        return $userRol;
+    }
+
 
 
     /**
