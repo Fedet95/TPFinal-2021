@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/studentList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentList.php" afterDir="false" />
     </list>
     <list id="8ccc725f-7d6d-41b9-a85b-19712bbd211e" name="Changes by Fede" comment="Changes by Fede" />
     <list id="90859d74-00b1-413e-984d-c2b993371ef8" name="Changes by paye_" comment="Changes by paye_" />
@@ -115,14 +114,7 @@
       <workItem from="1636315853310" duration="4882000" />
       <workItem from="1636320963331" duration="19000" />
       <workItem from="1636414826856" duration="11687000" />
-      <workItem from="1636463619761" duration="13880000" />
-    </task>
-    <task id="LOCAL-00053" summary="Changes by paye_">
-      <created>1635819739344</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1635819739344</updated>
+      <workItem from="1636463619761" duration="16056000" />
     </task>
     <task id="LOCAL-00054" summary="Changes by Fede">
       <created>1635819748599</created>
@@ -460,7 +452,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636475438670</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="update">
+      <created>1636479661710</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1636479661710</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

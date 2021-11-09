@@ -203,11 +203,24 @@ class JobController
 
         }
 
-        if(is_object($allOffers))
-        { $offer= $allOffers;
-            $allOffers= array();
-            array_push($allOffers, $offer);
-        }
+
+       if(isset($searchedValue) && $searchedValue!=null)
+       {
+           $flag=0;
+           foreach ($searchedValue as $offer)
+           {
+               if($offer->getActive()=='true')
+               {
+                   $flag=1;
+               }
+           }
+
+           if($flag==0)
+           {
+               $searchedValue=$allOffers;
+               $message= "No job offers with these characteristics were found";
+           }
+       }
 
 
         var_dump($allOffers);

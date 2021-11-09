@@ -186,6 +186,33 @@ include_once('nav.php');
                     <div class="col-md-9 post-list">
                         <ul class="cat-list">
 
+                            <?php if(isset($searchedValue)) {
+                                if(!empty($searchedValue))
+                                {
+                                    $allOffers=$searchedValue;
+
+                                }
+                                else if(empty($searchedValue) && $back==1)
+                                {
+                                    $message= "Job offer successfully added";
+                                }
+                                else if(empty($searchedValue) && $back==2)
+                                {
+                                    $message= "Job offer successfully updated";
+                                }
+                                else if(empty($searchedValue) && $back==3)
+                                {
+                                    $message="Remove operation aborted";
+                                }
+                                else
+                                {
+                                    $message= "No job offers with these characteristics were found";
+                                }
+                            }?>
+
+
+
+
                             <div class="form-group offset-7">  <!--JOB POSITION FILTER-->
                                 <table>
                                     <thead>
@@ -317,28 +344,6 @@ include_once('nav.php');
                             </div>
                         </ul>
 
-                        <?php if(isset($searchedValue)) {
-                            if(!empty($searchedValue))
-                            {
-                                $allOffers=$searchedValue;
-                            }
-                            else if(empty($searchedValue) && $back==1)
-                            {
-                                $message= "Job offer successfully added";
-                            }
-                            else if(empty($searchedValue) && $back==2)
-                            {
-                                $message= "Job offer successfully updated";
-                            }
-                            else if(empty($searchedValue) && $back==3)
-                            {
-                                $message="Remove operation aborted";
-                            }
-                            else
-                            {
-                                $message= "No job offers with these characteristics were found";
-                            }
-                        }?>
 
 
                         <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
