@@ -97,6 +97,7 @@ if (isset($_SESSION['loggedstudent']))
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Job Offers Management</a>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobPositionManagement"?>">Job Position List</a>
 
+
                         <?php
                     }
                     else if($loggedUser->getRol()->getUserRolId()==2)
@@ -131,6 +132,15 @@ if (isset($_SESSION['loggedstudent']))
             {
                 ?>
                 <a class="nav-link" href="<?php echo  FRONT_ROOT."Appointment/showAppointmentList"?>">Appointments</a>
+                <?php
+            }
+            else if($loggedUser->getRol()->getUserRolId()==1)
+            {
+            ?>
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo  FRONT_ROOT."Appointment/showAppointmentManagementView"?>">Appointments</a>
+                </li>
                 <?php
             }
             ?>
