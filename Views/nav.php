@@ -137,7 +137,6 @@ if (isset($_SESSION['loggedstudent']))
             else if($loggedUser->getRol()->getUserRolId()==1)
             {
             ?>
-                ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo  FRONT_ROOT."Appointment/showAppointmentManagementView"?>">Appointments</a>
                 </li>

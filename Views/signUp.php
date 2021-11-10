@@ -70,38 +70,6 @@ include_once('header.php');
                         <input type="text" name="lastname" id="contactNo" readonly class="form-control text-center"
                                 value="<?php echo $student->getLastName() ?>">
                     </div>
-
-
-                    <div class="form-group col-3">
-                        <label class="text-muted text-strong text" for="">DNI</label>
-                        <input type="text" name="dni" class="form-control text-center" value="<?php echo $student->getDni() ?>"
-                               readonly>
-                    </div>
-
-                    <div class="form-group col-3">
-                        <label class="text-muted text-strong text">File Number</label>
-                        <input type="text" name="fileNumber" class="form-control text-center"
-                               value="<?php echo $student->getFileNumber() ?>" readonly>
-                    </div>
-
-
-                    <div class="form-group col-3">
-                        <label class="text-muted text-strong" for="">Gender</label>
-                        <input type="text" name="gender" class="form-control text-center"
-                               value="<?php echo $student->getGender() ?>" readonly>
-                    </div>
-
-                    <div class="form-group col-3">
-                        <label class="text-muted text-strong text" for="">Birthdate</label>
-                        <input type="text" name="birthdate" class="form-control text-center"
-                               value="<?php echo $student->getBirthDate() ?>" readonly>
-                    </div>
-
-                    <div class="form-group col-3">
-                        <label class="text-muted text-strong text" for="">Phone Number</label>
-                        <input type="text" name="phoneNumber" class="form-control text-center"
-                               value="<?php echo $student->getPhoneNumber() ?>" readonly>
-                    </div>
                 </div>
             </div>
             <br>

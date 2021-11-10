@@ -589,8 +589,7 @@ class AppointmentController
 
 
 
-            //--------FILTROS---------------------------------------
-
+            //--------FILTROS START---------------------------------------
 
             $careerValidation=null;
             $companyValidation=null;
@@ -603,8 +602,11 @@ class AppointmentController
                 //$finalFilter=null;
                 $valueToSearch=null;
             }
-          var_dump($valueToSearch);
-          var_dump($titleToSearch);
+
+            if($valueToSearch==null && $titleToSearch==null )
+            {
+                $finalArray=$this->careerOfferStadistic($allOffers);
+            }
 
             if($valueToSearch!=null && $valueToSearch!='finalValue')
             {
@@ -629,15 +631,25 @@ class AppointmentController
                 else{
                     $searchedValue = $this->searchJobCareerFiltre($allOffers, $valueToSearch);
                     $allOffers=$searchedValue;
-                    var_dump($allOffers);
+                    $finalArray=$this->careerOfferStadistic($allOffers);
                     $careerValidation=1;
                 }
             }
 
-            var_dump($valueToSearch);
-            var_dump($titleToSearch);
-            var_dump($careerValidation);
-            var_dump($companyValidation);
+            if($careerValidation==1 && $companyValidation==null && $valueToSearch!='finalValue')
+            {
+                $finalArray=$this->companyOfferStadistic($allOffers);
+            }
+
+            if($companyValidation==1 && $careerValidation==null && $valueToSearch!='finalValue')
+            {
+                $finalArray=$this->titlesOfferStadistic($allOffers);
+            }
+
+            //var_dump($valueToSearch);
+            //var_dump($titleToSearch);
+            //var_dump($careerValidation);
+            //var_dump($companyValidation);
 
 
             $finalFilter=null;
@@ -663,7 +675,7 @@ class AppointmentController
             }
 
 
-          //--------FILTROS---------------------------------------
+          //--------FILTROS END---------------------------------------
 
              var_dump($allOffers);
             require_once(VIEWS_PATH . "appointmentManagement.php");
@@ -671,6 +683,139 @@ class AppointmentController
         }
 
     }
+
+
+    public function titlesOfferStadistic($allOffers)
+    {
+
+        $titles = array();
+        $numeros = array();
+        $finalArray= array();
+
+        foreach ($allOffers as $value) {
+            $flag = 0;
+            foreach ($titles as $title) {
+                if ($title == $value->getTitle()) {
+                    $flag = 1;
+                }
+            }
+
+            if ($flag == 0) {
+                array_push($titles, $value->getTitle());
+            }
+        }
+
+        foreach ($titles as $title) {
+            $flag = 0;
+            $i = 0;
+            foreach ($allOffers as $values) {
+                if ($title == $values->getTitle()) {
+                    $flag = 1;
+                    $i=count($values->getAppointment());
+                }
+            }
+
+            if ($flag == 1) {
+                array_push($numeros, $i);
+            }
+        }
+
+        $carreras=$titles;
+
+        $finalArray = array ("carreras"=> $carreras, "numeros"=>$numeros);
+
+        return $finalArray;
+
+    }
+
+
+
+
+    public function careerOfferStadistic($allOffers)
+    {
+
+        $carreras = array();
+        $numeros = array();
+        $finalArray= array();
+
+        foreach ($allOffers as $value) {
+            $flag = 0;
+            foreach ($carreras as $carre) {
+                if ($carre == $value->getCareer()->getDescription()) {
+                    $flag = 1;
+                }
+            }
+
+            if ($flag == 0) {
+                array_push($carreras, $value->getCareer()->getDescription());
+            }
+        }
+
+        foreach ($carreras as $carre) {
+            $flag = 0;
+            $i = 0;
+            foreach ($allOffers as $values) {
+                if ($carre == $values->getCareer()->getDescription()) {
+                    $flag = 1;
+                    $i++;
+                }
+            }
+
+            if ($flag == 1) {
+                array_push($numeros, $i);
+            }
+        }
+
+        $finalArray = array ("carreras"=> $carreras, "numeros"=>$numeros);
+
+        return $finalArray;
+
+    }
+
+    public function companyOfferStadistic($allOffers)
+    {
+
+        $carreras = array();
+        $numeros = array();
+        $finalArray= array();
+
+        foreach ($allOffers as $value) {
+            $flag = 0;
+            foreach ($carreras as $carre) {
+                if ($carre == $value->getCompany()->getName()) {
+                    $flag = 1;
+                }
+            }
+
+            if ($flag == 0) {
+                array_push($carreras, $value->getCompany()->getName());
+            }
+        }
+
+        foreach ($carreras as $carre) {
+            $flag = 0;
+            $i = 0;
+            foreach ($allOffers as $values) {
+                if ($carre == $values->getCompany()->getName()) {
+                    $flag = 1;
+                    $i++;
+                }
+            }
+
+            if ($flag == 1) {
+                array_push($numeros, $i);
+            }
+        }
+
+        $finalArray = array ("carreras"=> $carreras, "numeros"=>$numeros);
+
+        return $finalArray;
+
+    }
+
+
+
+
 
 
 

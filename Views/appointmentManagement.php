@@ -200,6 +200,67 @@ include_once('nav.php');
     array_push($allOffers, $offer);
 }?>
 
+
+<!--...........................ESTADISTICA..........................................................................-->
+
+
+<?php  if(isset($finalArray) && !empty($finalArray)){
+
+    $carreras= $finalArray['carreras'];
+    $numeros= $finalArray['numeros'];
+    ?>
+
+
+
+    <div class="offset-lg-5" style="width:20%;hieght:10%;text-align:center">
+        <h2 class="page-header" >Analytics Reports </h2>
+        <div>Job Offers per career </div>
+        <canvas  id="chartjs_bar"></canvas>
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript">
+        var ctx = document.getElementById("chartjs_bar").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels:<?php echo json_encode($carreras); ?>,
+                datasets: [{
+                    backgroundColor: [
+                        "#5969ff",
+                        "#ff407b",
+                        "#25d5f2",
+                        "#ffc750",
+                        "#2ec551",
+                        "#7040fa",
+                        "#ff004e"
+                    ],
+                    data:<?php echo json_encode($numeros); ?>,
+                }]
+            },
+            options: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+
+                    labels: {
+                        fontColor: '#71748d',
+                        fontFamily: 'Circular Std Book',
+                        fontSize: 14,
+                    }
+                },
+
+
+            }
+        });
+    </script>
+
+<?php }?>
+<!--.....................................................................................................................-->
+
+
+
     <section class="post-area section-gap">
         <div class="container">
             <div class="row justify-content-center d-flex bg-light-alpha p-5 border">
@@ -538,34 +599,13 @@ include_once('nav.php');
                                                     </form>
                                                     <br>
                                                 </td>
-                                                <?php if ($loggedUser->getRol()->getUserRolId()==2) { ?>
-                                                    <td>
-                                                    <?php if ($value->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) { ?>
-                                                        <form action="<?php echo FRONT_ROOT ."Appointment/showApplyView" ?>"
-                                                              method="POST">
-                                                            <input type="hidden" name="studentId" value="<?php echo $loggedUser->getEmail() ?>">
-                                                            <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
-                                                                    value="<?php echo $value->getJobOfferId() ?>">Apply
-                                                            </button>
-                                                        </form>
-                                                        <br>
-                                                        </td>
-                                                    <?php }else { ?>
-                                                        <td>
-                                                            <input type="button" id="show-option" value="Apply" title="This offer does not correspond to your career" class="btn buttonPer disabled ml-auto d-block">
-                                                            <br>
-                                                        </td>
-
-                                                        <?php
-                                                    }} ?>
-
                                                 <?php if ($loggedUser->getRol()->getUserRolId()==1) { ?>
                                                     <td>
-                                                        <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
+                                                        <form action="<?php echo FRONT_ROOT . "Appointment/showAppointmentList" ?>"
                                                               method="POST">
                                                             <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
                                                                     value="<?php echo $value->getJobOfferId() ?>">
-                                                                Remove
+                                                                Appoinments
                                                             </button>
                                                         </form>
                                                     </td>
@@ -577,6 +617,16 @@ include_once('nav.php');
                                                                     class="btn buttonPer ml-auto d-block"
                                                                     value="<?php echo $value->getJobOfferId() ?>"> Edit
                                                             </button>
+                                                            <br>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
+                                                              method="POST">
+                                                            <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
+                                                                    value="<?php echo $value->getJobOfferId() ?>">
+                                                                Remove
+                                                            </button>
                                                         </form>
                                                     </td>
 
@@ -586,10 +636,8 @@ include_once('nav.php');
                                     </div>
                                     <?php
                                 }
-                                else
-                                {
-                                    if($loggedUser->getRol()->getUserRolId()==1)
-                                    {
+                                else{ //VER QUE ONDA ESTO, SI QUIERO JOB OFFERS TERMINADAS CON APPOINTMENT (PERO SI AABO SE BORRAN LAS APOINTMENT... MMMM )
+
                                         if(strtotime($value->getEndDate()) < strtotime(date("Y-m-d")) ||  $value->getActive() == "false" || $company->getActive()=='false'){
                                             ?>
 
@@ -687,6 +735,16 @@ include_once('nav.php');
                                                 <div class="row offset-3">
                                                     <ul class="btns">
                                                         <td>
+                                                            <form action="<?php echo FRONT_ROOT . "Appointment/showAppointmentList" ?>"
+                                                                  method="POST">
+                                                                <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
+                                                                        value="<?php echo $value->getJobOfferId() ?>">
+                                                                    Appoinments
+                                                                </button>
+                                                                <br>
+                                                            </form>
+                                                        </td>
+                                                        <td>
                                                             <form action="<?php echo FRONT_ROOT . "Job/showJobOfferViewMore" ?>"
                                                                   method="POST">
                                                                 <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
@@ -726,11 +784,11 @@ include_once('nav.php');
                                 }
                             }
                         }
-                    } ?>
+                     ?>
 
                 </div>
 
-                <?php }?>
+                <?php } ?>
             </div>
         </div>
     </section>

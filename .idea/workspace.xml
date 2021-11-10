@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/Views/appointmentManagement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/appointmentManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentManagement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/signUp.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/signUp.php" afterDir="false" />
     </list>
     <list id="8ccc725f-7d6d-41b9-a85b-19712bbd211e" name="Changes by Fede" comment="Changes by Fede" />
     <list id="90859d74-00b1-413e-984d-c2b993371ef8" name="Changes by paye_" comment="Changes by paye_" />
@@ -115,21 +116,9 @@
       <workItem from="1636315853310" duration="4882000" />
       <workItem from="1636320963331" duration="19000" />
       <workItem from="1636414826856" duration="11687000" />
-      <workItem from="1636463619761" duration="42517000" />
-    </task>
-    <task id="LOCAL-00059" summary="update">
-      <created>1635877552587</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1635877552587</updated>
-    </task>
-    <task id="LOCAL-00060" summary="update">
-      <created>1635894393168</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1635894393168</updated>
+      <workItem from="1636463619761" duration="42625000" />
+      <workItem from="1636513135939" duration="401000" />
+      <workItem from="1636549410598" duration="8775000" />
     </task>
     <task id="LOCAL-00061" summary="update">
       <created>1635894401396</created>
@@ -460,7 +449,21 @@
       <option name="project" value="LOCAL" />
       <updated>1636497914079</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="update">
+      <created>1636512092034</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1636512092034</updated>
+    </task>
+    <task id="LOCAL-00109" summary="update">
+      <created>1636512103057</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1636512103057</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,8 +500,8 @@
     <MESSAGE value="administrar creation and appointment" />
     <MESSAGE value="administrar creation" />
     <MESSAGE value="Changes by paye_" />
-    <MESSAGE value="update" />
     <MESSAGE value="Changes by Fede" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes by Fede" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>
