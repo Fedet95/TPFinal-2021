@@ -100,7 +100,8 @@ class HomeController
             if ($searchedUser) //si encuentro a un user con ese email (student registrado o administrador)
             {
 
-                if ($searchedUser->getPassword() == $password) //verifico la pass, si esta mal no verifico el resto
+
+                if (password_verify( $password, $searchedUser->getPassword())) //verifico la pass, si esta mal no verifico el resto
                 {
 
                     try {
@@ -263,7 +264,8 @@ class HomeController
                  }
              }
 
-              $user->setPassword($password1);
+             $encrypted_password=password_hash($password1,PASSWORD_DEFAULT);
+             $user->setPassword($encrypted_password);
               $user->setRol($rol);
               $user->setEmail($email);
               $this->userDAO->add($user);

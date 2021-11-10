@@ -7,9 +7,11 @@
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/appointmentManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentManagement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/signUp.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/signUp.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/appointmentsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentsList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/editAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/editAdmin.php" afterDir="false" />
     </list>
     <list id="8ccc725f-7d6d-41b9-a85b-19712bbd211e" name="Changes by Fede" comment="Changes by Fede" />
     <list id="90859d74-00b1-413e-984d-c2b993371ef8" name="Changes by paye_" comment="Changes by paye_" />
@@ -118,14 +120,8 @@
       <workItem from="1636414826856" duration="11687000" />
       <workItem from="1636463619761" duration="42625000" />
       <workItem from="1636513135939" duration="401000" />
-      <workItem from="1636549410598" duration="8775000" />
-    </task>
-    <task id="LOCAL-00061" summary="update">
-      <created>1635894401396</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1635894401396</updated>
+      <workItem from="1636549410598" duration="11527000" />
+      <workItem from="1636562833947" duration="8985000" />
     </task>
     <task id="LOCAL-00062" summary="update">
       <created>1635896810280</created>
@@ -463,7 +459,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636512103057</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="update">
+      <created>1636558449901</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1636558449902</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

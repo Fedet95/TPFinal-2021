@@ -299,9 +299,17 @@ include_once('nav.php');;
             <form action="<?php echo FRONT_ROOT . "Job/showJobOfferViewMore" ?>"
                   method="POST">
                 <button type="submit" name="id" class="btn buttonPer m-lg-auto d-block"
-                        value="<?php echo $offerId ?>"><strong>Back to Job Offer info</strong>
+                        value="<?php echo $offerId ?>"><strong>Go to Job Offer info</strong>
                 </button>
+                <br>
             </form>
+
+        <form action=" <?php echo  FRONT_ROOT."Appointment/showAppointmentManagementView"?>"
+              method="POST">
+            <button type="submit" name="id" class="btn buttonPer m-lg-auto d-block"><strong>Go to Appointment Management View</strong>
+            </button>
+        </form>
+
 
 
 <?php

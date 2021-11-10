@@ -77,18 +77,50 @@ class UserController
      * @param $id
      * @param string $message
      */
-    public function showAdminEditView($id, $message = "")
+    public function showAdminEditView($id,$confirmPassword = null, $validate = null, $message = "")
     {
         //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
         SessionHelper::checkAdminSession();
 
         try {
             $admin = $this->userDAO->getUser($id);
-            require_once(VIEWS_PATH . "editAdmin.php");
+
 
         } catch (\Exception $ex) {
             throw $ex;
         }
+
+        $confirmAccess=null;
+
+        if($confirmPassword != null){
+            if($validate!=null)
+            {
+                 if($confirmPassword ==  $admin->getPassword())
+                 {
+                     $confirmAccess = $confirmPassword;
+                 }
+                 else
+                 {
+                     $message = "Incorrect Password";
+                 }
+            }
+            else
+            {
+                if(password_verify( $confirmPassword, $admin->getPassword()))
+                {
+
+                    $confirmAccess = $confirmPassword;
+                }
+                else
+                {
+                    $message = "Incorrect Password";
+                }
+
+            }
+
+        }
+
+        require_once(VIEWS_PATH . "editAdmin.php");
     }
 
 
@@ -270,7 +302,9 @@ class UserController
                 } else {
                     $adminAux = new User();
                     $adminAux->setEmail($email);
-                    $adminAux->setPassword($password);
+                    $encrypted_password=password_hash($password,PASSWORD_DEFAULT);
+                    $adminAux->setPassword($encrypted_password);
+                    //$adminAux->setPassword($password);
                     $adminAux->setRol($userRol);
 
 
@@ -287,7 +321,9 @@ class UserController
             } else {
                 $adminAux = new User();
                 $adminAux->setEmail($email);
-                $adminAux->setPassword($password);
+                $encrypted_password=password_hash($password,PASSWORD_DEFAULT);
+                $adminAux->setPassword($encrypted_password);
+                //$adminAux->setPassword($password);
                 $adminAux->setRol($userRol);
 
                 try {
@@ -352,7 +388,7 @@ class UserController
     /**
      * Update the administator values
      */
-    public function updateAdmin($id, $email, $actualPassword, $newPassword)
+    public function updateAdmin($id, $email, $newPassword, $confirmPassword)
     {
         SessionHelper::checkAdminSession();
         $userRol = $this->getRolId("administrator");
@@ -387,11 +423,14 @@ class UserController
                     if (strcasecmp($value->getEmail(), $email) == 0) {
                         $flag = 1;
                         $message = "The email " . $email . " is already registered";
+                        var_dump($flag);
                         break;
                     }
                 }
             }
         }
+
+        /*AHORA YA NO VALIDAMOS LA PW CON EL DAO PORQUE SE VERIFICÓ ANTES DE ENTRAR A EDITAR. SOLO VERIFICAMOS QUE INGRESO CORRECTAMENTE LA NUEVA
 
         if ($flag == 0) {
             foreach ($allAdmins as $value) {
@@ -402,19 +441,77 @@ class UserController
                     }
                 }
             }
+        }*/
+
+        /*if($newPassword != null && $confirmPassword != null) {
+
+            if ($validPassword == false) {
+                $flag = 1;
+                if ($newPassword == null && $confirmPassword != null) {
+
+                    $message = "Error. You must enter a password in both fields.";
+
+                } else {
+                    $message = "Error. Passwords do not match.";
+                }
+            }
+        }*/
+
+        if($flag==0)
+        {
+            if($newPassword != null)
+            {
+                if($confirmPassword!= null)
+                {
+
+                    $validPassword = $this->validatePassword($newPassword, $confirmPassword);
+
+                    if($validPassword == false)
+                    {
+                        $message = "Error. Passwords do not match.";
+                        $flag=1;
+                    }
+                }
+                else
+                {
+                    $message = "Error. You must enter a password in both fields.";
+                    $flag =1;
+                }
+
+            }
+            else if($confirmPassword != null)
+            {
+                $message = "Error. You must enter a password in both fields.";
+                $flag =1;
+            }
+
         }
 
 
+
         if ($flag == 1) {
-            $this->showAdminEditView($id, $message);
+            var_dump($flag);
+            $userAux = $this->userDAO->getUser($id);
+            $validate=1;
+            $this->showAdminEditView($id,$userAux->getPassword(), $validate, $message);
         } else {
 
             $adminAux = new User();
             $adminAux->setUserId($id);
             $adminAux->setEmail($email);
-            $adminAux->setPassword($newPassword);
-            $adminAux->setRol($userRol);
+            if($newPassword != null && $confirmPassword != null)
+            {
+                $encrypted_password=password_hash($newPassword,PASSWORD_DEFAULT);
 
+                $adminAux->setPassword($encrypted_password);
+            }
+            else
+            {
+                $userAux = $this->userDAO->getUser($id);
+                $adminAux->setPassword($userAux->getPassword());
+            }
+
+            $adminAux->setRol($userRol);
 
             try {
 
@@ -429,6 +526,23 @@ class UserController
         }
 
     }
+
+
+    public function validatePassword($password, $confirmPassword)
+    {
+
+        $validate = false;
+
+        if(strcasecmp($password,$confirmPassword) == 0){
+
+            $validate = true;
+        }
+
+        return $validate;
+
+    }
+
+
 
     /**
      * Validate if the entered email is valid

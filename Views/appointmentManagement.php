@@ -211,12 +211,34 @@ include_once('nav.php');
     ?>
 
 
-
+<?php if(isset($version) && $version==1){?>
     <div class="offset-lg-5" style="width:20%;hieght:10%;text-align:center">
         <h2 class="page-header" >Analytics Reports </h2>
-        <div>Job Offers per career </div>
+        <div><h6>Job Offers per Career</h6> </div>
+        <br>
         <canvas  id="chartjs_bar"></canvas>
     </div>
+    <?php }?>
+
+
+    <?php if(isset($version) && $version==2){?>
+        <div class="offset-lg-5" style="width:20%;hieght:10%;text-align:center">
+            <h2 class="page-header" >Analytics Reports </h2>
+            <div><h6>Job Offers per Company</h6> </div>
+            <br>
+            <canvas  id="chartjs_bar"></canvas>
+        </div>
+    <?php }?>
+
+
+    <?php if(isset($version) && $version==3){?>
+        <div class="offset-lg-5" style="width:20%;hieght:10%;text-align:center">
+            <h2 class="page-header" >Analytics Reports </h2>
+            <div><h6>Appointments per Job Offer</h6> </div>
+            <br>
+            <canvas  id="chartjs_bar"></canvas>
+        </div>
+    <?php }?>
 
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
@@ -228,11 +250,11 @@ include_once('nav.php');
                 labels:<?php echo json_encode($carreras); ?>,
                 datasets: [{
                     backgroundColor: [
-                        "#5969ff",
-                        "#ff407b",
-                        "#25d5f2",
-                        "#ffc750",
-                        "#2ec551",
+                        "#a3abf8",
+                        "#e8aefa",
+                        "#90e0f3",
+                        "#efd99e",
+                        "#99f6a8",
                         "#7040fa",
                         "#ff004e"
                     ],
@@ -495,8 +517,11 @@ include_once('nav.php');
                         foreach ($allCompanies as $company) {
                             if ($value->getCompany()->getCompanyId() == $company->getCompanyId()) {
 
-                                if ($value->getActive() == "true" && $company->getActive()=='true' && strtotime($value->getEndDate()) >= strtotime(date("Y-m-d")) ) {
+                                if ($company->getActive()=='true')  { //una job offer que finalizo se establece como inactive, pero sus postulaciones son validas.
+                                                                      //si una empresa inactivada (al quererse eliminar o manualmente) cuando posee postulaciones en alguna job offer, esas offers NO son validas salvo que sea active nuevamente
+                                                                       //en la tabla de appointment estan todas las appointment actuales validas, salvo las de una job offer de una company inactiva (si se elimina una job offer tambien sus postulaciones, por lo que no estarian en la tabla de appointment)
                                     ?>
+
 
                                     <div class="single-post d-flex flex-row">
                                         <div class="thumb ">
@@ -610,33 +635,13 @@ include_once('nav.php');
                                                         </form>
                                                     </td>
                                                     <br>
-                                                    <td>
-                                                        <form action="<?php echo FRONT_ROOT . "Job/editJobOffer" ?>"
-                                                              method="POST">
-                                                            <button type="submit" name="id"
-                                                                    class="btn buttonPer ml-auto d-block"
-                                                                    value="<?php echo $value->getJobOfferId() ?>"> Edit
-                                                            </button>
-                                                            <br>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
-                                                              method="POST">
-                                                            <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
-                                                                    value="<?php echo $value->getJobOfferId() ?>">
-                                                                Remove
-                                                            </button>
-                                                        </form>
-                                                    </td>
-
                                                 <?php } ?>
                                             </ul>
                                         </div>
                                     </div>
                                     <?php
                                 }
-                                else{ //VER QUE ONDA ESTO, SI QUIERO JOB OFFERS TERMINADAS CON APPOINTMENT (PERO SI AABO SE BORRAN LAS APOINTMENT... MMMM )
+                                else{ //COMPANY INACTIVA (APPOINTMENTS "NO" VALIDAS HASTA QUE SE VUELVA A ACTIVAR LA COMPANY)
 
                                         if(strtotime($value->getEndDate()) < strtotime(date("Y-m-d")) ||  $value->getActive() == "false" || $company->getActive()=='false'){
                                             ?>
@@ -753,28 +758,6 @@ include_once('nav.php');
                                                             </form>
                                                             <br>
                                                         </td>
-                                                        <?php if ($loggedUser->getRol()->getUserRolId()==1) { ?>
-                                                            <td>
-                                                                <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
-                                                                      method="POST">
-                                                                    <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
-                                                                            value="<?php echo $value->getJobOfferId() ?>">
-                                                                        Remove
-                                                                    </button>
-                                                                </form>
-                                                            </td>
-                                                            <br>
-                                                            <td>
-                                                                <form action="<?php echo FRONT_ROOT . "Job/editJobOffer" ?>"
-                                                                      method="POST">
-                                                                    <button type="submit" name="id"
-                                                                            class="btn ml-auto buttonPer d-block"
-                                                                            value="<?php echo $value->getJobOfferId() ?>"> Edit
-                                                                    </button>
-                                                                </form>
-                                                            </td>
-
-                                                        <?php } ?>
                                                     </ul>
                                                 </div>
                                             </div>

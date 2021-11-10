@@ -84,35 +84,46 @@ class AppointmentController
         //require_once(VIEWS_PATH . "checkLoggedUser.php");
         SessionHelper::checkUserSession();
 
-        if ($this->loggedUser->getRol()->getUserRolId() == 2) {
-            try {
+        if ($this->loggedUser->getRol()->getUserRolId() == 2)
+        {
+            try
+            {
                 $actualAppointment = $this->appointmentDAO->getAppointment($this->loggedUser->getUserId());
 
             } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }
 
-            //esto solo funciona si actualappointment retorna algo, sino tira error
-            if ($actualAppointment != null) {
-                if (strtotime($actualAppointment->getJobOffer()->getEndDate()) < strtotime(date("Y-m-d"))) {
+            //LA APPOINTMENT ES ACTUAL HASTA TANTO SEA RECHAZADA/ELIMINADA POR LA EMPRESA/ADMIN (no se rige por end date)
+            if ($actualAppointment != null)
+            {
+                /*
+                if (strtotime($actualAppointment->getJobOffer()->getEndDate()) < strtotime(date("Y-m-d")))
+                {
 
                     $message = $this->Remove($this->loggedUser->getUserId(), 1);
                     $actualAppointment = null;
-                } else {
+               */
 
-                    if ($this->allCareers == null) {
-                        $allCareers = $this->careersOrigin->start($this->careersOrigin);
-                    } else {
-                        $allCareers = $this->allCareers;
-                    }
 
-                    foreach ($allCareers as $career) {
-                        if ($career->getCareerId() == $actualAppointment->getJobOffer()->getCareer()->getCareerId()) {
-                            $searchCareer = $career;
-                        }
+                if ($this->allCareers == null)
+                {
+                    $allCareers = $this->careersOrigin->start($this->careersOrigin);
+                } else
+                {
+                    $allCareers = $this->allCareers;
+                }
+
+                foreach ($allCareers as $career)
+                {
+                    if ($career->getCareerId() == $actualAppointment->getJobOffer()->getCareer()->getCareerId())
+                    {
+                        $searchCareer = $career;
                     }
                 }
-            }
+
+           }
+
 
             $appointmentHistory = new AppointmentHistoryDAO();
             try {
@@ -126,7 +137,8 @@ class AppointmentController
             require_once(VIEWS_PATH . "appointmentsList.php");
 
 
-        } else if ($this->loggedUser->getRol()->getUserRolId() == 1) {
+        } else if ($this->loggedUser->getRol()->getUserRolId() == 1)
+        {
             try {
 
                 $allAppointments = $this->appointmentDAO->getAll();
@@ -174,6 +186,7 @@ class AppointmentController
         }
 
     }
+
 
 
     /**
@@ -606,6 +619,7 @@ class AppointmentController
             if($valueToSearch==null && $titleToSearch==null )
             {
                 $finalArray=$this->careerOfferStadistic($allOffers);
+                $version=1;
             }
 
             if($valueToSearch!=null && $valueToSearch!='finalValue')
@@ -632,6 +646,7 @@ class AppointmentController
                     $searchedValue = $this->searchJobCareerFiltre($allOffers, $valueToSearch);
                     $allOffers=$searchedValue;
                     $finalArray=$this->careerOfferStadistic($allOffers);
+                    $version=1;
                     $careerValidation=1;
                 }
             }
@@ -639,11 +654,13 @@ class AppointmentController
             if($careerValidation==1 && $companyValidation==null && $valueToSearch!='finalValue')
             {
                 $finalArray=$this->companyOfferStadistic($allOffers);
+                $version=2;
             }
 
             if($companyValidation==1 && $careerValidation==null && $valueToSearch!='finalValue')
             {
                 $finalArray=$this->titlesOfferStadistic($allOffers);
+                $version=3;
             }
 
             //var_dump($valueToSearch);
@@ -677,7 +694,7 @@ class AppointmentController
 
           //--------FILTROS END---------------------------------------
 
-             var_dump($allOffers);
+             //var_dump($allOffers);
             require_once(VIEWS_PATH . "appointmentManagement.php");
 
         }
