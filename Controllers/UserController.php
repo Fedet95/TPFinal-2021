@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use DAO\CompanyDAO;
+use DAO\JobOfferDAO;
 use Models\SessionHelper;
 
 SessionHelper::checkUserSession();
@@ -352,6 +354,7 @@ class UserController
 
         $userRol = $this->getRolId("administrator");
 
+
         if ($userRol != null) {
 
             $flag = 0;
@@ -363,8 +366,49 @@ class UserController
 
             if (is_object($allAdmins)) { //only one admin in the system
                 $flag = 1;
+                $message = "The system currently only has one administrator and cannot be deleted";
             }
         }
+
+        if($flag==0)
+        {
+            if($this->loggedUser->getUserId()==$id)
+            {
+                $flag = 1;
+                $message = "Logged account cannot be deleted";
+            }
+        }
+
+
+     if($flag==0)
+     {
+         $companyDao= new CompanyDAO();
+         $offerDao= new JobOfferDAO();
+
+         $allCompanies= $companyDao->getAll();
+         $allOffers= $offerDao->getAll();
+
+         foreach ($allCompanies as $company)
+         {
+             if($company->getCreationAdmin()->getUserId()==$id)
+             {
+                 $flag=1;
+                 $message="The selected administrator cannot be deleted while there are companies/offers created by him";
+             }
+         }
+
+         foreach ($allOffers as $offer)
+         {
+             if($offer->getCreationAdmin()->getUserId()==$id)
+             {
+                 $flag=1;
+                 $message="The selected administrator cannot be deleted while there are companies/offers created by him";
+             }
+         }
+     }
+
+
+
 
         if ($flag == 0) {
             try {
@@ -380,7 +424,6 @@ class UserController
                 echo $ex->getMessage();
             }
         } else {
-            $message = "The system currently only has one administrator and cannot be deleted";
             $this->showAdminListView($message);
         }
     }

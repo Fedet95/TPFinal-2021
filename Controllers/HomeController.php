@@ -3,6 +3,8 @@
 namespace Controllers;
 
 
+use DAO\CompanyDAO;
+use DAO\JobOfferDAO;
 use DAO\OriginStudentDAO;
 use DAO\UserDAO;
 use DAO\UserRolDAO;
@@ -66,6 +68,7 @@ class HomeController
     {
         //require_once(VIEWS_PATH."checkLoggedAdmin.php");
         SessionHelper::checkAdminSession();
+        $finalArray= $this->adminPanelCards();
         require_once(VIEWS_PATH."administratorControlPanel.php"); //panel de control
     }
 
@@ -316,7 +319,43 @@ class HomeController
     }
 
 
+    public function adminPanelCards()
+    {
+        $companydao= new CompanyDAO();
+        $userdao= new UserDAO();
+        $jobOfferdao= new JobOfferDAO();
 
+        $allCompanies= $companydao->getAll();
+        $allStudents= $userdao->getRol(2);
+        $allOffers= $jobOfferdao->getAll();
+
+    if (is_object($allCompanies)) {
+        $com = $allCompanies;
+        $allCompanies = array();
+        array_push($allCompanies, $com);
+    }
+
+    if(is_object($allOffers))
+    { $offer= $allOffers;
+        $allOffers= array();
+        array_push($allOffers, $offer);
+    }
+
+    if(is_object($allStudents))
+    { $std= $allStudents;
+        $allStudents= array();
+        array_push($allStudents, $std);
+    }
+
+       $cantC= count($allCompanies);
+        $cantS= count($allStudents);
+        $cantO=count($allOffers);
+
+        $finalArray= array("cantC"=>$cantC, "cantS"=>$cantS, "cantO"=>$cantO);
+
+        return $finalArray;
+
+    }
 
 }
 
