@@ -52,8 +52,11 @@ class AppointmentController
         SessionHelper::checkStudentSession();
 
 
+
         $flag = $this->validateActiveStudent($studentId);
+
         if ($flag == 1) {
+
             $validate = $this->uniqueAppointment($studentId);
             if ($validate == 1) {
                 $_SESSION['applyOffer'] = $jobOfferId;
@@ -63,6 +66,7 @@ class AppointmentController
             }
 
         } else {
+
             $this->showWelcomeView('Your account is not active, please get in contact with the university'); //in case the student is inactive at the moment of applying a job
         }
 
@@ -219,6 +223,7 @@ class AppointmentController
             echo $ex->getMessage();
         }
 
+
         try {
 
             if ($student != null) {
@@ -228,21 +233,24 @@ class AppointmentController
             echo $ex->getMessage();
         }
 
+
         $validate = 0;
         if ($searchedAppointment != null) {
-            if (strtotime($searchedAppointment->getJobOffer()->getEndDate()) < strtotime(date("Y-m-d"))) { //no more actual appointment
+
+            $validate = 1;
+        }
+
+        /* VERSION VIEJA EN QUE SE AUTO ELIMINABA LA APPOOINTMENT
+         * if (strtotime($searchedAppointment->getJobOffer()->getEndDate()) < strtotime(date("Y-m-d"))) { //no more actual appointment
                 $message = $this->Remove($this->loggedUser->getUserId(), 1);
                 $validate = 0;
             } else //actual appointment correct
             {
                 $validate = 1;
             }
+         */
 
-            if ($validate == 0) {
-                $validate = $message;
-            }
 
-        }
 
         return $validate;
     }
@@ -255,8 +263,9 @@ class AppointmentController
      * @param $jobOfferId
      * @param $cv
      */
-    public function addAppointment($text, $studentId, $jobOfferId, $cv)
+    public function addAppointment($text, $studentId, $jobOfferId, $cv) //studentId=email
     {
+
         //require_once(VIEWS_PATH . "checkLoggedStudent.php");
         SessionHelper::checkStudentSession();
 
@@ -264,18 +273,31 @@ class AppointmentController
         $appointment = new Appointment();
         $appointment = $this->validateCv($appointment);
 
+
+        try {
+            $userDAO = new UserDAO();
+            $studentSearched = $userDAO->searchByEmail($studentId);
+
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+
+
         if ($appointment != null) {
+
             $appointment->setMessage($text);
             $jobOffer = new JobOffer();
             $jobOffer->setJobOfferId($jobOfferId);
             $appointment->setJobOffer($jobOffer);
             $appointment->setDate((new \DateTime())->format('Y-m-d'));
             $student = new User();
-            $student->setUserId($studentId);
+            $student->setUserId($studentSearched->getUserId());
             $appointment->setStudent($student);
+
 
             try {
                 $count = $this->appointmentDAO->add($appointment);
+
 
                 if ($count > 0) {
                     $searchOffer = $this->jobOfferDAO->getJobOffer($jobOfferId);
@@ -288,7 +310,7 @@ class AppointmentController
                     $career->setDescription($searchOffer->getCareer()->getDescription());
                     $history->setCareer($career);
                     $student = new User();
-                    $student->setUserId($studentId);
+                    $student->setUserId($studentSearched->getUserId());
                     $history->setStudent($student);
                     try {
                         $companyDao = new CompanyDAO();
@@ -420,6 +442,7 @@ class AppointmentController
         $allStudents = $studentsOrigin->start($studentsOrigin);
 
         $flag = 0;
+
         foreach ($allStudents as $value) {
             if ($value->getEmail() == $email) {
                 if ($value->getActive() == 'true') {

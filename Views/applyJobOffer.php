@@ -78,7 +78,7 @@ include_once('nav.php');
                                           required></textarea>
                             </div>
 
-                            <input type="hidden" name="studentId" value="<?php echo $loggedUser->getUserId() ?>">
+                            <input type="hidden" name="studentId" value="<?php echo $loggedUser->getEmail() ?>"> <!--necesita el email para validar si es pdf!-->
 
                             <input type="hidden" name="jobOfferId" value="<?php echo $jobOfferId?>">
                             <input type="submit" class="btnRegister buttonPer text-strong font-weight-bold" value="Apply"/>
