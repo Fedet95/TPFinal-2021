@@ -780,7 +780,7 @@ class CompanyController
                 }
             }
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             $flag=1;
             echo $ex->getMessage();

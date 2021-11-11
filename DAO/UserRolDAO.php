@@ -26,7 +26,7 @@ class UserRolDAO implements lUserRolDAO
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }
@@ -47,7 +47,7 @@ class UserRolDAO implements lUserRolDAO
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }
@@ -71,7 +71,7 @@ class UserRolDAO implements lUserRolDAO
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }

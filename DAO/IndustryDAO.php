@@ -26,7 +26,7 @@ class IndustryDAO implements lIndustryDAO
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters); //el executeNonquery no retorna array, sino la cantidad de datos modificados
             return $this->connection->lastId();
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }
@@ -50,7 +50,7 @@ class IndustryDAO implements lIndustryDAO
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }
@@ -67,7 +67,7 @@ class IndustryDAO implements lIndustryDAO
 
             $result = $this->connection->Execute($query, $parameters);
 
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
 
@@ -93,7 +93,7 @@ class IndustryDAO implements lIndustryDAO
 
             $this->connection->ExecuteNonQuery($query, $parameters);
 
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }
@@ -118,7 +118,7 @@ class IndustryDAO implements lIndustryDAO
 
             return $mapedArray;
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }

@@ -33,7 +33,7 @@ class AppointmentHistoryDAO implements IAppointmentHistoryDAO
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query,$parameters);
 
-        }catch (\PDOException $ex)
+        }catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -62,7 +62,7 @@ class AppointmentHistoryDAO implements IAppointmentHistoryDAO
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -88,7 +88,7 @@ class AppointmentHistoryDAO implements IAppointmentHistoryDAO
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }

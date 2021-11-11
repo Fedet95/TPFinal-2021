@@ -27,7 +27,7 @@ class CountryDAO implements lCountryDAO
             $this->connection->ExecuteNonQuery($query,$parameters);
             return $this->connection->lastId();
 
-        }catch (\PDOException $ex)
+        }catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -55,7 +55,7 @@ class CountryDAO implements lCountryDAO
 
             return $mappedArray;
 
-        }catch(\PDOException $ex)
+        }catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -85,7 +85,7 @@ class CountryDAO implements lCountryDAO
 
             return $mapedArray;
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -111,7 +111,7 @@ class CountryDAO implements lCountryDAO
 
             return $mapedArray;
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }

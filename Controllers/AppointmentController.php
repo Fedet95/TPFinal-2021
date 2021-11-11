@@ -879,11 +879,6 @@ class AppointmentController
     }
 
 
-
-
-
-
-
     /**
      * Returns a searched job offer by career or all offers otherwise
      * @param $allOffers

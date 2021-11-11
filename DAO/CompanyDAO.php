@@ -51,7 +51,7 @@ class CompanyDAO implements lCompanyDAO
             $this->connection->ExecuteNonQuery($query, $parameters); //el executeNonquery no retorna array, sino la cantidad de datos modificados
 
         }
-        catch(\PDOException $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -91,7 +91,7 @@ class CompanyDAO implements lCompanyDAO
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -114,7 +114,7 @@ class CompanyDAO implements lCompanyDAO
 
             return $count=$this->connection->ExecuteNonQuery($query, $parameters);
         }
-        catch(\PDOException $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -150,7 +150,7 @@ class CompanyDAO implements lCompanyDAO
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -180,7 +180,7 @@ class CompanyDAO implements lCompanyDAO
 
             return $flag;
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -210,7 +210,7 @@ class CompanyDAO implements lCompanyDAO
 
             return $flag;
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -241,7 +241,7 @@ class CompanyDAO implements lCompanyDAO
 
             return $flag;
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -278,7 +278,7 @@ class CompanyDAO implements lCompanyDAO
 
             return $count= $this->connection->ExecuteNonQuery($query, $parameters);
         }
-        catch(\PDOException $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }

@@ -211,57 +211,6 @@ class UserDAO implements lUserDAO
     }
 
 
-/*
-    /**
-     * Update json student values with information from origin file (at student login)
-     * @param $student
-
-    public function updateStudentFile($student = null, $studentsArray = null)
-    {
-
-        if ($student != null)
-        {
-            try {
-                $searchedStudent = $this->getUser($student->getUserId(), $student->getRol()->getUserRolId());
-
-                if ($searchedStudent != null) {
-                    if ($searchedStudent != $student) {
-                        try {
-                            $this->update($student);
-                        } catch (\Exception $ex) {
-                            echo $ex->getMessage();
-                        }
-                    }
-                }
-
-            } catch (\Exception $ex) {
-                echo $ex->getMessage();
-            }
-
-        } else if ($studentsArray != null) {
-            foreach ($studentsArray as $value) {
-                try {
-                    $searchedStudent = $this->getUser($student->getUserId(), $student->getRol()->getUserRolId());
-
-                    if ($searchedStudent != null) {
-                        if ($searchedStudent != $value) {
-                            try {
-                                $this->update($value);
-                            } catch (\Exception $ex) {
-                                echo $ex->getMessage();
-                            }
-                        }
-                    }
-
-                } catch (\Exception $ex) {
-                    echo $ex->getMessage();
-                }
-            }
-        }
-    }
-    */
-
-
     public function mapear($array)
     {
         $array = is_array($array) ? $array : []; //si lo que viene como parametro es un array lo deja como viene, sino lo guarda como array vacio

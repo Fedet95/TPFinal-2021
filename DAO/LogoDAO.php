@@ -22,7 +22,7 @@ class LogoDAO implements ILogoDao
             $this->connection->ExecuteNonQuery($query, $parameters); //el executeNonquery no retorna array, sino la cantidad de datos modificados
             return $this->connection->lastId();
         }
-        catch(\PDOException $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -46,7 +46,7 @@ class LogoDAO implements ILogoDao
 
             return $mappedArray;
 
-        }catch(\PDOException $ex)
+        }catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -64,7 +64,7 @@ class LogoDAO implements ILogoDao
 
             return $count=$this->connection->ExecuteNonQuery($query, $parameters);
         }
-        catch(\PDOException $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -83,7 +83,7 @@ class LogoDAO implements ILogoDao
             $this->connection = Connection::GetInstance();
 
             $this->connection->ExecuteNonQuery($query, $parameters);
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
 
@@ -110,7 +110,7 @@ class LogoDAO implements ILogoDao
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }

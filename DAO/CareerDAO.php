@@ -25,7 +25,7 @@ class CareerDAO implements lCareerDAO
 
             $this->connection->ExecuteNonQuery($query, $parameters);
         }
-        catch(\PDOException $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -44,7 +44,7 @@ class CareerDAO implements lCareerDAO
             $resultSet = $this->connection->Execute($query, array());
 
         }
-        catch(\PDOException $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -82,7 +82,7 @@ class CareerDAO implements lCareerDAO
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -106,7 +106,7 @@ class CareerDAO implements lCareerDAO
 
             $this->connection->ExecuteNonQuery($query, $parameters);
         }
-        catch(\PDOException $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -174,33 +174,4 @@ class CareerDAO implements lCareerDAO
             }
         }
     }
-
-
-
-
-
-    /*
-    function add(Career $career)
-    {
-        try
-        {
-            $query = "CALL Careers_Add (:careerId, :description, :active)";
-
-            $parameters["careerId"] =  $career->getCareerId();
-            $parameters["description"] = $career->getDescription();
-            $parameters["active"] = $career->getActive();
-
-            $this->connection = Connection::GetInstance();
-
-            $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);
-        }
-        catch(\PDOException $ex)
-        {
-            throw $ex;
-        }
-    }
-
-    */
-
-
 }

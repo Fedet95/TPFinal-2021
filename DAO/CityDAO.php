@@ -26,7 +26,7 @@ class CityDAO implements lCityDAO
             $this->connection->ExecuteNonQuery($query,$parameters);
             return $this->connection->lastId();
 
-        }catch (\PDOException $ex)
+        }catch (\Exception $ex)
         {
             throw $ex;
         }
@@ -54,7 +54,7 @@ class CityDAO implements lCityDAO
 
             return $mappedArray;
 
-        }catch(\PDOException $ex)
+        }catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -83,7 +83,7 @@ class CityDAO implements lCityDAO
 
             return $mapedArray;
         }
-        catch (\PDOException $ex)
+        catch (\Exception $ex)
         {
             throw $ex;
         }
