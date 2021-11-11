@@ -772,7 +772,11 @@ class AppointmentController
 
     }
 
-
+    /**
+     * Returns searched job offer titles for pie char in appointment management view
+     * @param $allOffers
+     * @return array|mixed
+     */
     public function titlesOfferStadistic($allOffers)
     {
 
@@ -818,7 +822,11 @@ class AppointmentController
 
 
 
-
+    /**
+     * Returns searched career for pie char in appointment management view
+     * @param $allOffers
+     * @return array|mixed
+     */
     public function careerOfferStadistic($allOffers)
     {
 
@@ -860,6 +868,11 @@ class AppointmentController
 
     }
 
+    /**
+     * Returns searched companies for pie char in appointment management view
+     * @param $allOffers
+     * @return array|mixed
+     */
     public function companyOfferStadistic($allOffers)
     {
 
@@ -949,6 +962,9 @@ class AppointmentController
     }
 
 
+    /**
+     * Generates a PDF with appointments from a job offer
+     */
     public function infoToPdf($allAppointments, $jobOffer)
     {
         SessionHelper::checkAdminSession();
@@ -974,19 +990,22 @@ class AppointmentController
         $data.='<h4>Postulated Students: </h4>'.'<br>';
 
 
-        $i=1;
-        foreach ($allAppointments as $appointment)
-        {
-            $data.= $i.'<strong>) </strong>'.'<br>';
-            $data.= '<strong>-Last Name: </strong>'. $appointment->getStudent()->getLastName().'<br>';
-            $data.= '<strong>-Firt Name: </strong>'. $appointment->getStudent()->getFirstName().'<br>';
-            $data.= '<strong>-DNI: </strong>'. $appointment->getStudent()->getDni().'<br>';
-            $data.=' <strong>-Phone number: </strong>'. $appointment->getStudent()->getPhoneNumber().'<br>';
-            $data.=' <strong>-Email: </strong>'. $appointment->getStudent()->getEmail().'<br>';
-            $data.=' <strong>-Application Date: </strong>'. $appointment->getDate().'<br>';
-            $data.='<br><br>';
-            $i++;
-        }
+      if($allAppointments!=null)
+      {
+          $i=1;
+          foreach ($allAppointments as $appointment)
+          {
+              $data.= $i.'<strong>) </strong>'.'<br>';
+              $data.= '<strong>-Last Name: </strong>'. $appointment->getStudent()->getLastName().'<br>';
+              $data.= '<strong>-Firt Name: </strong>'. $appointment->getStudent()->getFirstName().'<br>';
+              $data.= '<strong>-DNI: </strong>'. $appointment->getStudent()->getDni().'<br>';
+              $data.=' <strong>-Phone number: </strong>'. $appointment->getStudent()->getPhoneNumber().'<br>';
+              $data.=' <strong>-Email: </strong>'. $appointment->getStudent()->getEmail().'<br>';
+              $data.=' <strong>-Application Date: </strong>'. $appointment->getDate().'<br>';
+              $data.='<br><br>';
+              $i++;
+          }
+      }
 
         $mpdf->WriteHTML($data);
         ob_clean();

@@ -11,9 +11,7 @@ use DAO\UserRolDAO;
 use Models\SessionHelper;
 use Models\User;
 
-/**
- *
- */
+
 class HomeController
 {
     private $userDAO;
@@ -182,6 +180,9 @@ class HomeController
     }
 
 
+    /**
+     * Validates signing up in the system
+     */
     public function signUp($email, $dni)
     {
         $searchedStudent= $this->searchStudentEmail($email); //from origin
@@ -231,6 +232,9 @@ class HomeController
         }
     }
 
+    /**
+     * Validates signing up password in the system
+     */
     public function signUpPassword($password1, $password2, $email)
     {
          if($password1==$password2)
@@ -319,6 +323,9 @@ class HomeController
     }
 
 
+    /**
+     * Returns information to show on cards in admin control panel view
+     */
     public function adminPanelCards()
     {
         $companydao = new CompanyDAO();

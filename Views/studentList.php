@@ -85,7 +85,7 @@ include_once('nav.php');
                 </tr>
                 <?php
             }}else{?> <h6 class="py-3 text-muted text-center text-strong"><?php echo "We couldn't find any student"?></h6>  <?php }?>
-            ?>
+
             </tbody>
         </table>
     </div>

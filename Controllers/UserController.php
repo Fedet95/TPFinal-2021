@@ -579,6 +579,9 @@ class UserController
     }
 
 
+    /**
+     * Validates if passwords match
+     */
     public function validatePassword($password, $confirmPassword)
     {
 
