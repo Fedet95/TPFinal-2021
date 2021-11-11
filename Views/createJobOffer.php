@@ -20,7 +20,17 @@ include_once('nav.php');
                             <label class="text-muted text-strong text" for="">Offering Company</label>
                             <select name="company" class="form-control" required >
                                 <option value="" disabled selected class="text-center">Select offering company</option>
+
+
+
                                 <?php
+
+                                  if(is_object($allCompanies))
+                    { $com= $allCompanies;
+                        $allCompanies= array();
+                        array_push($allCompanies, $com);
+                    }
+
                                 foreach ($allCompanies as $value)
                                 {
                                     if($value->getActive()=='true')

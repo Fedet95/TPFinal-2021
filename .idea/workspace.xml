@@ -5,21 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/TPFinal 2021.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TPFinal 2021.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/administratorControlPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/administratorControlPanel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/Views/css/estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/CompanyDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CompanyDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/JobOfferPositionDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferPositionDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/UserDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/appointmentManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentManagement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/createJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/createJobOffer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
     </list>
     <list id="8ccc725f-7d6d-41b9-a85b-19712bbd211e" name="Changes by Fede" comment="Changes by Fede" />
-    <list id="90859d74-00b1-413e-984d-c2b993371ef8" name="Changes by paye_" comment="Changes by paye_" />
+    <list id="90859d74-00b1-413e-984d-c2b993371ef8" name="Changes by paye_" comment="Changes by paye_">
+      <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/AppointmentHistoryDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentHistoryDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/CareerDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CareerDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/CityDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CityDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/CompanyDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CompanyDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/CountryDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CountryDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/IndustryDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/IndustryDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/LogoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/LogoDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/UserDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/UserRolDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/UserRolDAO.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="ExportToHTMLSettings">
@@ -35,6 +56,88 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/Controllers/CompanyController.php">
+      <ranges>
+        <range start1="23" end1="26" start2="23" end2="24" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="784" end1="785" start2="782" end2="783" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+        <range start1="853" end1="854" start2="851" end2="852" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="856" end1="857" start2="854" end2="855" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="868" end1="869" start2="866" end2="867" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="881" end1="883" start2="879" end2="880" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="887" end1="888" start2="884" end2="885" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="906" end1="907" start2="903" end2="904" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="913" end1="914" start2="910" end2="911" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="916" end1="917" start2="913" end2="914" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="920" end1="921" start2="917" end2="918" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="927" end1="928" start2="924" end2="925" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="937" end1="938" start2="934" end2="935" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="962" end1="963" start2="959" end2="960" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="971" end1="972" start2="968" end2="969" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="979" end1="980" start2="976" end2="976" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/Controllers/AppointmentController.php">
+      <ranges>
+        <range start1="194" end1="195" start2="194" end2="195" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="599" end1="601" start2="599" end2="603" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="602" end1="604" start2="604" end2="613" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="605" end1="611" start2="614" end2="620" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="612" end1="613" start2="621" end2="622" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="614" end1="615" start2="623" end2="624" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="617" end1="617" start2="626" end2="631" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="618" end1="619" start2="632" end2="633" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="620" end1="622" start2="634" end2="636" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="624" end1="631" start2="638" end2="645" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="632" end1="637" start2="646" end2="651" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="638" end1="652" start2="652" end2="666" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="653" end1="655" start2="667" end2="669" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="656" end1="667" start2="670" end2="681" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="668" end1="671" start2="682" end2="685" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="672" end1="681" start2="686" end2="695" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="682" end1="687" start2="696" end2="701" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="688" end1="693" start2="702" end2="707" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="695" end1="700" start2="709" end2="714" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="701" end1="710" start2="715" end2="724" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="711" end1="715" start2="725" end2="729" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="717" end1="718" start2="731" end2="732" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="720" end1="721" start2="734" end2="735" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="722" end1="723" start2="736" end2="748" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="856" end1="861" start2="881" end2="881" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/DAO/CompanyDAO.php">
+      <ranges>
+        <range start1="53" end1="54" start2="53" end2="54" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+        <range start1="83" end1="83" start2="83" end2="89" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="87" end1="88" start2="93" end2="94" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+        <range start1="110" end1="111" start2="116" end2="117" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+        <range start1="146" end1="147" start2="152" end2="153" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+        <range start1="176" end1="177" start2="182" end2="183" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+        <range start1="206" end1="207" start2="212" end2="213" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+        <range start1="237" end1="238" start2="243" end2="244" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+        <range start1="274" end1="275" start2="280" end2="281" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/DAO/UserDAO.php">
+      <ranges>
+        <range start1="81" end1="81" start2="81" end2="87" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="107" end1="107" start2="113" end2="119" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="144" end1="168" start2="156" end2="156" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="224" end1="275" start2="212" end2="212" changelist="90859d74-00b1-413e-984d-c2b993371ef8" />
+      </ranges>
+    </file>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/setasign/fpdi" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/mpdf/mpdf" />
+    </include_path>
   </component>
   <component name="ProjectId" id="1ySBkMTs6YzgRSxILEKaOJWvsUQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -120,14 +223,8 @@
       <workItem from="1636463619761" duration="42625000" />
       <workItem from="1636513135939" duration="401000" />
       <workItem from="1636549410598" duration="11527000" />
-      <workItem from="1636562833947" duration="28650000" />
-    </task>
-    <task id="LOCAL-00065" summary="Changes by paye_">
-      <created>1635951020304</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1635951020304</updated>
+      <workItem from="1636562833947" duration="28732000" />
+      <workItem from="1636638133979" duration="4800000" />
     </task>
     <task id="LOCAL-00066" summary="update">
       <created>1635951026498</created>
@@ -465,7 +562,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636591383288</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="update">
+      <created>1636598126279</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1636598126279</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -51,6 +51,14 @@ include_once('nav.php');
     </section>
 
 
+    <?php
+    if(is_object($allOffers))
+    { $offer= $allOffers;
+        $allOffers= array();
+        array_push($allOffers, $offer);
+    }?>
+
+
     <?php if(isset($allOffers) && $allOffers!=null){?>
         <section class="feature-cat-area pt-100" id="category">
             <div class="container">
@@ -408,7 +416,16 @@ include_once('nav.php');
                      { $offer= $allOffers;
                          $allOffers= array();
                          array_push($allOffers, $offer);
-                     }?>
+                     }
+
+                     if(is_object($allCompanies))
+                     { $com= $allCompanies;
+                         $allCompanies= array();
+                         array_push($allCompanies, $com);
+                     }
+
+
+                     ?>
 
 
 
@@ -719,8 +736,21 @@ include_once('nav.php');
             </div>
         </section>
 <?php }else{?>
-        <h6 class="py-3 text-muted text-center text-strong mb-100"><?php echo "No Job Offers  currently available" ?></h6>
-        <br><br><br>
+            <br><br><br><br>
+        <h4 class="py-3 text-muted text-center text-strong mb-100"><?php echo "No Job Offers  currently available" ?></h4>
+        <section id="hero" class=" align-items-center justify-content-center">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+
+                    <div class=" d-flex justify-content-center " data-aos="fade-up" data-aos-delay="200">
+                    </div>
+                    <div class=" hero-img" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="../Views/img/admini.png" width="450" height="350" class="img-fluid animated" alt="">
+
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Hero -->
         <?php }?>
 
         <!-- End post Area -->

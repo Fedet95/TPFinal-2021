@@ -81,6 +81,12 @@ class CompanyDAO implements lCompanyDAO
             if(!empty($result))
             {
                 $mapedArray= $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+
+                if(is_object($mapedArray))
+                { $com= $mapedArray;
+                    $mapedArray= array();
+                    array_push($mapedArray, $com);
+                }
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL

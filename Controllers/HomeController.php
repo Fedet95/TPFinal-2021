@@ -321,35 +321,57 @@ class HomeController
 
     public function adminPanelCards()
     {
-        $companydao= new CompanyDAO();
-        $userdao= new UserDAO();
-        $jobOfferdao= new JobOfferDAO();
+        $companydao = new CompanyDAO();
+        $userdao = new UserDAO();
+        $jobOfferdao = new JobOfferDAO();
 
-        $allCompanies= $companydao->getAll();
-        $allStudents= $userdao->getRol(2);
-        $allOffers= $jobOfferdao->getAll();
+        $allCompanies = $companydao->getAll();
+        $allStudents = $userdao->getRol(2);
+        $allOffers = $jobOfferdao->getAll();
 
-    if (is_object($allCompanies)) {
-        $com = $allCompanies;
-        $allCompanies = array();
-        array_push($allCompanies, $com);
-    }
 
-    if(is_object($allOffers))
-    { $offer= $allOffers;
-        $allOffers= array();
-        array_push($allOffers, $offer);
-    }
+        if ($allOffers == null) {
+            $cantO = 0;
+        }
+        else {
+            if(is_object($allOffers))
+            { $offer= $allOffers;
+                $allOffers= array();
+                array_push($allOffers, $offer);
+            }
+            $cantO=count($allOffers);
+        }
 
-    if(is_object($allStudents))
-    { $std= $allStudents;
-        $allStudents= array();
-        array_push($allStudents, $std);
-    }
+        if ($allCompanies == null) {
+            $cantC = 0;
+        }
+        else
+        {
+            if (is_object($allCompanies)) {
+                $com = $allCompanies;
+                $allCompanies = array();
+                array_push($allCompanies, $com);
+            }
 
-       $cantC= count($allCompanies);
-        $cantS= count($allStudents);
-        $cantO=count($allOffers);
+
+            $cantC= count($allCompanies);
+        }
+
+        if($allStudents==null)
+        {
+          $cantS=0;
+        }
+        else
+        {
+
+            if(is_object($allStudents))
+            { $std= $allStudents;
+                $allStudents= array();
+                array_push($allStudents, $std);
+            }
+            $cantS= count($allStudents);
+        }
+
 
         $finalArray= array("cantC"=>$cantC, "cantS"=>$cantS, "cantO"=>$cantO);
 

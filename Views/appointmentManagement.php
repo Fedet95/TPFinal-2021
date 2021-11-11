@@ -9,6 +9,7 @@ include_once('nav.php');
 ?>
 
 
+
 <link rel="stylesheet" href="../Views/css/linearicons.css">
 <link rel="stylesheet" href="../Views/css/font-awesome.min.css">
 <link rel="stylesheet" href="../Views/css/bootstrap.css">
@@ -47,7 +48,7 @@ include_once('nav.php');
 <!-- End calto-action Area -->
 
 
-          <?php if(isset($allOffers) && $allOffers!=null){?>
+          <?php if(isset($allOffers) && $allOffers!=null && $allAppointments!=null){?>
 
 
 
@@ -459,13 +460,24 @@ include_once('nav.php');
 
                     <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
 
+
                     <?php
 
                     if(is_object($allOffers))
                     { $offer= $allOffers;
                         $allOffers= array();
                         array_push($allOffers, $offer);
-                    }?>
+                    }
+
+                    if(is_object($allCompanies))
+                    { $com= $allCompanies;
+                        $allCompanies= array();
+                        array_push($allCompanies, $com);
+                    }
+
+
+                    ?>
+
 
 
 
@@ -738,7 +750,23 @@ include_once('nav.php');
 
                 </div>
 
-                <?php } ?>
+                <?php }else{?>
+                    <h6 class="py-3 text-muted text-center text-strong mb-100"><?php echo "No Job Offers with appointments currently available" ?></h6>
+                    <section id="hero" class=" align-items-center justify-content-center">
+                        <div class="container">
+                            <div class="row justify-content-center align-items-center">
+
+                                <div class=" d-flex justify-content-center " data-aos="fade-up" data-aos-delay="200">
+                                </div>
+                                <div class=" hero-img" data-aos="zoom-in" data-aos-delay="200">
+                                    <img src="../Views/img/admini.png" width="450" height="350" class="img-fluid animated" alt="">
+
+                                </div>
+                            </div>
+                        </div>
+                    </section><!-- End Hero -->
+                    <br><br><br>
+                <?php }?> ?>
             </div>
         </div>
     </section>

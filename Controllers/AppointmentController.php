@@ -192,7 +192,7 @@ class AppointmentController
                     require_once(VIEWS_PATH . "appointmentsList.php");
                 }
 
-                //require_once(VIEWS_PATH . "appointmentsList.php");
+                require_once(VIEWS_PATH . "appointmentsList.php");
 
             } catch (\Exception $ex) {
                 echo $ex->getMessage();
@@ -597,130 +597,155 @@ class AppointmentController
         $allAppointments = $this->appointmentDAO->getAll();
 
         $offersWithAppointment = array();
-        if ($allAppointments != null) {
-            //search appointments from this jobofferid
-
-            foreach ($allOffers as $offer) {
-                $appointment = $this->searchAppointments($allAppointments, $offer->getJobOfferId()); //valueToSearch = $jobOffer ID
-
-                if($appointment!=null)
-                {
-                    $offer->setAppointment($appointment);
-                    array_push($offersWithAppointment, $offer);
-                }
-            }
-
-            $allOffers = $offersWithAppointment; //offers with appointments
-
-      //--------OFFERS CON SU APPOINTMENT---------------------------------------
+     if($allOffers!=null)
+     {
+         if ($allAppointments != null) {
+             //search appointments from this jobofferid
 
 
+             if(is_object($allOffers))
+             { $offer= $allOffers;
+                 $allOffers= array();
+                 array_push($allOffers, $offer);
+             }
 
-            //--------FILTROS START---------------------------------------
+             foreach ($allOffers as $offer) {
+                 $appointment = $this->searchAppointments($allAppointments, $offer->getJobOfferId()); //valueToSearch = $jobOffer ID
 
-            $careerValidation=null;
-            $companyValidation=null;
+                 if($appointment!=null)
+                 {
+                     $offer->setAppointment($appointment);
+                     array_push($offersWithAppointment, $offer);
+                 }
+             }
 
+             $allOffers = $offersWithAppointment; //offers with appointments
 
-            $all=null;
-            if($valueToSearch=='Show all Offers')
-            {
-                $all=1;
-                //$finalFilter=null;
-                $valueToSearch=null;
-            }
-
-            if($valueToSearch==null && $titleToSearch==null )
-            {
-                $finalArray=$this->careerOfferStadistic($allOffers);
-                $version=1;
-            }
-
-            if($valueToSearch!=null && $valueToSearch!='finalValue')
-            {
-                if(is_numeric($valueToSearch))
-                {
-                    if($allOffers!=null)
-                    {
-                        $companyId=null;
-                        $careerId=null;
-                        foreach ($allOffers as $value)
-                        {
-                            if($value->getJobOfferId()==$valueToSearch)
-                            {
-                                $companyId= $value->getCompany()->getCompanyId();
-                                $careerId=$value->getCareer()->getCareerId();
-
-                            }
-                        }
-
-                        $companyFilter = array();
-                        foreach ($allOffers as $offer)
-                        {
-                          if($offer->getCareer()->getCareerId()==$careerId)
-                          {
-                              if($offer->getCompany()->getCompanyId()==$companyId)
-                              {
-                                  array_push($companyFilter, $offer);
-                              }
-                          }
-                        }
-
-                        $allOffers=$companyFilter;
-                        $companyValidation=1;
-                    }
-
-                }
-                else{
-                    $searchedValue = $this->searchJobCareerFiltre($allOffers, $valueToSearch);
-                    $allOffers=$searchedValue;
-                    $finalArray=$this->careerOfferStadistic($allOffers);
-                    $version=1;
-                    $careerValidation=1;
-                }
-            }
-
-            if($careerValidation==1 && $companyValidation==null && $valueToSearch!='finalValue')
-            {
-                $finalArray=$this->companyOfferStadistic($allOffers);
-                $version=2;
-            }
-
-            if($companyValidation==1 && $careerValidation==null && $valueToSearch!='finalValue')
-            {
-                $finalArray=$this->titlesOfferStadistic($allOffers);
-                $version=3;
-            }
+             //--------OFFERS CON SU APPOINTMENT---------------------------------------
 
 
-            $finalFilter=null;
-            if($valueToSearch=='finalValue')
-            {
-                $companyValidation=null;
-                $titleSearched=array();
+             if(is_object($allOffers))
+             { $offer= $allOffers;
+                 $allOffers= array();
+                 array_push($allOffers, $offer);
+             }
 
-                if($allOffers!=null)
-                {
-                   foreach ($allOffers as $offer)
-                   {
-                       if($offer->getTitle()==$titleToSearch)
-                       {
-                           array_push($titleSearched, $offer);
-                       }
-                   }
+             //--------FILTROS START---------------------------------------
 
-                   $allOffers=$titleSearched;
-                   $finalFilter=1;
-                }
-            }
+             $careerValidation=null;
+             $companyValidation=null;
 
 
-          //--------FILTROS END---------------------------------------
+             $all=null;
+             if($valueToSearch=='Show all Offers')
+             {
+                 $all=1;
+                 //$finalFilter=null;
+                 $valueToSearch=null;
+             }
+
+             if($valueToSearch==null && $titleToSearch==null )
+             {
+                 $finalArray=$this->careerOfferStadistic($allOffers);
+                 $version=1;
+             }
+
+             if($valueToSearch!=null && $valueToSearch!='finalValue')
+             {
+                 if(is_numeric($valueToSearch))
+                 {
+                     if($allOffers!=null)
+                     {
+                         $companyId=null;
+                         $careerId=null;
+                         foreach ($allOffers as $value)
+                         {
+                             if($value->getJobOfferId()==$valueToSearch)
+                             {
+                                 $companyId= $value->getCompany()->getCompanyId();
+                                 $careerId=$value->getCareer()->getCareerId();
+
+                             }
+                         }
+
+                         $companyFilter = array();
+                         foreach ($allOffers as $offer)
+                         {
+                             if($offer->getCareer()->getCareerId()==$careerId)
+                             {
+                                 if($offer->getCompany()->getCompanyId()==$companyId)
+                                 {
+                                     array_push($companyFilter, $offer);
+                                 }
+                             }
+                         }
+
+                         $allOffers=$companyFilter;
+                         $companyValidation=1;
+                     }
+
+                 }
+                 else{
+                     $searchedValue = $this->searchJobCareerFiltre($allOffers, $valueToSearch);
+                     $allOffers=$searchedValue;
+                     $finalArray=$this->careerOfferStadistic($allOffers);
+                     $version=1;
+                     $careerValidation=1;
+                 }
+             }
+
+             if($careerValidation==1 && $companyValidation==null && $valueToSearch!='finalValue')
+             {
+                 $finalArray=$this->companyOfferStadistic($allOffers);
+                 $version=2;
+             }
+
+             if($companyValidation==1 && $careerValidation==null && $valueToSearch!='finalValue')
+             {
+                 $finalArray=$this->titlesOfferStadistic($allOffers);
+                 $version=3;
+             }
+
+
+             $finalFilter=null;
+             if($valueToSearch=='finalValue')
+             {
+                 $companyValidation=null;
+                 $titleSearched=array();
+
+                 if($allOffers!=null)
+                 {
+                     foreach ($allOffers as $offer)
+                     {
+                         if($offer->getTitle()==$titleToSearch)
+                         {
+                             array_push($titleSearched, $offer);
+                         }
+                     }
+
+                     $allOffers=$titleSearched;
+                     $finalFilter=1;
+                 }
+             }
+
+
+             //--------FILTROS END---------------------------------------
 
              //var_dump($allOffers);
-            require_once(VIEWS_PATH . "appointmentManagement.php");
+             require_once(VIEWS_PATH . "appointmentManagement.php");
 
-        }
+         }
+         else
+         {
+             $message="Theres no Appointment currently in the system";
+             require_once(VIEWS_PATH . "appointmentManagement.php");
+         }
+     }
+     else
+     {
+         $message="Theres no Job Offer currently in the system";
+         require_once(VIEWS_PATH . "appointmentManagement.php");
+     }
 
     }
 

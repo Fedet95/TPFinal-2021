@@ -22,7 +22,7 @@ class JobOfferPositionDAO implements IJobOfferPosition
             $this->connection =Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters); //el executeNonquery no retorna array, sino la cantidad de datos modificados
         }
-        catch(\PDOException $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -40,7 +40,7 @@ class JobOfferPositionDAO implements IJobOfferPosition
             $this->connection = Connection::GetInstance();
 
             $this->connection->ExecuteNonQuery($query, $parameters);
-        } catch (\PDOException $ex) {
+        } catch (\Exception $ex) {
             throw $ex;
         }
     }
@@ -62,7 +62,7 @@ class JobOfferPositionDAO implements IJobOfferPosition
 
             return $count=$this->connection->ExecuteNonQuery($query, $parameters);
         }
-        catch(\PDOException $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }

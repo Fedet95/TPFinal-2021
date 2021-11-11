@@ -388,23 +388,31 @@ class UserController
          $allCompanies= $companyDao->getAll();
          $allOffers= $offerDao->getAll();
 
-         foreach ($allCompanies as $company)
+         if($allCompanies!=null)
          {
-             if($company->getCreationAdmin()->getUserId()==$id)
+             foreach ($allCompanies as $company)
              {
-                 $flag=1;
-                 $message="The selected administrator cannot be deleted while there are companies/offers created by him";
+                 if($company->getCreationAdmin()->getUserId()==$id)
+                 {
+                     $flag=1;
+                     $message="The selected administrator cannot be deleted while there are companies/offers created by him";
+                 }
+             }
+
+         }
+
+         if($allOffers!=null)
+         {
+             foreach ($allOffers as $offer)
+             {
+                 if($offer->getCreationAdmin()->getUserId()==$id)
+                 {
+                     $flag=1;
+                     $message="The selected administrator cannot be deleted while there are companies/offers created by him";
+                 }
              }
          }
 
-         foreach ($allOffers as $offer)
-         {
-             if($offer->getCreationAdmin()->getUserId()==$id)
-             {
-                 $flag=1;
-                 $message="The selected administrator cannot be deleted while there are companies/offers created by him";
-             }
-         }
      }
 
 
@@ -466,7 +474,7 @@ class UserController
                     if (strcasecmp($value->getEmail(), $email) == 0) {
                         $flag = 1;
                         $message = "The email " . $email . " is already registered";
-                        var_dump($flag);
+
                         break;
                     }
                 }
@@ -533,7 +541,7 @@ class UserController
 
 
         if ($flag == 1) {
-            var_dump($flag);
+
             $userAux = $this->userDAO->getUser($id);
             $validate=1;
             $this->showAdminEditView($id,$userAux->getPassword(), $validate, $message);

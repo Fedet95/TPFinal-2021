@@ -21,9 +21,7 @@ use Models\Logo;
 use Models\User;
 
 
-/**
- *
- */
+
 class CompanyController
 {
     private $companyDAO;
@@ -851,10 +849,10 @@ class CompanyController
             $allOffers= $offerDAO->getAll();
 
 
-            var_dump($allOffers);
+
             if($allOffers!=null)
             {
-                var_dump($id);
+
                 $activeOffers= array();
                 $inactiveOffers= array();
 
@@ -866,7 +864,7 @@ class CompanyController
 
                 foreach ($allOffers as $value)
                 {
-                    var_dump($value);
+
                     if($value->getCompany()->getCompanyId()==$id)
                     {
                         if($value->getActive()=='true' && strtotime($value->getEndDate()) >= strtotime(date("Y-m-d")))
@@ -879,13 +877,12 @@ class CompanyController
                         }
                     }
 
-                    var_dump($activeOffers);
-                    var_dump($inactiveOffers);
+
                 }
             }
             else
             {
-                var_dump($id);
+
                 $this->companyDAO->remove($id);
                 $this->showCompanyManagement(null, null, "Company removed successfully");
                 //company with no job offers
@@ -904,28 +901,28 @@ class CompanyController
                         array_push($allAppointments, $appointment);
                     }
 
-                    var_dump($allAppointments);
+
 
                     $flag=0;
                     if ($allAppointments != null)
                     {
                         foreach ($allAppointments as $appointment)
                         {
-                            var_dump($appointment);
+
                             foreach ($activeOffers as $offers)
                             {
-                                var_dump($offers);
+
                                 if (strcmp($appointment->getJobOffer()->getJobOfferId(),$offers->getJobOfferId()) ==0)
                                 {
                                     $flag=1; //no se elimina, se inactiva la empresa
-                                    var_dump($flag);
+
                                 }
                             }
                         }
 
                         if($flag==0)
                         {
-                            var_dump($flag);
+
                             $this->companyDAO->remove($id);
                             $this->showCompanyManagement(null, null, "Company removed successfully");
                             //no tiene ninguna oferta de trabajo activa con postulaciones
@@ -935,7 +932,7 @@ class CompanyController
 
                             try {
                                 $company= $this->companyDAO->getCompany($id);
-                                var_dump($company);
+
                                 if($company->getActive()=='true')
                                 {
                                     $company->setActive("false");
@@ -960,7 +957,7 @@ class CompanyController
                     }
                     else
                     {
-                        var_dump($id);
+
                         $this->companyDAO->remove($id);
                         $this->showCompanyManagement(null, null, "Company removed successfully");
                     }   //no hay postulaciones
@@ -969,7 +966,7 @@ class CompanyController
 
                     if(!empty($inactiveOffers))
                     {
-                        var_dump($id);
+
                         $this->companyDAO->remove($id);
                         $this->showCompanyManagement(null, null, "Company removed successfully");
                         //$message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo";
@@ -977,7 +974,6 @@ class CompanyController
                     else
                     {
 
-                        var_dump($id);
                         $this->companyDAO->remove($id);
                         $this->showCompanyManagement(null, null, "Company removed successfully");
                         //$message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo activa (tiene inactivas)";

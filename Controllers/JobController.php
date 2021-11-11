@@ -225,7 +225,6 @@ class JobController
        }
 
 
-        var_dump($allOffers);
         require_once(VIEWS_PATH . "jobOffersManagement.php");
     }
 

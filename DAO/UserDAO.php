@@ -79,6 +79,12 @@ class UserDAO implements lUserDAO
             $mapedArray = null;
             if (!empty($result)) {
                 $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+
+                if(is_object($mapedArray))
+                { $com= $mapedArray;
+                    $mapedArray= array();
+                    array_push($mapedArray, $com);
+                }
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
@@ -105,6 +111,12 @@ class UserDAO implements lUserDAO
             $mapedArray = null;
             if (!empty($result)) {
                 $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+
+                if(is_object($mapedArray))
+                { $com= $mapedArray;
+                    $mapedArray= array();
+                    array_push($mapedArray, $com);
+                }
             }
 
             return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
@@ -142,30 +154,6 @@ class UserDAO implements lUserDAO
         }
     }
 
-    /*
-    public function getOnlyRegistered()
-    {
-
-        try {
-            $query = "SELECT * FROM " . $this->tableName . " s INNER JOIN " . $this->tableName2 . " c ON s.career= c.careerId WHERE (s.password IS NOT NULL)";
-
-            //$query= "SELECT  b.beerType, b.code, b.name, bt.id FROM ".$this->secondTableName." b INNER JOIN ".$this->tableName." bt ON b.beerType = bt.id WHERE (bt.id = :id)";
-
-            $this->connection = Connection::GetInstance();
-
-            $result = $this->connection->Execute($query, array());
-
-            $mapedArray = null;
-            if (!empty($result)) {
-                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
-            }
-
-            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
-        } catch (\Exception $ex) {
-            throw $ex;
-        }
-    }
-    */
 
     /**
      * Update a value in data base
