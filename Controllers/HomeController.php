@@ -92,7 +92,7 @@ class HomeController
         } else {
             try {
                 $searchedUser = $this->userDAO->searchByEmail($email); //retorna un usuario por email, verifico su pass y verifico su rol
-                var_dump($searchedUser);
+
             } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }

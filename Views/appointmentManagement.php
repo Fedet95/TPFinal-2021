@@ -32,167 +32,148 @@ include_once('nav.php');
 
 
 
-    <section class="download-area section-gap" id="app">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 download-left">
-                    <img class="img-fluid" src="../Views/img/people.png" alt="">
-                </div>
-                <br><br>
-                <div class="col-lg-6 download-right">
-                    <h1>Find your<br>
-                        Dream Job Today!</h1>
-                    <p class="subs">
-                        We offer you a wide variety of job offers from the best companies so that you can find your dream job. Do not wait any longer and expand your work horizons.
-                    </p>
+<!-- Start callto-action Area -->
+<section class="callto-action-area section-gap"  id="join">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content col-lg-9">
+                <div class="title text-center">
+                    <h1 class="mb-10 text-white">Appoiment Management</h1>
                 </div>
             </div>
         </div>
-    </section>
-
-
-        <section class="feature-cat-area pt-100" id="category">
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <div class="menu-content pb-60 col-lg-10">
-                        <div class="title text-center">
-                            <h1 class="mb-10">Get your Job!</h1>
-                            <p>With a wide variety of offers perfect for you</p>
-                        </div>
-                    </div>
-                </div>
-
+    </div>
+</section>
+<!-- End calto-action Area -->
 
 
           <?php if(isset($allOffers) && $allOffers!=null){?>
 
 
-                <div class="title text-center">
-                    <h4 class="mb-2">Trending careers</h4>
-                </div>
-                <div class="row">
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <br>
-                        <div class="single-fcat">
-                            <img src="../Views/img/o1.png" alt="">
-                            <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
-                            <?php
 
-                            foreach ($allCareers as $car) {
+<!-----------------------CARDD----------------------------->
 
-                                if($car->getActive()=='true' && $car->getDescription()=="University technician in textile production")
-                                {
-                                    ?>
-                                    <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light-1 c-filter  ml-auto" name="button" value="Textile Production">
-                                    <?php
-                                }} ?>
-                            </form>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <br>
-                        <div class="single-fcat">
-                            <img src="../Views/img/o2.png" alt="">
-                            <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
-                            <?php
+    <div class="container">
+        <br><br><br>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="card-box bg-blue">
+                    <div class="inner">
 
-                            foreach ($allCareers as $car) {
 
-                                if($car->getActive()=='true' && $car->getDescription()=="University technician in computer systems")
-                                {
-                                    ?>
-                                    <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light-1 c-filter ml-auto" name="button" value=" Ing Comp systems">
-                                    <?php
-                                }} ?>
-                            </form>
+                        <?php
+                        $carreras = array();
 
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <br>
-                        <div class="single-fcat">
-                            <img src="../Views/img/o3.png" alt="">
-                            <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
-                            <?php
+                        foreach ($allOffers as $value) {
+                            $flag = 0;
+                            foreach ($carreras as $carre) {
+                                if ($carre == $value->getCareer()->getDescription()) {
+                                    $flag = 1;
+                                }
+                            }
 
-                            foreach ($allCareers as $car) {
+                            if ($flag == 0) {
+                                array_push($carreras, $value->getCareer()->getDescription());
+                            }
 
-                                if($car->getActive()=='true' && $car->getDescription()=="University technician in programming")
-                                {
-                                    ?>
-                                    <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light-1 c-filter ml-auto" name="button" value="Tech programming">
-                                    <?php
-                                }} ?>
-                            </form>
+                        }
+                        $cant=count($carreras);
 
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <br>
-                        <div class="single-fcat">
-                            <img src="../Views/img/o4.png" alt="">
-                            <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
-                            <?php
+                        ?>
 
-                            foreach ($allCareers as $car) {
-
-                                if($car->getActive()=='true' && $car->getDescription()=="Naval engineering")
-                                {
-                                    ?>
-                                    <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light-1 c-filter ml-auto" name="button" value="Naval">
-                                    <?php
-                                }} ?>
-                            </form>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <br>
-                        <div class="single-fcat">
-                            <img src="../Views/img/o5.png" alt="">
-                            <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
-                            <?php
-
-                            foreach ($allCareers as $car) {
-
-                                if($car->getActive()=='true' && $car->getDescription()=="University technician in administration")
-                                {
-                                    ?>
-                                    <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light-1 c-filter ml-auto" name="button" value="Administration">
-                                    <?php
-                                }} ?>
-                            </form>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <br>
-                        <div class="single-fcat">
-                            <img src="../Views/img/o6.png" alt="">
-                            <form action="<?php echo FRONT_ROOT . "Job/showJobOfferManagementView" ?>" method="post"">
-                            <?php
-
-                            foreach ($allCareers as $car) {
-
-                                if($car->getActive()=='true' && $car->getDescription()=="University technician in environmental procedures and technologies")
-                                {
-                                    ?>
-                                    <input type="hidden" name="valueToSearch" value="<?php echo $car->getDescription()?>">
-                                    <input type="submit" class=" btn btn-light-1 c-filter ml-auto" name="button" value="Environmental">
-                                    <?php
-                                }} ?>
-                            </form>
-                        </div>
+                        <h3> <?php echo $cant ?> </h3>
+                        <h5> Careers with Appointments </h5>
                     </div>
                 </div>
             </div>
-        </section>
+
+            <div class="col-lg-3 col-sm-6">
+                <div class="card-box bg-green">
+                    <div class="inner">
+
+                        <?php
+                        $companies= array();
+                        foreach ($allOffers as $value) {
+                            $flag = 0;
+                            foreach ($companies as $com) {
+                                if ($com == $value->getCompany()->getName()) {
+                                    $flag = 1;
+                                }
+                            }
+
+                            if ($flag == 0) {
+                                array_push($companies, $value->getCompany()->getName());
+                            }
+
+                        }
+                        $cant=count($companies);
+
+                        ?>
+
+
+                        <h3>  <?php echo $cant ?> </h3>
+                        <h5>Selected Companies </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6">
+                <div class="card-box bg-orange">
+                    <div class="inner">
+
+                  <?php
+                  $titles= array();
+                  foreach ($allOffers as $value) {
+                      $flag = 0;
+                      foreach ($titles as $title) {
+                          if ($title == $value->getTitle()) {
+                              $flag = 1;
+                          }
+                      }
+
+                      if ($flag == 0) {
+                          array_push($titles, $value->getTitle());
+                      }
+
+                  }
+                  $cant=count($titles);?>
+
+                        <h3>  <?php echo $cant ?></h3>
+                        <h5>Selected offers </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6">
+                <div class="card-box bg-red">
+                    <div class="inner">
+
+                        <?php
+
+                        $cantidad = 0;
+                        $total=0;
+                        foreach ($allOffers as $value) {
+
+                               $cantidad=count($value->getAppointment());
+                               $total=$total+$cantidad;
+
+                        } ?>
+
+
+                        <h3><?php echo $total ?>  </h3>
+                        <h5> Total Appointments </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-------------------------CARD--------------------------------->
+
+
 
 <?php   if(is_object($allOffers))
 { $offer= $allOffers;
@@ -213,6 +194,7 @@ include_once('nav.php');
 
 <?php if(isset($version) && $version==1){?>
     <div class="offset-lg-5" style="width:20%;hieght:10%;text-align:center">
+        <br><br><br>
         <h2 class="page-header" >Analytics Reports </h2>
         <div><h6>Job Offers per Career</h6> </div>
         <br>
@@ -223,6 +205,7 @@ include_once('nav.php');
 
     <?php if(isset($version) && $version==2){?>
         <div class="offset-lg-5" style="width:20%;hieght:10%;text-align:center">
+            <br><br><br>
             <h2 class="page-header" >Analytics Reports </h2>
             <div><h6>Job Offers per Company</h6> </div>
             <br>
@@ -233,8 +216,9 @@ include_once('nav.php');
 
     <?php if(isset($version) && $version==3){?>
         <div class="offset-lg-5" style="width:20%;hieght:10%;text-align:center">
-            <h2 class="page-header" >Analytics Reports </h2>
-            <div><h6>Appointments per Job Offer</h6> </div>
+            <br><br><br>
+            <h3 class="page-header" >Analytics Reports </h3>
+            <div><h6></h6> </div>
             <br>
             <canvas  id="chartjs_bar"></canvas>
         </div>
@@ -288,32 +272,6 @@ include_once('nav.php');
             <div class="row justify-content-center d-flex bg-light-alpha p-5 border">
                 <div class="col-md-9 post-list">
                     <ul class="cat-list">
-
-                        <?php if(isset($searchedValue)) {
-                            if(!empty($searchedValue))
-                            {
-                                $allOffers=$searchedValue;
-
-                            }
-                            else if(empty($searchedValue) && $back==1)
-                            {
-                                $message= "Job offer successfully added";
-                            }
-                            else if(empty($searchedValue) && $back==2)
-                            {
-                                $message= "Job offer successfully updated";
-                            }
-                            else if(empty($searchedValue) && $back==3)
-                            {
-                                $message="Remove operation aborted";
-                            }
-                            else
-                            {
-                                $message= "No job offers with these characteristics were found";
-                            }
-                        }?>
-
-
 
                         <?php if($careerValidation==null && $companyValidation==null && ($all==1 || $all==null)){?>
 
@@ -398,7 +356,8 @@ include_once('nav.php');
                                                             {
                                                                 array_push($companies, $value->getCompany()->getCompanyId());
                                                                 ?>
-                                                                <option value="<?php echo $value->getCompany()->getCompanyId()?>"><?php echo $value->getCompany()->getName()?></option>
+
+                                                                <option value="<?php echo $value->getJobOfferId()?>"><?php echo $value->getCompany()->getName()?></option>
                                                                 <?php
                                                             }
                                                         }
@@ -624,7 +583,6 @@ include_once('nav.php');
                                                     </form>
                                                     <br>
                                                 </td>
-                                                <?php if ($loggedUser->getRol()->getUserRolId()==1) { ?>
                                                     <td>
                                                         <form action="<?php echo FRONT_ROOT . "Appointment/showAppointmentList" ?>"
                                                               method="POST">
@@ -635,7 +593,16 @@ include_once('nav.php');
                                                         </form>
                                                     </td>
                                                     <br>
-                                                <?php } ?>
+                                                    <td>
+                                                        <form action="<?php echo FRONT_ROOT . "Appointment/showAppointmentList" ?>"
+                                                              method="POST">
+                                                            <input type="hidden" name="back" value="1">
+                                                            <button type="submit" name="id" class="btn buttonPer m-lg-auto d-block"
+                                                                    value="<?php echo $value->getJobOfferId() ?>">Generate PDF
+                                                            </button>
+                                                            <br>
+                                                        </form>
+                                                    </td>
                                             </ul>
                                         </div>
                                     </div>

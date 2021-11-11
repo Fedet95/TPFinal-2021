@@ -18,12 +18,9 @@ use Models\Career;
 use Models\Company;
 use Models\JobOffer;
 use Models\User;
+use Mpdf\Mpdf;
 
 
-
-/**
- *
- */
 class AppointmentController
 {
 
@@ -141,6 +138,14 @@ class AppointmentController
         {
             try {
 
+                //pdf
+                if($valueToSearch==1 && $back!=null)
+                {
+                    $value=$valueToSearch; //value=1 (back)
+                    $valueToSearch=$back; //offerid
+                    $back=$value; // 1
+                }
+
                 $allAppointments = $this->appointmentDAO->getAll();
 
                 if ($allAppointments != null) {
@@ -178,7 +183,16 @@ class AppointmentController
                 }
 
 
-                require_once(VIEWS_PATH . "appointmentsList.php");
+                if($back==1)
+                {
+                    $this->infoToPdf($allAppointments, $searchedJobOffer);
+                }
+                else
+                {
+                    require_once(VIEWS_PATH . "appointmentsList.php");
+                }
+
+                //require_once(VIEWS_PATH . "appointmentsList.php");
 
             } catch (\Exception $ex) {
                 echo $ex->getMessage();
@@ -628,13 +642,28 @@ class AppointmentController
                 {
                     if($allOffers!=null)
                     {
+                        $companyId=null;
+                        $careerId=null;
+                        foreach ($allOffers as $value)
+                        {
+                            if($value->getJobOfferId()==$valueToSearch)
+                            {
+                                $companyId= $value->getCompany()->getCompanyId();
+                                $careerId=$value->getCareer()->getCareerId();
+
+                            }
+                        }
+
                         $companyFilter = array();
                         foreach ($allOffers as $offer)
                         {
-                            if($offer->getCompany()->getCompanyId()==$valueToSearch)
-                            {
-                                array_push($companyFilter, $offer);
-                            }
+                          if($offer->getCareer()->getCareerId()==$careerId)
+                          {
+                              if($offer->getCompany()->getCompanyId()==$companyId)
+                              {
+                                  array_push($companyFilter, $offer);
+                              }
+                          }
                         }
 
                         $allOffers=$companyFilter;
@@ -663,11 +692,6 @@ class AppointmentController
                 $version=3;
             }
 
-            //var_dump($valueToSearch);
-            //var_dump($titleToSearch);
-            //var_dump($careerValidation);
-            //var_dump($companyValidation);
-
 
             $finalFilter=null;
             if($valueToSearch=='finalValue')
@@ -677,7 +701,6 @@ class AppointmentController
 
                 if($allOffers!=null)
                 {
-                    var_dump($allOffers);
                    foreach ($allOffers as $offer)
                    {
                        if($offer->getTitle()==$titleToSearch)
@@ -881,6 +904,54 @@ class AppointmentController
 
         return $searchedOffer;
     }
+
+
+    public function infoToPdf($allAppointments, $jobOffer)
+    {
+        SessionHelper::checkAdminSession();
+        require_once(ROOT.'vendor/autoload.php') ;
+        $mpdf = new Mpdf();
+
+        $cant= count($allAppointments);
+        $data = '';
+        $data  .='<h1>Job Offer Appointments</h1>';
+        $data.='<strong>Company: </strong>'. $jobOffer->getCompany()->getName().'<br>';
+        $data.='<strong>Email: </strong>'. $jobOffer->getCompany()->getEmail().'<br>';
+        $data.='<strong>Website: </strong>'. $jobOffer->getCompany()->getCompanyLink().'<br>';
+
+
+        $data.=' '.'<br>';
+        $data.='<strong>Career: </strong>'. $jobOffer->getCareer()->getDescription().'<br>';
+        $data.='<strong>Job Offer Title: </strong>'. $jobOffer->getTitle().'<br>';
+        $data.='<strong>Publish Date: </strong>'. $jobOffer->getPublishDate().'<br>';
+        $data.='<strong>End Date: </strong>'. $jobOffer->getEndDate().'<br>';
+        $data.='<strong>Number of Appointments: </strong>'.$cant.'<br>';
+
+        $data.=' '.'<br><br>';
+        $data.='<h4>Postulated Students: </h4>'.'<br>';
+
+
+        foreach ($allAppointments as $appointment)
+        {
+            $data.= '<strong>Last Name: </strong>'. $appointment->getStudent()->getLastName().'<br>';
+            $data.= '<strong>Firt Name: </strong>'. $appointment->getStudent()->getFirstName().'<br>';
+            $data.= '<strong>DNI: </strong>'. $appointment->getStudent()->getDni().'<br>';
+            $data.=' <strong>Phone number: </strong>'. $appointment->getStudent()->getPhoneNumber().'<br>';
+            $data.=' <strong>Email: </strong>'. $appointment->getStudent()->getEmail().'<br>';
+            $data.=' <strong>Application Date: </strong>'. $appointment->getDate().'<br>';
+            $data.='<br><br>';
+        }
+
+        $mpdf->WriteHTML($data);
+        ob_clean();
+        $mpdf->Output('myfile.pdf', 'D');
+
+    }
+
+
+
+
+
 
 
 

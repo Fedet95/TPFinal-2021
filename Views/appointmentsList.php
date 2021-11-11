@@ -308,6 +308,16 @@ include_once('nav.php');;
               method="POST">
             <button type="submit" name="id" class="btn buttonPer m-lg-auto d-block"><strong>Go to Appointment Management View</strong>
             </button>
+            <br>
+        </form>
+
+        <form action="<?php echo FRONT_ROOT . "Appointment/showAppointmentList" ?>"
+              method="POST">
+            <input type="hidden" name="back" value="1">
+            <button type="submit" name="id" class="btn buttonPer m-lg-auto d-block"
+                    value="<?php echo $offerId ?>"><strong>Generate PDF</strong>
+            </button>
+            <br>
         </form>
 
 
@@ -366,13 +376,12 @@ include_once('nav.php');;
             </section>
 
 
-    <?php } }else { ?>
+    <?php }}else { ?>
     <div class="title text-center my-5">
         <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
     </div>
 
-
-<?php } }?>
+    <?php } }?>
 
 
 <br><br><br>
