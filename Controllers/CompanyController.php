@@ -290,6 +290,9 @@ class CompanyController
 
                 try {
                     $this->companyDAO->add($company);
+
+
+
                     $this->showCompanyManagement();
                 }
                 catch (\Exception $ex)
