@@ -220,6 +220,7 @@ class JobController
            if($flag==0)
            {
                $searchedValue=$allOffers;
+               $validateMessage=1;
                $message= "No job offers with these characteristics were found";
            }
        }
@@ -548,39 +549,66 @@ class JobController
             echo $ex->getMessage();
         }
 
-        try {
-            $allCompanies = $this->companyDAO->getAll();
-        } catch (\Exception $ex) {
-            echo $ex->getMessage();
+
+        if($jobOffer!=null)
+        {
+            $flag=0;
+            try {
+                $offerDao= new AppointmentDAO();
+                $allAppointments = $offerDao->getAppointmentFromOffers($jobOfferId);
+                if($allAppointments!=null)
+                {
+                    $flag=1; //no puede editar
+
+                }
+            } catch (\Exception $ex) {
+                echo $ex->getMessage();
+            }
         }
 
 
-            if($this->allCareers==null)
-            {
-                $allCareers = $this->careersOrigin->start($this->careersOrigin);
-            }
-            else
-            {
-                $allCareers= $this->allCareers;
-            }
+      if($flag==0)
+      {
+
+          try {
+              $allCompanies = $this->companyDAO->getAll();
+          } catch (\Exception $ex) {
+              echo $ex->getMessage();
+          }
 
 
-        if ($values != null) {
-
-                if($this->allPositions==null)
-                {
-                    $allPositions = $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
-                }
-                else
-                {
-                    $allPositions= $this->allPositions;
-                }
+          if($this->allCareers==null)
+          {
+              $allCareers = $this->careersOrigin->start($this->careersOrigin);
+          }
+          else
+          {
+              $allCareers= $this->allCareers;
+          }
 
 
-            $this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, $allPositions, $message, $careerId, $values);
-        } else {
-            $this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, null, $message);
-        }
+          if ($values != null) {
+
+              if($this->allPositions==null)
+              {
+                  $allPositions = $this->jobPositionsOrigin->start($this->jobPositionsOrigin);
+              }
+              else
+              {
+                  $allPositions= $this->allPositions;
+              }
+
+
+              $this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, $allPositions, $message, $careerId, $values);
+          } else {
+              $this->showEditJobOfferView($allCompanies, $allCareers, $jobOffer, null, $message);
+          }
+      }
+      else
+      {
+          $message="The job offer have appointments and cannot be edited";
+            $this->showJobOfferManagementView(null, $message);
+      }
 
     }
 

@@ -6,12 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/studentList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/studentList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/edea.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/geaviation.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/gratis-png-greenpeace-usa-organizacion-greenpeace-australia-pacifico-sostenibilidad-thumbnail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/greenpeace.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/spi.png" beforeDir="false" />
     </list>
-    <list id="8ccc725f-7d6d-41b9-a85b-19712bbd211e" name="Changes by Fede" comment="Changes by Fede" />
+    <list id="85270889-5dd1-416f-9f4d-45f2b152b949" name="Changes by Fede" comment="">
+      <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
+    </list>
+    <list id="35919033-f1f6-429b-b771-da40ecdfa16d" name="Changes by paye_" comment="">
+      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -130,14 +137,7 @@
       <workItem from="1636513135939" duration="401000" />
       <workItem from="1636549410598" duration="11527000" />
       <workItem from="1636562833947" duration="28732000" />
-      <workItem from="1636638133979" duration="10765000" />
-    </task>
-    <task id="LOCAL-00070" summary="Changes by Fede">
-      <created>1635990975359</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1635990975359</updated>
+      <workItem from="1636638133979" duration="24274000" />
     </task>
     <task id="LOCAL-00071" summary="Changes by paye_">
       <created>1635990989795</created>
@@ -475,7 +475,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636646406843</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="update">
+      <created>1636658078057</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1636658078057</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
