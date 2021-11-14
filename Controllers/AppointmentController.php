@@ -62,7 +62,31 @@ class AppointmentController
                 $this->showAppointmentList($valueToSearch = null, $back = null, "Only one active application is allowed");
 
             } else {
-                require_once(VIEWS_PATH . "applyJobOffer.php");
+                $jobOffer = new JobOffer();
+                $jobOfferFromDAO = $this->jobOfferDAO->getJobOffer($jobOfferId);
+                if($jobOfferFromDAO != null)
+                {
+                    $allApointments = $this->appointmentDAO->getAppointmentFromOffers($jobOfferId);
+                    if ($allApointments != null)
+                    {
+                        $cant = count($allApointments);
+                        $maxApply = $jobOfferFromDAO->getMaxApply();
+
+                        if ($cant < $maxApply)
+                        {
+                            require_once(VIEWS_PATH . "applyJobOffer.php");
+                        }
+                        else
+                        {
+                            $this->showAppointmentList($valueToSearch = null, $back = null, "Error, maximun number of appointments has been reached for this job offer");
+                        }
+
+                    }
+                    else
+                    {
+                        require_once(VIEWS_PATH . "applyJobOffer.php");
+                    }
+                }
             }
 
         } else {
@@ -287,55 +311,126 @@ class AppointmentController
 
             $appointment->setMessage($text);
             $jobOffer = new JobOffer();
-            $jobOffer->setJobOfferId($jobOfferId);
-            $appointment->setJobOffer($jobOffer);
-            $appointment->setDate((new \DateTime())->format('Y-m-d'));
-            $student = new User();
-            $student->setUserId($studentSearched->getUserId());
-            $appointment->setStudent($student);
+            $jobOfferFromDAO = $this->jobOfferDAO->getJobOffer($jobOfferId);
+            if($jobOfferFromDAO != null)
+            {
+                $allApointments= $this->appointmentDAO->getAppointmentFromOffers($jobOfferId);
+                if($allApointments!=null)
+                {
+                    $cant= count($allApointments);
+                    $maxApply= $jobOfferFromDAO->getMaxApply();
+
+                    if($cant<$maxApply)
+                    {
+                        $jobOffer->setJobOfferId($jobOfferId);
+                        $appointment->setJobOffer($jobOffer);
+                        $appointment->setDate((new \DateTime())->format('Y-m-d'));
+                        $student = new User();
+                        $student->setUserId($studentSearched->getUserId());
+                        $appointment->setStudent($student);
 
 
-            try {
-                $count = $this->appointmentDAO->add($appointment);
+                        try {
+                            $count = $this->appointmentDAO->add($appointment);
 
 
-                if ($count > 0) {
-                    $searchOffer = $this->jobOfferDAO->getJobOffer($jobOfferId);
-                    $history = new AppointmentHistory();
-                    $offer = new JobOffer();
-                    $offer->setTitle($searchOffer->getTitle());
-                    $history->setJobOffer($offer);
-                    $history->setAppointmentDate($appointment->getDate());
-                    $career = new Career();
-                    $career->setDescription($searchOffer->getCareer()->getDescription());
-                    $history->setCareer($career);
+                            if ($count > 0) {
+                                $searchOffer = $this->jobOfferDAO->getJobOffer($jobOfferId);
+                                $history = new AppointmentHistory();
+                                $offer = new JobOffer();
+                                $offer->setTitle($searchOffer->getTitle());
+                                $history->setJobOffer($offer);
+                                $history->setAppointmentDate($appointment->getDate());
+                                $career = new Career();
+                                $career->setDescription($searchOffer->getCareer()->getDescription());
+                                $history->setCareer($career);
+                                $student = new User();
+                                $student->setUserId($studentSearched->getUserId());
+                                $history->setStudent($student);
+                                try {
+                                    $companyDao = new CompanyDAO();
+                                    $searchCompany = $companyDao->getCompany($searchOffer->getCompany()->getCompanyId());
+                                    $company = new Company();
+                                    $company->setName($searchCompany->getName());
+                                    $company->setCuit($searchCompany->getCuit());
+                                    $history->setCompany($company);
+                                } catch (\Exception $ex) {
+                                    echo $ex->getMessage();
+                                }
+
+                                $historyDAO = new AppointmentHistoryDAO();
+                                try {
+                                    $historyDAO->add($history);
+                                } catch (\Exception $ex) {
+                                    echo $ex->getMessage();
+                                }
+                            }
+
+                            $this->showAppointmentList($valueToSearch = null, $back = null, "Successfully added application");
+
+                        } catch (\Exception $ex) {
+                            echo $ex->getMessage();
+                        }
+                    }
+                    else
+                    {
+                        $this->showApplyView($studentId, $jobOfferId, "Error, maximun number of appointments has been reached for this job offer");
+                    }
+                }
+                else
+                {
+                    $jobOffer->setJobOfferId($jobOfferId);
+                    $appointment->setJobOffer($jobOffer);
+                    $appointment->setDate((new \DateTime())->format('Y-m-d'));
                     $student = new User();
                     $student->setUserId($studentSearched->getUserId());
-                    $history->setStudent($student);
-                    try {
-                        $companyDao = new CompanyDAO();
-                        $searchCompany = $companyDao->getCompany($searchOffer->getCompany()->getCompanyId());
-                        $company = new Company();
-                        $company->setName($searchCompany->getName());
-                        $company->setCuit($searchCompany->getCuit());
-                        $history->setCompany($company);
-                    } catch (\Exception $ex) {
-                        echo $ex->getMessage();
-                    }
+                    $appointment->setStudent($student);
 
-                    $historyDAO = new AppointmentHistoryDAO();
+
                     try {
-                        $historyDAO->add($history);
+                        $count = $this->appointmentDAO->add($appointment);
+
+
+                        if ($count > 0) {
+                            $searchOffer = $this->jobOfferDAO->getJobOffer($jobOfferId);
+                            $history = new AppointmentHistory();
+                            $offer = new JobOffer();
+                            $offer->setTitle($searchOffer->getTitle());
+                            $history->setJobOffer($offer);
+                            $history->setAppointmentDate($appointment->getDate());
+                            $career = new Career();
+                            $career->setDescription($searchOffer->getCareer()->getDescription());
+                            $history->setCareer($career);
+                            $student = new User();
+                            $student->setUserId($studentSearched->getUserId());
+                            $history->setStudent($student);
+                            try {
+                                $companyDao = new CompanyDAO();
+                                $searchCompany = $companyDao->getCompany($searchOffer->getCompany()->getCompanyId());
+                                $company = new Company();
+                                $company->setName($searchCompany->getName());
+                                $company->setCuit($searchCompany->getCuit());
+                                $history->setCompany($company);
+                            } catch (\Exception $ex) {
+                                echo $ex->getMessage();
+                            }
+
+                            $historyDAO = new AppointmentHistoryDAO();
+                            try {
+                                $historyDAO->add($history);
+                            } catch (\Exception $ex) {
+                                echo $ex->getMessage();
+                            }
+                        }
+
+                        $this->showAppointmentList($valueToSearch = null, $back = null, "Successfully added application");
+
                     } catch (\Exception $ex) {
                         echo $ex->getMessage();
                     }
                 }
-
-                $this->showAppointmentList($valueToSearch = null, $back = null, "Successfully added application");
-
-            } catch (\Exception $ex) {
-                echo $ex->getMessage();
             }
+
         } else {
             $this->showApplyView($studentId, $jobOfferId, "Please enter a validad curriculum file");
         }

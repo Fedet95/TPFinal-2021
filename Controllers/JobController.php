@@ -21,7 +21,7 @@ use Models\JobOffer;
 use Models\JobOfferPosition;
 use Models\JobPosition;
 use Models\User;
-
+use Models\Appointment;
 
 
 class JobController
@@ -36,7 +36,7 @@ class JobController
     private $loggedUser;
     private $jobOfferDAO;
     private $jobOfferPositionDAO;
-
+    private $allAppointments;
 
     public function __construct()
     {
@@ -49,6 +49,7 @@ class JobController
         $this->loggedUser = $this->loggedUserValidation();
         $this->jobOfferDAO = new JobOfferDAO();
         $this->jobOfferPositionDAO = new JobOfferPositionDAO();
+        $this->appointmentDAO = new AppointmentDAO();
     }
 
 

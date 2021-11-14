@@ -100,7 +100,35 @@ class AppointmentDAO implements IAppointmentDAO
         }
     }
 
+    function getAppointmentFromOffers($jobOfferId)
+    {
+        try {
 
+            $query = "SELECT * FROM " . $this->tableName . " a INNER JOIN " . $this->tableName2 . " j ON a.jobOfferAppointmentId= j.jobOfferId
+            WHERE (a.jobOfferAppointmentId = :jobOfferAppointmentId)";
+
+            $parameters['jobOfferAppointmentId'] = $jobOfferId;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, $parameters);
+
+            $mapedArray = null;
+            if (!empty($result)) {
+                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+
+                if(is_object($mapedArray))
+                { $com= $mapedArray;
+                    $mapedArray= array();
+                    array_push($mapedArray, $com);
+                }
+            }
+
+            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 
     public function mapear($array)
     {
