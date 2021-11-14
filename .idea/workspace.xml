@@ -6,22 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/JobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/JobOffer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/createJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/createJobOffer.php" afterDir="false" />
-    </list>
-    <list id="85270889-5dd1-416f-9f4d-45f2b152b949" name="Changes by Fede" comment="">
-      <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/AppointmentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/AppointmentDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
-    </list>
-    <list id="35919033-f1f6-429b-b771-da40ecdfa16d" name="Changes by paye_" comment="">
       <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
     </list>
+    <list id="85270889-5dd1-416f-9f4d-45f2b152b949" name="Changes by Fede" comment="Changes by Fede" />
+    <list id="35919033-f1f6-429b-b771-da40ecdfa16d" name="Changes by paye_" comment="Changes by paye_" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,69 +34,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/Controllers/AppointmentController.php">
-      <ranges>
-        <range start1="53" end1="55" start2="53" end2="53" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="60" end1="61" start2="58" end2="60" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="63" end1="63" start2="62" end2="63" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="64" end1="65" start2="64" end2="89" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="289" end1="295" start2="313" end2="387" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="297" end1="299" start2="389" end2="391" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="301" end1="324" start2="393" end2="416" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="325" end1="332" start2="417" end2="424" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="333" end1="334" start2="425" end2="426" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="335" end1="338" start2="427" end2="433" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/Controllers/JobController.php">
-      <ranges>
-        <range start1="23" end1="24" start2="23" end2="24" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="38" end1="39" start2="38" end2="39" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="51" end1="51" start2="51" end2="52" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="381" end1="382" start2="382" end2="383" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="390" end1="405" start2="391" end2="413" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="406" end1="409" start2="414" end2="417" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="410" end1="413" start2="418" end2="421" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="414" end1="417" start2="422" end2="425" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="418" end1="424" start2="426" end2="432" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="425" end1="426" start2="433" end2="434" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="427" end1="428" start2="435" end2="436" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="429" end1="430" start2="437" end2="438" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="431" end1="437" start2="439" end2="445" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="438" end1="440" start2="446" end2="448" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="441" end1="446" start2="449" end2="454" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="447" end1="453" start2="455" end2="464" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="455" end1="455" start2="466" end2="479" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="648" end1="649" start2="672" end2="673" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="713" end1="747" start2="737" end2="744" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="748" end1="748" start2="745" end2="796" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="750" end1="753" start2="798" end2="801" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="755" end1="756" start2="803" end2="804" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="757" end1="758" start2="805" end2="806" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="759" end1="765" start2="807" end2="813" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="766" end1="768" start2="814" end2="816" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="769" end1="774" start2="817" end2="822" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="775" end1="780" start2="823" end2="830" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/DAO/AppointmentDAO.php">
-      <ranges>
-        <range start1="102" end1="102" start2="102" end2="114" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="103" end1="103" start2="115" end2="131" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="128" end1="128" start2="156" end2="157" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/DAO/JobOfferDAO.php">
-      <ranges>
-        <range start1="30" end1="31" start2="30" end2="31" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="43" end1="43" start2="43" end2="45" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="147" end1="148" start2="149" end2="150" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="161" end1="162" start2="163" end2="167" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="227" end1="227" start2="232" end2="234" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-      </ranges>
-    </file>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -204,35 +131,8 @@
       <workItem from="1636549410598" duration="11527000" />
       <workItem from="1636562833947" duration="28732000" />
       <workItem from="1636638133979" duration="26316000" />
-      <workItem from="1636841552935" duration="7618000" />
-    </task>
-    <task id="LOCAL-00073" summary="update">
-      <created>1635991229784</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1635991229784</updated>
-    </task>
-    <task id="LOCAL-00074" summary="update">
-      <created>1636042220156</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1636042220156</updated>
-    </task>
-    <task id="LOCAL-00075" summary="update">
-      <created>1636042227655</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1636042227655</updated>
-    </task>
-    <task id="LOCAL-00076" summary="update">
-      <created>1636055815492</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1636055815493</updated>
+      <workItem from="1636841552935" duration="7682000" />
+      <workItem from="1636926030763" duration="5199000" />
     </task>
     <task id="LOCAL-00077" summary="update">
       <created>1636055824192</created>
@@ -549,7 +449,35 @@
       <option name="project" value="LOCAL" />
       <updated>1636841652734</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="update">
+      <created>1636849745778</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1636849745778</updated>
+    </task>
+    <task id="LOCAL-00123" summary="Changes by Fede">
+      <created>1636849761157</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1636849761157</updated>
+    </task>
+    <task id="LOCAL-00124" summary="Changes by paye_">
+      <created>1636849772198</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1636849772198</updated>
+    </task>
+    <task id="LOCAL-00125" summary="update">
+      <created>1636849781404</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1636849781404</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

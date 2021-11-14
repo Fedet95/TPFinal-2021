@@ -3,6 +3,7 @@
 namespace Controllers;
 
 
+use DAO\AppointmentDAO;
 use DAO\CompanyDAO;
 use DAO\JobOfferDAO;
 use DAO\OriginStudentDAO;
@@ -55,6 +56,7 @@ class HomeController
     {
         //require_once(VIEWS_PATH."checkLoggedStudent.php");
         SessionHelper::checkStudentSession();
+        $this->verifyEndDate();
         require_once(VIEWS_PATH."studentControlPanel.php"); //panel de control
     }
 
@@ -67,6 +69,7 @@ class HomeController
         //require_once(VIEWS_PATH."checkLoggedAdmin.php");
         SessionHelper::checkAdminSession();
         $finalArray= $this->adminPanelCards();
+        $this->verifyEndDate();
         require_once(VIEWS_PATH."administratorControlPanel.php"); //panel de control
     }
 
@@ -385,6 +388,98 @@ class HomeController
         return $finalArray;
 
     }
+
+
+    public function verifyEndDate()
+    {
+        $offerDao= new JobOfferDAO();
+        $allOffers= $offerDao->getAll();
+
+        if($allOffers!=null)
+        {
+            foreach ($allOffers as $offer)
+            {
+                if(strtotime($offer->getEndDate()) < strtotime(date("Y-m-d"))) {
+                    $offer->setActive("false"); //string
+                    $offer->setEmailSent(1); //boolean
+                    try {
+                        $offerDao->update($offer);
+                    } catch (\Exception $ex)
+                    {
+                        echo $ex->getMessage();
+                    }
+
+                    $appointmentDao= new AppointmentDAO();
+                    $appointments= $appointmentDao->getAppointmentFromOffers($offer->getJobOfferId());
+
+                    if($appointments!=null)
+                    {
+                        $studentsId= array();
+                        foreach ($appointments as $value)
+                        {
+                            array_push($studentsId,$value->getStudent()->getUserId());
+                        }
+
+                        $allStudents= new User();
+
+                        $userDAO= new UserDAO();
+                        try {
+                            $allStudents=$userDAO->getRol(2);
+                        }catch (\Exception $ex)
+                        {
+                            echo $ex->getMessage();
+                        }
+
+
+                        $studentsEmails= array();
+                        $sub="Appointment Expiration";
+                        $text="UTN Job Search thanks you for applying to one of our job offers, which has reached its deadline. We wish you the best of luck!";
+
+                        foreach ($allStudents as $student)
+                        {
+                            foreach ($studentsId as $id)
+                            {
+                                if($student->getUserId()==$id)
+                                {
+                                    array_push($studentsEmails, $student->getEmail());
+                                    $this->sendEmailEndDate($student->getEmail(), $sub, $text);
+                                    $this->sendEmailEndDate("juanpayetta@gmail.com", $sub, $text); //me auto envio mensaje para probar que funcione
+                                }
+                            }
+                        }
+
+                        /* ENVIO DE EMAIL A COMPAÑIA, BUSCAR EL EMAILD E LA COMPAÑIA CORRESPONDIENTE A ESTA JOB OFFER (mensaje que mire los postulantes)
+                        $sub="Appointment Expiration";
+                        $text="UTN Job Search thanks you for applying to one of our job offers, which has reached its deadline. We wish you the best of luck!";
+                        $this->sendEmailEndDate($student->getEmail(), $sub, $text);
+                        */
+
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Send a mail from the system to the inserted email
+     * @param $email
+     * @param $sub
+     * @param $text
+     */
+    public function sendEmailEndDate ($email, $sub, $text)
+    {
+        $to = $email;
+        $subject = $sub;
+        $message = $text;
+        $headers = 'From: tpfinalutn2021@gmail.com' . "\r\n" .
+            'MIME-Version: 1.0' . "\r\n" .
+            'Content-type: text/html; charset=utf-8';
+        if (mail($to, $subject, $message, $headers))
+            echo "Email sent";
+        else
+            echo "Email sending failed";
+    }
+
 
 }
 

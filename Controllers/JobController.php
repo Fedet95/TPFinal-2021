@@ -192,6 +192,14 @@ class JobController
             $allPositions= $this->allPositions;
         }
 
+        try {
+            $allAppointments= $this->appointmentDAO->getAll();
+        }
+        catch (\Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+
 
         if($valueToSearch!=null)
         {
@@ -225,6 +233,8 @@ class JobController
                $message= "No job offers with these characteristics were found";
            }
        }
+
+
 
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
@@ -936,44 +946,50 @@ class JobController
             {
                 $this->jobOfferPositionDAO->remove($id);
 
-                $studentsId= array();
-                foreach ($appointments as $value)
+                if($searchedOffer->getEmailSent()==0) //para cuando aun NO se le agradecio a los postulantes por email
                 {
-                    array_push($studentsId,$value->getStudent()->getUserId());
-                }
-
-                $allStudents= new User();
-                $userRol= $this->getRolId("student");
-
-                $userDAO= new UserDAO();
-                try {
-                    $allStudents=$userDAO->getRol($userRol->getUserRolId());
-                }catch (\Exception $ex)
-                {
-                    echo $ex->getMessage();
-                }
-
-
-                $studentsEmails= array();
-                foreach ($allStudents as $student)
-                {
-                    foreach ($studentsId as $id)
+                    $studentsId= array();
+                    foreach ($appointments as $value)
                     {
-                        if($student->getUserId()==$id)
+                        array_push($studentsId,$value->getStudent()->getUserId());
+                    }
+
+                    $allStudents= new User();
+                    $userRol= $this->getRolId("student");
+
+                    $userDAO= new UserDAO();
+                    try {
+                        $allStudents=$userDAO->getRol($userRol->getUserRolId());
+                    }catch (\Exception $ex)
+                    {
+                        echo $ex->getMessage();
+                    }
+
+
+                    $studentsEmails= array();
+                    foreach ($allStudents as $student)
+                    {
+                        foreach ($studentsId as $id)
                         {
-                            array_push($studentsEmails, $student->getEmail());
-                            $this->sendEmail($student->getEmail(), $sub, $text);
-                            $this->sendEmail("juanpayetta@gmail.com", $sub, $text); //me auto envio mensaje para probar que funcione
+                            if($student->getUserId()==$id)
+                            {
+                                array_push($studentsEmails, $student->getEmail());
+                                $this->sendEmail($student->getEmail(), $sub, $text);
+                                $this->sendEmail("juanpayetta@gmail.com", $sub, $text); //me auto envio mensaje para probar que funcione
+                            }
                         }
                     }
+
+                    $finalMessage="Job offer was successfully removed and applicants were notified";
+                    $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
+
+                }
+                else //no se envia email xq ya se les agradecio a los potulantes x email antes
+                {
+                    $finalMessage="Job offer was successfully removed";
+                    $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
                 }
 
-                $finalMessage="Job offer was successfully removed and applicants were notified";
-                $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
-
-
-                //$this->sendEmail("pablopayetta@gmail.com", $sub, $text);
-                //$this->sendEmail("ftacchini95@gmail.com", $sub, $text);
 
             }
             else

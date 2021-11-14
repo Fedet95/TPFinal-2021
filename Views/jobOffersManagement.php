@@ -557,19 +557,67 @@ include_once('nav.php');
                                                     </td>
                                                     <?php if ($loggedUser->getRol()->getUserRolId() == 2) { ?>
                                                         <td>
-                                                        <?php if ($value->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) { ?>
-                                                            <form action="<?php echo FRONT_ROOT . "Appointment/showApplyView" ?>"
-                                                                  method="POST">
-                                                                <input type="hidden" name="studentId"
-                                                                       value="<?php echo $loggedUser->getEmail() ?>">
-                                                                <button type="submit" name="id"
-                                                                        class="btn buttonPer ml-auto d-block"
-                                                                        value="<?php echo $value->getJobOfferId() ?>">
-                                                                    Apply
-                                                                </button>
-                                                            </form>
-                                                            <br>
-                                                            </td>
+                                                        <?php if ($value->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) {
+
+                                                            if(isset($allAppointments) && $allAppointments!=null)
+                                                            {
+                                                                $cant=0;
+                                                                foreach ($allAppointments as $appointment)
+                                                                {
+                                                                    if($appointment->getJobOffer()->getJobOfferId()==$value->getJobOfferId())
+                                                                    {
+                                                                        $cant++;
+                                                                    }
+                                                                }
+
+                                                                if($cant!=0 && $cant==$value->getMaxApply())
+                                                                { ?>
+                                                                    <td>
+                                                                        <input type="button" id="show-option" value="Apply"
+                                                                               title="This offer has reached the maximun number of appointments"
+                                                                               class="btn buttonPer disabled ml-auto d-block">
+                                                                        <br>
+                                                                    </td>
+
+                                                                    <?php
+                                                                }
+                                                                else
+                                                                { ?>
+                                                                    <form action="<?php echo FRONT_ROOT . "Appointment/showApplyView" ?>"
+                                                                          method="POST">
+                                                                        <input type="hidden" name="studentId"
+                                                                               value="<?php echo $loggedUser->getEmail() ?>">
+                                                                        <button type="submit" name="id"
+                                                                                class="btn buttonPer ml-auto d-block"
+                                                                                value="<?php echo $value->getJobOfferId() ?>">
+                                                                            Apply
+                                                                        </button>
+                                                                    </form>
+                                                                    <br>
+                                                                    </td>
+
+                                                                   <?php
+                                                                    }
+                                                            }
+                                                            else
+                                                            { ?>
+                                                                <form action="<?php echo FRONT_ROOT . "Appointment/showApplyView" ?>"
+                                                                      method="POST">
+                                                                    <input type="hidden" name="studentId"
+                                                                           value="<?php echo $loggedUser->getEmail() ?>">
+                                                                    <button type="submit" name="id"
+                                                                            class="btn buttonPer ml-auto d-block"
+                                                                            value="<?php echo $value->getJobOfferId() ?>">
+                                                                        Apply
+                                                                    </button>
+                                                                </form>
+                                                                <br>
+                                                                </td>
+                                                           <?php
+                                                            }
+
+                                                            ?>
+
                                                         <?php } else { ?>
                                                             <td>
                                                                 <input type="button" id="show-option" value="Apply"
