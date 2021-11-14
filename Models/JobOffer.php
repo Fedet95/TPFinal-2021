@@ -18,6 +18,10 @@ class JobOffer
  private $jobPosition = array();
  private $career;
  private $appointment = array();
+ private $emailSent;
+ private $maxApply;
+
+
 
 
 
@@ -188,6 +192,31 @@ class JobOffer
     {
         $this->appointment = $appointment;
     }
+
+
+    public function getEmailSent()
+    {
+        return $this->emailSent;
+    }
+
+
+    public function setEmailSent($emailSent)
+    {
+        $this->emailSent = $emailSent;
+    }
+
+
+    public function getMaxApply()
+    {
+        return $this->maxApply;
+    }
+
+
+    public function setMaxApply($maxApply)
+    {
+        $this->maxApply = $maxApply;
+    }
+
 
 
 

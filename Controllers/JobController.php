@@ -379,7 +379,7 @@ class JobController
     /**
      * End the new job offer, adding to data base
      */
-    public function addJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $active, $values)
+    public function addJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $max, $active, $values)
     {
         $postvalue = unserialize(base64_decode($values));
 
@@ -388,70 +388,93 @@ class JobController
             $this->showCreateJobOfferView($message, $postvalue['career'], $postvalue);
         }
 
-
-        $titleValidation = $this->validateUniqueTitle($title, $postvalue['company']);
-        if ($titleValidation == 1) {
-            $message = "Error, the entered Job Offer Title is already in use by the offering company";
+        $positiveNumber=$this->validateNegativeNumber($max);
+        if($positiveNumber==null) {
+            $message = "Error, the entered maximun of applies value must be a positive number";
             $this->showCreateJobOfferView($message, $postvalue['career'], $postvalue);
-        } else {
-            $newJobOffer = new JobOffer();
-            $newJobOffer->setDescription($description);
-            $newJobOffer->setActive($this->validateActive($postvalue['publishDate'], $active));
-            $newJobOffer->setDedication($dedication);
-            $newJobOffer->setEndDate($postvalue['endDate']);
-            $newJobOffer->setPublishDate($postvalue['publishDate']);
-            $newJobOffer->setRemote($remote);
-            $newJobOffer->setSalary($salary);
-            $newJobOffer->setTitle($title);
-
-            $career = new Career();
-            $career->setCareerId($postvalue['career']);
-            $newJobOffer->setCareer($career);
-
-            $company = new Company();
-            $company->setCompanyId($postvalue['company']);
-            $newJobOffer->setCompany($company);
-
-            $admin = new User();
-            $admin->setUserId($this->loggedUser->getUserId());
-            $newJobOffer->setCreationAdmin($admin);
-
-            $positionsArray = array();
-            foreach ($position as $value) {
-                $newJobPosition = new JobPosition();
-                $newJobPosition->setJobPositionId($value);
-                array_push($positionsArray, $newJobPosition);
-            }
-
-            $newJobOffer->setJobPosition($positionsArray);
-
-            try {
-
-                $idOffer = $this->jobOfferDAO->add($newJobOffer); //add job offer to JobOffer DAO
-
-                foreach ($newJobOffer->getJobPosition() as $value) {
-                    $op = new JobOfferPosition();
-                    $op->setJobPositionId($value->getJobPositionId());
-                    $op->setJoOfferId($idOffer);
-                    $this->jobOfferPositionDAO->add($op); //add job OfferxPosition to JobOfferPosition DAO (N:M table)
-                }
-
-                $message = "Job Offer successfully added";
-                $this->showJobOfferManagementView(null,"$message", 1);
-
-            } catch (\Exception $ex) {
-                if ($ex->getCode() == 23000) //unique constraint
-                {
+           } else
+            {
+                $titleValidation = $this->validateUniqueTitle($title, $postvalue['company']);
+                if ($titleValidation == 1) {
                     $message = "Error, the entered Job Offer Title is already in use by the offering company";
-                    $this->showCreateJobOfferView($message, $postvalue['career'], $values);
-
+                    $this->showCreateJobOfferView($message, $postvalue['career'], $postvalue);
                 } else {
-                    $message = "Error, try again";
-                    $this->showCreateJobOfferView($message, $postvalue['career'], $values);
+                    $newJobOffer = new JobOffer();
+                    $newJobOffer->setDescription($description);
+                    $newJobOffer->setActive($this->validateActive($postvalue['publishDate'], $active));
+                    $newJobOffer->setDedication($dedication);
+                    $newJobOffer->setEndDate($postvalue['endDate']);
+                    $newJobOffer->setPublishDate($postvalue['publishDate']);
+                    $newJobOffer->setRemote($remote);
+                    $newJobOffer->setSalary($salary);
+                    $newJobOffer->setTitle($title);
+                    $newJobOffer->setEmailSent("false");
+                    $newJobOffer->setMaxApply($max);
+
+                    $career = new Career();
+                    $career->setCareerId($postvalue['career']);
+                    $newJobOffer->setCareer($career);
+
+                    $company = new Company();
+                    $company->setCompanyId($postvalue['company']);
+                    $newJobOffer->setCompany($company);
+
+                    $admin = new User();
+                    $admin->setUserId($this->loggedUser->getUserId());
+                    $newJobOffer->setCreationAdmin($admin);
+
+                    $positionsArray = array();
+                    foreach ($position as $value) {
+                        $newJobPosition = new JobPosition();
+                        $newJobPosition->setJobPositionId($value);
+                        array_push($positionsArray, $newJobPosition);
+                    }
+
+                    $newJobOffer->setJobPosition($positionsArray);
+
+                    try {
+
+                        $idOffer = $this->jobOfferDAO->add($newJobOffer); //add job offer to JobOffer DAO
+
+                        foreach ($newJobOffer->getJobPosition() as $value) {
+                            $op = new JobOfferPosition();
+                            $op->setJobPositionId($value->getJobPositionId());
+                            $op->setJoOfferId($idOffer);
+                            $this->jobOfferPositionDAO->add($op); //add job OfferxPosition to JobOfferPosition DAO (N:M table)
+                        }
+
+                        $message = "Job Offer successfully added";
+                        $this->showJobOfferManagementView(null,"$message", 1);
+
+                    } catch (\Exception $ex) {
+                        if ($ex->getCode() == 23000) //unique constraint
+                        {
+                            $message = "Error, the entered Job Offer Title is already in use by the offering company";
+                            $this->showCreateJobOfferView($message, $postvalue['career'], $values);
+
+                        } else {
+                            $message = "Error, try again";
+                            $this->showCreateJobOfferView($message, $postvalue['career'], $values);
+                        }
+                    }
                 }
             }
-        }
+
+
     }
+
+
+    public function validateNegativeNumber($number)
+    {
+        $validate = null;
+
+        if ($number>0){
+            $validate=1;
+        }
+
+        return $validate;
+    }
+
 
 
     public function validateActive($publishDate, $active)
@@ -646,7 +669,7 @@ class JobController
     /**
      * End the update of a job offer, adding to data base
      */
-    public function editJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $active, $values)
+    public function editJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $max, $active, $values)
     {
         $postvalue = unserialize(base64_decode($values));
 
@@ -711,73 +734,99 @@ class JobController
             $message = "Error, the entered Job Offer Title is already in use by the offering company";
             $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $postvalue);
         }
-        else {
-
-
-
-            $newJobOffer = new JobOffer();
-            $newJobOffer->setDescription($description);
-            $newJobOffer->setActive($this->validateActive($postvalue['publishDate'], $active));
-            $newJobOffer->setDedication($dedication);
-            $newJobOffer->setEndDate($postvalue['endDate']);
-            $newJobOffer->setPublishDate($postvalue['publishDate']);
-            $newJobOffer->setRemote($remote);
-            $newJobOffer->setSalary($salary);
-            $newJobOffer->setTitle($title);
-            $newJobOffer->setJobOfferId($postvalue['jobOfferId']);
-
-            $career = new Career();
-            $career->setCareerId($postvalue['career']);
-            $newJobOffer->setCareer($career);
-
-            $company = new Company();
-            $company->setCompanyId($postvalue['company']);
-            $newJobOffer->setCompany($company);
-
-
-            $admin = new User();
-            $admin->setUserId($this->loggedUser->getUserId());
-            $newJobOffer->setCreationAdmin($admin);
-
-
-            $positionsArray = array();
-            foreach ($position as $value) {
-                $newJobPosition = new JobPosition();
-                $newJobPosition->setJobPositionId($value);
-                array_push($positionsArray, $newJobPosition);
+        else
+        {
+            $positiveNumber=$this->validateNegativeNumber($max);
+            if($positiveNumber==null)
+            {
+                $message = "Error, the entered maximun of applies value must be a positive number";
+                $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $postvalue);
             }
+            else
+            {
+                $flagg=0;
+               $allAppointments= $this->appointmentDAO->getAppointmentFromOffers($postvalue['jobOfferId']);
+               if($allAppointments!=null)
+               {
+                   $flagg=0;
+                   $cant=count($allAppointments);
+                   if($max<$cant)
+                   {
+                       $message = "Error, the entered maximun of applies value must be equal or superior to the actual number of appointmets (".$cant.")";
+                       $flagg=1;
+                       $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $postvalue);
+                   }
+               }
+               else
+               {
+                   if($flagg==0)
+                   {
+                       $newJobOffer = new JobOffer();
+                       $newJobOffer->setDescription($description);
+                       $newJobOffer->setActive($this->validateActive($postvalue['publishDate'], $active));
+                       $newJobOffer->setDedication($dedication);
+                       $newJobOffer->setEndDate($postvalue['endDate']);
+                       $newJobOffer->setPublishDate($postvalue['publishDate']);
+                       $newJobOffer->setRemote($remote);
+                       $newJobOffer->setSalary($salary);
+                       $newJobOffer->setTitle($title);
+                       $newJobOffer->setJobOfferId($postvalue['jobOfferId']);
+                       $newJobOffer->setMaxApply($max);
+
+                       $career = new Career();
+                       $career->setCareerId($postvalue['career']);
+                       $newJobOffer->setCareer($career);
+
+                       $company = new Company();
+                       $company->setCompanyId($postvalue['company']);
+                       $newJobOffer->setCompany($company);
 
 
-            //buscar todos los jobOfferPosition que tienen como id esta jobOffer y borrarlos, y agregar los nuevos
-            $this->jobOfferPositionDAO->remove($postvalue['jobOfferId']);
-            $newJobOffer->setJobPosition($positionsArray);
+                       $admin = new User();
+                       $admin->setUserId($this->loggedUser->getUserId());
+                       $newJobOffer->setCreationAdmin($admin);
 
 
-            try {
+                       $positionsArray = array();
+                       foreach ($position as $value) {
+                           $newJobPosition = new JobPosition();
+                           $newJobPosition->setJobPositionId($value);
+                           array_push($positionsArray, $newJobPosition);
+                       }
 
-                $this->jobOfferDAO->update($newJobOffer); //update job offer to JobOffer DAO
 
-                foreach ($newJobOffer->getJobPosition() as $value) {
-                    $op = new JobOfferPosition();
-                    $op->setJobPositionId($value->getJobPositionId());
-                    $op->setJoOfferId($postvalue['jobOfferId']);
-                    $this->jobOfferPositionDAO->add($op); //add job OfferxPosition to JobOfferPosition DAO (N:M table) //luego de eliminar los anteriores
-                }
+                       //buscar todos los jobOfferPosition que tienen como id esta jobOffer y borrarlos, y agregar los nuevos
+                       $this->jobOfferPositionDAO->remove($postvalue['jobOfferId']);
+                       $newJobOffer->setJobPosition($positionsArray);
 
-                $message = "Job Offer successfully updated";
-                $this->showJobOfferManagementView(null, "$message", 2); //for message
 
-            } catch (\Exception $ex) {
-                $message= "Error, try again";
-                if ($ex->getCode() == 23000) //unique constraint
-                {
-                    $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $values);
+                       try {
 
-                } else {
-                    $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $values);
-                }
+                           $this->jobOfferDAO->update($newJobOffer); //update job offer to JobOffer DAO
+
+                           foreach ($newJobOffer->getJobPosition() as $value) {
+                               $op = new JobOfferPosition();
+                               $op->setJobPositionId($value->getJobPositionId());
+                               $op->setJoOfferId($postvalue['jobOfferId']);
+                               $this->jobOfferPositionDAO->add($op); //add job OfferxPosition to JobOfferPosition DAO (N:M table) //luego de eliminar los anteriores
+                           }
+
+                           $message = "Job Offer successfully updated";
+                           $this->showJobOfferManagementView(null, "$message", 2); //for message
+
+                       } catch (\Exception $ex) {
+                           $message= "Error, try again";
+                           if ($ex->getCode() == 23000) //unique constraint
+                           {
+                               $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $values);
+
+                           } else {
+                               $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $values);
+                           }
+                       }
+                   }
+               }
             }
-
         }
     }
 

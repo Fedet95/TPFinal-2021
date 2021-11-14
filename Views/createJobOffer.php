@@ -157,6 +157,14 @@ else {
 
                             <div class="col-lg-15">
                                 <div class="form-group">
+                                    <label class="text-muted text-strong" for="">Maximun Number of Applys</label>
+                                    <br>
+                                    <input required type="number" name="max" min="0">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-15">
+                                <div class="form-group">
                                     <p class="text-muted text-strong text">Condition</p>
                                     <label for="active" >Active</label>
                                     <input type="radio" name="active" value="true" checked class="radioSize" required id="active">

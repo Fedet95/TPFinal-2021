@@ -126,6 +126,7 @@ class AppointmentDAO implements IAppointmentDAO
                 $jobOffer->setEndDate($value["endDate"]);
                 $jobOffer->setDedication($value['dedication']);
                 $jobOffer->setDescription($value["descriptionOffer"]);
+                $jobOffer->setEmailSent($value["emailSent"]);
                 $company= new Company();
                 $company->setCompanyId($value['companyId']);
                 $career= new Career();

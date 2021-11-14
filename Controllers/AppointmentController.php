@@ -51,16 +51,16 @@ class AppointmentController
         //require_once(VIEWS_PATH . "checkLoggedStudent.php");
         SessionHelper::checkStudentSession();
 
-
-
         $flag = $this->validateActiveStudent($studentId);
 
         if ($flag == 1) {
 
             $validate = $this->uniqueAppointment($studentId);
-            if ($validate == 1) {
+            if ($validate == 1)
+            {
                 $_SESSION['applyOffer'] = $jobOfferId;
                 $this->showAppointmentList($valueToSearch = null, $back = null, "Only one active application is allowed");
+
             } else {
                 require_once(VIEWS_PATH . "applyJobOffer.php");
             }
