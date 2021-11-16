@@ -7,8 +7,7 @@
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
     </list>
     <list id="85270889-5dd1-416f-9f4d-45f2b152b949" name="Changes by Fede" comment="Changes by Fede" />
     <list id="35919033-f1f6-429b-b771-da40ecdfa16d" name="Changes by paye_" comment="Changes by paye_" />
@@ -132,14 +131,8 @@
       <workItem from="1636562833947" duration="28732000" />
       <workItem from="1636638133979" duration="26316000" />
       <workItem from="1636841552935" duration="7682000" />
-      <workItem from="1636926030763" duration="5199000" />
-    </task>
-    <task id="LOCAL-00077" summary="update">
-      <created>1636055824192</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1636055824193</updated>
+      <workItem from="1636926030763" duration="5435000" />
+      <workItem from="1637022686628" duration="1051000" />
     </task>
     <task id="LOCAL-00078" summary="update">
       <created>1636084918614</created>
@@ -477,7 +470,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636849781404</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL-00126" summary="update">
+      <created>1636931279964</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1636931279965</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

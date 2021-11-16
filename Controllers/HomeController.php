@@ -399,7 +399,7 @@ class HomeController
         {
             foreach ($allOffers as $offer)
             {
-                if(strtotime($offer->getEndDate()) < strtotime(date("Y-m-d"))) {
+                if(strtotime($offer->getEndDate()) < strtotime(date("Y-m-d")) && $offer->getEmailSent()!=1)  {
                     $offer->setActive("false"); //string
                     $offer->setEmailSent(1); //boolean
                     try {
@@ -433,7 +433,7 @@ class HomeController
 
                         $studentsEmails= array();
                         $sub="Appointment Expiration";
-                        $text="UTN Job Search thanks you for applying to one of our job offers, which has reached its deadline. We wish you the best of luck!";
+                        $text="UTN Job Search thanks you for applying to one of our job offers (id: ".$offer->getJobOfferId()."), which has reached its deadline. We wish you the best of luck!";
 
                         foreach ($allStudents as $student)
                         {

@@ -147,7 +147,7 @@ class JobOfferDAO implements IJobOfferDAO
 
         try
         {
-            $query= "UPDATE ".$this->tableName." SET activeJobOffer = :activeJobOffer , remote = :remote, publishDate = :publishDate, endDate = :endDate, title = :title, dedication = :dedication, descriptionOffer = :descriptionOffer, salary = :salary, creationAdmin = :creationAdmin, companyId = :companyId, careerIdOffer = :careerIdOffer, maxApply= :maxApply
+            $query= "UPDATE ".$this->tableName." SET activeJobOffer = :activeJobOffer , remote = :remote, publishDate = :publishDate, endDate = :endDate, title = :title, dedication = :dedication, descriptionOffer = :descriptionOffer, salary = :salary, creationAdmin = :creationAdmin, companyId = :companyId, careerIdOffer = :careerIdOffer, maxApply= :maxApply, emailSent=:emailSent
             WHERE (jobOfferId = :jobOfferId)";
 
                 $parameters["activeJobOffer"] =  $jobOffer->getActive();
@@ -163,6 +163,7 @@ class JobOfferDAO implements IJobOfferDAO
                $parameters["careerIdOffer"] = $jobOffer->getCareer()->getCareerId();
                $parameters["jobOfferId"] = $jobOffer->getJobOfferId();
                $parameters['maxApply']=$jobOffer->getMaxApply();
+               $parameters['emailSent']=$jobOffer->getEmailSent();
 
 
 
