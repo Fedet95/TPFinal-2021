@@ -1045,6 +1045,9 @@ class CompanyController
             }
             else
             {
+                $company = $this->companyDAO->getCompany($id);
+                $userCompany = $this->userDAO->getUserByEmail($company->getEmail());
+                $this->userDAO->remove($userCompany->getUserId());
 
                 $this->companyDAO->remove($id);
                 $this->showCompanyManagement(null, null, "Company removed successfully");

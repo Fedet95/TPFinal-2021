@@ -295,7 +295,7 @@ class UserDAO implements lUserDAO
                 $student->setBirthDate($searchedStudent->getBirthDate());
                 $user = $student;
 
-            } else if ($rol == 1) //admin
+            } else if ($rol == 1 || $rol == 3) //admin-company
             {
                 $aux = new User();
                 $aux->setUserId($value['userId']);

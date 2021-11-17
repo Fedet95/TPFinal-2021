@@ -126,6 +126,39 @@ class CompanyDAO implements lCompanyDAO
      * @param $companyId
      */
 
+
+
+    function getCompanyByEmail($email)
+    {
+        try
+        {
+            $query= "SELECT * FROM ".$this->tableName." c INNER JOIN ".$this->tableName2." co ON c.country= co.idCountry
+            INNER JOIN ".$this->tableName3." ci ON c.city= ci.idCity 
+            INNER JOIN ".$this->tableName4." ind ON c.industry= ind.idIndustry
+            INNER JOIN ".$this->tableName5." lo ON c.logo= lo.idLogo
+            INNER JOIN ".$this->tableName6." u ON c.creationAdmin= u.userId WHERE (emailCompany= :emailCompany)";
+
+            $parameters['emailCompany']=$email;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, $parameters);
+
+            $mapedArray=null;
+            if(!empty($result))
+            {
+                $mapedArray= $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+            }
+
+            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        }
+        catch (\Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
+
     function getCompany($companyId)
     {
         try
@@ -155,6 +188,9 @@ class CompanyDAO implements lCompanyDAO
             throw $ex;
         }
     }
+
+
+
 
     /**
      * Validate if a cuit number is available

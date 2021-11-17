@@ -78,9 +78,7 @@ else if(isset($_SESSION['loggedcompany']))
                     ?>
                 </div>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-                    Job Offers
-                </a>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Job Offers</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <?php
                     if($loggedUser->getRol()->getUserRolId()==1)

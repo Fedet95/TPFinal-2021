@@ -11,7 +11,7 @@ use DAO\UserDAO;
 use DAO\UserRolDAO;
 use Models\SessionHelper;
 use Models\User;
-
+use Models\Company;
 
 class HomeController
 {
@@ -54,7 +54,7 @@ class HomeController
      */
     public function showStudentControlPanelView($message = "")
     {
-        //require_once(VIEWS_PATH."checkLoggedStudent.php");
+        //requir
         SessionHelper::checkStudentSession();
         $this->verifyEndDate();
         require_once(VIEWS_PATH."studentControlPanel.php"); //panel de control
@@ -66,7 +66,7 @@ class HomeController
      */
     public function showAdministratorControlPanelView($message = "")
     {
-        //require_once(VIEWS_PATH."checkLoggedAdmin.php");
+
         SessionHelper::checkAdminSession();
         $finalArray= $this->adminPanelCards();
         $this->verifyEndDate();
@@ -88,7 +88,7 @@ class HomeController
 
     public function showContactUsView($message= "")
     {
-        //require_once(VIEWS_PATH."checkLoggedStudent.php");
+
         SessionHelper::checkStudentSession();
         require_once (VIEWS_PATH."contactUs.php");
     }
