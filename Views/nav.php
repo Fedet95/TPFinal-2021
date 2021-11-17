@@ -10,11 +10,12 @@ if (isset($_SESSION['loggedstudent']))
 {
     $loggedUser= $_SESSION['loggedadmin'];
 }
-
+else if(isset($_SESSION['loggedcompany']))
+{
+    $loggedUser= $_SESSION['loggedcompany'];
+}
 
 ?>
-
-
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <img style="max-width:60px; margin-top: -7px;" src="../Views/img/utn-128x128.png">
     <a class="navbar-brand" href="#">Welcome</a>
@@ -36,6 +37,12 @@ if (isset($_SESSION['loggedstudent']))
                 {
                     ?>
                     <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/showStudentControlPanelView"?>">Home</a>
+                    <?php
+                }
+                else if($loggedUser->getRol()->getUserRolId()==3)
+                {
+                    ?>
+                    <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/showCompanyControlPanelView"?>">Home</a>
                     <?php
                 }
                 ?>
@@ -86,6 +93,12 @@ if (isset($_SESSION['loggedstudent']))
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Search Job Offers</a>
+                        <?php
+                    }
+                    else if($loggedUser->getRol()->getUserRolId()=='3')
+                    {
+                        ?>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showCreateJobOfferView"?>">Add Job Offer</a>
                         <?php
                     }
                     ?>

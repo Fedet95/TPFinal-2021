@@ -73,6 +73,18 @@ class HomeController
         require_once(VIEWS_PATH."administratorControlPanel.php"); //panel de control
     }
 
+    /**
+     * * Send to administrator control panel view
+     * @param string $message
+     */
+    public function showCompanyControlPanelView($message = "")
+    {
+        SessionHelper::checkCompanySession();
+        $this->verifyEndDate();
+        require_once(VIEWS_PATH."companyControlPanel.php"); //panel de control
+    }
+
+
 
     public function showContactUsView($message= "")
     {
@@ -134,6 +146,32 @@ class HomeController
                                 $message = 'Your account is not active, please get in contact with the university';
                                 $this->welcome($message);
                             }
+                        }
+
+                    }
+                    else if(strcasecmp($userRol->getRolName(), 'company') == 0)
+                    {
+                        $companyDao= new CompanyDAO();
+
+                        try {
+                            $searchedCompany= $companyDao->getCompanyByEmail($email);
+                            if($searchedCompany!=null)
+                            {
+                                if($searchedCompany->getActive()=='true')
+                                {
+                                    $_SESSION['loggedcompany'] = $searchedUser;
+                                    $this->showCompanyControlPanelView();
+                                }
+                                else
+                                {
+                                    $message = 'Your account is not active, please get in contact with the university';
+                                    $this->welcome($message);
+                                }
+                            }
+                        }
+                        catch (\Exception $ex)
+                        {
+                            echo $ex->getMessage();
                         }
 
                     }

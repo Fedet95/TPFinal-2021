@@ -156,6 +156,42 @@ class UserDAO implements lUserDAO
 
 
     /**
+     * Returns all values from Data base
+     * @return array
+     */
+    public function getUserByEmail($email)
+    {
+        try {
+
+            $query = "SELECT * FROM " . $this->tableName . " u INNER JOIN " . $this->tableName2 . " r ON u.rolId=r.userRolId  WHERE  (u.email= :email)";
+
+
+            $parameters['email'] = $email;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query, $parameters);
+
+            $mapedArray = null;
+            if (!empty($result)) {
+                $mapedArray = $this->mapear($result); //lo mando a MAPEAR y lo retorno (ver video minuto 13:13 en adelante)
+            }
+
+            return $mapedArray; //si todo esta ok devuelve el array mapeado, y sino NULL
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
+
+
+
+
+
+
+
+    /**
      * Update a value in data base
      * @return array
      */
@@ -261,15 +297,15 @@ class UserDAO implements lUserDAO
 
             } else if ($rol == 1) //admin
             {
-                $administrator = new User();
-                $administrator->setUserId($value['userId']);
-                $administrator->setEmail($value['email']);
-                $administrator->setPassword($value['password']);
+                $aux = new User();
+                $aux->setUserId($value['userId']);
+                $aux->setEmail($value['email']);
+                $aux->setPassword($value['password']);
                 $userRol = new UserRol();
                 $userRol->setUserRolId($rol);
-                $administrator->setRol($userRol);
+                $aux->setRol($userRol);
 
-                $user = $administrator;
+                $user = $aux;
             }
 
 

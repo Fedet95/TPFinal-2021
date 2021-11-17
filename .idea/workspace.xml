@@ -5,11 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/Views/checkLoggedCompany.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/companyControlPanel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/UserDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/SessionHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/SessionHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/checkLoggedUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/checkLoggedUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/createJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/createJobOffer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
     </list>
-    <list id="85270889-5dd1-416f-9f4d-45f2b152b949" name="Changes by Fede" comment="Changes by Fede" />
+    <list id="85270889-5dd1-416f-9f4d-45f2b152b949" name="Changes by Fede" comment="Changes by Fede">
+      <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/CompanyDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CompanyDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/UserDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
+    </list>
     <list id="35919033-f1f6-429b-b771-da40ecdfa16d" name="Changes by paye_" comment="Changes by paye_" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +47,50 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/DAO/UserDAO.php">
+      <ranges>
+        <range start1="156" end1="156" start2="156" end2="192" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="261" end1="262" start2="297" end2="298" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
+        <range start1="263" end1="267" start2="299" end2="303" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="269" end1="270" start2="305" end2="306" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="271" end1="272" start2="307" end2="308" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/Controllers/CompanyController.php">
+      <ranges>
+        <range start1="3" end1="3" start2="3" end2="4" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="289" end1="289" start2="290" end2="318" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="292" end1="292" start2="321" end2="322" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="294" end1="296" start2="324" end2="324" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="305" end1="305" start2="333" end2="355" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="881" end1="883" start2="931" end2="931" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="884" end1="884" start2="932" end2="1044" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="887" end1="887" start2="1047" end2="1050" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
+        <range start1="893" end1="989" start2="1056" end2="1056" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="1252" end1="1252" start2="1319" end2="1336" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/Views/nav.php">
+      <ranges>
+        <range start1="12" end1="13" start2="12" end2="16" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="15" end1="17" start2="18" end2="18" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="40" end1="40" start2="41" end2="47" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="73" end1="76" start2="80" end2="81" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
+        <range start1="90" end1="90" start2="95" end2="101" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/Controllers/HomeController.php">
+      <ranges>
+        <range start1="13" end1="14" start2="13" end2="14" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
+        <range start1="56" end1="57" start2="56" end2="57" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
+        <range start1="68" end1="69" start2="68" end2="69" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
+        <range start1="75" end1="75" start2="75" end2="87" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="78" end1="79" start2="90" end2="91" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
+        <range start1="139" end1="139" start2="151" end2="177" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+      </ranges>
+    </file>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -132,14 +190,8 @@
       <workItem from="1636638133979" duration="26316000" />
       <workItem from="1636841552935" duration="7682000" />
       <workItem from="1636926030763" duration="5435000" />
-      <workItem from="1637022686628" duration="1051000" />
-    </task>
-    <task id="LOCAL-00078" summary="update">
-      <created>1636084918614</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1636084918614</updated>
+      <workItem from="1637022686628" duration="1067000" />
+      <workItem from="1637103593961" duration="12113000" />
     </task>
     <task id="LOCAL-00079" summary="Changes by Fede">
       <created>1636084928951</created>
@@ -477,7 +529,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636931279965</updated>
     </task>
-    <option name="localTasksCounter" value="127" />
+    <task id="LOCAL-00127" summary="update">
+      <created>1637023752238</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1637023752239</updated>
+    </task>
+    <option name="localTasksCounter" value="128" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

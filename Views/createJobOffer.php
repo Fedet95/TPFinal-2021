@@ -1,6 +1,6 @@
 <?php
 use Models\SessionHelper;
-SessionHelper::checkAdminSession();
+SessionHelper::checkUserSession();
 //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 include_once('header.php');
 include_once('nav.php');
@@ -15,13 +15,12 @@ include_once('nav.php');
                     <strong class=" offset-md-5"><?php if(isset($message)){ echo $message;}?></strong>
                     <div class="row  col-sm-10 offset-sm-1 text-center bg-light-alpha p-5 border">
 
+                      <?php if($loggedUser->getRol()->getUserRolId() == 1){ ?>
                         <div class=" offset-3 col-7">
                         <div class="form-group">
                             <label class="text-muted text-strong text" for="">Offering Company</label>
                             <select name="company" class="form-control" required >
                                 <option value="" disabled selected class="text-center">Select offering company</option>
-
-
 
                                 <?php
 
@@ -30,7 +29,6 @@ include_once('nav.php');
                         $allCompanies= array();
                         array_push($allCompanies, $com);
                     }
-
                                 foreach ($allCompanies as $value)
                                 {
                                     if($value->getActive()=='true')
@@ -40,10 +38,31 @@ include_once('nav.php');
                                     <?php
                                 }
                                 }
-                                ?>
+
+                          ?>
                             </select>
                         </div>
                         </div>
+                        <?php }else if($loggedUser->getRol()->getUserRolId() == 3){?>
+
+                        <div class=" offset-3 col-7">
+                            <div class="form-group">
+                                <label class="text-muted text-strong text" for="">Offering Company</label>
+                <?php  foreach ($allCompanies as $value)
+                {
+                    if($value->getEmail()==$loggedUser->getEmail())
+                    {
+                        ?>
+                            <input type="hidden" name="company" value="<?php echo $value->getCompanyId()?>">
+                        <input type="text" value="<?php echo $value->getName()?>" readonly class="form-control  text-center">
+                        <?php
+                    }
+                }?>
+            </div>
+                        </div>
+
+
+            <?php }?>
 
                         <div class="form-group offset-3 col-7">
                             <label class="text-muted text-strong text" for="">Referring Career</label>

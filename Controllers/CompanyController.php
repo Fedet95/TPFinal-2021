@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 //require_once(VIEWS_PATH . "checkLoggedUser.php");
+use DAO\UserRolDAO;
 use Models\SessionHelper;
 SessionHelper::checkUserSession();
 
@@ -287,13 +288,40 @@ class CompanyController
                 $company->setEmail($email);
                 $company->setActive($active);
 
+                $userCompany= new User();
+                $rolDao= new UserRolDAO();
+                try {
+                    $rol= $rolDao->getRolIdByRolName("company");
+                }
+                catch (\Exception $ex)
+                {
+                    echo $ex->getMessage();
+                }
+
+                if($rol!=null)
+                {
+                    $userCompany->setRol($rol);
+                    $userCompany->setEmail($email);
+                    $userCompany->setActive($active);
+                    $pass= $this->randomPassword();
+                    $sub="UTN's Job Search Register"; ///Send email with Password before encrypt it
+                    $text="Registration for company: ".$name." successfull. Username: " . $email . ". Password: " . $pass . ". You can change your password once you login";
+
+                    $this->sendEmail($email,$sub,$text);
+                    $this->sendEmail("juanpayetta@gmail.com",$sub,$text);
+
+                    $message= "Company created succesfully. User data sent to email " . $email . ".";
+                    $encrypted_password=password_hash($pass,PASSWORD_DEFAULT);
+                    $userCompany->setPassword($encrypted_password);
+                    $this->showCompanyManagement(null,null,$message);
+
+                }
 
                 try {
                     $this->companyDAO->add($company);
+                    $this->userDAO->add($userCompany);
 
 
-
-                    $this->showCompanyManagement();
                 }
                 catch (\Exception $ex)
                 {
@@ -301,6 +329,28 @@ class CompanyController
                 }
             }
     }
+
+
+    /**
+     * Send a mail from the system to the inserted email
+     * @param $email
+     * @param $sub
+     * @param $text
+     */
+    public function sendEmail ($email, $sub, $text)
+    {
+        $to = $email;
+        $subject = $sub;
+        $message = $text;
+        $headers = 'From: tpfinalutn2021@gmail.com' . "\r\n" .
+            'MIME-Version: 1.0' . "\r\n" .
+            'Content-type: text/html; charset=utf-8';
+        if (mail($to, $subject, $message, $headers))
+            echo "Email sent";
+        else
+            echo "Email sending failed";
+    }
+
 
 
     /**
@@ -879,9 +929,119 @@ class CompanyController
                             array_push($inactiveOffers, $value);
                         }
                     }
-
-
                 }
+
+                try {
+
+                    if (!empty($activeOffers)) {
+                        $appointmentDAO = new AppointmentDAO();
+                        $allAppointments = $appointmentDAO->getAll();
+                        $searchedAppointments = array();
+
+                        if(is_object($allAppointments))
+                        { $appointment= $allAppointments;
+                            $allAppointments= array();
+                            array_push($allAppointments, $appointment);
+                        }
+
+
+
+                        $flag=0;
+                        if ($allAppointments != null)
+                        {
+                            foreach ($allAppointments as $appointment)
+                            {
+
+                                foreach ($activeOffers as $offers)
+                                {
+
+                                    if (strcmp($appointment->getJobOffer()->getJobOfferId(),$offers->getJobOfferId()) ==0)
+                                    {
+                                        $flag=1; //no se elimina, se inactiva la empresa
+
+                                    }
+                                }
+                            }
+
+                            if($flag==0)
+                            {
+
+                                $company = $this->companyDAO->getCompany($id);
+                                $userCompany = $this->userDAO->getUserByEmail($company->getEmail());
+                                $this->userDAO->remove($userCompany->getUserId());
+
+                                $this->companyDAO->remove($id);
+                                $this->showCompanyManagement(null, null, "Company removed successfully");
+                                //no tiene ninguna oferta de trabajo activa con postulaciones
+                            }
+                            else
+                            {
+
+                                try { //el user company ya no podra loguearse hasta tanto la company vuelva a estar activa
+                                    $company= $this->companyDAO->getCompany($id);
+
+                                    if($company->getActive()=='true')
+                                    {
+                                        $company->setActive("false");
+                                        $message= "Company status changed to 'Inactive' due to existing active job offer with appointments. Remove after expiration date.";
+                                    }
+                                    else
+                                    {
+                                        $message= "Company current status is 'Inactive' due to existing active job offer with appointments and previous remove operation.";
+                                    }
+
+                                }catch (\Exception $ex)
+                                {
+                                    echo $ex->getMessage();
+                                }
+
+
+
+                                $this->companyDAO->update($company);
+                                $this->showCompanyManagement(null, null, $message);
+
+                            }
+                        }
+                        else
+                        {
+                            $company = $this->companyDAO->getCompany($id);
+                            $userCompany = $this->userDAO->getUserByEmail($company->getEmail());
+                            $this->userDAO->remove($userCompany->getUserId());
+
+                            $this->companyDAO->remove($id);
+                            $this->showCompanyManagement(null, null, "Company removed successfully");
+                        }   //no hay postulaciones
+                    }
+                    else{
+
+                        if(!empty($inactiveOffers))
+                        {
+                            $company = $this->companyDAO->getCompany($id);
+                            $userCompany = $this->userDAO->getUserByEmail($company->getEmail());
+                            $this->userDAO->remove($userCompany->getUserId());
+
+                            $this->companyDAO->remove($id);
+                            $this->showCompanyManagement(null, null, "Company removed successfully");
+                            //$message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo";
+                        }
+                        else
+                        {
+                            $company = $this->companyDAO->getCompany($id);
+                            $userCompany = $this->userDAO->getUserByEmail($company->getEmail());
+                            $this->userDAO->remove($userCompany->getUserId());
+
+                            $this->companyDAO->remove($id);
+                            $this->showCompanyManagement(null, null, "Company removed successfully");
+                            //$message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo activa (tiene inactivas)";
+                        }
+
+                    }
+                }catch (\Exception $ex)
+                {
+                    echo $ex->getMessage();
+                }
+
+
             }
             else
             {
@@ -890,102 +1050,6 @@ class CompanyController
                 $this->showCompanyManagement(null, null, "Company removed successfully");
                 //company with no job offers
 
-            }
-            try {
-
-                if (!empty($activeOffers)) {
-                    $appointmentDAO = new AppointmentDAO();
-                    $allAppointments = $appointmentDAO->getAll();
-                    $searchedAppointments = array();
-
-                    if(is_object($allAppointments))
-                    { $appointment= $allAppointments;
-                        $allAppointments= array();
-                        array_push($allAppointments, $appointment);
-                    }
-
-
-
-                    $flag=0;
-                    if ($allAppointments != null)
-                    {
-                        foreach ($allAppointments as $appointment)
-                        {
-
-                            foreach ($activeOffers as $offers)
-                            {
-
-                                if (strcmp($appointment->getJobOffer()->getJobOfferId(),$offers->getJobOfferId()) ==0)
-                                {
-                                    $flag=1; //no se elimina, se inactiva la empresa
-
-                                }
-                            }
-                        }
-
-                        if($flag==0)
-                        {
-
-                            $this->companyDAO->remove($id);
-                            $this->showCompanyManagement(null, null, "Company removed successfully");
-                            //no tiene ninguna oferta de trabajo activa con postulaciones
-                        }
-                        else
-                        {
-
-                            try {
-                                $company= $this->companyDAO->getCompany($id);
-
-                                if($company->getActive()=='true')
-                                {
-                                    $company->setActive("false");
-                                    $message= "Company status changed to 'Inactive' due to existing active job offer with appointments. Remove after expiration date.";
-                                }
-                                else
-                                {
-                                    $message= "Company current status is 'Inactive' due to existing active job offer with appointments and previous remove operation.";
-                                }
-
-                            }catch (\Exception $ex)
-                            {
-                                echo $ex->getMessage();
-                            }
-
-
-
-                            $this->companyDAO->update($company);
-                            $this->showCompanyManagement(null, null, $message);
-
-                        }
-                    }
-                    else
-                    {
-
-                        $this->companyDAO->remove($id);
-                        $this->showCompanyManagement(null, null, "Company removed successfully");
-                    }   //no hay postulaciones
-                }
-                else{
-
-                    if(!empty($inactiveOffers))
-                    {
-
-                        $this->companyDAO->remove($id);
-                        $this->showCompanyManagement(null, null, "Company removed successfully");
-                        //$message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo";
-                    }
-                    else
-                    {
-
-                        $this->companyDAO->remove($id);
-                        $this->showCompanyManagement(null, null, "Company removed successfully");
-                        //$message="Se elimina porque esta compañia no tiene ninguna oferta de trabajo activa (tiene inactivas)";
-                    }
-
-                }
-            }catch (\Exception $ex)
-            {
-                echo $ex->getMessage();
             }
         }
         catch (\Exception $ex)
@@ -1250,5 +1314,22 @@ class CompanyController
 
         return $searchedCompany;
     }
+
+
+    /**
+     * Returns a random default password for the new company user
+     */
+    function randomPassword() {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
+    }
+
+
 
 }

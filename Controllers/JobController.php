@@ -62,7 +62,7 @@ class JobController
     public function showCreateJobOfferView($message = "", $careerId = null, $values = null)
     {
         //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
-        SessionHelper::checkAdminSession();
+        SessionHelper::checkUserSession();
 
         try {
             $allCompanies = $this->companyDAO->getAll();
@@ -215,7 +215,7 @@ class JobController
         }
 
 
-       if(isset($searchedValue) && $searchedValue!=null)
+       if($this->loggedUser->getRol()->getUserRolId()==2 && isset($searchedValue) && $searchedValue!=null)
        {
            $flag=0;
            foreach ($searchedValue as $offer)
@@ -232,6 +232,7 @@ class JobController
                $validateMessage=1;
                $message= "No job offers with these characteristics were found";
            }
+
        }
 
 
@@ -364,7 +365,7 @@ class JobController
     public function addJobOfferFirstPart($company, $career, $publishDate, $endDate)
     {
 
-        SessionHelper::checkAdminSession();
+        SessionHelper::checkUserSession();
         $publishDateValidation=$this->validatePublishDate($publishDate);
         if ($publishDateValidation == null) {
             $message = "Error, enter a valid Job Offer Publish Date";
@@ -430,9 +431,9 @@ class JobController
                     $company->setCompanyId($postvalue['company']);
                     $newJobOffer->setCompany($company);
 
-                    $admin = new User();
-                    $admin->setUserId($this->loggedUser->getUserId());
-                    $newJobOffer->setCreationAdmin($admin);
+                        $admin = new User();
+                        $admin->setUserId($this->loggedUser->getUserId());
+                        $newJobOffer->setCreationAdmin($admin);
 
                     $positionsArray = array();
                     foreach ($position as $value) {
@@ -1161,6 +1162,7 @@ class JobController
             $searchedOffer = $allOffers;
         }
 
+
         return $searchedOffer;
     }
 
@@ -1225,6 +1227,10 @@ class JobController
             $loggedUser = $_SESSION['loggedadmin'];
         } else if (isset($_SESSION['loggedstudent'])) {
             $loggedUser = $_SESSION['loggedstudent'];
+        }
+        else if(isset($_SESSION['loggedcompany']))
+        {
+            $loggedUser = $_SESSION['loggedcompany'];
         }
 
         return $loggedUser;

@@ -16,6 +16,12 @@ class SessionHelper
 
     }
 
+    static public function checkCompanySession()
+    {
+        require_once(VIEWS_PATH . "checkLoggedCompany.php");
+
+    }
+
     static public function checkUserSession()
     {
         require_once(VIEWS_PATH . "checkLoggedUser.php");
