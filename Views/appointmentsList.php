@@ -209,7 +209,7 @@ include_once('nav.php');;
         </div>
 
 
-    <?php } } else if($loggedUser->getRol()->getUserRolId()==1){?>
+    <?php } } else if($loggedUser->getRol()->getUserRolId()==1 || $loggedUser->getRol()->getUserRolId()==3){?>
 
 
     <!-- Start callto-action Area -->
@@ -304,13 +304,14 @@ include_once('nav.php');;
                 <br>
             </form>
 
+        <?php if($loggedUser->getRol()->getUserRolId()==1){?>
         <form action=" <?php echo  FRONT_ROOT."Appointment/showAppointmentManagementView"?>"
               method="POST">
             <button type="submit" name="id" class="btn buttonPer m-lg-auto d-block"><strong>Go to Appointment Management View</strong>
             </button>
             <br>
         </form>
-
+<?php }?>
         <form action="<?php echo FRONT_ROOT . "Appointment/showAppointmentList" ?>"
               method="POST">
             <input type="hidden" name="back" value="1">

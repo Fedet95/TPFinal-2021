@@ -171,6 +171,11 @@ class JobController
             echo $ex->getMessage();
         }
 
+        if($this->loggedUser->getRol()->getUserRolId()==3)
+        {
+            $allOffers=$this->userCompanyOffers($allOffers);
+        }
+
 
             if($this->allCareers==null)
             {
@@ -234,8 +239,6 @@ class JobController
            }
 
        }
-
-
 
 
         require_once(VIEWS_PATH . "jobOffersManagement.php");
@@ -1214,6 +1217,22 @@ class JobController
     }
 
 
+    public function userCompanyOffers($allOffers)
+    {
+        $offerArray= array();
+        if($allOffers!=null)
+        {
+            foreach ($allOffers as $offer)
+            {
+                if($offer->getCompany()->getEmail()==$this->loggedUser->getEmail())
+                {
+                    array_push($offerArray, $offer);
+                }
+            }
+        }
+
+        return $offerArray;
+    }
 
     /**
      * Validate if the admin/student has logged in the system correctly

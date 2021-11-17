@@ -106,7 +106,6 @@ class AppointmentController
     public function showAppointmentList($valueToSearch = null, $back = null, $message = "")
     {
         //valueToSearch = $jobOffer ID
-        //require_once(VIEWS_PATH . "checkLoggedUser.php");
         SessionHelper::checkUserSession();
 
         if ($this->loggedUser->getRol()->getUserRolId() == 2)
@@ -162,7 +161,7 @@ class AppointmentController
             require_once(VIEWS_PATH . "appointmentsList.php");
 
 
-        } else if ($this->loggedUser->getRol()->getUserRolId() == 1)
+        } else if ($this->loggedUser->getRol()->getUserRolId() == 1 || $this->loggedUser->getRol()->getUserRolId() == 3)
         {
             try {
 
@@ -671,6 +670,9 @@ class AppointmentController
             $loggedUser = $_SESSION['loggedadmin'];
         } else if (isset($_SESSION['loggedstudent'])) {
             $loggedUser = $_SESSION['loggedstudent'];
+        }
+        else if(isset($_SESSION['loggedcompany'])){
+            $loggedUser = $_SESSION['loggedcompany'];
         }
 
         return $loggedUser;

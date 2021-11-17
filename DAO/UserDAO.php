@@ -217,6 +217,30 @@ class UserDAO implements lUserDAO
 
 
     /**
+     * Update a email in data base
+     * @return array
+     */
+    function updateEmail(User $user)
+    {
+
+        try {
+
+            $query = "UPDATE " . $this->tableName . " SET  email = :email
+            WHERE (userId = :userId)";
+
+            $parameters["userId"] = $user->getUserId();
+            $parameters["email"] = $user->getEmail();
+
+            $this->connection = Connection::GetInstance();
+
+            return $count= $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
+    /**
      * Search an user by email, returning the user or null
      * @param $email
      * @return mixed|null

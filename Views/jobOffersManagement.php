@@ -241,11 +241,11 @@ include_once('nav.php');
                                     $message = "Job offer successfully updated";
                                 } else if (empty($searchedValue) && $back == 3) {
                                     $message = "Remove operation aborted";
-                                } else if(empty($searchedValue) && $validateMessage=1){ ?>
+                                } else if(empty($searchedValue) && isset($validateMessage) && $validateMessage==1){
+                                    ?>
                                     <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
                             <?php
-                                }
-                                else {
+                                } else {
                                     $message = "No job offers with these characteristics were found";
                                 }
                             } ?>
@@ -271,7 +271,7 @@ include_once('nav.php');
                                                         $positionIds = array();
                                                         foreach ($allOffers as $value) {
                                                             $flag = 0;
-                                                            if ($loggedUser->getRol()->getUserRolId() == 1) {
+                                                            if ($loggedUser->getRol()->getUserRolId() == 1 || $loggedUser->getRol()->getUserRolId() == 3) {
 
                                                                 foreach ($value->getJobPosition() as $pos) {
 
@@ -348,7 +348,7 @@ include_once('nav.php');
                                                         $careerDescription = array();
                                                         foreach ($allOffers as $value) {
                                                             $flag = 0;
-                                                            if ($loggedUser->getRol()->getUserRolId() == 1) {
+                                                            if ($loggedUser->getRol()->getUserRolId() == 1 || $loggedUser->getRol()->getUserRolId() == 3) {
                                                                 foreach ($careerDescription as $career) {
                                                                     if ($career == $value->getCareer()->getDescription()) {
                                                                         $flag = 1;
@@ -449,7 +449,7 @@ include_once('nav.php');
                             foreach ($allCompanies as $company) {
                                 if ($value->getCompany()->getCompanyId() == $company->getCompanyId()) {
 
-                                    if ($value->getActive() == "true" && $company->getActive() == 'true' && strtotime($value->getEndDate()) >= strtotime(date("Y-m-d"))) {
+                                    if ($value->getActive() == "true" && $company->getActive() == 'true' && strtotime($value->getEndDate()) >= strtotime(date("Y-m-d")) && ($loggedUser->getRol()->getUserRolId() == 2 || $loggedUser->getRol()->getUserRolId() == 1)){
                                         ?>
 
                                         <div class="single-post d-flex flex-row">
@@ -742,6 +742,152 @@ include_once('nav.php');
                                                         <br>
                                                         <div class="row offset-3">
                                                             <p class="text-strong text-muted ">Inactive</p>
+                                                            <h5 class=""> <!--CAREER-->
+                                                                <I> <?php echo $value->getCareer()->getDescription() ?></I>
+                                                            </h5>
+                                                            <h5>Job Nature: <?php echo $value->getDedication(); ?></h5>
+                                                            <!--DEDICATION-->
+                                                            <p class="address"><span class="lnr lnr-map"></span>
+                                                                Country: <?php echo $company->getCountry()->getName() ?>
+                                                            </p>
+                                                            <!--COUNTRY-->
+                                                            <p class="address"><span class="lnr lnr-map"></span>
+                                                                City: <?php echo $company->getCity()->getName() ?> </p>
+                                                            <!--COUNTRY-->
+                                                            <p class="address"><span class="lnr lnr-database"></span>
+                                                                Publish
+                                                                Date: <?php echo $value->getPublishDate() ?>  </p>
+                                                            <!--PUBLISHDATE-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row offset-3">
+                                                        <ul class="btns">
+                                                            <td>
+                                                                <form action="<?php echo FRONT_ROOT . "Job/showJobOfferViewMore" ?>"
+                                                                      method="POST">
+                                                                    <button type="submit" name="id"
+                                                                            class="btn buttonPer ml-auto d-block"
+                                                                            value="<?php echo $value->getJobOfferId() ?>">
+                                                                        View More
+                                                                    </button>
+                                                                </form>
+                                                                <br>
+                                                            </td>
+                                                            <?php if ($loggedUser->getRol()->getUserRolId() == 1) { ?>
+                                                                <td>
+                                                                    <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
+                                                                          method="POST">
+                                                                        <button type="submit" name="id"
+                                                                                class="btn buttonPer ml-auto d-block"
+                                                                                value="<?php echo $value->getJobOfferId() ?>">
+                                                                            Remove
+                                                                        </button>
+                                                                    </form>
+                                                                </td>
+                                                                <br>
+                                                                <td>
+                                                                    <form action="<?php echo FRONT_ROOT . "Job/editJobOffer" ?>"
+                                                                          method="POST">
+                                                                        <button type="submit" name="id"
+                                                                                class="btn ml-auto buttonPer d-block"
+                                                                                value="<?php echo $value->getJobOfferId() ?>">
+                                                                            Edit
+                                                                        </button>
+                                                                    </form>
+                                                                </td>
+
+                                                            <?php } ?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                            }
+                                        } else if($loggedUser->getRol()->getUserRolId() == 3){
+                                            if($loggedUser->getEmail()==$company->getEmail()) { ?>
+
+
+                                                <div class="single-post d-flex flex-row">
+                                                    <div class="thumb ">
+                                                        <img><?php echo '<img src="../uploads/' . $company->getLogo()->getFile() . '" height="150" width="180"/>'; ?>
+                                                        <!--  <img src="../Views/img/post.png" alt=""> --LOGO-->
+                                                        <div class="">
+                                                            <ul class="tags offset-1 ">
+                                                                <?php if ($value->getCareer()->getCareerID() == 1 || $value->getCareer()->getCareerID() == 2) { ?>
+                                                                    <li>
+                                                                        <?php if ($value->getCareer()->getCareerID() == 3) { ?>
+                                                                            <a href="#">Naval</a>
+                                                                        <?php } else { ?>   <a
+                                                                                href="#">Fishing</a>  <?php } ?>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Engineering</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Harbor</a>
+                                                                    </li>
+                                                                <?php } else if ($value->getCareer()->getCareerID() == 3 || $value->getCareer()->getCareerID() == 4) { ?>
+                                                                    <li>
+                                                                        <?php if ($value->getCareer()->getCareerID() == 3) { ?>
+                                                                            <a href="#">Programming</a>
+                                                                        <?php } else { ?>    <a
+                                                                                href="#">Systems</a>  <?php } ?>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Development</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Technology</a>
+                                                                    </li>
+                                                                <?php } else if ($value->getCareer()->getCareerID() == 5) { ?>
+                                                                    <li>
+                                                                        <a href="#">Textile</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Fabrics</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Manufacturing</a>
+                                                                    </li>
+                                                                <?php } else if ($value->getCareer()->getCareerID() == 6) { ?>
+                                                                    <li>
+                                                                        <a href="#">Administration</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Management</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Organization</a>
+                                                                    </li>
+                                                                <?php } else if ($value->getCareer()->getCareerID() == 7 || $value->getCareer()->getCareerID() == 8) { ?>
+                                                                    <li>
+                                                                        <a href="#">Ecology</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Enviroment</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">Investigation</a>
+                                                                    </li>
+                                                                <?php } ?>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="details">
+                                                        <div class="offset-3 title d-flex flex justify-content-between">
+                                                            <div class="titles">
+                                                                <a href="single.html">
+                                                                    <h4><?php echo $value->getTitle() ?></h4></a>
+                                                                <!--TITLE-->
+                                                                <h5><?php echo $company->getName() ?></h5>
+                                                                <!--COMPANY NAME-->
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row offset-3">
+                                                            <?php if(strtotime($value->getEndDate()) < strtotime(date("Y-m-d")) || $value->getActive() == "false"){?>
+                                                            <p class="text-strong text-muted ">Inactive</p>
+                                                    <?php }?>
                                                             <h5 class=""> <!--CAREER-->
                                                                 <I> <?php echo $value->getCareer()->getDescription() ?></I>
                                                             </h5>

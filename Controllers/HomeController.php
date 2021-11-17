@@ -5,6 +5,8 @@ namespace Controllers;
 
 use DAO\AppointmentDAO;
 use DAO\CompanyDAO;
+use DAO\CountryDAO;
+use DAO\IndustryDAO;
 use DAO\JobOfferDAO;
 use DAO\OriginStudentDAO;
 use DAO\UserDAO;
@@ -19,6 +21,7 @@ class HomeController
     private $userRolDAO;
     private $Sorigin; //api student
     private $studentsOrigin; //students array
+    private $loggedUser;
 
 
 
@@ -27,6 +30,7 @@ class HomeController
         $this->userRolDAO= new UserRolDAO();
         $this->userDAO = new UserDAO();
         $this->Sorigin=new OriginStudentDAO();
+        $this->loggedUser = $this->loggedUserValidation();
     }
 
     public function Index($message = "")
@@ -74,15 +78,28 @@ class HomeController
     }
 
     /**
-     * * Send to administrator control panel view
+     * * Send to company control panel view
      * @param string $message
      */
-    public function showCompanyControlPanelView($message = "")
+    public function showCompanyControlPanelView($email, $message = "")
     {
         SessionHelper::checkCompanySession();
         $this->verifyEndDate();
+
+
+        $companyDao= new CompanyDAO();
+
+
+        try {
+            $company= $companyDao->getCompanyByEmail($email);
+        }catch (\Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+
         require_once(VIEWS_PATH."companyControlPanel.php"); //panel de control
     }
+
 
 
 
@@ -160,7 +177,7 @@ class HomeController
                                 if($searchedCompany->getActive()=='true')
                                 {
                                     $_SESSION['loggedcompany'] = $searchedUser;
-                                    $this->showCompanyControlPanelView();
+                                    $this->showCompanyControlPanelView($email, null);
                                 }
                                 else
                                 {
@@ -517,6 +534,40 @@ class HomeController
         else
             echo "Email sending failed";
     }
+
+
+    /**
+     * Validate if the admin/student has logged in the system correctly
+     * @return mixed|null
+     */
+    public function loggedUserValidation()
+    {
+        $loggedUser = null;
+
+        if (isset($_SESSION['loggedadmin'])) {
+            $loggedUser = $_SESSION['loggedadmin'];
+        }
+        else if(isset($_SESSION['loggedstudent'])) {
+            $loggedUser = $_SESSION['loggedstudent'];
+        }
+        else if(isset($_SESSION['loggedcompany'])) {
+            $loggedUser = $_SESSION['loggedcompany'];
+        }
+
+        return  $loggedUser;
+    }
+
+
+    public function companyUserControlPanel()
+    {
+        if($this->loggedUser->getRol()->getUserRolId()==3)
+        {
+            $email= $this->loggedUser->getEmail();
+            $this->showCompanyControlPanelView($email);
+        }
+
+    }
+
 
 
 }

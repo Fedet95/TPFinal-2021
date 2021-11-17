@@ -11,53 +11,60 @@ include_once('nav.php');
 
             <h1 class="mb-3 text-center text-muted">Welcome!</h1>
             <br>
-
+            <strong class="offset-lg-4"><?php if (isset($message)) {
+                    echo $message;
+                } ?></strong>
             <div class="bg-light-alpha p-2 text-center">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-lg-3">
-                        <!--
-                        <label class="text-muted text-strong" for="">First Name</label>
-                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getFirstName()?>">
+
+                        <label class="text-muted text-strong" for="">Company Name</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $company->getName()?>">
                     </div>
 
                     <div class="col-lg-3">
-                        <label class="text-muted text-strong" for="">Last Name</label>
-                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getLastName()?>">
+                        <label class="text-muted text-strong" for="">Cuit</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $company->getCuit()?>">
                     </div>
 
                     <div class="col-lg-3">
-                        <label class="text-muted text-strong"  for="">DNI</label>
-                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getDni()?>">
+                        <label class="text-muted text-strong"  for="">Company Web URL</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $company->getCompanyLink()?>">
                     </div>
 
                     <div class="col-lg-3">
                         <label class="text-muted text-strong" for="">Email</label>
-                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getEmail()?>">
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $company->getEmail()?>">
                     </div>
                     <div class="col-lg-4">
                         <br>
-                        <label class="text-muted text-strong" for="">PhoneNumber</label>
-                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getPhoneNumber()?>">
+                        <label class="text-muted text-strong" for="">Location Country</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $company->getCountry()->getName()?>">
                     </div>
                     <div class="col-lg-4">
                         <br>
-                        <label class="text-muted text-strong" for="">FileNumber</label>
-                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getFileNumber()?>">
+                        <label class="text-muted text-strong" for="">Location City</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $company->getCity()->getName()?>">
                     </div>
                     <div class="col-lg-4">
                         <br>
-                        <label class="text-muted text-strong" for="">BirthDate</label>
-                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getBirthDate()?>">
+                        <label class="text-muted text-strong" for="">Industry Area</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $company->getIndustry()->getType()?>">
                     </div>
                     <div class="col-lg-4">
                         <br>
-                        <label class="text-muted text-strong" for="">Career</label>
-                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $loggedUser->getCareer()->getDescription()?>">
+                        <label class="text-muted text-strong" for="">Condition</label>
+                        <input type="text" name="" class="form-control form-control-ml text-center" disabled value="<?php echo $company->getActive()?>">
+                    </div>
+                    <div class="col-lg-4">
+                        <br>
+                        <label class="text-muted text-strong" for="">Logo</label>
+                        <img><?php echo '<img src="../uploads/' . $company->getLogo()->getFile() . '" height="150" width="180"/>'; ?>
                     </div>
                 </div>
             </div>
     </section>
--->
+
 
     <section id="why-us" class="why-us section-bg justify-content-center align-items-center">
         <div class="container-fluid" data-aos="fade-up">

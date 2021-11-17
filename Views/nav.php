@@ -42,7 +42,7 @@ else if(isset($_SESSION['loggedcompany']))
                 else if($loggedUser->getRol()->getUserRolId()==3)
                 {
                     ?>
-                    <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/showCompanyControlPanelView"?>">Home</a>
+                    <a class="nav-link" href="<?php echo  FRONT_ROOT."Home/companyUserControlPanel"?>">Home</a>
                     <?php
                 }
                 ?>
@@ -64,6 +64,13 @@ else if(isset($_SESSION['loggedcompany']))
                     {
                         ?>
                         <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>">Companies</a>
+                        <?php
+                    }
+                    else if($loggedUser->getRol()->getUserRolId()==3)
+                    {
+                        ?>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Company/editUserCompany"?>">Edit Company Information</a>
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."User/showUserCompanyEditPass"?>">Update Password</a>
                         <?php
                     }
                     ?>
@@ -111,10 +118,10 @@ else if(isset($_SESSION['loggedcompany']))
 
                         <?php
                     }
-                    else if($loggedUser->getRol()->getUserRolId()==2)
+                    else if($loggedUser->getRol()->getUserRolId()==3)
                     {
                         ?>
-                        <!--<a class="dropdown-item" href="#">View Our Portfolio</a>-->
+                        <a class="dropdown-item" href="<?php echo  FRONT_ROOT."Job/showJobOfferManagementView"?>">Job Offers Management</a>
                         <?php
                     }
                     ?>

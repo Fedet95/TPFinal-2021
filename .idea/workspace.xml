@@ -5,26 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/Views/checkLoggedCompany.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/companyControlPanel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/updateCompanyPass.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DAO/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/UserDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/SessionHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/SessionHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/checkLoggedUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/checkLoggedUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/createJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/createJobOffer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/appointmentsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentsList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/companyControlPanel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/companyControlPanel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/editCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/editCompany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOfferViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOfferViewMore.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
     </list>
-    <list id="85270889-5dd1-416f-9f4d-45f2b152b949" name="Changes by Fede" comment="Changes by Fede">
+    <list id="85270889-5dd1-416f-9f4d-45f2b152b949" name="Changes by Fede" comment="Changes by Fede" />
+    <list id="35919033-f1f6-429b-b771-da40ecdfa16d" name="Changes by paye_" comment="Changes by paye_">
       <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/CompanyDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/CompanyDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/UserDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/UserDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav.php" afterDir="false" />
     </list>
-    <list id="35919033-f1f6-429b-b771-da40ecdfa16d" name="Changes by paye_" comment="Changes by paye_" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,46 +48,21 @@
     </file-type-list>
   </component>
   <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/DAO/UserDAO.php">
-      <ranges>
-        <range start1="156" end1="156" start2="156" end2="192" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="261" end1="262" start2="297" end2="298" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="263" end1="267" start2="299" end2="303" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="269" end1="270" start2="305" end2="306" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="271" end1="272" start2="307" end2="308" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-      </ranges>
-    </file>
     <file path="$PROJECT_DIR$/Controllers/CompanyController.php">
       <ranges>
-        <range start1="3" end1="3" start2="3" end2="4" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="289" end1="289" start2="290" end2="318" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="292" end1="292" start2="321" end2="322" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="294" end1="296" start2="324" end2="324" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="305" end1="305" start2="333" end2="355" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="881" end1="883" start2="931" end2="931" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="884" end1="884" start2="932" end2="1044" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="887" end1="887" start2="1047" end2="1050" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="893" end1="989" start2="1056" end2="1056" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="1252" end1="1252" start2="1319" end2="1336" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/Views/nav.php">
-      <ranges>
-        <range start1="12" end1="13" start2="12" end2="16" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="15" end1="17" start2="18" end2="18" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="40" end1="40" start2="41" end2="47" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="73" end1="76" start2="80" end2="81" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="90" end1="90" start2="95" end2="101" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/Controllers/HomeController.php">
-      <ranges>
-        <range start1="13" end1="14" start2="13" end2="14" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="56" end1="57" start2="56" end2="57" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="68" end1="69" start2="68" end2="69" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="75" end1="75" start2="75" end2="87" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="78" end1="79" start2="90" end2="91" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="139" end1="139" start2="151" end2="177" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="108" end1="108" start2="108" end2="136" changelist="35919033-f1f6-429b-b771-da40ecdfa16d" />
+        <range start1="145" end1="146" start2="173" end2="174" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="149" end1="149" start2="177" end2="178" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="708" end1="708" start2="737" end2="740" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="1069" end1="1070" start2="1101" end2="1102" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="1101" end1="1101" start2="1133" end2="1174" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="1107" end1="1108" start2="1180" end2="1181" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="1249" end1="1249" start2="1322" end2="1377" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="1258" end1="1259" start2="1386" end2="1386" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="1260" end1="1260" start2="1387" end2="1388" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="1261" end1="1262" start2="1389" end2="1400" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="1269" end1="1269" start2="1407" end2="1408" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
+        <range start1="1335" end1="1335" start2="1474" end2="1483" changelist="35919033-f1f6-429b-b771-da40ecdfa16d" />
       </ranges>
     </file>
   </component>
@@ -191,28 +165,8 @@
       <workItem from="1636841552935" duration="7682000" />
       <workItem from="1636926030763" duration="5435000" />
       <workItem from="1637022686628" duration="1067000" />
-      <workItem from="1637103593961" duration="12113000" />
-    </task>
-    <task id="LOCAL-00079" summary="Changes by Fede">
-      <created>1636084928951</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1636084928951</updated>
-    </task>
-    <task id="LOCAL-00080" summary="update">
-      <created>1636084945190</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1636084945190</updated>
-    </task>
-    <task id="LOCAL-00081" summary="update">
-      <created>1636134774112</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1636134774113</updated>
+      <workItem from="1637103593961" duration="12359000" />
+      <workItem from="1637157918177" duration="20443000" />
     </task>
     <task id="LOCAL-00082" summary="Changes by Fede">
       <created>1636134791838</created>
@@ -536,7 +490,28 @@
       <option name="project" value="LOCAL" />
       <updated>1637023752239</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="update">
+      <created>1637117369145</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1637117369145</updated>
+    </task>
+    <task id="LOCAL-00129" summary="Changes by Fede">
+      <created>1637117381233</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1637117381233</updated>
+    </task>
+    <task id="LOCAL-00130" summary="update">
+      <created>1637117390272</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1637117390272</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -572,8 +547,8 @@
     <MESSAGE value="appointments" />
     <MESSAGE value="administrar creation and appointment" />
     <MESSAGE value="administrar creation" />
-    <MESSAGE value="Changes by Fede" />
     <MESSAGE value="Changes by paye_" />
+    <MESSAGE value="Changes by Fede" />
     <MESSAGE value="update" />
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>

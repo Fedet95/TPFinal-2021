@@ -32,6 +32,30 @@ class UserController
         $this->studentsOrigin = new OriginStudentDAO();
     }
 
+
+
+    /**
+     * * Send to company control panel view
+     * @param string $message
+     */
+    public function showCompanyControlPanelView($email, $message = "")
+    {
+        SessionHelper::checkCompanySession();
+
+        $companyDao= new CompanyDAO();
+
+        try {
+            $company= $companyDao->getCompanyByEmail($email);
+        }catch (\Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+        require_once(VIEWS_PATH."companyControlPanel.php"); //panel de control
+    }
+
+
+
     /**
      * Show the administrator list view
      * @param string $message
@@ -245,6 +269,10 @@ class UserController
         } else if (isset($_SESSION['loggedstudent'])) {
             $loggedUser = $_SESSION['loggedstudent'];
         }
+        else if (isset($_SESSION['loggedcompany'])) {
+            $loggedUser = $_SESSION['loggedcompany'];
+        }
+
 
         return $loggedUser;
     }
@@ -608,6 +636,128 @@ class UserController
             $validate = true;
         }
         return $validate;
+    }
+
+
+    /**
+     * Show the user company password edit view
+     */
+    public function showUserCompanyEditPass(){
+
+        SessionHelper::checkCompanySession();
+        $modifyPass=1;
+        require_once(VIEWS_PATH . "updateCompanyPass.php");
+    }
+
+
+
+    /**
+     * Show the user company password edit view
+     */
+    public function showCompanyEditPassView($id,$confirmPassword = null, $message = "")
+    {
+
+        SessionHelper::checkCompanySession();
+
+        try {
+            $userCompany = $this->userDAO->getUser($id);
+
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+
+        $modifyPass=1;
+
+        if($confirmPassword != null)
+        {
+                if(password_verify( $confirmPassword, $userCompany->getPassword()))
+                {
+                    $modifyPass = 2;
+                }
+                else
+                {
+                    $message = "Incorrect Password";
+                }
+        }
+        else
+        {
+            $message="Complete all the fields";
+        }
+
+        require_once(VIEWS_PATH . "updateCompanyPass.php");
+    }
+
+
+
+
+    /**
+     * Show the user company password edit view
+     */
+    public function updateUserCompanyPass($newPassword, $confirmPassword)
+    {
+        $modifyPass=1;
+
+        SessionHelper::checkCompanySession();
+
+        $flag=0;
+            if($newPassword != null)
+            {
+                if($confirmPassword!= null)
+                {
+
+                    $validPassword = $this->validatePassword($newPassword, $confirmPassword);
+
+                    if($validPassword == false)
+                    {
+                        $message = "Error. Passwords do not match.";
+                        $flag=1;
+                    }
+                }
+                else
+                {
+                    $message = "Error. You must enter a password in both fields.";
+                    $flag =1;
+                }
+
+            }
+            else if($confirmPassword != null)
+            {
+                $message = "Error. You must enter a password in both fields.";
+                $flag =1;
+            }
+
+
+
+
+        if ($flag == 1) {
+
+            $modifyPass=1;
+
+            require_once(VIEWS_PATH . "updateCompanyPass.php");
+        } else {
+
+            $companyUser = new User();
+            $companyUser->setUserId($this->loggedUser->getUserId());
+            $companyUser->setEmail($this->loggedUser->getEmail());
+            if($newPassword != null && $confirmPassword != null)
+            {
+                $encrypted_password=password_hash($newPassword,PASSWORD_DEFAULT);
+
+                $companyUser->setPassword($encrypted_password);
+            }
+
+            try {
+
+                $cant = $this->userDAO->update($companyUser);
+
+                $this->showCompanyControlPanelView($this->loggedUser->getEmail(), "User Company password succesfullly edited");
+
+            } catch (\Exception $ex) {
+
+                echo $ex->getMessage();
+            }
+        }
+
     }
 
 

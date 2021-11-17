@@ -143,9 +143,10 @@ class CompanyController
     public function showEditCompany($company, $allIndustrys, $allCountrys, $message = "")
     {
         //require_once(VIEWS_PATH . "checkLoggedUser.php");
-        SessionHelper::checkAdminSession();
+        SessionHelper::checkUserSession();
         require_once(VIEWS_PATH . "editCompany.php");
     }
+
 
 
     /**
@@ -706,6 +707,9 @@ class CompanyController
         else if(isset($_SESSION['loggedstudent'])) {
             $loggedUser = $_SESSION['loggedstudent'];
         }
+        else if(isset($_SESSION['loggedcompany'])) {
+            $loggedUser = $_SESSION['loggedcompany'];
+        }
 
         return  $loggedUser;
     }
@@ -1067,7 +1071,7 @@ class CompanyController
      */
     public function Edit($id, $message=null)
     {
-        SessionHelper::checkAdminSession();
+        SessionHelper::checkUserSession();
         //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
         try {
@@ -1099,13 +1103,54 @@ class CompanyController
     }
 
 
+    /**
+     * Edit information of a company from the system by a user company
+     */
+    public function editUserCompany()
+    {
+        SessionHelper::checkCompanySession();
+
+        try {
+            $allCompanies = $this->companyDAO->getAll();
+        }
+        catch (\Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+        $id=null;
+        if($allCompanies!=null)
+        {
+            foreach ($allCompanies as $company)
+            {
+                if($company->getEmail()==$this->loggedUser->getEmail())
+                {
+                  $id=$company->getCompanyId();
+                }
+            }
+        }
+
+
+        if($id!=null)
+        {
+            $this->Edit($id, null);
+        }
+
+        else
+        {
+            $message="There is an error verifying your account";
+            $this->Index($message);
+        }
+
+    }
+
 
     /**
      * Update the information of a company from the system
      */
     public function UpdateCompany($name, $cuit, $companyLink, $email, $country, $city, $industry, $active, $foundationDate, $aboutUs, $id, $image)
     {
-        SessionHelper::checkAdminSession();
+        SessionHelper::checkUserSession();
         //require_once(VIEWS_PATH . "checkLoggedAdmin.php");
 
 
@@ -1247,6 +1292,61 @@ class CompanyController
         //UPDATE
         if ($flag == 0)
         {
+
+            try {
+                $searchedOriginalCompany= $this->companyDAO->getCompany($id);
+
+
+                if($searchedOriginalCompany!=null)
+                {
+                    $originalEmail=null;
+                    if($searchedOriginalCompany->getEmail()!=$email) //email ingresado en el update
+                    {
+                        $originalEmail=$searchedOriginalCompany->getEmail();
+
+                    }
+                }
+
+            }
+            catch (\Exception $ex)
+            {
+                echo $ex;
+            }
+
+
+            if($originalEmail!=null) //si ingreso un mail nuevo para la compañia, se actualiza el mail del user
+            {
+
+                $searchedUser= $this->userDAO->getUserByEmail($originalEmail); //busco el usuario con el email original
+
+                if($searchedUser!=null)
+                {
+
+                    $searchedUser->setEmail($email);
+                    try {
+                        $cant=$this->userDAO->updateEmail($searchedUser); //PROBAR SI FUNCIONA
+                        $_SESSION['loggedcompany'] = $searchedUser;
+
+                        if($cant>0)
+                        {
+                            if($this->loggedUser->getRol()->getUserRolId()==1)
+                            {
+                                $sub="UTN's Job Search Email Change";
+                                $text="Your username email was changed bye the administrator. New username email: ".$email.". Thank you.";
+                                $this->sendEmail($originalEmail, $sub, $text);
+                                $this->sendEmail("juanpayetta@gmail.com", $sub, $text);
+
+                            }
+                        }
+                    }
+                    catch (\Exception $ex)
+                    {
+                        echo $ex->getMessage();
+                    }
+                }
+
+            }
+
             $company->setCompanyId($id);
             $company->setName($name);
             $company->setFoundationDate($foundationDate); //date
@@ -1256,10 +1356,20 @@ class CompanyController
             $company->setEmail($email);
             $company->setActive($active);
 
-
             try {
+
                 $count=$this->companyDAO->update($company);
-                $this->showCompanyManagement();
+
+
+                if($this->loggedUser->getRol()->getUserRolId()==1)
+                {
+                    $this->showCompanyManagement();
+                }
+                else if($this->loggedUser->getRol()->getUserRolId()==3)
+                {
+                    $this->showCompanyControlPanelView($email,"Company information modify successfully");
+                }
+
             }
             catch (\Exception $ex)
             {
@@ -1267,6 +1377,7 @@ class CompanyController
             }
         }
     }
+
 
 
 

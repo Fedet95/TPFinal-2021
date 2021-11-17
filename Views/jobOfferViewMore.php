@@ -127,7 +127,7 @@ include_once('nav.php');
                               <li>Salary :  <span><?php if($jobOffer->getSalary()==0){ echo "Undefined";}else{echo "$ ". $jobOffer->getSalary();} ?> </span></li>
                           </ul>
                          <div class="apply-btn2">
-                             <?php if($loggedUser->getRol()->getUserRolId()==1){?>
+                             <?php if($loggedUser->getRol()->getUserRolId()==1 || $loggedUser->getRol()->getUserRolId() == 3){?>
                                  <form action="<?php echo FRONT_ROOT . "Appointment/showAppointmentList" ?>"
                                        method="POST">
                                      <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
