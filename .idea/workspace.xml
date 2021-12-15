@@ -5,24 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27e10b2e-52ef-435e-8c09-9a12a93c6674" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/Views/viewFlyer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AppointmentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/OriginCareerDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/OriginCareerDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/OriginJobPositionDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/OriginJobPositionDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/OriginStudentDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/OriginStudentDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/JobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/JobOffer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/appointmentsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/appointmentsList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/createJobOffer.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/createJobOffer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/jobOffersManagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOffersManagement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/25-552-7065.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/25-669-1408.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/26-149-2035.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/52-405-2882.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/63-025-8112.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/76-803-4887.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/81-077-9856.pdf" beforeDir="false" />
     </list>
-    <list id="85270889-5dd1-416f-9f4d-45f2b152b949" name="Changes by Fede" comment="Changes by Fede">
-      <change beforePath="$PROJECT_DIR$/Controllers/JobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/JobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/JobOfferDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/JobOfferDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/jobOfferViewMore.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/jobOfferViewMore.php" afterDir="false" />
-    </list>
+    <list id="85270889-5dd1-416f-9f4d-45f2b152b949" name="Changes by Fede" comment="Changes by Fede" />
     <list id="35919033-f1f6-429b-b771-da40ecdfa16d" name="Changes by paye_" comment="Changes by paye_">
       <change beforePath="$PROJECT_DIR$/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CompanyController.php" afterDir="false" />
     </list>
@@ -48,35 +42,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/DAO/JobOfferDAO.php">
-      <ranges>
-        <range start1="30" end1="31" start2="30" end2="31" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="45" end1="45" start2="45" end2="46" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="149" end1="150" start2="150" end2="151" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="166" end1="166" start2="167" end2="168" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="235" end1="235" start2="237" end2="238" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/Controllers/JobController.php">
-      <ranges>
-        <range start1="140" end1="140" start2="140" end2="145" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="396" end1="397" start2="401" end2="402" changelist="85270889-5dd1-416f-9f4d-45f2b152b949" />
-        <range start1="399" end1="399" start2="404" end2="405" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="415" end1="417" start2="421" end2="433" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="686" end1="687" start2="702" end2="703" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="690" end1="690" start2="706" end2="710" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="774" end1="774" start2="794" end2="801" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="776" end1="776" start2="803" end2="821" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="778" end1="779" start2="823" end2="824" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="842" end1="843" start2="887" end2="888" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="896" end1="896" start2="941" end2="942" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="951" end1="951" start2="997" end2="998" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="1029" end1="1029" start2="1076" end2="1084" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-        <range start1="1258" end1="1258" start2="1313" end2="1403" changelist="27e10b2e-52ef-435e-8c09-9a12a93c6674" />
-      </ranges>
-    </file>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -180,21 +145,7 @@
       <workItem from="1637103593961" duration="12359000" />
       <workItem from="1637157918177" duration="22556000" />
       <workItem from="1637265380572" duration="543000" />
-      <workItem from="1639423113142" duration="23862000" />
-    </task>
-    <task id="LOCAL-00083" summary="Changes by paye_">
-      <created>1636134799450</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1636134799450</updated>
-    </task>
-    <task id="LOCAL-00084" summary="update">
-      <created>1636215003518</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1636215003518</updated>
+      <workItem from="1639423113142" duration="27717000" />
     </task>
     <task id="LOCAL-00085" summary="update">
       <created>1636218328247</created>
@@ -525,7 +476,21 @@
       <option name="project" value="LOCAL" />
       <updated>1637182899646</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="update">
+      <created>1639606410472</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1639606410472</updated>
+    </task>
+    <task id="LOCAL-00133" summary="Changes by Fede">
+      <created>1639606420992</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1639606420992</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -562,8 +527,8 @@
     <MESSAGE value="administrar creation and appointment" />
     <MESSAGE value="administrar creation" />
     <MESSAGE value="Changes by paye_" />
-    <MESSAGE value="Changes by Fede" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="Changes by Fede" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by Fede" />
   </component>
 </project>

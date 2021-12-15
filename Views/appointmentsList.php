@@ -240,10 +240,15 @@ include_once('nav.php');;
         </div>
     </section><!-- End Hero -->
 
+    <div class="title text-center my-5">
+        <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message ."<br>" ;} if(isset($message2)) {echo $message2; } ?></h6>
+    </div>
+
     <?php if(isset($allAppointments) && $allAppointments!=null){  $offerId=$allAppointments[0]->getJobOffer()->getJobOfferId()?>
+            <?php $_SESSION['offerId']=$offerId?>
 
 
-    <main class="py-5">
+        <main class="py-5">
         <section id="listado" class="mb-3">
             <div class="container">
                 <h3 class="mb-4 text-center text-muted">Job Offer: <?php echo $searchedJobOffer->getTitle()?></h3>
@@ -324,6 +329,8 @@ include_once('nav.php');;
 
 
 <?php
+
+
         foreach ($allAppointments as $actualAppointment){
         ?>
 
@@ -389,7 +396,9 @@ include_once('nav.php');;
 
     <?php }}else { ?>
     <div class="title text-center my-5">
+        <?php if(!isset($message2)){?>
         <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
+            <?php }?>
     </div>
 
     <?php } }?>

@@ -103,7 +103,7 @@ class AppointmentController
      * @param null $back
      * @param string $message
      */
-    public function showAppointmentList($valueToSearch = null, $back = null, $message = "")
+    public function showAppointmentList($valueToSearch = null, $back = null, $message = "", $validationRemove= null)
     {
         //valueToSearch = $jobOffer ID
         SessionHelper::checkUserSession();
@@ -203,7 +203,17 @@ class AppointmentController
                         }
 
                     } else {
-                        $message = "There are currently no applications for the selected job offer ";
+
+                        if(isset($validationRemove) && $validationRemove!=null)
+                        {
+                            $message = "Appointment dropped out successfully and student notified";
+                            $message2 = "There are currently no applications for the selected job offer ";
+                        }
+                        else
+                        {
+                            $message = "There are currently no applications for the selected job offer ";
+                        }
+
                     }
                 } else {
                     $message = "There are currently no applications in the system";
@@ -472,7 +482,6 @@ class AppointmentController
     public function Remove($studentId, $system = null)
     {
         //require_once(VIEWS_PATH . "checkLoggedStudent.php");
-        //SessionHelper::checkStudentSession();
         SessionHelper::checkUserSession();
 
         try {
@@ -495,8 +504,12 @@ class AppointmentController
                         {
                             $sub="UTN's Job Search Dropped Appointment";
                             $text="The application in which you were registered has been canceled";
-                            $this->sendEmail($$student->getEmail(), $sub, $text);
+                            $this->sendEmail($student->getEmail(), $sub, $text);
                             $this->sendEmail("juanpayetta@gmail.com", $sub, $text);
+                            $validationRemove=1;
+                            $message = "Appointment dropped out successfully and student notified";
+                            $offerId= $_SESSION['offerId'];
+                            $this->showAppointmentList($offerId, null, $message, $validationRemove);
                         }
                         else //si es el estudiante que da de baja la postulacion
                         {
@@ -611,10 +624,6 @@ class AppointmentController
         $headers = 'From: tpfinalutn2021@gmail.com' . "\r\n" .
             'MIME-Version: 1.0' . "\r\n" .
             'Content-type: text/html; charset=utf-8';
-        if (mail($to, $subject, $message, $headers))
-            echo "Email sent";
-        else
-            echo "Email sending failed";
     }
 
 
