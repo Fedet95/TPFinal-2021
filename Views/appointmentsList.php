@@ -369,6 +369,16 @@ include_once('nav.php');;
                                             </form>
                                             <br>
                                         </td>
+                                        <td>
+                                            <!--HACIENDOLO!!! REMOVE DEL ADMIN Le quite el if que analizaba si aun no se habia llegado a la fecha de End Date (que si tiene el remove del alumno)-->
+                                            <form action="<?php echo FRONT_ROOT . "Appointment/Remove" ?>"
+                                                  method="POST">
+                                                <button type="submit" name="id" class="btn buttonPer ml-auto d-block"
+                                                        value="<?php echo $actualAppointment->getStudent()->getUserId() ?>"><strong>Drop out</strong>
+                                                </button>
+                                            </form>
+                                            <br>
+                                        </td>
                                     </ul>
                                 </div>
                             </div>

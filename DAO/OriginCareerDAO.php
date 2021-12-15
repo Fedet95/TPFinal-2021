@@ -4,7 +4,7 @@ use Models\Career;
 
 class OriginCareerDAO
 {
-    private $url='https://utn-students-api.herokuapp.com/api/Career';
+    private $url='https://utn-students-api2.herokuapp.com/api/Career';
     private $option;
     private $handler; //mi $ch
     private $response;

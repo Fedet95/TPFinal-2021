@@ -138,6 +138,11 @@ class JobController
     }
 
 
+    public function showFlyerView($flyer)
+    {
+        SessionHelper::checkUserSession();
+        require_once (VIEWS_PATH."viewFlyer.php");
+    }
 
     /**
      * Call the "job offer management" view
@@ -398,6 +403,7 @@ class JobController
     {
         $postvalue = unserialize(base64_decode($values));
 
+
         if ($values == '') {
             $message = "Error, complete all fields";
             $this->showCreateJobOfferView($message, $postvalue['career'], $postvalue);
@@ -413,8 +419,18 @@ class JobController
                 if ($titleValidation == 1) {
                     $message = "Error, the entered Job Offer Title is already in use by the offering company";
                     $this->showCreateJobOfferView($message, $postvalue['career'], $postvalue);
-                } else {
-                    $newJobOffer = new JobOffer();
+                }
+
+                $newJobOffer = new JobOffer();
+
+                $searchedCompany= $this->companyDAO->getCompany($postvalue['company']);
+                $flyerValidation=$this->validateFlyer($newJobOffer, $searchedCompany->getName()); //si esta todo ok, ya le setea el flyer
+                if($flyerValidation==null)
+                {
+                    $message = "Error, enter a valid flyer (jpg,png,jpeg)";
+                    $this->showCreateJobOfferView($message, $postvalue['career'], $postvalue);
+                }
+                else {
                     $newJobOffer->setDescription($description);
                     $newJobOffer->setActive($this->validateActive($postvalue['publishDate'], $active));
                     $newJobOffer->setDedication($dedication);
@@ -684,9 +700,13 @@ class JobController
     /**
      * End the update of a job offer, adding to data base
      */
-    public function editJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $max, $active, $values)
+    public function editJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $max, $active, $values, $flyer)
     {
         $postvalue = unserialize(base64_decode($values));
+
+        var_dump($flyer);
+        var_dump($active);
+        var_dump($values);
 
         if ($values == '') {
             $message = "Error, complete all fields";
@@ -772,11 +792,36 @@ class JobController
                        $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $postvalue);
                    }
                }
+
+                $newJobOffer = new JobOffer();
+               if($flyer['name']=='') //validamos que el array que contiene el flyer esté vacio
+               {
+                   var_dump($searchedOffer->getFlyer());
+                   $newJobOffer->setFlyer($searchedOffer->getFlyer());
+               }
                else
                {
+                   $this->removeFlyer($searchedOffer); //eliminamos el flyer viejo
+                   try{
+                       $searchedCompany= $this->companyDAO->getCompany($postvalue['company']);
+                   }catch (\Exception $ex)
+                   {
+                       echo $ex->getMessage();
+                   }
+
+                   $flyerValidation=$this->validateFlyer($newJobOffer, $searchedCompany->getName()); //si esta todo ok, ya le setea el flyer
+                   if($flyerValidation==null)
+                   {
+                       $flagg=1;
+                       $message = "Error, enter a valid flyer (jpg,png,jpeg)";
+                       $this->editJobOffer($postvalue['jobOfferId'], $postvalue['career'], $message, $postvalue);
+                   }
+               }
+
+
                    if($flagg==0)
                    {
-                       $newJobOffer = new JobOffer();
+
                        $newJobOffer->setDescription($description);
                        $newJobOffer->setActive($this->validateActive($postvalue['publishDate'], $active));
                        $newJobOffer->setDedication($dedication);
@@ -840,7 +885,7 @@ class JobController
                            }
                        }
                    }
-               }
+
             }
         }
     }
@@ -894,6 +939,7 @@ class JobController
                         if($count>0)
                         {
                             $this->jobOfferPositionDAO->remove($id);
+                            $this->removeFlyer($searchedOffer);
                             $finalMessage="The job offer had no applications and was successfully eliminated";
                             $this->showRemoveJobOfferView($searchedOffer, null, null, null, $finalMessage );
                         }
@@ -949,6 +995,7 @@ class JobController
             if($count>0)
             {
                 $this->jobOfferPositionDAO->remove($id);
+                $this->removeFlyer($searchedOffer);
 
                 if($searchedOffer->getEmailSent()==0) //para cuando aun NO se le agradecio a los postulantes por email
                 {
@@ -1025,6 +1072,14 @@ class JobController
             echo "Email sent";
         else
             echo "Email sending failed";
+    }
+
+
+    public function removeFlyer($jobOffer)
+    {
+        $path = "uploads/";
+        $file_pattern = $path . $jobOffer->getFlyer();
+        $result = array_map("unlink", glob($file_pattern));
     }
 
 
@@ -1254,6 +1309,96 @@ class JobController
 
         return $loggedUser;
     }
+
+
+    //---------------------------------------TRABAJANDO FLYER-----------------------------------------------------
+
+
+    /**
+     * Validate if a flyer is correctly loaded
+     * @param $jobOffer, $companyName
+     * @return mixed|null
+     */
+    public function validateFlyer($jobOffer, $companyName)
+    {
+        $statusMsg = '';
+        // File upload path
+        $targetDir = "uploads/";
+        $randomNumber= rand(1, 999);
+        $companyName= $companyName.$randomNumber; //le agregamos al nombre de la compañia, la palabra flyer, para que no se mezcle con el nombre de ningun logo
+
+        $temp = explode(".", $_FILES["flyer"]["name"]); //tomo la extension
+        $newfilename = $companyName . '.' . end($temp); //le doy nuevo nombre y le concateno la extension
+
+        $targetFilePath = $targetDir . $newfilename;
+        $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+        $flag = 0;
+        if (!empty($_FILES["flyer"]["name"])) {
+            // Allow certain file formats
+            $allowTypes = array('jpg','png','jpeg');
+            if (!file_exists($targetFilePath)) { //image already exist in the folder
+                if (in_array($fileType, $allowTypes)) {
+
+                    // Upload file to server
+                    if (move_uploaded_file($_FILES["flyer"]["tmp_name"], $targetFilePath)) { //image doesn't exist in the folder, add it (si no funciona, sacar el . $newfilename)
+
+                        // Insert image file name into database
+                        $jobOffer->setFlyer($newfilename); //---->antes era $filename y lo cambie por $newfilename
+
+                    } else {
+                        /* $statusMsg = "Sorry, there was an error uploading your file";*/
+                        $flag = 1;
+                    }
+                } else {
+                    /*$statusMsg = "Sorry, only PDF, DOC files are allowed to upload.";*/
+                    $flag = 1;
+                }
+            } else {
+                /* $statusMsg = "The file <b>".$fileName. "</b> is already exist";*/
+
+
+                $path = 'uploads/';
+                $files = scandir($path);
+
+                $flag = 1;
+                foreach ($files as $value) {
+                    if ($value == $newfilename) //--->antes era $filename y lo camnbie por newfilename
+                    {
+                        $jobOffer->setFlyer($newfilename);
+                        $flag = 0;
+                    }
+                }
+            }
+        } else {
+            /*$statusMsg = 'Please select a file to upload';*/
+            $flag = 1;
+        }
+        // Display status message
+        if ($flag == 1) {
+            return null;
+        } else {
+            return $jobOffer;
+        }
+    }
+
+
+    public function showFlyer($jobOfferId)
+    {
+        try {
+            $offer = $this->jobOfferDAO->getJobOffer($jobOfferId);
+            $this->showFlyerView($offer->getFlyer());
+
+        }
+        catch (\Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
+
+    }
+
+
+
 
 
 }

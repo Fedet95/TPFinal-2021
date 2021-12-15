@@ -6,7 +6,7 @@ use Models\User;
 
 class OriginStudentDAO
 {
-    private $url='https://utn-students-api.herokuapp.com/api/Student';
+    private $url='https://utn-students-api2.herokuapp.com/api/Student';
     private $option;
     private $handler; //mi $ch
     private $response;

@@ -555,6 +555,17 @@ include_once('nav.php');
                                                         </form>
                                                         <br>
                                                     </td>
+                                                    <td>
+                                                        <form action="<?php echo FRONT_ROOT . "Job/showFlyer" ?>"
+                                                              method="POST">
+                                                            <button type="submit" name="id"
+                                                                    class="btn buttonPer ml-auto d-block"
+                                                                    value="<?php echo $value->getJobOfferId() ?>">
+                                                                Show Flyer
+                                                            </button>
+                                                        </form>
+                                                        <br>
+                                                    </td>
                                                     <?php if ($loggedUser->getRol()->getUserRolId() == 2) { ?>
                                                         <td>
                                                         <?php if ($value->getCareer()->getCareerId() == $loggedUser->getCareer()->getCareerId()) {
@@ -773,6 +784,17 @@ include_once('nav.php');
                                                                 </form>
                                                                 <br>
                                                             </td>
+                                                            <td>
+                                                                <form action="<?php echo FRONT_ROOT . "Job/showFlyer" ?>"
+                                                                      method="POST">
+                                                                    <button type="submit" name="id"
+                                                                            class="btn buttonPer ml-auto d-block"
+                                                                            value="<?php echo $value->getJobOfferId() ?>">
+                                                                        Show Flyer
+                                                                    </button>
+                                                                </form>
+                                                                <br>
+                                                            </td>
                                                             <?php if ($loggedUser->getRol()->getUserRolId() == 1) { ?>
                                                                 <td>
                                                                     <form action="<?php echo FRONT_ROOT . "Job/removeJobOffer" ?>"
@@ -915,6 +937,17 @@ include_once('nav.php');
                                                                             class="btn buttonPer ml-auto d-block"
                                                                             value="<?php echo $value->getJobOfferId() ?>">
                                                                         View More
+                                                                    </button>
+                                                                </form>
+                                                                <br>
+                                                            </td>
+                                                            <td>
+                                                                <form action="<?php echo FRONT_ROOT . "Job/showFlyer" ?>"
+                                                                      method="POST">
+                                                                    <button type="submit" name="id"
+                                                                            class="btn buttonPer ml-auto d-block"
+                                                                            value="<?php echo $value->getJobOfferId() ?>">
+                                                                        Show Flyer
                                                                     </button>
                                                                 </form>
                                                                 <br>
@@ -1106,7 +1139,7 @@ if (($edit != null) && ($loggedUser->getRol()->getUserRolId() == 1) && ($jobOffe
             <div class="container">
             <h2 class="mb-4 text-center text-muted">Edit Job Offer</h2>
             <div class="row justify-content-center">
-            <form action="<?php echo FRONT_ROOT . "Job/editJobOfferSecondPart" ?>" method="POST" class="bg-light-alpha p-5 border" >
+            <form action="<?php echo FRONT_ROOT . "Job/editJobOfferSecondPart" ?>" method="POST" class="bg-light-alpha p-5 border" enctype="multipart/form-data" >
             <div class="col-sm-10 offset-sm-1 text-center">
             <strong><?php if (isset($message)) {
                     echo $message;
@@ -1205,6 +1238,17 @@ if (($edit != null) && ($loggedUser->getRol()->getUserRolId() == 1) && ($jobOffe
                 <input required type="number" name="max" value="<?php echo $jobOfferEdit->getMaxApply() ?>" min="0">
             </div>
         </div>
+
+
+        <div class="col-lg-15">
+            <div class="form-group">
+                <a target="_blank" class="btn buttonPer ml-auto text-strong text-muted" href="<?php echo FRONT_ROOT ?>uploads/<?php echo $jobOfferEdit->getFlyer() ?>">Actual Flyer</a>
+            </div>
+        </div>
+
+        <label class="text-muted text-strong text" for="">New Flyer</label>
+        <input type="file" name="flyer" class="form-control" value="<?php $jobOfferEdit->getFlyer() ?>">
+        <br>
 
         <div class="col-lg-15">
             <div class="form-group">

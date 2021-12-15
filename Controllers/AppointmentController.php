@@ -472,7 +472,77 @@ class AppointmentController
     public function Remove($studentId, $system = null)
     {
         //require_once(VIEWS_PATH . "checkLoggedStudent.php");
-        SessionHelper::checkStudentSession();
+        //SessionHelper::checkStudentSession();
+        SessionHelper::checkUserSession();
+
+        try {
+
+            $count = $this->appointmentDAO->remove($studentId);
+            if ($count > 0) {
+                $studentDAO = new UserDAO();
+                try {
+                    $student = $studentDAO->getUser($studentId);
+                    $path = "uploads/";
+                    $file_pattern = $path . $student->getDni() . '*';
+                    $result = array_map("unlink", glob($file_pattern));
+
+                    $flag = 0;
+
+                    if (!empty($result) && $system == null) {
+                        $message = "Appointment dropped out successfully";
+
+                        if($this->loggedUser->getRol()->getUserRolId()==1) //si el que elimina es el administrador, debe enviar un email al usuario avisando
+                        {
+                            $sub="UTN's Job Search Dropped Appointment";
+                            $text="The application in which you were registered has been canceled";
+                            $this->sendEmail($$student->getEmail(), $sub, $text);
+                            $this->sendEmail("juanpayetta@gmail.com", $sub, $text);
+                        }
+                        else //si es el estudiante que da de baja la postulacion
+                        {
+                            if (isset($_SESSION['applyOffer'])) {
+                                $applyId = $_SESSION['applyOffer'];
+                                $message = "Appointment dropped out successfully. Now you can apply to this fantastic offer!";
+                                $JobController = new JobController();
+                                unset($_SESSION['applyOffer']);
+
+                                $JobController->showJobOfferViewMore($applyId, $message);
+                            } else {
+
+                                $message = "Appointment dropped out successfully";
+                                $this->showAppointmentList(null, null, $message);
+                            }
+                        }
+
+                    } else if (!empty($result) && $system != null) {
+                        $flag = 1;
+                        $message = "Your current job appointment was terminated as result of reaching the job offer's end date";
+                    }
+                } catch (\Exception $ex) {
+                    echo $ex->getMessage();
+                }
+            } else {
+                $message = "Appointment cannot be dropped out, try again";
+                $this->showAppointmentList(null, null, $message);
+            }
+
+        } catch (\Exception $ex) {
+            echo $ex->getMessage();
+        }
+
+        if ($system != null && $flag == 1) {
+            return $message;
+        }
+    }
+
+
+    /*
+     * /**
+    public function Remove($studentId, $system = null)
+    {
+        //require_once(VIEWS_PATH . "checkLoggedStudent.php");
+        //SessionHelper::checkStudentSession();
+        SessionHelper::checkUserSession();
 
         try {
 
@@ -523,6 +593,31 @@ class AppointmentController
             return $message;
         }
     }
+
+*/
+
+
+    /**
+     * Send a mail from the system to the inserted email
+     * @param $email
+     * @param $sub
+     * @param $text
+     */
+    public function sendEmail ($email, $sub, $text)
+    {
+        $to = $email;
+        $subject = $sub;
+        $message = $text;
+        $headers = 'From: tpfinalutn2021@gmail.com' . "\r\n" .
+            'MIME-Version: 1.0' . "\r\n" .
+            'Content-type: text/html; charset=utf-8';
+        if (mail($to, $subject, $message, $headers))
+            echo "Email sent";
+        else
+            echo "Email sending failed";
+    }
+
+
 
 
     /**

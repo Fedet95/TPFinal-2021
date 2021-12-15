@@ -109,7 +109,7 @@ else {
             <div class="container">
                 <h2 class="mb-4 text-center text-muted">Create Job Offer</h2>
                 <div class="row justify-content-center">
-                    <form action="<?php echo FRONT_ROOT . "Job/addJobOfferSecondPart" ?>" method="POST" class="bg-light-alpha p-5 border" >
+                    <form action="<?php echo FRONT_ROOT . "Job/addJobOfferSecondPart" ?>" method="POST"  enctype="multipart/form-data" class="bg-light-alpha p-5 border" >
                         <div class=" col-lg-12 text-center">
                             <strong><?php if(isset($message)){ echo $message;}?></strong>
                             <div class="form-group">
@@ -179,6 +179,13 @@ else {
                                     <label class="text-muted text-strong" for="">Maximun Number of Applys</label>
                                     <br>
                                     <input required type="number" name="max" min="0">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-15">
+                                <div class="form-group">
+                                    <label class="text-muted">Add Flyer</label>
+                                    <input type="file" name="flyer" class="form-control" required>
                                 </div>
                             </div>
 

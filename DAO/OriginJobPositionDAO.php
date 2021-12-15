@@ -7,7 +7,7 @@ use Models\JobPosition;
 
 class OriginJobPositionDAO
 {
-    private $url='https://utn-students-api.herokuapp.com/api/JobPosition';
+    private $url='https://utn-students-api2.herokuapp.com/api/JobPosition';
     private $option;
     private $handler; //mi $ch
     private $response;

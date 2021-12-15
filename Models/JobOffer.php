@@ -20,7 +20,7 @@ class JobOffer
  private $appointment = array();
  private $emailSent;
  private $maxApply;
-
+ private $flyer;
 
 
 
@@ -215,6 +215,17 @@ class JobOffer
     public function setMaxApply($maxApply)
     {
         $this->maxApply = $maxApply;
+    }
+
+
+    public function getFlyer()
+    {
+        return $this->flyer;
+    }
+
+    public function setFlyer($flyer)
+    {
+        $this->flyer = $flyer;
     }
 
 

@@ -28,7 +28,7 @@ class JobOfferDAO implements IJobOfferDAO
     {
         try
         {
-            $query= "INSERT INTO ".$this->tableName."(activeJobOffer , remote, publishDate, endDate, title, dedication, descriptionOffer, salary, creationAdmin, companyId, careerIdOffer, emailSent, maxApply) VALUES (:activeJobOffer , :remote, :publishDate, :endDate, :title, :dedication, :descriptionOffer, :salary, :creationAdmin, :companyId, :careerIdOffer, :emailSent, :maxApply)";
+            $query= "INSERT INTO ".$this->tableName."(activeJobOffer , remote, publishDate, endDate, title, dedication, descriptionOffer, salary, creationAdmin, companyId, careerIdOffer, emailSent, maxApply, flyer) VALUES (:activeJobOffer , :remote, :publishDate, :endDate, :title, :dedication, :descriptionOffer, :salary, :creationAdmin, :companyId, :careerIdOffer, :emailSent, :maxApply, :flyer)";
 
             $parameters['activeJobOffer']=$jobOffer->getActive();
             $parameters['remote']=$jobOffer->getRemote();
