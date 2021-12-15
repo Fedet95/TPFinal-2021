@@ -399,7 +399,7 @@ class JobController
     /**
      * End the new job offer, adding to data base
      */
-    public function addJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $max, $active, $values)
+    public function addJobOfferSecondPart($title, $position, $remote, $dedication, $description, $salary, $max, $active, $values, $flyer)
     {
         $postvalue = unserialize(base64_decode($values));
 

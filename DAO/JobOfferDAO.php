@@ -43,6 +43,7 @@ class JobOfferDAO implements IJobOfferDAO
             $parameters['careerIdOffer']=$jobOffer->getCareer()->getCareerId();
             $parameters['emailSent']=$jobOffer->getEmailSent();
             $parameters['maxApply']=$jobOffer->getMaxApply();
+            $parameters["flyer"]=$jobOffer->getFlyer();
 
 
             $this->connection =Connection::GetInstance();
@@ -147,7 +148,7 @@ class JobOfferDAO implements IJobOfferDAO
 
         try
         {
-            $query= "UPDATE ".$this->tableName." SET activeJobOffer = :activeJobOffer , remote = :remote, publishDate = :publishDate, endDate = :endDate, title = :title, dedication = :dedication, descriptionOffer = :descriptionOffer, salary = :salary, creationAdmin = :creationAdmin, companyId = :companyId, careerIdOffer = :careerIdOffer, maxApply= :maxApply, emailSent=:emailSent
+            $query= "UPDATE ".$this->tableName." SET activeJobOffer = :activeJobOffer , remote = :remote, publishDate = :publishDate, endDate = :endDate, title = :title, dedication = :dedication, descriptionOffer = :descriptionOffer, salary = :salary, creationAdmin = :creationAdmin, companyId = :companyId, careerIdOffer = :careerIdOffer, maxApply= :maxApply, flyer = :flyer, emailSent=:emailSent
             WHERE (jobOfferId = :jobOfferId)";
 
                 $parameters["activeJobOffer"] =  $jobOffer->getActive();
@@ -164,6 +165,7 @@ class JobOfferDAO implements IJobOfferDAO
                $parameters["jobOfferId"] = $jobOffer->getJobOfferId();
                $parameters['maxApply']=$jobOffer->getMaxApply();
                $parameters['emailSent']=$jobOffer->getEmailSent();
+               $parameters["flyer"]=$jobOffer->getFlyer();
 
 
 
@@ -233,6 +235,7 @@ class JobOfferDAO implements IJobOfferDAO
             $jobOffer->setSalary($value["salary"]);
             $jobOffer->setMaxApply($value["maxApply"]);
             $jobOffer->setEmailSent($value["emailSent"]);
+            $jobOffer->setFlyer($value["flyer"]);
 
 
             if(isset($value['companyId']))
