@@ -306,7 +306,7 @@ class UserController
 
         if ($userRol != null) {
             try {
-                $allAdmins = $this->userDAO->getRol($userRol->getUserRolId());
+                $allAdmins = $this->userDAO->getAll();
             } catch (\Exception $ex) {
                 echo $ex->getMessage();
             }

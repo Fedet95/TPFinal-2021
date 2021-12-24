@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 //require_once(VIEWS_PATH . "checkLoggedUser.php");
+use DAO\JobOfferPositionDAO;
 use DAO\UserRolDAO;
 use Models\SessionHelper;
 SessionHelper::checkUserSession();
@@ -950,6 +951,7 @@ class CompanyController
 
 
 
+
                         $flag=0;
                         if ($allAppointments != null)
                         {
@@ -974,12 +976,15 @@ class CompanyController
                                 $userCompany = $this->userDAO->getUserByEmail($company->getEmail());
                                 $this->userDAO->remove($userCompany->getUserId());
 
+
                                 $this->companyDAO->remove($id);
                                 $this->showCompanyManagement(null, null, "Company removed successfully");
                                 //no tiene ninguna oferta de trabajo activa con postulaciones
+
                             }
                             else
                             {
+
 
                                 try { //el user company ya no podra loguearse hasta tanto la company vuelva a estar activa
                                     $company= $this->companyDAO->getCompany($id);
@@ -1020,9 +1025,76 @@ class CompanyController
 
                         if(!empty($inactiveOffers))
                         {
+
+                            //ESTO AGREGO 23/12 PARA ELIMINAR PRIMERO JOBOFFER Y LUEGO EL USUARIO
+
+                            $jobOfferDAO = new JobOfferDAO();
+                            try {
+
+
+                                foreach ($inactiveOffers as $offer)
+                                {
+                                    $jobOfferDAO->remove($offer->getJobOfferId());
+                                }
+
+                            } catch (\Exception $ex)
+                            {
+                                echo $ex->getMessage();
+                            }
+
+
+                            /*
+
+                                //ESTO LO AGREGUE DESPUES PARA BUSCAR LAS APPOINTMENT DE LA JOB OFFER A BORRAR
+                                $appointmentDAO = new AppointmentDAO();
+                                $allAppointments = $appointmentDAO->getAll();
+                                $searchedAppointments = array();
+
+                                if(is_object($allAppointments))
+                                { $appointment= $allAppointments;
+                                    $allAppointments= array();
+                                    array_push($allAppointments, $appointment);
+                                }
+
+
+
+                                $flag=0;
+                                if ($allAppointments != null) {
+
+                                    $appointmentsToRemove = array();
+                                    foreach ($allAppointments as $appointment) {
+
+                                        foreach ($inactiveOffers as $offers) {
+
+                                            if (strcmp($appointment->getJobOffer()->getJobOfferId(), $offers->getJobOfferId()) == 0) {
+                                                array_push($appointmentsToRemove, $appointment);
+                                            }
+                                        }
+                                    }
+
+                                    if(!empty($appointmentsToRemove))
+                                    {
+                                        foreach ($appointmentsToRemove as $value )
+                                            {
+
+                                                 $appointmentDAO->remove($value->getJobOfferId());
+                                                $this->removeFlyer($value);
+                                            }
+                                    }
+
+
+                                    //HASTA ACA ES COPIADO DE ARRIBA
+
+                                }
+
+                            */
+
+                            //HASTA ACA
+
                             $company = $this->companyDAO->getCompany($id);
                             $userCompany = $this->userDAO->getUserByEmail($company->getEmail());
                             $this->userDAO->remove($userCompany->getUserId());
+
 
                             $this->companyDAO->remove($id);
                             $this->showCompanyManagement(null, null, "Company removed successfully");
@@ -1030,6 +1102,7 @@ class CompanyController
                         }
                         else
                         {
+
                             $company = $this->companyDAO->getCompany($id);
                             $userCompany = $this->userDAO->getUserByEmail($company->getEmail());
                             $this->userDAO->remove($userCompany->getUserId());
@@ -1063,6 +1136,14 @@ class CompanyController
         {
             echo $ex->getMessage();
         }
+    }
+
+
+    public function removeFlyer($jobOffer)
+    {
+        $path = "uploads/";
+        $file_pattern = $path . $jobOffer->getFlyer();
+        $result = array_map("unlink", glob($file_pattern));
     }
 
 

@@ -397,7 +397,7 @@ include_once('nav.php');;
     <?php }}else { ?>
     <div class="title text-center my-5">
         <?php if(!isset($message2)){?>
-        <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {echo $message;} ?></h6>
+        <h6 class="py-3 text-muted text-center text-strong"><?php if (isset($message)) {if(strcasecmp($message, "There are currently no applications for the selected job offer")==0){ echo $message;}} ?></h6>
             <?php }?>
     </div>
 
