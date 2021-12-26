@@ -95,24 +95,6 @@ include_once('nav.php');
                                 </div>
                             </li>
 
-                            <li>
-                                <form action="<?php echo  FRONT_ROOT."Company/showCompanyManagement"?>"
-                                      method="POST">
-                                    <button type="submit" name="filename" class="btn buttonPer"><span>02</span><strong>Chek out the member companies</strong> </button>
-                                </form>
-                                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i>
-                                <p> Our member companies offer you the best benefits</p>
-                            </li>
-
-                            <li>
-                                <form action="<?php echo  FRONT_ROOT."Home/showContactUsView"?>"
-                                      method="POST">
-                                    <button type="submit" name="filename" class="btn buttonPer"><span>03</span><strong>Do you have any questions? Contact us</strong> </button>
-                                </form>
-                                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i>
-                                <p> Do not hesitate to ask us your questions, we are here for you</p>
-                            </li>
-
                         </ul>
                     </div>
 
