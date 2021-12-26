@@ -704,9 +704,7 @@ class JobController
     {
         $postvalue = unserialize(base64_decode($values));
 
-        var_dump($flyer);
-        var_dump($active);
-        var_dump($values);
+
 
         if ($values == '') {
             $message = "Error, complete all fields";
